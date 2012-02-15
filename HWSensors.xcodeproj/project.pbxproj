@@ -228,7 +228,7 @@
 		1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadeonChipsets.h; sourceTree = "<group>"; };
 		1DA962C613ED389E0096F8A5 /* AtomBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomBIOS.h; sourceTree = "<group>"; };
 		1DBB87F01458B90A00C4B56E /* thermotemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermotemplate.png; sourceTree = "<group>"; };
-		2CB03FB814EB99F50070DC93 /* IntelThermal copy.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "IntelThermal copy.kext"; path = IntelCPUMonitor.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelCPUMonitor.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB03FBA14EB9AB70070DC93 /* IntelCPUMonitor-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "IntelCPUMonitor-Info.plist"; path = "IntelCPUMonitor/IntelCPUMonitor-Info.plist"; sourceTree = "<group>"; };
 		2CB03FBB14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IntelCPUMonitor-Prefix.pch"; path = "IntelCPUMonitor/IntelCPUMonitor-Prefix.pch"; sourceTree = "<group>"; };
 		2CB03FBC14EB9AB70070DC93 /* IntelCPUMonitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IntelCPUMonitor.cpp; path = IntelCPUMonitor/IntelCPUMonitor.cpp; sourceTree = "<group>"; };
@@ -403,7 +403,7 @@
 				1D9F831E144FF24000EEEFEB /* HWMonitor.app */,
 				6A85F85314DBEF5000F863A9 /* HWMonitorExtra.menu */,
 				6A0F327514DD6A6800AA5598 /* NuvotonNCT677x.kext */,
-				2CB03FB814EB99F50070DC93 /* IntelThermal copy.kext */,
+				2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1149,7 +1149,7 @@
 			);
 			name = IntelCPUMonitor;
 			productName = IntelThermal;
-			productReference = 2CB03FB814EB99F50070DC93 /* IntelThermal copy.kext */;
+			productReference = 2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 		6A0F327414DD6A6800AA5598 /* NuvotonNCT677x */ = {

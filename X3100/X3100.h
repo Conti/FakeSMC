@@ -27,6 +27,7 @@ private:
 	bool				addSensor(const char* key, const char* type, unsigned char size, int index);
 	
 public:
+	virtual IOService*	probe(IOService *provider, SInt32 *score);
     virtual bool		start(IOService *provider);
 	virtual bool		init(OSDictionary *properties=0);
 	virtual void		free(void);

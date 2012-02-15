@@ -3,7 +3,7 @@
  *  HWSensors
  *
  *  Created by Sergey on 19.12.10.
- *  Copyright 2010 mozodojo. All rights reserved.
+ *  Copyright 2010 slice. All rights reserved.
  *
  */
 
@@ -61,7 +61,7 @@ bool X3100monitor::init(OSDictionary *properties)
 	return true;
 }
 
-/*IOService* X3100monitor::probe(IOService *provider, SInt32 *score)
+IOService* X3100monitor::probe(IOService *provider, SInt32 *score)
 {
 	if (super::probe(provider, score) != this) return 0;
 	UInt32 vendor_id, device_id;
@@ -87,14 +87,18 @@ bool X3100monitor::init(OSDictionary *properties)
 		}
 	}	
 	return this;
-}*/
+}
 
 bool X3100monitor::start(IOService * provider)
 {
-	if (!super::start(provider)) 
-        return false;
+	if (!provider || !super::start(provider)) return false;
     
-    VCard = (IOPCIDevice*)provider;
+//    VCard = (IOPCIDevice*)provider;
+    if (!VCard) {
+      return false;
+    }
+
+
 
 	IOMemoryDescriptor * theDescriptor;
 	IOPhysicalAddress bar = (IOPhysicalAddress)((VCard->configRead32(kMCHBAR)) & ~0xf);
