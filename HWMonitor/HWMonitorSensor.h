@@ -14,6 +14,7 @@ enum {
     TachometerSensorGroup =    3,
     FrequencySensorGroup =     4,
     MultiplierSensorGroup =    5,
+
 };
 typedef NSUInteger SensorGroup;
 

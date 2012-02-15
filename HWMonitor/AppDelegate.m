@@ -210,6 +210,12 @@
     
     [self insertFooterAndTitle:@"TEMPERATURES"];  
     
+    for (int i=0; i<16; i++)
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:FrequencySensorGroup];
+    
+    //
+    [self insertFooterAndTitle:@"FREQUENCIES"];
+    
     //Multipliers
     
     for (int i=0; i<0xA; i++)

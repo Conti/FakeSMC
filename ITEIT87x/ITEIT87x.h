@@ -46,6 +46,8 @@ const UInt8 ITE_SMARTGUARDIAN_CONTROL[5]				= { 0x64, 0x6c, 0x74, 0x94, 0x9c };
 const UInt8 ITE_SMARTGUARDIAN_TEMPERATURE_DELTA[5]	= { 0x65, 0x6d, 0x75, 0x95, 0x9d };
 // 
 
+#define MAX_TEMP_THRESHOLD 127
+
 enum IT87xModel
 {
 	IT8512F = 0x8512,

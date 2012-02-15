@@ -107,7 +107,7 @@ class IntelCPUMonitor : public FakeSMCPlugin
 {
     OSDeclareDefaultStructors(IntelCPUMonitor)   
 public:
-	UInt32					Frequency[MaxCpuCount];
+	UInt32			 		Frequency[MaxCpuCount];
 	UInt32					Voltage;
 
 private:

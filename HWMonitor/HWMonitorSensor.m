@@ -134,6 +134,17 @@
                 return [[NSString alloc] initWithFormat:@"%drpm",rpm];
                 
             } break;
+            case FrequencySensorGroup:
+            {
+                unsigned int MHZ = 0;
+                
+                bcopy([value bytes], &MHZ, 2);
+                
+                MHZ = [HWMonitorSensor swapBytes:MHZ];
+                
+                return [[NSString alloc] initWithFormat:@"%dMhz",MHZ];
+                
+            } break;  
                 
             case MultiplierSensorGroup:
             {

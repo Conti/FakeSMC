@@ -97,7 +97,7 @@ bool X3100monitor::start(IOService * provider)
     if (!VCard) {
       return false;
     }
-
+  
 
 
 	IOMemoryDescriptor * theDescriptor;

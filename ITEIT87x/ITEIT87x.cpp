@@ -359,7 +359,7 @@ bool IT87x::startPlugin()
 			char key[8];
 			
 			snprintf(key, 8, "TEMPIN%X", i);
-            if(readTemperature(i)<150)  // Need to check if temperature sensor valid
+            if(readTemperature(i)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
     			if (OSString* name = OSDynamicCast(OSString, configuration->getObject(key)))
                     if (name->isEqualTo("Processor")) {
                         if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, i))
@@ -376,13 +376,13 @@ bool IT87x::startPlugin()
 		}
 	}
 	else {
-        if(readTemperature(0)<150)  // Need to check if temperature sensor valid
+        if(readTemperature(0)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
              if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 0))
                  WarningLog("error adding heatsink temperature sensor");
-        if(readTemperature(1)<150)  // Need to check if temperature sensor valid
+        if(readTemperature(1)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
             if (!addSensor(KEY_AMBIENT_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 1))
                 WarningLog("error adding auxiliary temperature sensor");
-        if(readTemperature(2)<150)  // Need to check if temperature sensor valid
+        if(readTemperature(2)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
             if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 2))
                 WarningLog("error adding system temperature sensor");
 	}
