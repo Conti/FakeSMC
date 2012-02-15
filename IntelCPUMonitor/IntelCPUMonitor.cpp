@@ -11,7 +11,7 @@
 #include "FakeSMC.h"
 #include "FakeSMCUtils.h"
 
-#define Debug FALSE
+#define Debug false
 
 #define LogPrefix "IntelCPUMonitor: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -298,20 +298,7 @@ bool IntelCPUMonitor::start(IOService * provider)
 			}
 		}	
 	}
-    
-    switch (cpuid_info()->cpuid_family) {
-        case CPUFAMILY_INTEL_NEHALEM:
-        case CPUFAMILY_INTEL_WESTMERE:
-        case CPUFAMILY_INTEL_SANDYBRIDGE: {
-            if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)KEY_NON_APPLE_PACKAGE_MULTIPLIER, (void *)TYPE_UI16, (void *)2, this)) {
-                WarningLog("Can't add key to fake SMC device");
-                //return false;
-            }
-            
-            break;
-        }
-            
-    }
+ 
 	if (Platform[0] != 'n') {
 		if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)"RPlt", (void *)"ch8*", (void *)6, this)) {
 			WarningLog("Can't add Platform key to fake SMC device");
@@ -412,14 +399,13 @@ IOReturn IntelCPUMonitor::callPlatformFunction(const OSSymbol *functionName, boo
                         
                                 
                             default:
-                                float mult = float(((value >> 8) & 0x1f)) + 0.5 * float((value >> 14) & 1);
+                                float mult = float(((value >> 8) & 0x1f)) + 0.5f * float((value >> 14) & 1);
 								value = mult * 10;
                             break;
                         }
                     
                     
-                    bcopy(&value, data, 2);
-                    return kIOReturnSuccess;    
+                     
                     } else return kIOReturnBadArgument;
                       
                 break;
