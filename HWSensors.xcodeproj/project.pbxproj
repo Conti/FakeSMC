@@ -87,7 +87,6 @@
 		1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C613ED389E0096F8A5 /* AtomBIOS.h */; };
 		1DBB87F11458B90A00C4B56E /* thermotemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB87F01458B90A00C4B56E /* thermotemplate.png */; };
 		2CB03FB314EB99F50070DC93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D05AC2613ED100D00EADBF6 /* InfoPlist.strings */; };
-		2CB03FBE14EB9AB70070DC93 /* IntelCPUMonitor-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CB03FBA14EB9AB70070DC93 /* IntelCPUMonitor-Info.plist */; };
 		2CB03FBF14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2CB03FBB14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch */; };
 		2CB03FC014EB9AB70070DC93 /* IntelCPUMonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB03FBC14EB9AB70070DC93 /* IntelCPUMonitor.cpp */; };
 		2CB03FC114EB9AB70070DC93 /* IntelCPUMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CB03FBD14EB9AB70070DC93 /* IntelCPUMonitor.h */; };
@@ -1329,7 +1328,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB03FB314EB99F50070DC93 /* InfoPlist.strings in Resources */,
-				2CB03FBE14EB9AB70070DC93 /* IntelCPUMonitor-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
