@@ -392,29 +392,36 @@ IOReturn IntelCPUMonitor::callPlatformFunction(const OSSymbol *functionName, boo
                  
                     index = name[2] >= 'A' ? name[2] - 65 : name[2] - 48;
 					if (index >= 0 && index < count) 
-                    if (strcasecmp(name, KEY_NON_APPLE_PACKAGE_MULTIPLIER) == 0) {
-                        switch (cpuid_info()->cpuid_family) {
-                            case CPUFAMILY_INTEL_NEHALEM:
-                            case CPUFAMILY_INTEL_WESTMERE:
-                                value = GlobalState[index].Control * 10;
+                    {
+                        
+                        value = GlobalState[index].Control;
+                        switch (cpuid_info()->cpuid_model) {
+                            case CPUID_MODEL_NEHALEM:
+                            case CPUID_MODEL_FIELDS:
+                            case CPUID_MODEL_DALES:
+                            case CPUID_MODEL_DALES_32NM:
+                            case CPUID_MODEL_WESTMERE:
+                            case CPUID_MODEL_NEHALEM_EX:
+                            case CPUID_MODEL_WESTMERE_EX:
+                                value = (value & 0xff) * 10;
                                 break;
                                 
-                            case CPUFAMILY_INTEL_SANDYBRIDGE:
-                                value = (GlobalState[index].Control >> 8) * 10;
+                            case CPUID_MODEL_SANDYBRIDGE:
+                                value = ((value >> 8) & 0xff) * 10;	
                                 break;
+                        
+                                
+                            default:
+                                float mult = float(((value >> 8) & 0x1f)) + 0.5 * float((value >> 14) & 1);
+								value = mult * 10;
+                            break;
                         }
-                    }
-                    else {
-                    
-                            float mult = ((float)(((GlobalState[index].Control >> 8) & 0x1f)) + 0.5f * (float)((GlobalState[index].Control >> 14) & 1)) * 10.0f;
-                            value = mult;
-                        }
-                        else return kIOReturnBadArgument;
                     
                     
                     bcopy(&value, data, 2);
-                    
-                    return kIOReturnSuccess;  
+                    return kIOReturnSuccess;    
+                    } else return kIOReturnBadArgument;
+                      
                 break;
 				case 'F':
 					if ((name[1] != 'R') || (name[2] != 'C')) {

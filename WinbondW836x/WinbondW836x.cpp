@@ -52,7 +52,7 @@
 #include "cpuid.h"
 #include "FakeSMC.h"
 
-#define Debug FALSE
+#define Debug true
 
 #define LogPrefix "W836x: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -449,16 +449,7 @@ bool W836x::probePort()
 		return false;
     }
     
-    IOSleep(50);
-    
-    UInt16 vendor = (UInt16)(listenPortByte(WINBOND_VENDOR_ID_REGISTER) << 8) | listenPortByte(WINBOND_VENDOR_ID_REGISTER);
-    
-    if (vendor != WINBOND_VENDOR_ID)
-    {
-        DebugLog("wrong vendor chip ID=0x%x REVISION=0x%x VENDORID=0x%x", id, revision, vendor);
-        return false;
-    }
-    
+   
 	return true;
 }
 
