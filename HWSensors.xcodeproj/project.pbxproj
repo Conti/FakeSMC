@@ -86,8 +86,6 @@
 		1DA962C513ED37D90096F8A5 /* RadeonChipsets.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */; };
 		1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C613ED389E0096F8A5 /* AtomBIOS.h */; };
 		1DBB87F11458B90A00C4B56E /* thermotemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB87F01458B90A00C4B56E /* thermotemplate.png */; };
-		2CB03FAE14EB99F50070DC93 /* IntelThermal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05AC3513ED109200EADBF6 /* IntelThermal.cpp */; };
-		2CB03FB114EB99F50070DC93 /* IntelThermal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05AC3613ED109200EADBF6 /* IntelThermal.h */; };
 		2CB03FB314EB99F50070DC93 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D05AC2613ED100D00EADBF6 /* InfoPlist.strings */; };
 		2CB03FBE14EB9AB70070DC93 /* IntelCPUMonitor-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CB03FBA14EB9AB70070DC93 /* IntelCPUMonitor-Info.plist */; };
 		2CB03FBF14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2CB03FBB14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch */; };
@@ -231,7 +229,7 @@
 		1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadeonChipsets.h; sourceTree = "<group>"; };
 		1DA962C613ED389E0096F8A5 /* AtomBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomBIOS.h; sourceTree = "<group>"; };
 		1DBB87F01458B90A00C4B56E /* thermotemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermotemplate.png; sourceTree = "<group>"; };
-		2CB03FB814EB99F50070DC93 /* IntelThermal copy.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IntelThermal copy.kext"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CB03FB814EB99F50070DC93 /* IntelThermal copy.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "IntelThermal copy.kext"; path = IntelCPUMonitor.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB03FBA14EB9AB70070DC93 /* IntelCPUMonitor-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "IntelCPUMonitor-Info.plist"; path = "IntelCPUMonitor/IntelCPUMonitor-Info.plist"; sourceTree = "<group>"; };
 		2CB03FBB14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IntelCPUMonitor-Prefix.pch"; path = "IntelCPUMonitor/IntelCPUMonitor-Prefix.pch"; sourceTree = "<group>"; };
 		2CB03FBC14EB9AB70070DC93 /* IntelCPUMonitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IntelCPUMonitor.cpp; path = IntelCPUMonitor/IntelCPUMonitor.cpp; sourceTree = "<group>"; };
@@ -914,7 +912,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CB03FB114EB99F50070DC93 /* IntelThermal.h in Headers */,
 				2CB03FBF14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch in Headers */,
 				2CB03FC114EB9AB70070DC93 /* IntelCPUMonitor.h in Headers */,
 			);
@@ -1560,7 +1557,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CB03FAE14EB99F50070DC93 /* IntelThermal.cpp in Sources */,
 				2CB03FC014EB9AB70070DC93 /* IntelCPUMonitor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
