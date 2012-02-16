@@ -121,20 +121,13 @@ unsigned char FakeSMCKey::getSize() { return size; };
 const void *FakeSMCKey::getValue() 
 { 
 	if (handler) {
-        clock_sec_t secs = 0;
-        clock_usec_t usecs = 0;
-        
-        clock_get_system_microtime(&secs, &usecs);
-        
-        if (secs - lastcall > 1) {
+
             IOReturn result = handler->callPlatformFunction(kFakeSMCGetValueCallback, true, (void *)name, (void *)value, (void *)size, 0);
             
             if (kIOReturnSuccess != result)
                 WarningLog("value update request callback error for key %s, return 0x%x", name, result);
         }
         
-        lastcall = secs;
-	}
 
 	return value; 
 };
@@ -159,17 +152,13 @@ bool FakeSMCKey::setValueFromBuffer(const void *aBuffer, unsigned char aSize)
 	bcopy(aBuffer, value, size);
 	
 	if (handler) {
-        clock_sec_t secs = 0;
-        clock_usec_t usecs = 0;
-        
-        clock_get_system_microtime(&secs, &usecs);
+    
         
 		IOReturn result = handler->callPlatformFunction(kFakeSMCSetValueCallback, true, (void *)name, (void *)value, (void *)size, 0);
 		
 		if (kIOReturnSuccess != result)
 			WarningLog("value changed event callback error for key %s, return 0x%x", name, result);
         
-        lastcall = secs;
 	}
 	
 	return true;

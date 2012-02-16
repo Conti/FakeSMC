@@ -40,7 +40,7 @@ protected:
 	void *			value;
 	IOService *		handler;
     
-    clock_sec_t     lastcall;
+
 	
 public:
 	static FakeSMCKey *withValue(const char *aName, const char *aType, unsigned char aSize, const void *aValue);
