@@ -45,328 +45,265 @@
  
  */
 
-#include "NuvotonNCT677x.h"
-
 #include <architecture/i386/pio.h>
 #include "FakeSMC.h"
+#include "NuvotonNCT677x.h"
 
 #define Debug FALSE
 
 #define LogPrefix "NCT677x: "
-#define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
+#define DebugLog(string, args...)   do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
 #define WarningLog(string, args...) do { IOLog (LogPrefix "[Warning] " string "\n", ## args); } while(0)
-#define InfoLog(string, args...)	do { IOLog (LogPrefix string "\n", ## args); } while(0)
+#define InfoLog(string, args...)  do { IOLog (LogPrefix string "\n", ## args); } while(0)
 
 #define super SuperIOMonitor
 OSDefineMetaClassAndStructors(NCT677x, SuperIOMonitor)
 
-UInt8 NCT677x::readByte(UInt16 reg) 
+UInt8 NCT677x::readByte(UInt16 reg)
 {
-    UInt8 bank = reg >> 8;
-    UInt8 regi = reg & 0xFF;
-    
-    outb((UInt16)(address + NUVOTON_ADDRESS_REGISTER_OFFSET), NUVOTON_BANK_SELECT_REGISTER);
-    outb((UInt16)(address + NUVOTON_DATA_REGISTER_OFFSET), bank);
-    outb((UInt16)(address + NUVOTON_ADDRESS_REGISTER_OFFSET), regi);
-    
-    return inb((UInt16)(address + NUVOTON_DATA_REGISTER_OFFSET));
+  UInt8 bank = reg >> 8;
+  UInt8 regi = reg & 0xFF;
+
+  outb((UInt16)(address + NUVOTON_ADDRESS_REGISTER_OFFSET), NUVOTON_BANK_SELECT_REGISTER);
+  outb((UInt16)(address + NUVOTON_DATA_REGISTER_OFFSET), bank);
+  outb((UInt16)(address + NUVOTON_ADDRESS_REGISTER_OFFSET), regi);
+
+  return inb((UInt16)(address + NUVOTON_DATA_REGISTER_OFFSET));
 }
 
 void NCT677x::writeByte(UInt16 reg, UInt8 value)
 {
-	UInt8 bank = reg >> 8;
-    UInt8 regi = reg & 0xFF;
-    
-    outb((UInt16)(address + NUVOTON_ADDRESS_REGISTER_OFFSET), NUVOTON_BANK_SELECT_REGISTER);
-    outb((UInt16)(address + NUVOTON_DATA_REGISTER_OFFSET), bank);
-    outb((UInt16)(address + NUVOTON_ADDRESS_REGISTER_OFFSET), regi);
-    outb((UInt16)(address + NUVOTON_DATA_REGISTER_OFFSET), value);
-}
+  UInt8 bank = reg >> 8;
+  UInt8 regi = reg & 0xFF;
 
-void NCT677x::updateTemperatures()
-{
-    for (int i = 0; i < 9; i++)
-	{
-        int value = readByte(NUVOTON_TEMPERATURE_REG[i]) << 1;
-        
-        if (NUVOTON_TEMPERATURE_HALF_BIT[i] > 0) {
-            value |= ((readByte(NUVOTON_TEMPERATURE_HALF_REG[i]) >> NUVOTON_TEMPERATURE_HALF_BIT[i]) & 0x1);
-        }
-        
-        UInt8 source = readByte(NUVOTON_TEMPERATURE_SRC_REG[i]);
-        
-        float t = 0.5f * (float)value;
-        
-        if (t > 125 || t < -55)
-            t = 0;
-        
-        switch (model) {
-            case NCT6771F:
-                switch (source) {
-                    case NCT6771F_SOURCE_CPUTIN: 
-                        temperature[0] = t; 
-                        break;
-                    case NCT6771F_SOURCE_AUXTIN: 
-                        temperature[1] = t; 
-                        break;
-                    case NCT6771F_SOURCE_SYSTIN: 
-                        temperature[2] = t; 
-                        break;
-                        
-                } break;
-            case NCT6776F:
-                switch (source) {
-                    case NCT6776F_SOURCE_CPUTIN: 
-                        temperature[0] = t; 
-                        break;
-                    case NCT6776F_SOURCE_AUXTIN: 
-                        temperature[1] = t; 
-                        break;
-                    case NCT6776F_SOURCE_SYSTIN: 
-                        temperature[2] = t; 
-                        break;              
-                } break;
-        }  
-    }
-    
-    for (int i = 0; i < 3; i++)
-        temperatureIsObsolete[i] = false;
+  outb((UInt16)(address + NUVOTON_ADDRESS_REGISTER_OFFSET), NUVOTON_BANK_SELECT_REGISTER);
+  outb((UInt16)(address + NUVOTON_DATA_REGISTER_OFFSET), bank);
+  outb((UInt16)(address + NUVOTON_ADDRESS_REGISTER_OFFSET), regi);
+  outb((UInt16)(address + NUVOTON_DATA_REGISTER_OFFSET), value);
 }
 
 long NCT677x::readTemperature(unsigned long index)
 {
-    if (index <3) {
-        if (temperatureIsObsolete[index]) 
-            updateTemperatures();
-        
-        temperatureIsObsolete[index] = true;
-        
-        return temperature[index];
-    }
-    
-	return 0;
+  if (index < 2) {
+
+    int value = readByte(NUVOTON_TEMPERATURE_REG[index]) << 1;
+
+    float t = 0.5f * (float)value;
+
+    return temperature[index] = t <= 125 && t >= -55 ? t : 0;
+  }
+
+  return 0;
 }
 
 long NCT677x::readVoltage(unsigned long index)
 {
-    if (index < 10) {
-        float value = 0.008f * (float)readByte(NUVOTON_VOLTAGE_REG[index]);
-        
-        bool valid = value > 0;
-        
-        // check if battery voltage monitor is enabled
-        if (valid && NUVOTON_VOLTAGE_REG[index] == NUVOTON_VOLTAGE_VBAT_REG) 
-            valid = (readByte(0x005D) & 0x01) > 0;
-        
-        return valid ? value : 0;
+  if (index < 9) {
+
+    float value = readByte(NUVOTON_VOLTAGE_REG[index]) * (NUVOTON_VOLTAGE_SCALE[index]);
+
+    bool valid = value > 0;
+
+    // check if battery voltage monitor is enabled
+    if (valid && NUVOTON_VOLTAGE_REG[index] == NUVOTON_VOLTAGE_VBAT_REG) {
+      valid = (readByte(0x5D) & 0x01) > 0;
     }
-    
-    return 0;
+
+    return valid ? value : 0;
+  }
+
+  return 0;
 }
 
 long NCT677x::readTachometer(unsigned long index)
 {
-    if (index < 5) {
-        UInt8 high = readByte(NUVOTON_FAN_RPM_REG[index]);
-        UInt8 low = readByte(NUVOTON_FAN_RPM_REG[index] + 1);
-        int value = (high << 8) | low;
-        
-        return value > minFanRPM ? value : 0;
-    }
-    
-    return 0;
+  if (index < 5) {
+
+    UInt8 high = readByte(NUVOTON_FAN_RPM_REG[index]);
+    UInt8 low  = readByte(NUVOTON_FAN_RPM_REG[index] + 1);
+
+    int value = (high << 8) | low;
+
+    return value > minFanRPM ? value : 0;
+  }
+
+  return 0;
 }
 
 void NCT677x::enter()
 {
-	outb(registerPort, 0x87);
-	outb(registerPort, 0x87);
+  outb(registerPort, 0x87);
+  outb(registerPort, 0x87);
 }
 
 void NCT677x::exit()
 {
-	outb(registerPort, 0xAA);
+  outb(registerPort, 0xAA);
 }
 
 bool NCT677x::probePort()
 {
-    UInt8 id =listenPortByte(SUPERIO_CHIP_ID_REGISTER);
-    
-    IOSleep(50);
-    
-	UInt8 revision = listenPortByte(SUPERIO_CHIP_REVISION_REGISTER);
-	
-	if (id == 0 || id == 0xff || revision == 0 || revision == 0xff)
-		return false;
-    
-	switch (id) 
-	{		
-        case 0xB4:
-            switch (revision & 0xF0) {
-                case 0x70:
-                    model = NCT6771F;
-                    minFanRPM = (int)(1.35e6 / 0xFFFF);
-                    break;
-            } break;
-        case 0xC3:
-            switch (revision & 0xF0) {
-                case 0x30:
-                    model = NCT6776F;
-                    minFanRPM = (int)(1.35e6 / 0x1FFF);
-                    break;
-            } break;
-    }
-    
-    if (!model)
-	{
-		DebugLog("found unsupported chip ID=0x%x REVISION=0x%x", id, revision);
-		return false;
-	}
-    
-	selectLogicalDevice(NUVOTON_HARDWARE_MONITOR_LDN);
-	
-    IOSleep(50);
-    
-	if (!getLogicalDeviceAddress()) {
-        DebugLog("can't get monitoring logical device address");
-		return false;
-    }
-    
-    IOSleep(50);
-    
-    UInt16 vendor = (UInt16)(listenPortByte(NUVOTON_VENDOR_ID_HIGH_REGISTER) << 8) | listenPortByte(NUVOTON_VENDOR_ID_LOW_REGISTER);
-    
-    if (vendor != NUVOTON_VENDOR_ID)
-    {
-        DebugLog("wrong vendor chip ID=0x%x REVISION=0x%x VENDORID=0x%x", id, revision, vendor);
-        return false;
-    }
-    
-	return true;
+  UInt8 id        = listenPortByte(SUPERIO_CHIP_ID_REGISTER);
+  UInt8 revision  = listenPortByte(SUPERIO_CHIP_REVISION_REGISTER);
+
+  if (id == 0 || id == 0xff || revision == 0 || revision == 0xff) {
+    return false;
+  }
+
+  switch (id) {
+    case 0xB4:
+      switch (revision & 0xF0) {
+        case 0x70:
+          model = NCT6771F;
+          minFanRPM = (int)(1.35e6 / 0xFFFF);
+          break;
+      } break;
+    case 0xC3:
+      switch (revision & 0xF0) {
+        case 0x30:
+          model = NCT6776F;
+          minFanRPM = (int)(1.35e6 / 0x1FFF);
+          break;
+      } break;
+  }
+
+  if (!model) {
+    WarningLog("Found unsupported chip ID=0x%x REVISION=0x%x", id, revision);
+    return false;
+  }
+
+  selectLogicalDevice(NUVOTON_HARDWARE_MONITOR_LDN);
+
+  if (!getLogicalDeviceAddress()) {
+    WarningLog("Can't get monitoring logical device address");
+    return false;
+  }
+
+  return true;
 }
 
 bool NCT677x::startPlugin()
 {
-    InfoLog("found NUvoton %s", getModelName());
-    
-    OSDictionary* list = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
-    OSDictionary* configuration = list ? OSDynamicCast(OSDictionary, list->getObject(getModelName())) : 0;
-	
-    if (list && !configuration) 
-        configuration = OSDynamicCast(OSDictionary, list->getObject("Default"));
-    
-    // Temperatures
-    for (int i = 0; i < 2; i++) {        
-        char key[8];
-        
-        snprintf(key, 8, "TEMPIN%X", i);
-        
-        OSString  *name = configuration ? OSDynamicCast(OSString, configuration->getObject(key)) : 0;
-        
-        if ((name && name->isEqualTo("System")) || (!configuration && i==0)) {
-            if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, i)) {
-                WarningLog("ERROR adding System temperature sensor");
-            }
-        }
-        else if ((name && name->isEqualTo("Processor")) || (!configuration && i==1)) {
-            if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i)) {
-                WarningLog("ERROR adding Processor temperature sensor");
-            }
-        }
-        else if ((name && name->isEqualTo("Auxiliary"))) {
-            if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i)) {
-                WarningLog("ERROR adding Processor temperature sensor");
-            }
-        }
+  InfoLog("Found Nuvoton %s", getModelName());
+
+  OSDictionary  *list          = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
+  OSDictionary  *configuration = list ? OSDynamicCast(OSDictionary, list->getObject(getModelName())) : 0;
+
+  if (list && !configuration) 
+    configuration = OSDynamicCast(OSDictionary, list->getObject("Default"));
+
+  // Fans
+  for (int i = 0; i < 5; i++) {
+
+    OSString  *name = 0;
+
+    if (configuration) {
+
+      char key[7];
+
+      snprintf(key, 7, "FANIN%X", i);
+
+      name = OSDynamicCast(OSString, configuration->getObject(key));
     }
-    
-    // Voltage ??? we have 9 inputs, which is which ???
-    // Voltages
-    for (int i = 0; i < 9; i++)
-    {
-        char key[5];
-        
-        snprintf(key, 5, "VIN%X", i);
-        
-        OSString* name = configuration ? OSDynamicCast(OSString, configuration->getObject(key)) : 0;
-        
-        if ((name && name->isEqualTo("CPU")) || (!configuration && i==0)) 
-        {
-            if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding CPU Voltage Sensor!");
-        }
-        else if ((name && name->isEqualTo("+12V")) || (!configuration && i==1)) 
-        {
-            if (!addSensor(KEY_12V_VOLTAGE, TYPE_FP2E/*TYPE_FP4C*/, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding +12 Voltage Sensor!");
-        }
-        else if ((name && name->isEqualTo("AVCC")) || (!configuration && i==2)) 
-        {
-            if (!addSensor(KEY_AVCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding AVCC Voltage Sensor!");
-        }
-        else if ((name && name->isEqualTo("3VCC")) || (!configuration && i==3)) 
-        {
-            if (!addSensor(KEY_3VCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding 3VCC Voltage Sensor!");
-        }
-        else if ((name && name->isEqualTo("UNKN0")) || (!configuration && i==4)) 
-        {
-            if (!addSensor(KEY_CPU_VRM_SUPPLY0, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding UNKN0 Voltage Sensor!");
-        }
-        else if ((name && name->isEqualTo("UNKN1")) || (!configuration && i==5)) 
-        {
-            if (!addSensor(KEY_CPU_VRM_SUPPLY1, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding UNKN1 Voltage Sensor!");
-        }
-        
-        else if ((name && name->isEqualTo("UNKN2")) || (!configuration && i==6)) 
-        {
-            if (!addSensor(KEY_CPU_VRM_SUPPLY2, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding UNKN2 Voltage Sensor!");
-        }
-        else if ((name && name->isEqualTo("3VSB")) || (!configuration && i==7)) 
-        {
-            if (!addSensor(KEY_3VSB_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding 3VSB Voltage Sensor!");
-        }
-        else if ((name && name->isEqualTo("VBAT")) || (!configuration && i==8)) 
-        {
-            if (!addSensor(KEY_VBAT_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-                WarningLog("ERROR Adding VBAT Voltage Sensor!");
-        }
+
+    UInt64 nameLength = name ? name->getLength() : 0;
+
+    if (readTachometer(i) > minFanRPM || nameLength > 0) {
+      if (!addTachometer(i, (nameLength > 0 ? name->getCStringNoCopy() : 0))) {
+        WarningLog("ERROR adding tachometer sensor %d", i);
+      }
     }
-    
-    // Tachometers
-	for (int i = 0; i < 5; i++) {
-        OSString* name = 0;
-		
-		if (configuration) {
-			char key[7];
-			
-			snprintf(key, 7, "FANIN%X", i);
-			
-			name = OSDynamicCast(OSString, configuration->getObject(key));
-		}
-		
-		UInt64 nameLength = name ? name->getLength() : 0;
-		
-		if (readTachometer(i) > minFanRPM || nameLength > 0)
-			if (!addTachometer(i, (nameLength > 0 ? name->getCStringNoCopy() : 0)))
-				WarningLog("error adding tachometer sensor %d", i);
-	}
-    
-    return true;
+  }
+
+  // Temperatures
+  for (int i = 0; i < 2; i++) {
+
+    if (configuration) {
+
+      char key[8];
+
+      snprintf(key, 8, "TEMPIN%X", i);
+
+      OSString  *name = configuration ? OSDynamicCast(OSString, configuration->getObject(key)) : 0;
+
+      if ((name && name->isEqualTo("System")) || (!configuration && i==0)) {
+        if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, i)) {
+          WarningLog("ERROR adding System temperature sensor");
+        }
+      }
+      else if ((name && name->isEqualTo("Processor")) || (!configuration && i==1)) {
+        if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i)) {
+          WarningLog("ERROR adding Processor temperature sensor");
+        }
+      }
+    }
+  }
+
+  // Voltages
+  for (int i = 0; i < 9; i++) {
+
+    char key[5];
+
+    snprintf(key, 5, "VIN%X", i);
+
+    OSString  *name = configuration ? OSDynamicCast(OSString, configuration->getObject(key)) : 0;
+
+    if ((name && name->isEqualTo("Processor")) || (!configuration && i==0)) {
+      if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding Processor Voltage Sensor!");
+      }
+    }
+    else if ((name && name->isEqualTo("+12V")) || (!configuration && i==1)) {
+      if (!addSensor(KEY_12V_VOLTAGE, TYPE_FP2E/*TYPE_FP4C*/, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding +12 Voltage Sensor!");
+      }
+    }
+    else if ((name && name->isEqualTo("AVCC")) || (!configuration && i==2)) {
+      if (!addSensor(KEY_AVCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding AVCC Voltage Sensor!");
+      }
+    }
+    else if ((name && name->isEqualTo("3VCC")) || (!configuration && i==3)) {
+      if (!addSensor(KEY_3VCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding 3VCC Voltage Sensor!");
+      }
+    }
+    else if ((name && name->isEqualTo("+5V")) || (!configuration && i==4)) {
+      if (!addSensor(KEY_CPU_VRM_SUPPLY0, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding +5V Voltage Sensor!");
+      }
+    }
+    else if ((name && name->isEqualTo("5VSB")) || (!configuration && i==5)) {
+      if (!addSensor(KEY_CPU_VRM_SUPPLY1, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding 5VSB Voltage Sensor!");
+      }
+    }
+    else if ((name && name->isEqualTo("+3.3V")) || (!configuration && i==6)) {
+      if (!addSensor(KEY_CPU_VRM_SUPPLY2, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding +3.3V Voltage Sensor!");
+      }
+    }
+    else if ((name && name->isEqualTo("3VSB")) || (!configuration && i==7)) {
+      if (!addSensor(KEY_3VSB_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding 3VSB Voltage Sensor!");
+      }
+    }
+    else if ((name && name->isEqualTo("VBAT")) || (!configuration && i==8)) {
+      if (!addSensor(KEY_VBAT_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+        WarningLog("ERROR Adding VBAT Voltage Sensor!");
+      }
+    }
+  }
+
+  return true;
 }
 
 const char *NCT677x::getModelName()
 {
-	switch (model) 
-	{
-        case NCT6771F:    return "NCT6771F";
-        case NCT6776F:    return "NCT6776F";
-	}
-	
-	return "unknown";
+  switch (model) {
+    case NCT6771F:  return "NCT6771F";
+    case NCT6776F:  return "NCT6776F";
+  }
+
+  return "Unknown";
 }

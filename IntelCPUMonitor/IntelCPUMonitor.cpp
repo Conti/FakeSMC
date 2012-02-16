@@ -284,11 +284,24 @@ bool IntelCPUMonitor::start(IOService * provider)
 		if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)keyF, (void *)"freq", (void *)2, this)) {
 			WarningLog("Can't add Frequency key to fake SMC device");
 		}	
-	
-		snprintf(keyF, 5, KEY_FORMAT_NON_APPLE_CPU_MULTIPLIER, i);
-		if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)keyF, (void *)TYPE_UI16, (void *)2, this)) {
-			WarningLog("Can't add Frequency key to fake SMC device");
-		}        
+        
+        switch (cpuid_info()->cpuid_family) {
+            case CPUFAMILY_INTEL_NEHALEM:
+            case CPUFAMILY_INTEL_WESTMERE:
+            case CPUFAMILY_INTEL_SANDYBRIDGE:
+                break;
+                
+            default:
+                snprintf(keyF, 5, KEY_FORMAT_NON_APPLE_CPU_MULTIPLIER, i);
+                
+                if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)key, (void *)TYPE_UI16, (void *)2, this)) {
+                    WarningLog("Can't add key to fake SMC device");
+                    //return false;
+                }
+                
+                break;
+        }
+      
         
 		if (!nehalemArch){  // Voltage is impossible for Nehalem
 			char keyV[5];
@@ -298,6 +311,20 @@ bool IntelCPUMonitor::start(IOService * provider)
 			}
 		}	
 	}
+    switch (cpuid_info()->cpuid_family) {
+        case CPUFAMILY_INTEL_NEHALEM:
+        case CPUFAMILY_INTEL_WESTMERE:
+        case CPUFAMILY_INTEL_SANDYBRIDGE: {
+            if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)KEY_NON_APPLE_PACKAGE_MULTIPLIER, (void *)TYPE_UI16, (void *)2, this)) {
+                WarningLog("Can't add key to fake SMC device");
+                //return false;
+            }
+            
+            break;
+        }
+            
+    }
+
  
 	if (Platform[0] != 'n') {
 		if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)"RPlt", (void *)"ch8*", (void *)6, this)) {
@@ -376,35 +403,31 @@ IOReturn IntelCPUMonitor::callPlatformFunction(const OSSymbol *functionName, boo
 					break;
                 case 'M':
                 
-                 
+                    if (strcasecmp(name, KEY_NON_APPLE_PACKAGE_MULTIPLIER) == 0) {
+                           value = GlobalState[0].Control;
+                        switch (cpuid_info()->cpuid_family) {
+                            case CPUFAMILY_INTEL_NEHALEM:
+                            case CPUFAMILY_INTEL_WESTMERE:
+                                value = value * 10;
+                                break;
+                                
+                            case CPUFAMILY_INTEL_SANDYBRIDGE:
+                                value = (value >> 8) * 10;
+                                break;
+                        }
+                        bcopy(&value, data, 2);
+                        
+                        return kIOReturnSuccess;
+                    }
                     index = name[2] >= 'A' ? name[2] - 65 : name[2] - 48;
 					if (index >= 0 && index < count) 
                     {
                         
                         value = GlobalState[index].Control;
-                        switch (cpuid_info()->cpuid_model) {
-                            case CPUID_MODEL_NEHALEM:
-                            case CPUID_MODEL_FIELDS:
-                            case CPUID_MODEL_DALES:
-                            case CPUID_MODEL_DALES_32NM:
-                            case CPUID_MODEL_WESTMERE:
-                            case CPUID_MODEL_NEHALEM_EX:
-                            case CPUID_MODEL_WESTMERE_EX:
-                                value = (value & 0xff) * 10;
-                                break;
-                                
-                            case CPUID_MODEL_SANDYBRIDGE:
-                                value = ((value >> 8) & 0xff) * 10;	
-                                break;
-                        
-                                
-                            default:
-                                float mult = float(((value >> 8) & 0x1f)) + 0.5f * float((value >> 14) & 1);
-								value = mult * 10;
-                            break;
-                        }
-                    
-                    
+                   
+                        float mult = float(((value >> 8) & 0x1f)) + 0.5f * float((value >> 14) & 1);
+                        value = mult * 10.0f;
+
                      
                     } else return kIOReturnBadArgument;
                       
