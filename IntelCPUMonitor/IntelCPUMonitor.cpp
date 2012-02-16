@@ -285,23 +285,14 @@ bool IntelCPUMonitor::start(IOService * provider)
 			WarningLog("Can't add Frequency key to fake SMC device");
 		}	
         
-        switch (cpuid_info()->cpuid_family) {
-            case CPUFAMILY_INTEL_NEHALEM:
-            case CPUFAMILY_INTEL_WESTMERE:
-            case CPUFAMILY_INTEL_SANDYBRIDGE:
-                break;
-                
-            default:
-                snprintf(keyF, 5, KEY_FORMAT_NON_APPLE_CPU_MULTIPLIER, i);
-                
-                if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)key, (void *)TYPE_UI16, (void *)2, this)) {
+        if (!nehalemArch and !SandyArch){ 
+            char keyM[5];
+              snprintf(keyM, 5, KEY_FORMAT_NON_APPLE_CPU_MULTIPLIER, i);
+                if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)keyM, (void *)TYPE_UI16, (void *)2, this)) {
                     WarningLog("Can't add key to fake SMC device");
                     //return false;
                 }
-                
-                break;
         }
-      
         
 		if (!nehalemArch){  // Voltage is impossible for Nehalem
 			char keyV[5];
@@ -311,19 +302,11 @@ bool IntelCPUMonitor::start(IOService * provider)
 			}
 		}	
 	}
-    switch (cpuid_info()->cpuid_family) {
-        case CPUFAMILY_INTEL_NEHALEM:
-        case CPUFAMILY_INTEL_WESTMERE:
-        case CPUFAMILY_INTEL_SANDYBRIDGE: {
-            if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)KEY_NON_APPLE_PACKAGE_MULTIPLIER, (void *)TYPE_UI16, (void *)2, this)) {
+    if (nehalemArch || SandyArch) 
+        if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)KEY_NON_APPLE_PACKAGE_MULTIPLIER, (void *)TYPE_UI16, (void *)2, this)) {
                 WarningLog("Can't add key to fake SMC device");
                 //return false;
             }
-            
-            break;
-        }
-            
-    }
 
  
 	if (Platform[0] != 'n') {
@@ -405,20 +388,18 @@ IOReturn IntelCPUMonitor::callPlatformFunction(const OSSymbol *functionName, boo
                 
                     if (strcasecmp(name, KEY_NON_APPLE_PACKAGE_MULTIPLIER) == 0) {
                            value = GlobalState[0].Control;
-                        switch (cpuid_info()->cpuid_family) {
-                            case CPUFAMILY_INTEL_NEHALEM:
-                            case CPUFAMILY_INTEL_WESTMERE:
-                                value = value * 10;
-                                break;
-                                
-                            case CPUFAMILY_INTEL_SANDYBRIDGE:
+                        if (nehalemArch) 
+                              value = value * 10;
+                        
+                        else if(SandyArch)
                                 value = (value >> 8) * 10;
-                                break;
-                        }
+                                
                         bcopy(&value, data, 2);
                         
-                        return kIOReturnSuccess;
+                        return kIOReturnSuccess;    
                     }
+                    else    
+                    {
                     index = name[2] >= 'A' ? name[2] - 65 : name[2] - 48;
 					if (index >= 0 && index < count) 
                     {
@@ -429,8 +410,9 @@ IOReturn IntelCPUMonitor::callPlatformFunction(const OSSymbol *functionName, boo
                         value = mult * 10.0f;
 
                      
-                    } else return kIOReturnBadArgument;
-                      
+                    }
+                    else return kIOReturnBadArgument;
+                    }  
                 break;
 				case 'F':
 					if ((name[1] != 'R') || (name[2] != 'C')) {
