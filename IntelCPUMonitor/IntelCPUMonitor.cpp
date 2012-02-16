@@ -388,11 +388,12 @@ IOReturn IntelCPUMonitor::callPlatformFunction(const OSSymbol *functionName, boo
                 
                     if (strcasecmp(name, KEY_NON_APPLE_PACKAGE_MULTIPLIER) == 0) {
                            value = GlobalState[0].Control;
-                        if (nehalemArch) 
-                              value = value * 10;
-                        
-                        else if(SandyArch)
-                                value = (value >> 8) * 10;
+                        if (SandyArch) 
+                           value = (value >> 8) * 10;
+                        else if(nehalemArch)
+                           value = value * 10;
+                        else value=0;
+                              
                                 
                         bcopy(&value, data, 2);
                         
