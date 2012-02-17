@@ -32,7 +32,7 @@
         
         while (sensor = (HWMonitorSensor *)[enumerator nextObject]) {
             if (isMenuVisible || [sensor favorite]) {
-                CFTypeRef name = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, [[sensor key] cStringUsingEncoding:NSASCIIStringEncoding], kCFStringEncodingASCII);
+                CFTypeRef name = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, [[sensor key] cStringUsingEncoding:NSUTF8StringEncoding], kCFStringEncodingUTF8);
                 
                 CFArrayAppendValue(favorites, name);
             }
