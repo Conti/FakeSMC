@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "ISPSmartController.h"
 #include "HWMonitorSensor.h"
+
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSStatusItem *          statusItem;
@@ -16,10 +17,16 @@
     NSDictionary*           statusItemAttributes;
     
     NSMutableArray *        sensorsList;
+    NSMutableDictionary *        DisksList;
+    
+    ISPSmartController *    smartController;
     
     BOOL                    isMenuVisible;
+    BOOL                    smart;
     int                     menusCount;
     int                     lastMenusCount;
+    
+    NSDate          *       lastcall;
     
     IBOutlet NSMenu *       statusMenu;
     NSFont *                statusMenuFont;

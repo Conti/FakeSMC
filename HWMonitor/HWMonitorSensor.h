@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ISPSmartController.h"
 
 enum {
     TemperatureSensorGroup =   1,
@@ -14,6 +15,7 @@ enum {
     TachometerSensorGroup =    3,
     FrequencySensorGroup =     4,
     MultiplierSensorGroup =    5,
+    HDSmartTempSensorGroup = 6, 
 
 };
 typedef NSUInteger SensorGroup;
@@ -26,11 +28,12 @@ typedef NSUInteger SensorGroup;
 @property (readwrite, retain) id            object;
 @property (readwrite, assign) BOOL          favorite;
 
+
 + (unsigned int)        swapBytes:(unsigned int) value;
 
-+ (NSDictionary *)      populateValues;
+- (NSDictionary *)      populateValues;
 + (NSData *)            populateValueForKey:(NSString *)key;
-+ (NSData *)            readValueForKey:(NSString *)key;
+- (NSData *)            readValueForKey:(NSString *)key;
 
 - (HWMonitorSensor *)   initWithKey:(NSString *)aKey andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption;
 - (NSString *)          formateValue:(NSData *)value;

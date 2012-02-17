@@ -12,6 +12,9 @@
 
 @implementation AppDelegate
 
+
+#define SMART_UPDATE_INTERVAL 5*60
+
 - (void)updateTitles
 {
     io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching(kFakeSMCDeviceService));
@@ -21,7 +24,8 @@
         NSEnumerator * enumerator = nil;
         HWMonitorSensor * sensor = nil;
         int count = 0;
-    
+        
+
         CFMutableArrayRef favorites = (CFMutableArrayRef)CFArrayCreateMutable(kCFAllocatorDefault, 0, nil);
         
         enumerator = [sensorsList  objectEnumerator];
@@ -38,9 +42,17 @@
         
         if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateList), favorites)) 
         {           
-   //         NSDictionary * values = (__bridge_transfer NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
-   //   CFBridgingRelease
-          NSDictionary * values = (NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+          NSMutableDictionary * values = (__bridge_transfer NSMutableDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+            
+            if(smart)
+            {
+                if (fabs([lastcall timeIntervalSinceNow]) > SMART_UPDATE_INTERVAL) 
+                {
+                    lastcall = [NSDate date];
+                    [smartController update];
+                }
+                [values addEntriesFromDictionary:[smartController getDataSet:1]];
+            }
             if (values) {
                 
                 enumerator = [sensorsList  objectEnumerator];
@@ -83,10 +95,35 @@
         }
         else [statusItem setTitle:@""];
     }
+
 }
 
-- (HWMonitorSensor *)addSensorWithKey:(NSString *)key andCaption:(NSString *)caption intoGroup:(SensorGroup)group
+- (HWMonitorSensor *)addSensorWithKey:(NSString *)key andCaption:(NSString *)caption intoGroup:(SensorGroup)group 
 {
+    if(group==HDSmartTempSensorGroup)
+    {
+        HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andGroup:group withCaption:caption];
+        
+        [sensor setFavorite:[[NSUserDefaults standardUserDefaults] boolForKey:key]];
+        
+        NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:caption action:nil keyEquivalent:@""];
+        
+        [menuItem setRepresentedObject:sensor];
+        [menuItem setAction:@selector(menuItemClicked:)];
+        
+        if ([sensor favorite]) [menuItem setState:TRUE];
+        
+        [statusMenu insertItem:menuItem atIndex:menusCount++];
+        
+        [sensor setObject:menuItem];
+        
+        [sensorsList addObject:sensor];
+        
+        return sensor;
+
+    }
+    else
+        
     if ([HWMonitorSensor populateValueForKey:key]) {
         HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andGroup:group withCaption:caption];
         
@@ -167,7 +204,15 @@
 - (void)awakeFromNib
 {
     menusCount = 0;
-    
+    lastcall = [NSDate date];
+    smartController = [[ISPSmartController alloc] init];
+	if (smartController) {
+        smart = YES;
+        [smartController getPartitions];
+        [smartController update];
+        DisksList = [smartController getDataSet:1];
+    }
+	
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:statusMenu];
     [statusItem setHighlightMode:YES];
@@ -197,22 +242,23 @@
     //Temperatures
     
     for (int i=0; i<0xA; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TC%XD",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:TemperatureSensorGroup];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TC%XD",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:TemperatureSensorGroup ];
     
-    [self addSensorWithKey:@"Th0H" andCaption:@"CPU Heatsink" intoGroup:TemperatureSensorGroup];
-    [self addSensorWithKey:@"TN0P" andCaption:@"Motherboard" intoGroup:TemperatureSensorGroup];
-    [self addSensorWithKey:@"TA0P" andCaption:@"Ambient" intoGroup:TemperatureSensorGroup];
+    [self addSensorWithKey:@"Th0H" andCaption:@"CPU Heatsink" intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"TN0P" andCaption:@"Motherboard" intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"Tm0P" andCaption:@"Memory" intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"TA0P" andCaption:@"Ambient" intoGroup:TemperatureSensorGroup ];
     
     for (int i=0; i<0xA; i++) {
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XD",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Core",i] intoGroup:TemperatureSensorGroup];
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XH",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Board",i] intoGroup:TemperatureSensorGroup];
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XP",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Proximity",i] intoGroup:TemperatureSensorGroup];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XD",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Core",i] intoGroup:TemperatureSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XH",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Board",i] intoGroup:TemperatureSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XP",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Proximity",i] intoGroup:TemperatureSensorGroup ];
     }
     
     [self insertFooterAndTitle:@"TEMPERATURES"];  
     
     for (int i=0; i<16; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:FrequencySensorGroup];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:FrequencySensorGroup ];
     
     //
     [self insertFooterAndTitle:@"FREQUENCIES"];
@@ -220,26 +266,33 @@
     //Multipliers
     
     for (int i=0; i<0xA; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"MC%XC",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X Multiplier",i] intoGroup:MultiplierSensorGroup];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"MC%XC",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X Multiplier",i] intoGroup:MultiplierSensorGroup ];
     
-    [self addSensorWithKey:@"MPkC" andCaption:@"CPU Package Multiplier" intoGroup:MultiplierSensorGroup];
+    [self addSensorWithKey:@"MPkC" andCaption:@"CPU Package Multiplier" intoGroup:MultiplierSensorGroup ];
     
     [self insertFooterAndTitle:@"MULTIPLIERS"];
     
     // Voltages
 
-    [self addSensorWithKey:@"VC0C" andCaption:@"CPU Voltage" intoGroup:VoltageSensorGroup];
-    [self addSensorWithKey:@"VM0R" andCaption:@"DIMM Voltage" intoGroup:VoltageSensorGroup];
+    [self addSensorWithKey:@"VC0C" andCaption:@"CPU Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@"VM0R" andCaption:@"DIMM Voltage" intoGroup:VoltageSensorGroup ];
     
     [self insertFooterAndTitle:@"VOLTAGES"];
     
     // Fans
     
     for (int i=0; i<10; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andCaption:[[NSString alloc] initWithFormat:@"Fan %X",i] intoGroup:TachometerSensorGroup];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andCaption:[[NSString alloc] initWithFormat:@"Fan %X",i] intoGroup:TachometerSensorGroup ];
     
     [self insertFooterAndTitle:@"FANS"];
+    // Disks
+    NSEnumerator * DisksEnumerator = [DisksList keyEnumerator]; 
+    id nextDisk;
+    while (nextDisk = [DisksEnumerator nextObject]) 
+        [self addSensorWithKey:nextDisk andCaption:nextDisk intoGroup:HDSmartTempSensorGroup];
     
+    
+     [self insertFooterAndTitle:@"DISKS TEMPS"];
     if (![sensorsList count]) {
         NSMenuItem * item = [[NSMenuItem alloc]initWithTitle:@"No sensors found or FakeSMCDevice unavailable" action:nil keyEquivalent:@""];
         

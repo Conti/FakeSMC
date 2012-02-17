@@ -23,7 +23,7 @@
     return ((value & 0xff00) >> 8) | ((value & 0xff) << 8);
 }
 
-+ (NSDictionary *)populateValues;
+- (NSDictionary *)populateValues;
 {
     NSDictionary * values = NULL;
     
@@ -54,7 +54,7 @@
         
         if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDeviceUpdateKeyValue), message)) 
         {
-            NSDictionary * values = (/*__bridge_transfer*/ NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+            NSDictionary * values = (__bridge_transfer /*__bridge_transfer*/ NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
             
             if (values)
                 value = [values objectForKey:key];
@@ -74,7 +74,7 @@
     io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching(kFakeSMCDeviceService));
     
     if (service) {
-        NSDictionary * values = (/*__bridge_transfer*/ NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+        NSDictionary * values = (__bridge_transfer /*__bridge_transfer*/ NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
         
         if (values) 
             value = [values objectForKey:key];
@@ -109,6 +109,19 @@
                 return [[NSString alloc] initWithFormat:@"%d°",t];
                 
             } break;
+            
+            case HDSmartTempSensorGroup:
+            {
+                unsigned int t = 0;
+                
+                bcopy([value bytes], &t, 2);
+                
+                //t = [NSSensor swapBytes:t] >> 8;
+                
+                return [[NSString alloc] initWithFormat:@"%d°",t];
+                
+            } break;
+                
                 
             case VoltageSensorGroup:
             {

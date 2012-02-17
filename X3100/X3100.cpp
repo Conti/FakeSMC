@@ -33,7 +33,7 @@
 #define INVID(offset) OSReadLittleInt32((mmio_base), offset)
 #define OUTVID(offset,val) OSWriteLittleInt32((mmio_base), offset, val)
 
-#define Debug FALSE
+#define Debug FALSE 
 
 #define LogPrefix "X3100monitor: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -71,6 +71,7 @@ bool X3100monitor::init(OSDictionary *properties)
 			IOPCIDevice* device = 0;
 			
 			while (device = OSDynamicCast(IOPCIDevice, iterator->getNextObject())) {
+                DebugLog("name: %s\n", device->getName());
 				OSData *data = OSDynamicCast(OSData, device->getProperty("vendor-id"));
 				if (data)
 					vendor_id = *(UInt32*)data->getBytesNoCopy();
