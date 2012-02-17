@@ -34,7 +34,7 @@
 			</array>
 			<key>IOProviderClass</key>
 			<string>IOACPIPlatformDevice</string>
-			<key>Fan Names</key>
+			<key>FanNames</key>
 			<array>
 				<string>System Fan</string>
 				<string>Processor Fan</string>

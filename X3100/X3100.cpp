@@ -61,7 +61,7 @@ bool X3100monitor::init(OSDictionary *properties)
 	return true;
 }
 
-IOService* X3100monitor::probe(IOService *provider, SInt32 *score)
+/*IOService* X3100monitor::probe(IOService *provider, SInt32 *score)
 {
 	if (super::probe(provider, score) != this) return 0;
 	UInt32 vendor_id, device_id;
@@ -87,21 +87,19 @@ IOService* X3100monitor::probe(IOService *provider, SInt32 *score)
 		}
 	}	
 	return this;
-}
+}*/
 
 bool X3100monitor::start(IOService * provider)
 {
 	if (!provider || !super::start(provider)) return false;
     
-//    VCard = (IOPCIDevice*)provider;
-    if (!VCard) {
-      return false;
-    }
-  
-
+    VCard = (IOPCIDevice*)provider;
+	
+	hostSpace = VCard->space;
+	hostSpace.s.deviceNum = 0;
 
 	IOMemoryDescriptor * theDescriptor;
-	IOPhysicalAddress bar = (IOPhysicalAddress)((VCard->configRead32(kMCHBAR)) & ~0xf);
+	IOPhysicalAddress bar = (IOPhysicalAddress)((VCard->configRead32(hostSpace, kMCHBAR)) & ~0xf);
 	DebugLog("Fx3100: register space=%08lx\n", (long unsigned int)bar);
 	theDescriptor = IOMemoryDescriptor::withPhysicalAddress (bar, 0x2000, kIODirectionOutIn); // | kIOMapInhibitCache);
 	if(theDescriptor != NULL)

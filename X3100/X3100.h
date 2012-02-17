@@ -19,6 +19,7 @@ class X3100monitor : public FakeSMCPlugin
     
 private:
 	OSDictionary *		sensors;
+	IOPCIAddressSpace	hostSpace;
 	volatile UInt8*     mmio_base;
 	int					numCard;  //numCard=0 if only one Video, but may be any other value
 	IOPCIDevice *		VCard;
@@ -27,7 +28,6 @@ private:
 	bool				addSensor(const char* key, const char* type, unsigned char size, int index);
 	
 public:
-	virtual IOService*	probe(IOService *provider, SInt32 *score);
     virtual bool		start(IOService *provider);
 	virtual bool		init(OSDictionary *properties=0);
 	virtual void		free(void);

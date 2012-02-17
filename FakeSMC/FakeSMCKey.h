@@ -22,7 +22,7 @@ inline void copySymbol(const char *from, char* to)
 {
 	bzero(to, 5);
 	
-	UInt64 len = strlen(from);
+	UInt32 len = (UInt32)strlen(from);
 	
 	bcopy(from, to, len > 4 ? 4 : len);
 }

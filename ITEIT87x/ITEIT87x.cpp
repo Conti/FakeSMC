@@ -421,7 +421,7 @@ bool IT87x::startPlugin()
 			name = OSDynamicCast(OSString, configuration->getObject(key_temp));
 		}
 		
-		UInt32 nameLength = name ? strlen(name->getCStringNoCopy()) : 0;
+		UInt32 nameLength = name ? (UInt32)strlen(name->getCStringNoCopy()) : 0;
 		
 		if (readTachometer(i) > 10 || nameLength > 0)
             // Pff WTF ??? Add tachometer if it doesn't exist in a system but only the name defined in the config???   

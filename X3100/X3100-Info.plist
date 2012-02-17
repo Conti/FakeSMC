@@ -28,12 +28,14 @@
 			<string>X3100monitor</string>
 			<key>IOMatchCategory</key>
 			<string>FakeSMCplugin</string>
+			<key>IOPCIClassMatch</key>
+			<string>0x03000000&amp;0xFF000000</string>
+			<key>IOPCIMatch</key>
+			<string>0x2a028086&amp;0xFFFFFFFF</string>
 			<key>IOProbeScore</key>
 			<integer>1000</integer>
 			<key>IOProviderClass</key>
-			<string>IOResources</string>
-			<key>IOResourceMatch</key>
-			<string>IOKit</string>
+			<string>IOPCIDevice</string>
 		</dict>
 	</dict>
 	<key>OSBundleLibraries</key>
