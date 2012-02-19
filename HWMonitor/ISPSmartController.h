@@ -13,6 +13,7 @@
 
 #define kATADefaultSectorSize 512
 #define kWindowSMARTsDriveTempAttribute 0xC2
+#define kWindowSMARTsDriveTempAttribute2    0xE7
 #define kSMARTAttributeCount 30
 
 @interface ISPSmartController : NSObject {

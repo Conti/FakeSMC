@@ -219,7 +219,7 @@ void SwapASCIIString(UInt16 *buffer, UInt16 length) {
 			int currentAttributeIndex = 0;
 			for (currentAttributeIndex = 0; currentAttributeIndex < kSMARTAttributeCount; currentAttributeIndex++) {
 				IOATASmartAttribute currentAttribute = smartDataVendorSpecifics.vendorAttributes[currentAttributeIndex];
-				if (currentAttribute.attributeId == kWindowSMARTsDriveTempAttribute) {
+				if (currentAttribute.attributeId == kWindowSMARTsDriveTempAttribute || currentAttribute.attributeId==kWindowSMARTsDriveTempAttribute2) {
 					UInt8 temp = currentAttribute.rawvalue[0];
 					temperature = [NSNumber numberWithUnsignedInt:temp];
 					foundTemperature = YES;

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "NSString+TruncateToWidth.h"
 #include "FakeSMCDefinitions.h"
 
 @implementation AppDelegate
@@ -100,8 +100,9 @@
 
 - (HWMonitorSensor *)addSensorWithKey:(NSString *)key andCaption:(NSString *)caption intoGroup:(SensorGroup)group 
 {
-    if(group==HDSmartTempSensorGroup)
+    if(group==HDSmartTempSensorGroup || [HWMonitorSensor populateValueForKey:key])
     {
+        caption = [caption stringByTruncatingToWidth:145.0f withFont:statusItemFont]; 
         HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andGroup:group withCaption:caption];
         
         [sensor setFavorite:[[NSUserDefaults standardUserDefaults] boolForKey:key]];
@@ -122,30 +123,7 @@
         return sensor;
 
     }
-    else
-        
-    if ([HWMonitorSensor populateValueForKey:key]) {
-        HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andGroup:group withCaption:caption];
-        
-        [sensor setFavorite:[[NSUserDefaults standardUserDefaults] boolForKey:key]];
-        
-        NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:caption action:nil keyEquivalent:@""];
-        
-        [menuItem setRepresentedObject:sensor];
-        [menuItem setAction:@selector(menuItemClicked:)];
-        
-        if ([sensor favorite]) [menuItem setState:TRUE];
-        
-        [statusMenu insertItem:menuItem atIndex:menusCount++];
-        
-        [sensor setObject:menuItem];
-        
-        [sensorsList addObject:sensor];
-        
-        return sensor;
-    }
-    
-    return NULL;
+      return NULL;
 }
 
 - (void)insertFooterAndTitle:(NSString *)title
@@ -292,7 +270,7 @@
         [self addSensorWithKey:nextDisk andCaption:nextDisk intoGroup:HDSmartTempSensorGroup];
     
     
-     [self insertFooterAndTitle:@"DISKS TEMPS"];
+     [self insertFooterAndTitle:@"HARD DRIVES TEMPERATURES"];
     if (![sensorsList count]) {
         NSMenuItem * item = [[NSMenuItem alloc]initWithTitle:@"No sensors found or FakeSMCDevice unavailable" action:nil keyEquivalent:@""];
         
