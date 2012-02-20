@@ -23,6 +23,7 @@ typedef NSUInteger SensorGroup;
 @interface HWMonitorSensor : NSObject
 
 @property (readwrite, retain) NSString *    key;
+@property (readwrite, retain) NSString *    type;
 @property (readwrite, assign) SensorGroup   group;
 @property (readwrite, retain) NSString *    caption;
 @property (readwrite, retain) id            object;
@@ -36,7 +37,7 @@ typedef NSUInteger SensorGroup;
 + (NSData *)            populateValueForKey:(NSString *)key;
 - (NSData *)            readValueForKey:(NSString *)key;
 
-- (HWMonitorSensor *)   initWithKey:(NSString *)aKey andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption;
+- (HWMonitorSensor *)   initWithKey:(NSString *)aKey andType: aType andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption;
 - (NSString *)          formateValue:(NSData *)value;
 
 @end

@@ -13,6 +13,7 @@
 @implementation HWMonitorSensor
 
 @synthesize key;
+@synthesize type;
 @synthesize group;
 @synthesize caption;
 @synthesize object;
@@ -85,8 +86,9 @@
     return value;
 }
 
-- (HWMonitorSensor *)initWithKey:(NSString *)aKey andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption
+- (HWMonitorSensor *)initWithKey:(NSString *)aKey andType: aType andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption
 {
+    type = aType;
     key = aKey;
     group = aGroup;
     caption = aCaption;
@@ -131,9 +133,15 @@
                 
                 encoded = [HWMonitorSensor swapBytes:encoded];
                 
-                float v = ((encoded & 0xc000) >> 14) + ((encoded & 0x3fff) >> 4) / 1000.0;
-           
+                if ([type isEqualToString:@TYPE_FP4C]){ 
+                float v = ((encoded & 0xF000) >> 12) + ((encoded & 0x0fff)>>2) / 1000.0;
                 return [[NSString alloc] initWithFormat:@"%2.3fV",v];
+                }
+                else if ([type isEqualToString:@TYPE_FP2E])
+                { 
+                float v = ((encoded & 0xc000) >> 14) + ((encoded & 0x3fff)>>4) / 1000.0;
+                return [[NSString alloc] initWithFormat:@"%1.3fV",v]; 
+                }
             } break;
                 
             case TachometerSensorGroup:

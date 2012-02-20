@@ -34,7 +34,7 @@
 }
 
 - (void)updateTitles;
-- (HWMonitorSensor *)addSensorWithKey:(NSString *)key andCaption:(NSString *)caption intoGroup:(SensorGroup)group;
+- (HWMonitorSensor *)addSensorWithKey:(NSString *)key andType:(NSString *)aType andCaption:(NSString *)caption intoGroup:(SensorGroup)group;
 - (void)insertFooterAndTitle:(NSString *)title;
 
 - (void)menuItemClicked:(id)sender;

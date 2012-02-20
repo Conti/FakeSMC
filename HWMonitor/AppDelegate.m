@@ -98,12 +98,12 @@
 
 }
 
-- (HWMonitorSensor *)addSensorWithKey:(NSString *)key andCaption:(NSString *)caption intoGroup:(SensorGroup)group 
+- (HWMonitorSensor *)addSensorWithKey:(NSString *)key andType:(NSString *) aType andCaption:(NSString *)caption intoGroup:(SensorGroup)group 
 {
     if(group==HDSmartTempSensorGroup || [HWMonitorSensor populateValueForKey:key])
     {
         caption = [caption stringByTruncatingToWidth:145.0f withFont:statusItemFont]; 
-        HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andGroup:group withCaption:caption];
+        HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andType: aType andGroup:group withCaption:caption];
         
         [sensor setFavorite:[[NSUserDefaults standardUserDefaults] boolForKey:key]];
         
@@ -220,23 +220,23 @@
     //Temperatures
     
     for (int i=0; i<0xA; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TC%XD",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:TemperatureSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TC%XD",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:TemperatureSensorGroup ];
     
-    [self addSensorWithKey:@"Th0H" andCaption:@"CPU Heatsink" intoGroup:TemperatureSensorGroup ];
-    [self addSensorWithKey:@"TN0P" andCaption:@"Motherboard" intoGroup:TemperatureSensorGroup ];
-    [self addSensorWithKey:@"Tm0P" andCaption:@"Memory" intoGroup:TemperatureSensorGroup ];
-    [self addSensorWithKey:@"TA0P" andCaption:@"Ambient" intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"Th0H" andType: @TYPE_SP78 andCaption:@"CPU Heatsink" intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"TN0P" andType: @TYPE_SP78 andCaption:@"Motherboard" intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"Tm0P" andType: @TYPE_SP78 andCaption:@"Memory" intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"TA0P" andType: @TYPE_SP78 andCaption:@"Ambient" intoGroup:TemperatureSensorGroup ];
     
     for (int i=0; i<0xA; i++) {
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XD",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Core",i] intoGroup:TemperatureSensorGroup ];
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XH",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Board",i] intoGroup:TemperatureSensorGroup ];
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XP",i] andCaption:[[NSString alloc] initWithFormat:@"GPU %X Proximity",i] intoGroup:TemperatureSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XD",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"GPU %X Core",i] intoGroup:TemperatureSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XH",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"GPU %X Board",i] intoGroup:TemperatureSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XP",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"GPU %X Proximity",i] intoGroup:TemperatureSensorGroup ];
     }
     
     [self insertFooterAndTitle:@"TEMPERATURES"];  
     
     for (int i=0; i<16; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:FrequencySensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andType: @TYPE_FREQ andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:FrequencySensorGroup ];
     
     //
 //    [self addSensorWithKey:@"FGC0" andCaption:@"GPU" intoGroup:FrequencySensorGroup];
@@ -245,24 +245,24 @@
     //Multipliers
     
     for (int i=0; i<0xA; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"MC%XC",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X Multiplier",i] intoGroup:MultiplierSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"MC%XC",i] andType: @TYPE_FP4C andCaption:[[NSString alloc] initWithFormat:@"CPU %X Multiplier",i] intoGroup:MultiplierSensorGroup ];
     
-    [self addSensorWithKey:@"MPkC" andCaption:@"CPU Package Multiplier" intoGroup:MultiplierSensorGroup ];
+    [self addSensorWithKey:@"MPkC" andType: @TYPE_FP4C andCaption:@"CPU Package Multiplier" intoGroup:MultiplierSensorGroup ];
 
     [self insertFooterAndTitle:@"MULTIPLIERS"];
     
     // Voltages
 
-    [self addSensorWithKey:@"VC0C" andCaption:@"CPU Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@"VM0R" andCaption:@"DIMM Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_12V_VOLTAGE andCaption:@"12V Bus Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_AVCC_VOLTAGE andCaption:@"VCC Bus Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_3VCC_VOLTAGE andCaption:@"3.3 VCC Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_3VSB_VOLTAGE andCaption:@"3.3 VSB Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_VBAT_VOLTAGE andCaption:@"Battery Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY0 andCaption:@"VRM Supply 0 Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY1 andCaption:@"VRM Supply 1 Voltage" intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY2 andCaption:@"VRM Supply 2 Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@"VC0C" andType: @TYPE_FP2E andCaption:@"CPU Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@"VM0R" andType: @TYPE_FP2E andCaption:@"DIMM Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_12V_VOLTAGE andType: @TYPE_FP4C andCaption:@"12V Bus Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_AVCC_VOLTAGE andType: @TYPE_FP2E andCaption:@"VCC Bus Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_3VCC_VOLTAGE andType: @TYPE_FP2E andCaption:@"3.3 VCC Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_3VSB_VOLTAGE andType: @TYPE_FP2E andCaption:@"3.3 VSB Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_VBAT_VOLTAGE andType: @TYPE_FP2E andCaption:@"Battery Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY0 andType: @TYPE_FP2E andCaption:@"VRM Supply 0 Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY1 andType: @TYPE_FP2E andCaption:@"VRM Supply 1 Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY2 andType: @TYPE_FP2E andCaption:@"VRM Supply 2 Voltage" intoGroup:VoltageSensorGroup ];
 
 
     [self insertFooterAndTitle:@"VOLTAGES"];
@@ -274,14 +274,14 @@
         NSString * caption = [[NSString alloc] initWithData:[HWMonitorSensor populateValueForKey:[[NSString alloc] initWithFormat:@"F%XID",i] ]encoding: NSUTF8StringEncoding];
         if([caption length]<=0) caption = [[NSString alloc] initWithFormat:@"Fan %d",i];
         
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andCaption:caption intoGroup:TachometerSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andType: @TYPE_FPE2 andCaption:caption intoGroup:TachometerSensorGroup ];
     }
     [self insertFooterAndTitle:@"FANS"];
     // Disks
     NSEnumerator * DisksEnumerator = [DisksList keyEnumerator]; 
     id nextDisk;
     while (nextDisk = [DisksEnumerator nextObject]) 
-        [self addSensorWithKey:nextDisk andCaption:nextDisk intoGroup:HDSmartTempSensorGroup];
+        [self addSensorWithKey:nextDisk andType: @TYPE_FPE2 andCaption:nextDisk intoGroup:HDSmartTempSensorGroup];
     
     
      [self insertFooterAndTitle:@"HARD DRIVES TEMPERATURES"];
