@@ -239,6 +239,7 @@
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:FrequencySensorGroup ];
     
     //
+//    [self addSensorWithKey:@"FGC0" andCaption:@"GPU" intoGroup:FrequencySensorGroup];
     [self insertFooterAndTitle:@"FREQUENCIES"];
     
     //Multipliers
@@ -247,7 +248,7 @@
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"MC%XC",i] andCaption:[[NSString alloc] initWithFormat:@"CPU %X Multiplier",i] intoGroup:MultiplierSensorGroup ];
     
     [self addSensorWithKey:@"MPkC" andCaption:@"CPU Package Multiplier" intoGroup:MultiplierSensorGroup ];
-    
+
     [self insertFooterAndTitle:@"MULTIPLIERS"];
     
     // Voltages
@@ -260,8 +261,12 @@
     // Fans
     
     for (int i=0; i<10; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andCaption:[[NSString alloc] initWithFormat:@"Fan %X",i] intoGroup:TachometerSensorGroup ];
-    
+    {
+        NSString * caption = [[NSString alloc] initWithData:[HWMonitorSensor populateValueForKey:[[NSString alloc] initWithFormat:@"F%XID",i] ]encoding: NSUTF8StringEncoding];
+        if([caption length]<=0) caption = [[NSString alloc] initWithFormat:@"Fan %d",i];
+        
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andCaption:caption intoGroup:TachometerSensorGroup ];
+    }
     [self insertFooterAndTitle:@"FANS"];
     // Disks
     NSEnumerator * DisksEnumerator = [DisksList keyEnumerator]; 
