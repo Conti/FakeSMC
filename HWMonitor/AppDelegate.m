@@ -255,7 +255,16 @@
 
     [self addSensorWithKey:@"VC0C" andCaption:@"CPU Voltage" intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@"VM0R" andCaption:@"DIMM Voltage" intoGroup:VoltageSensorGroup ];
-    
+    [self addSensorWithKey:@KEY_12V_VOLTAGE andCaption:@"12V Bus Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_AVCC_VOLTAGE andCaption:@"VCC Bus Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_3VCC_VOLTAGE andCaption:@"3.3 VCC Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_3VSB_VOLTAGE andCaption:@"3.3 VSB Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_VBAT_VOLTAGE andCaption:@"Battery Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY0 andCaption:@"VRM Supply 0 Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY1 andCaption:@"VRM Supply 1 Voltage" intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY2 andCaption:@"VRM Supply 2 Voltage" intoGroup:VoltageSensorGroup ];
+
+
     [self insertFooterAndTitle:@"VOLTAGES"];
     
     // Fans
