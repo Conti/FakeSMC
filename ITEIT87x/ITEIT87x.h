@@ -32,9 +32,8 @@ const UInt8 ITE_VENDOR_ID_REGISTER						= 0x58;
 const UInt8 ITE_FAN_TACHOMETER_16_BIT_ENABLE_REGISTER	= 0x0c;
 const UInt8 ITE_FAN_TACHOMETER_REG[5]					= { 0x0d, 0x0e, 0x0f, 0x80, 0x82 };
 const UInt8 ITE_FAN_TACHOMETER_EXT_REG[5]				= { 0x18, 0x19, 0x1a, 0x81, 0x83 };
-const UInt8 ITE_VOLTAGE_BASE_REG						= 0x20;
-
-const float ITE_VOLTAGE_GAIN[]							= {1, 1, 1, (6.8f / 10 + 1), 1, 1, 1, 1, 1 };
+const UInt8 ITE_VOLTAGE_REG[9]						    = { 0x20, 0x21, 0x22, 0x23, 0x24,0x25,0x26,0x27,0x28};
+const float ITE_VOLTAGE_GAIN[]							= { 1, 1, 1, (6.8f / 10 + 1), 1, 1, 1, 1, 1 };
 
 const UInt8 ITE_SMARTGUARDIAN_MAIN_CONTROL				= 0x13;
 const UInt8 ITE_SMARTGUARDIAN_PWM_CONTROL[5]			= { 0x15, 0x16, 0x17, 0x88, 0x89 };
@@ -85,6 +84,14 @@ inline UInt16 encode_fp2e(UInt16 value)
 	return swap_value((dec << 14) | (frc << 4) /*| 0x3*/);
 }
 
+inline UInt16 encode_fp4c(UInt16 value)
+{
+    UInt16 dec = (float)value / 1000.0f;
+    UInt16 frc = value - (dec * 1000);
+    
+    return swap_value((dec << 12) | (frc << 8));
+}
+
 inline UInt16 encode_fpe2(UInt16 value)
 {
 	return swap_value(value << 2);
@@ -96,13 +103,15 @@ class IT87xSensor : public SuperIOSensor
 {
     OSDeclareDefaultStructors(IT87xSensor)
     
-    
-    
+private:
+    UInt16    coeff;
+     
 public:    
     static SuperIOSensor *withOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex);
     
     virtual long		getValue();
     virtual void        setValue(UInt16 value);
+    virtual void        setCoeff(UInt16 value);
 };
 
 class IT87x : public SuperIOMonitor

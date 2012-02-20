@@ -132,8 +132,8 @@
                 encoded = [HWMonitorSensor swapBytes:encoded];
                 
                 float v = ((encoded & 0xc000) >> 14) + ((encoded & 0x3fff) >> 4) / 1000.0;
-                
-                return [[NSString alloc] initWithFormat:@"%1.3fV",v];
+           
+                return [[NSString alloc] initWithFormat:@"%2.3fV",v];
             } break;
                 
             case TachometerSensorGroup:

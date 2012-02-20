@@ -4,6 +4,7 @@
  *
  *  Created by mozo on 08/10/10.
  *  Copyright 2010 mozodojo. All rights reserved.
+ *  Modified by Navi 2012
  *
  */
 
@@ -28,7 +29,10 @@ OSDefineMetaClassAndStructors(IT87xSensor, SuperIOSensor)
 SuperIOSensor * IT87xSensor::withOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex)
 {
 	SuperIOSensor *me = new IT87xSensor;
-	
+    ((IT87xSensor *) me)->setCoeff(1);
+    if(strncmp(aKey, KEY_12V_VOLTAGE, 4)==0)
+        ((IT87xSensor *) me)->setCoeff(4);
+        
     if (me && !me->initWithOwner(aOwner, aKey, aType, aSize, aGroup, aIndex)) {
         me->release();
         return 0;
@@ -36,6 +40,12 @@ SuperIOSensor * IT87xSensor::withOwner(SuperIOMonitor *aOwner, const char* aKey,
 	
     return me;
 }
+
+void IT87xSensor::setCoeff(UInt16 value)
+{
+    coeff = value;
+}
+
 
 long IT87xSensor::getValue()
 {
@@ -45,7 +55,7 @@ long IT87xSensor::getValue()
 			value = owner->readTemperature(index);
 			break;
 		case kSuperIOVoltageSensor:
-			value = owner->readVoltage(index);
+			value = owner->readVoltage(index)*coeff;
 			break;
 		case kSuperIOTachometerSensor:
 			value = owner->readTachometer(index);
@@ -75,8 +85,13 @@ long IT87xSensor::getValue()
 		default:
 			break;
 	}
+   
+
 	if (*((uint32_t*)type) == *((uint32_t*)TYPE_FP2E)) {
 		value = encode_fp2e(value);
+	}
+    else if (*((uint32_t*)type) == *((uint32_t*)TYPE_FP4C)) {
+		value = encode_fp4c(value);
 	}
 	else if (*((uint32_t*)type) == *((uint32_t*)TYPE_FPE2)) {
 		value = encode_fpe2(value);
@@ -215,7 +230,7 @@ long IT87x::readTemperature(unsigned long index)
 long IT87x::readVoltage(unsigned long index)
 {
     
-    return readByte(address, ITE_VOLTAGE_BASE_REG + index) * voltageGain;
+    return readByte(address, ITE_VOLTAGE_REG[index]) * voltageGain;
     
 }
 
@@ -398,50 +413,50 @@ bool IT87x::startPlugin()
 			
 			if (OSString* name = OSDynamicCast(OSString, configuration->getObject(key))) {
 				if (name->isEqualTo("Processor")) {
-					if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
+					if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i))
 						WarningLog("error adding CPU voltage sensor");
 				}
 				else if (name->isEqualTo("Memory")) {
-					if (!addSensor(KEY_MEMORY_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
+					if (!addSensor(KEY_MEMORY_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i))
 						WarningLog("error adding memory voltage sensor");
 				}
                 else if (name->isEqualTo("AVCC")) {
-                    if (!addSensor(KEY_AVCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                    if (!addSensor(KEY_AVCC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding AVCC Voltage Sensor!");
                     }
                 }
                 else if (name->isEqualTo("12VC")) {
-                    if (!addSensor(KEY_12V_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                    if (!addSensor(KEY_12V_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding 12V Voltage Sensor!");
                     }
                 }         
                 else if (name->isEqualTo("3VCC")) {
-                    if (!addSensor(KEY_3VCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                    if (!addSensor(KEY_3VCC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding 3VCC Voltage Sensor!");
                     }
                 }
                 else if (name->isEqualTo("VRM1")) {
-                    if (!addSensor(KEY_CPU_VRM_SUPPLY0, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                    if (!addSensor(KEY_CPU_VRM_SUPPLY0, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding UNKN1 Voltage Sensor!");
                     }
                 }
                 else if (name->isEqualTo("VRM2")) {
-                    if (!addSensor(KEY_CPU_VRM_SUPPLY1, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                    if (!addSensor(KEY_CPU_VRM_SUPPLY1, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding UNKN2 Voltage Sensor!");
                     }
                 }
                 else if (name->isEqualTo("VRM3")) {
-                    if (!addSensor(KEY_CPU_VRM_SUPPLY2, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                    if (!addSensor(KEY_CPU_VRM_SUPPLY2, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding UNKN3 Voltage Sensor!");
                     }
                 }
                 else if (name->isEqualTo("3VSB")) {
-                    if (!addSensor(KEY_3VSB_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                    if (!addSensor(KEY_3VSB_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding 3VSB Voltage Sensor!");
                     }
                 }
                 else if (name->isEqualTo("VBAT")) {
-                    if (!addSensor(KEY_VBAT_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                    if (!addSensor(KEY_VBAT_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding VBAT Voltage Sensor!");
                     }
                 }
@@ -532,8 +547,9 @@ SuperIOSensor * IT87x::addSensor(const char* name, const char* type, unsigned ch
 {
 	if (NULL != getSensor(name))
 		return 0;
-	
-	if (SuperIOSensor *sensor = IT87xSensor::withOwner(this, name, type, size, group, index))
+    SuperIOSensor *sensor = sensor = IT87xSensor::withOwner(this, name, type, size, group, index);
+
+	if (sensor)
 		if (sensors->setObject(sensor))
 			if(kIOReturnSuccess == fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)name, (void *)type, (void *)size, (void *)this))
 				return sensor;

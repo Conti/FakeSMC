@@ -29,6 +29,7 @@ typedef NSUInteger SensorGroup;
 @property (readwrite, assign) BOOL          favorite;
 
 
+
 + (unsigned int)        swapBytes:(unsigned int) value;
 
 - (NSDictionary *)      populateValues;
