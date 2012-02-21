@@ -11,6 +11,7 @@
 #include <architecture/i386/pio.h>
 #include "ITEIT87x.h"
 #include "FakeSMC.h"
+#include "FakeSMCUtils.h"
 
 #define Debug false
 
