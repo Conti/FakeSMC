@@ -419,7 +419,7 @@ IOReturn FakeSMCDevice::setProperties(OSObject * properties)
             if (OSCollectionIterator *iterator = OSCollectionIterator::withCollection(keys)) {
                 while (FakeSMCKey *key = OSDynamicCast(FakeSMCKey, iterator->getNextObject()))
                     values->setObject(key->getName(), OSData::withBytes(key->getValue(), key->getSize()));
-                
+                  
                 iterator->release();
             }
             

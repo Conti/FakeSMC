@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  HWSensors
+
+  Created by Navi on 21.02.12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+"TEMPERATURES"="ТЕМПЕРАТУРЫ";
+"FREQUENCIES"="ЧАСТОТЫ";
+"MULTIPLIERS"="МНОЖИТЕЛИ";
+"VOLTAGES"="НАПРЯЖЕНИЯ";
+"FANS"="ВЕНТИЛЯТОРЫ";
+"HARD DRIVES TEMPERATURES"="ТЕМПЕРАТУРЫ ДИСКОВ";
+"CPU Heatsink"="Радиатор CPU";
+"GPU %X Board"="Радиатор GPU %X";
+"Motherboard"="Чипсет";
+"CPU Package Multiplier"="Общий множитель CPU";
+"CPU %X Multiplier"="Множитель CPU %X";
+"CPU Voltage"="Шина CPU";
+"DIMM Voltage"="Шина модулей DIMM";
+"12V Bus Voltage"="Шина 12В";
+"VCC Bus Voltage"="Шина VCC";
+"3.3 VCC Voltage"="Шина 3.3В VCC";
+"3.3 VSB Voltage"="Шина 3.3В VSB";
+"Battery Voltage"="Шина батареи";
+"VRM Supply 0 Voltage"="Шина VRM 0";
+"VRM Supply 1 Voltage"="Шина VRM 1";
+"VRM Supply 2 Voltage"="Шина VRM 2";
