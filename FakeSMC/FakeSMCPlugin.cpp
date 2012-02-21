@@ -14,9 +14,9 @@
 #define Debug FALSE
 
 #define LogPrefix "FakeSMCPlugin: "
-#define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
+#define DebugLog(string, args...)   do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
 #define WarningLog(string, args...) do { IOLog (LogPrefix "[Warning] " string "\n", ## args); } while(0)
-#define InfoLog(string, args...)	do { IOLog (LogPrefix string "\n", ## args); } while(0)
+#define InfoLog(string, args...)    do { IOLog (LogPrefix string "\n", ## args); } while(0)
 
 
 #define super IOService
@@ -24,52 +24,52 @@ OSDefineMetaClassAndAbstractStructors(FakeSMCPlugin, IOService)
 
 bool FakeSMCPlugin::init(OSDictionary *properties)
 {
-	DebugLog("initialising...");
-	
+    DebugLog("Initialising...");
+
     isActive = false;
-    
-	return super::init(properties);
+
+    return super::init(properties);
 }
 
 IOService * FakeSMCPlugin::probe(IOService *provider, SInt32 *score)
 {
-	DebugLog("probing...");
-	
-	if (super::probe(provider, score) != this) 
-		return 0;
-    
+    DebugLog("Probing...");
+
+    if (super::probe(provider, score) != this) 
+        return 0;
+
     return this;
 }
 
 bool FakeSMCPlugin::start(IOService *provider)
-{		
-	DebugLog("starting...");
-	
-	if (!super::start(provider)) 
+{
+    DebugLog("Starting...");
+
+    if (!super::start(provider))
         return false;
-    
-	if (!(fakeSMC = waitForService(serviceMatching(kFakeSMCDeviceService)))) {
-		WarningLog("can't locate fake SMC device");
-		return false;
-	}
-	
-	return true;
+
+    if (!(fakeSMC = waitForService(serviceMatching(kFakeSMCDeviceService)))) {
+        WarningLog("Can't locate fake SMC device!");
+        return false;
+    }
+
+    return true;
 }
 
 void FakeSMCPlugin::stop(IOService* provider)
 {
-	DebugLog("stoping...");
-    
+    DebugLog("Stoping...");
+
     fakeSMC->callPlatformFunction(kFakeSMCRemoveHandler, true, this, NULL, NULL, NULL);
-	
-	super::stop(provider);
+
+    super::stop(provider);
 }
 
 void FakeSMCPlugin::free()
 {
-	DebugLog("freeing...");
-	
-	super::free();
+    DebugLog("Freeing...");
+
+    super::free();
 }
 
 IOReturn FakeSMCPlugin::callPlatformFunction(const OSSymbol *functionName, bool waitForFunction, void *param1, void *param2, void *param3, void *param4 )

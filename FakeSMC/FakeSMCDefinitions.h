@@ -17,7 +17,7 @@
 #define KEY_CPU_PROXIMITY_TEMPERATURE           "TC0P"
 // GPU
 #define KEY_FORMAT_GPU_DIODE_TEMPERATURE        "TG%XD"
-#define	KEY_FORMAT_GPU_BOARD_TEMPERATURE		"TG%XH"
+#define KEY_FORMAT_GPU_BOARD_TEMPERATURE        "TG%XH"
 #define KEY_FORMAT_GPU_PROXIMITY_TEMPERATURE    "TG%XP"
 #define KEY_GPU_MEMORY_TEMPERATURE              "TG0M"
 // PECI
@@ -95,15 +95,15 @@
 #define KEY_FORMAT_FAN_SPEED                    "F%XAc"
 
 // Other
-#define KEY_FORMAT_NON_APPLE_CPU_FREQUENCY		"FRC%X"
-#define KEY_FORMAT_NON_APPLE_CPU_MULTIPLIER		"MC%XC"
+#define KEY_FORMAT_NON_APPLE_CPU_FREQUENCY      "FRC%X"
+#define KEY_FORMAT_NON_APPLE_CPU_MULTIPLIER     "MC%XC"
 #define KEY_FORMAT_NON_APPLE_GPU_FREQUENCY      "FGC%X"
 
 #define KEY_NON_APPLE_PACKAGE_MULTIPLIER        "MPkC"
 
 
 //SmartGuardian keys
-#define KEY_FORMAT_FAN_TARGET_SPEED         "F%dTg"
+#define KEY_FORMAT_FAN_TARGET_SPEED             "F%dTg"
 // Old bad legacy naming but i have to keep it actually means
 
 //￼￼￼￼￼￼Bit - 7 R/W Auto/Manual mode selection: 0 - software control, 1 - automatic chip control
@@ -119,23 +119,23 @@
 //Smart guardian software mode. The fan speed will be determined by the PWM value entered into a register in it8718f by a software program. The pwm value is stored in bits 6-0 of a register. This is 0 for stopped and 127 for full speed.
 
 //Smart guardian Automatic mode. The fan speed will be determined by the values in the it8718f registers.
-#define KEY_FORMAT_FAN_MIN_SPEED            "F%dMn"
-#define KEY_FORMAT_FAN_MAX_SPEED            "F%dMx"
-#define KEY_FAN_FORCE                       "FS! "
+#define KEY_FORMAT_FAN_MIN_SPEED                "F%dMn"
+#define KEY_FORMAT_FAN_MAX_SPEED                "F%dMx"
+#define KEY_FAN_FORCE                           "FS! "
 
 
-#define KEY_FORMAT_FAN_START_TEMP           "F%dSt"
+#define KEY_FORMAT_FAN_START_TEMP               "F%dSt"
 //start temperature, At this temperature the fan will start with the start pwm value. 
-#define KEY_FORMAT_FAN_OFF_TEMP             "F%dSs"
+#define KEY_FORMAT_FAN_OFF_TEMP                 "F%dSs"
 //off temperature, At temperatures below this value the fan pwm value will be 0.   Usually 0 degrees is default value
-#define KEY_FORMAT_FAN_FULL_TEMP            "F%dFt"
+#define KEY_FORMAT_FAN_FULL_TEMP                "F%dFt"
 //Temperature limit when fan will run at max speed/PWM
-#define KEY_FORMAT_FAN_START_PWM            "F%dPt"
+#define KEY_FORMAT_FAN_START_PWM                "F%dPt"
 //start PWM value, At start temperature this is the pwm value the fan will be running at. 
 //Bit 7 - R/W Slope PWM bit[6]
 //Please refer to the description of SmartGuardian Automatic Mode Control Register
 //Bits 6-0 R/W Start PWM Value
-#define KEY_FORMAT_FAN_TEMP_DELTA           "F%dFo"
+#define KEY_FORMAT_FAN_TEMP_DELTA               "F%dFo"
 //￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼Bit - 7 R/W Direct-Down Control
 //This bit selects the PWM linear changing decreasing mode. 0: Slow decreasing mode. 1: Direct decreasing mode.
 //Bits 6-5 - reserved
@@ -143,7 +143,7 @@
 //Direct-down control,  Direct decreasing mode. As temperature decreases the pwm value             will decrease  by the slope pwm value for each degree decrease.  Slow decreasing mode. As temperature decreases the pwm value will not decrease  until the temperature has decreased the value of  temperature interval. Then it will decrease by the slope pwm value.
 //temperature interval, In Slow decreasing mode this is the value temperature has to decrease before  pwm value will decrease by slope pwm value. This is a 5 bit value, bits 4-0 of a register.
 
-#define KEY_FORMAT_FAN_CONTROL              "F%dCt"
+#define KEY_FORMAT_FAN_CONTROL                  "F%dCt"
 //Bit 7 R/W FAN Smoothing
 //This bit enables the FAN PWM smoothing changing. 0: Disable
 // 1: Enable
