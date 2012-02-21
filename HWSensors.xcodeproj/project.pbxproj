@@ -17,9 +17,6 @@
 		1D05AC1813ED0FA900EADBF6 /* cpuid.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05AC1413ED0FA900EADBF6 /* cpuid.h */; };
 		1D05AC1913ED0FA900EADBF6 /* TigerAdditionals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05AC1513ED0FA900EADBF6 /* TigerAdditionals.cpp */; };
 		1D05AC1A13ED0FA900EADBF6 /* TigerAdditionals.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05AC1613ED0FA900EADBF6 /* TigerAdditionals.h */; };
-		1D05AC2813ED100D00EADBF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D05AC2613ED100D00EADBF6 /* InfoPlist.strings */; };
-		1D05AC3713ED109200EADBF6 /* IntelThermal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05AC3513ED109200EADBF6 /* IntelThermal.cpp */; };
-		1D05AC3813ED109200EADBF6 /* IntelThermal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05AC3613ED109200EADBF6 /* IntelThermal.h */; };
 		1D05AC6113ED123D00EADBF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D05AC5F13ED123D00EADBF6 /* InfoPlist.strings */; };
 		1D05AC6E13ED126C00EADBF6 /* ITEIT87x.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05AC6C13ED126C00EADBF6 /* ITEIT87x.cpp */; };
 		1D05AC6F13ED126C00EADBF6 /* ITEIT87x.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05AC6D13ED126C00EADBF6 /* ITEIT87x.h */; };
@@ -129,7 +126,6 @@
 		1D05AC1413ED0FA900EADBF6 /* cpuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpuid.h; path = Utils/cpuid.h; sourceTree = "<group>"; };
 		1D05AC1513ED0FA900EADBF6 /* TigerAdditionals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TigerAdditionals.cpp; path = Utils/TigerAdditionals.cpp; sourceTree = "<group>"; };
 		1D05AC1613ED0FA900EADBF6 /* TigerAdditionals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TigerAdditionals.h; path = Utils/TigerAdditionals.h; sourceTree = "<group>"; };
-		1D05AC2213ED100D00EADBF6 /* IntelThermal.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelThermal.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D05AC2713ED100D00EADBF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1D05AC2D13ED100D00EADBF6 /* IntelThermal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IntelThermal-Prefix.pch"; sourceTree = "<group>"; };
 		1D05AC3513ED109200EADBF6 /* IntelThermal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntelThermal.cpp; sourceTree = "<group>"; };
@@ -280,13 +276,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D05AC1D13ED100D00EADBF6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D05AC5613ED123D00EADBF6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -398,7 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				1D05ABE413ED0DAD00EADBF6 /* FakeSMC.kext */,
-				1D05AC2213ED100D00EADBF6 /* IntelThermal.kext */,
 				1D05AC5B13ED123D00EADBF6 /* ITEIT87x.kext */,
 				1D05AC7613ED131B00EADBF6 /* WinbondW836x.kext */,
 				1DA9620513ED30E40096F8A5 /* FintekF718x.kext */,
@@ -835,14 +823,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D05AC1E13ED100D00EADBF6 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D05AC3813ED109200EADBF6 /* IntelThermal.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D05AC5713ED123D00EADBF6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -954,25 +934,6 @@
 			name = FakeSMC;
 			productName = FakeSMC;
 			productReference = 1D05ABE413ED0DAD00EADBF6 /* FakeSMC.kext */;
-			productType = "com.apple.product-type.kernel-extension";
-		};
-		1D05AC2113ED100D00EADBF6 /* IntelThermal */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1D05AC2E13ED100D00EADBF6 /* Build configuration list for PBXNativeTarget "IntelThermal" */;
-			buildPhases = (
-				1D05AC1C13ED100D00EADBF6 /* Sources */,
-				1D05AC1D13ED100D00EADBF6 /* Frameworks */,
-				1D05AC1E13ED100D00EADBF6 /* Headers */,
-				1D05AC1F13ED100D00EADBF6 /* Resources */,
-				1D05AC2013ED100D00EADBF6 /* Rez */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = IntelThermal;
-			productName = IntelThermal;
-			productReference = 1D05AC2213ED100D00EADBF6 /* IntelThermal.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 		1D05AC5A13ED123D00EADBF6 /* ITEIT87x */ = {
@@ -1221,7 +1182,6 @@
 			projectRoot = "";
 			targets = (
 				1D05ABE313ED0DAD00EADBF6 /* FakeSMC */,
-				1D05AC2113ED100D00EADBF6 /* IntelThermal */,
 				1D6FE3ED13FEBFF200376E64 /* ACPISensors */,
 				1DA9623F13ED34070096F8A5 /* NVClockX */,
 				1DA962A413ED36030096F8A5 /* RadeonX */,
@@ -1245,14 +1205,6 @@
 			files = (
 				1DA9625013ED34430096F8A5 /* License.txt in Resources */,
 				1D6FE40313FEC11300376E64 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D05AC1F13ED100D00EADBF6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D05AC2813ED100D00EADBF6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1370,13 +1322,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D05AC2013ED100D00EADBF6 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D05AC5913ED123D00EADBF6 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
@@ -1460,14 +1405,6 @@
 				1D05AC0313ED0E2E00EADBF6 /* FakeSMCKey.cpp in Sources */,
 				6A9C468D14E657EE0083E5E6 /* FakeSMCPlugin.cpp in Sources */,
 				6A9A244A14E65E9C0088F3AA /* SuperIOMonitor.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D05AC1C13ED100D00EADBF6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D05AC3713ED109200EADBF6 /* IntelThermal.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1794,61 +1731,6 @@
 				INFOPLIST_FILE = "FakeSMC/FakeSMC-Info.plist";
 				MODULE_NAME = org.mozodojo.FakeSMC;
 				MODULE_VERSION = 3.1.0d1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Release;
-		};
-		1D05AC2F13ED100D00EADBF6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.0d1;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "IntelThermal/IntelThermal-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = 4.2;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "IntelThermal/IntelThermal-Info.plist";
-				MODULE_NAME = org.mozodojo.IntelThermal;
-				MODULE_VERSION = 1.0.0d1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Debug;
-		};
-		1D05AC3013ED100D00EADBF6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0d1;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "IntelThermal/IntelThermal-Prefix.pch";
-				GCC_VERSION = 4.2;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "IntelThermal/IntelThermal-Info.plist";
-				MODULE_NAME = org.mozodojo.IntelThermal;
-				MODULE_VERSION = 1.0.0d1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -2553,15 +2435,6 @@
 			buildConfigurations = (
 				1D05ABF513ED0DAD00EADBF6 /* Debug */,
 				1D05ABF613ED0DAD00EADBF6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1D05AC2E13ED100D00EADBF6 /* Build configuration list for PBXNativeTarget "IntelThermal" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1D05AC2F13ED100D00EADBF6 /* Debug */,
-				1D05AC3013ED100D00EADBF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
