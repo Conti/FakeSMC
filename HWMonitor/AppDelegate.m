@@ -217,7 +217,6 @@
     // Init sensors
     sensorsList = [[NSMutableArray alloc] init];
     lastMenusCount = menusCount;
-    [HWMonitorSensor populateValues];
     //Temperatures
     
     for (int i=0; i<0xA; i++)
