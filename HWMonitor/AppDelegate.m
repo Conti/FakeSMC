@@ -101,7 +101,7 @@
 
 - (HWMonitorSensor *)addSensorWithKey:(NSString *)key andType:(NSString *) aType andCaption:(NSString *)caption intoGroup:(SensorGroup)group 
 {
-    if(group==HDSmartTempSensorGroup || [HWMonitorSensor populateValueForKey:key])
+    if(group==HDSmartTempSensorGroup || [HWMonitorSensor readValueForKey:key])
     {
         caption = [caption stringByTruncatingToWidth:145.0f withFont:statusItemFont]; 
         HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andType: aType andGroup:group withCaption:caption];
@@ -217,7 +217,7 @@
     // Init sensors
     sensorsList = [[NSMutableArray alloc] init];
     lastMenusCount = menusCount;
-    
+    [HWMonitorSensor populateValues];
     //Temperatures
     
     for (int i=0; i<0xA; i++)
@@ -272,7 +272,7 @@
     
     for (int i=0; i<10; i++)
     {
-        NSString * caption = [[NSString alloc] initWithData:[HWMonitorSensor populateValueForKey:[[NSString alloc] initWithFormat:@"F%XID",i] ]encoding: NSUTF8StringEncoding];
+        NSString * caption = [[NSString alloc] initWithData:[HWMonitorSensor readValueForKey:[[NSString alloc] initWithFormat:@"F%XID",i] ]encoding: NSUTF8StringEncoding];
         if([caption length]<=0) caption = [[NSString alloc] initWithFormat:@"Fan %d",i];
         
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andType: @TYPE_FPE2 andCaption:caption intoGroup:TachometerSensorGroup ];

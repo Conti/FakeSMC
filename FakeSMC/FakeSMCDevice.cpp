@@ -404,16 +404,23 @@ bool FakeSMCDevice::init(IOService *platform, OSDictionary *properties)
 
 IOReturn FakeSMCDevice::setProperties(OSObject * properties)
 {
-    if (OSDictionary * message = OSDynamicCast(OSDictionary, properties)) {
-        if (OSString * name = OSDynamicCast(OSString, message->getObject(kFakeSMCDeviceUpdateKeyValue))) {
+    if (OSDictionary * message = OSDynamicCast(OSDictionary, properties)) 
+    {
+        if(OSDictionary * data = OSDynamicCast(OSDictionary, message->getObject(kFakeSMCDeviceUpdateKeyValue))) {
+        if (OSString * name = OSDynamicCast(OSString, data->getObject("Name"))) 
+        {
             if (FakeSMCKey * key = getKey(name->getCStringNoCopy())) {
-
+                if(OSData * result = OSDynamicCast(OSData, data->getObject("Value")))
+                {
+                key->setValueFromBuffer(result->getBytesNoCopy(), result->getLength());
                 values->setObject(key->getName(), OSData::withBytes(key->getValue(), key->getSize()));
-
+                
                 this->setProperty(kFakeSMCDeviceValues, OSDictionary::withDictionary(values));
 
                 return kIOReturnSuccess;
+                }
             }
+        }
         }
         else if ((OSString *)OSDynamicCast(OSString, message->getObject(kFakeSMCDevicePopulateValues))) {
             if (OSCollectionIterator *iterator = OSCollectionIterator::withCollection(keys)) {

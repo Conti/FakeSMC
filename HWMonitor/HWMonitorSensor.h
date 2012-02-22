@@ -33,9 +33,9 @@ typedef NSUInteger SensorGroup;
 
 + (unsigned int)        swapBytes:(unsigned int) value;
 
-- (NSDictionary *)      populateValues;
-+ (NSData *)            populateValueForKey:(NSString *)key;
-- (NSData *)            readValueForKey:(NSString *)key;
++ (NSDictionary *)      populateValues;
+//+ (NSData *)            populateValueForKey:(NSString *)key;
++ (NSData *)            readValueForKey:(NSString *)key;
 
 - (HWMonitorSensor *)   initWithKey:(NSString *)aKey andType: aType andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption;
 - (NSString *)          formateValue:(NSData *)value;

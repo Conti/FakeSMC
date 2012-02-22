@@ -24,7 +24,7 @@
     return ((value & 0xff00) >> 8) | ((value & 0xff) << 8);
 }
 
-- (NSDictionary *)populateValues;
++ (NSDictionary *)populateValues;
 {
     NSDictionary * values = NULL;
     
@@ -44,29 +44,29 @@
     
 }
 
-+ (NSData *)populateValueForKey:(NSString *)key
-{
-    NSData * value = NULL;
-    
-    io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching(kFakeSMCDeviceService));
-    
-    if (service) {
-        CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, [key cStringUsingEncoding:NSASCIIStringEncoding], kCFStringEncodingASCII);
-        
-        if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDeviceUpdateKeyValue), message)) 
-        {
-            NSDictionary * values = (__bridge_transfer /*__bridge_transfer*/ NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
-            
-            if (values)
-                value = [values objectForKey:key];
-        }
-        
-        CFRelease(message);
-        IOObjectRelease(service);
-    }
-    
-    return value;
-}
+//+ (NSData *)populateValueForKey:(NSString *)key
+//{
+//    NSData * value = NULL;
+//    
+//    io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching(kFakeSMCDeviceService));
+//    
+//    if (service) {
+//        CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, [key cStringUsingEncoding:NSASCIIStringEncoding], kCFStringEncodingASCII);
+//        
+//        if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDeviceUpdateKeyValue), message)) 
+//        {
+//            NSDictionary * values = (__bridge_transfer /*__bridge_transfer*/ NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+//            
+//            if (values)
+//                value = [values objectForKey:key];
+//        }
+//        
+//        CFRelease(message);
+//        IOObjectRelease(service);
+//    }
+//    
+//    return value;
+//}
 
 + (NSData *) readValueForKey:(NSString *)key
 {
@@ -78,7 +78,7 @@
         NSDictionary * values = (__bridge_transfer /*__bridge_transfer*/ NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
         
         if (values) 
-            value = [values objectForKey:key];
+            value = [values valueForKey:key];
 
         IOObjectRelease(service);
     }
