@@ -41,12 +41,12 @@ void PC8739x::writeByte(UInt8 bank, UInt8 reg, UInt8 value)
 
 long PC8739x::readTemperature(unsigned long index)
 {
-	return mmioBase[NSC_HARDWARE_MONITOR_REGS[0][index]];
+	return mmioBase[NSC_HARDWARE_MONITOR_REGS[model][index]];
 }
 
 long PC8739x::readTachometer(unsigned long index)
 {
-	return (0xff - (mmioBase[NSC_HARDWARE_MONITOR_REGS[1][index]] & 0xff)) * 20;
+	return (0xff - (mmioBase[NSC_HARDWARE_MONITOR_REGS[model+1][index]] & 0xff)) * 20;  
 }
 
 bool PC8739x::probePort()
@@ -72,6 +72,10 @@ bool PC8739x::probePort()
 		}
 		
 		switch (revision) {
+      case 0x1B:
+          model = PC87391B;
+          break;
+
 			default:
 				model = PC8739xx;
 				break;
@@ -149,6 +153,7 @@ const char *PC8739x::getModelName()
 	switch (model) 
 	{
         case PC8739xx: return "PC8739xx";
+      case PC87391B: return "PC87391B";
 	}
 	
 	return "unknown";

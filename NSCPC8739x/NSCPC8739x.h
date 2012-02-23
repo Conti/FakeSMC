@@ -10,9 +10,11 @@
 #include <IOKit/IOService.h>
 #include "SuperIOMonitor.h"
 //temp and fans
-const UInt16 NSC_HARDWARE_MONITOR_REGS[2][4]	= {{0x61, 0x62, 0x63, 0x64}, {0x68, 0x68, 0x68, 0x68}};
+const UInt16 NSC_HARDWARE_MONITOR_REGS[4][4]	= {{0x61, 0x62, 0x63, 0x64}, {0x68, 0x68, 0x68, 0x68},
+                                                 {0x15, 0x16, 0x17, 0x18}, {0x1C, 0x1B, 0x1A, 0x19},
+                                                };
 
-// ITE Environment Controller
+// NSC Environment Controller
 const UInt8 NSC_ADDRESS_REGISTER_OFFSET		= 0x00;
 const UInt8 NSC_DATA_REGISTER_OFFSET		= 0x01;
 const UInt8 NSC_BANK_SELECT_REGISTER		= 0x07;
@@ -22,11 +24,12 @@ const UInt8 NSC_LDN_PRESENT					= 0x30;
 
 
 const UInt8 NSC_HARDWARE_MONITOR_LDN		= 0x0F;
-const UInt8 NSC_MEM							= 0xF4;
+const UInt8 NSC_MEM                     = 0xF4;
 
 enum PC8739xModel
 {
-	PC8739xx = 0xfc00
+	PC8739xx = 0,
+  PC87391B = 1,
 };
 
 class PC8739x : public SuperIOMonitor
