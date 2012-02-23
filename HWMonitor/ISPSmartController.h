@@ -3,7 +3,7 @@
 //  iStatPro
 //
 //  Created by Buffy on 11/06/07.
-//  Copyright 2007 __MyCompanyName__. All rights reserved.
+//  Copyright 2007 . All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
