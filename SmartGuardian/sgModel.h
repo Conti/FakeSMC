@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #include "FakeSMCDefinitions.h"
 
+
+#define SpinTransactionTime 3.0
+#define SpinTime  10.0
 @interface sgModel : NSObject {
 
-NSMutableArray *   fans; 
+NSMutableDictionary *   fans; 
     
 }
 
@@ -26,6 +29,8 @@ NSMutableArray *   fans;
 
 -(sgModel *) init;
 -(NSDictionary *) testPrepareFan;
--(BOOL) addFan: (NSDictionary *) desc;
--(BOOL) calibrateFan:(NSUInteger) fanId;
+-(NSDictionary *) testPrepareFan2;
+
+-(BOOL) addFan: (NSDictionary *) desc withName: (NSString *) name;
+-(BOOL) calibrateFan:(NSString *) fanId;
 @end

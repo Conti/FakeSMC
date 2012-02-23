@@ -7,8 +7,13 @@
 //
 #import "sgModel.h"
 
+#define Debug true
 
-
+#ifdef Debug
+#define DebugLog(string, args...)	do { if (Debug) { NSLog (string , ## args); } } while(0)
+#else
+#define DebugLog
+#endif
 
 @implementation sgModel
 
@@ -120,31 +125,47 @@
 
 -(sgModel *) init
 {
-    fans = [NSMutableArray arrayWithCapacity:1];
+    fans = [NSMutableDictionary dictionaryWithCapacity:0];
     return self;
 }
 
 -(NSDictionary *) testPrepareFan 
 {
     NSMutableDictionary * fan = [NSMutableDictionary dictionaryWithCapacity:20];    
-    [fan setObject:@"F0Ac" forKey:@"RPM Read Key"];
-    [fan setObject:@"F2Tg" forKey:@"Fan Control Key"];
+    [fan setObject:@"F1Ac" forKey:@"RPM Read Key"];
+    [fan setObject:@"F1Tg" forKey:@"Fan Control Key"];
 
-    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data"];
+    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Upward"];
+    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Downward"];
     return fan; 
 }
 
--(BOOL) addFan: (NSDictionary *) desc
+-(NSDictionary *) testPrepareFan2
 {
-    [fans addObject:desc];
+    NSMutableDictionary * fan = [NSMutableDictionary dictionaryWithCapacity:20];    
+    [fan setObject:@"F0Ac" forKey:@"RPM Read Key"];
+    [fan setObject:@"F2Tg" forKey:@"Fan Control Key"];
+    
+    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Upward"];
+    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Downward"];
+    return fan; 
+}
+
+-(BOOL) addFan: (NSDictionary *) desc withName:(NSString *) name
+{
+    [fans setValue:desc forKey: name];
     return YES;
 }
 
--(BOOL) calibrateFan:(NSUInteger) fanId
+-(BOOL) calibrateFan:(NSString *) fanId
 {
     NSDictionary * fan;
-    if ((fan = [fans objectAtIndex:fanId])) {
-        NSMutableArray * calibrationData = [fan valueForKey:@"Calibration Data"];
+    DebugLog(@"Starting calibration for %@",fanId);
+    if ((fan = [fans valueForKey:fanId])) {
+    
+        NSMutableArray * calibrationDataUp = [fan valueForKey:@"Calibration Data Upward"];
+        NSMutableArray * calibrationDataDown = [fan valueForKey:@"Calibration Data Downward"];
+
 //        if (calibrationData) {
 //            NSNumber * stub[128];
 //            calibrationData = [NSMutableArray arrayWithObjects:stub count:128];
@@ -152,18 +173,34 @@
         NSString * FanRPMReadKey = [fan valueForKey:@"RPM Read Key"];
         NSString * FanControlKey = [fan valueForKey:@"Fan Control Key"];
         NSData * originalPWM = [sgModel readValueForKey:FanControlKey];
-        for(int i=0;i<128;i++)
+        int i = 0;
+        [sgModel writeValueForKey:FanControlKey data:[NSData dataWithBytes:&i length:1]]; 
+        [NSThread sleepForTimeInterval:SpinTime];  // Give a time to stop rotation
+        
+        // Upward disrection
+        for( i=0;i<128;i++)
         {
             [sgModel writeValueForKey:FanControlKey data:[NSData dataWithBytes:&i length:1]];  
-            [NSThread sleepForTimeInterval:1.0]; //  Give some time for fan to reach the stable rotation
+            [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
             NSData * dataptr = [sgModel readValueForKey:FanRPMReadKey];
             UInt16 value = [sgModel decode_fpe2:*((UInt16 *)[dataptr bytes])];
             NSNumber * num = [NSNumber numberWithInt:value];
-            [calibrationData addObject:num];
-            NSLog(@"RPMs at PWM = %d  is %d", i, value);
+            [calibrationDataUp addObject:num];
+            DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d",FanRPMReadKey, i, value);
+        }
+        //Downward direction
+        for( i=127;i>=0;i--)
+        {
+            [sgModel writeValueForKey:FanControlKey data:[NSData dataWithBytes:&i length:1]];  
+            [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
+            NSData * dataptr = [sgModel readValueForKey:FanRPMReadKey];
+            UInt16 value = [sgModel decode_fpe2:*((UInt16 *)[dataptr bytes])];
+            NSNumber * num = [NSNumber numberWithInt:value];
+            [calibrationDataDown insertObject:num atIndex: 0];
+            DebugLog(@"RPMs for FAN %@  at PWM = %d  is %d",FanRPMReadKey, i, value);
         }
             
-        
+        [sgModel writeValueForKey:FanControlKey data:originalPWM];
         return YES;
     }
     return NO;
