@@ -175,7 +175,6 @@
 #define kFakeSMCDeviceValues                    "Values"
 #define kFakeSMCDeviceUpdateKeyValue            "updateKeyValue"
 #define kFakeSMCDevicePopulateValues            "populateValues"
-#define kFakeSMCDevicePopulateList              "populateList"
 #define kFakeSMCDeviceKeysList                  "KeysList"
 
 #define kFakeSMCAddKeyValue                     "FakeSMC_AddKeyValue"

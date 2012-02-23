@@ -26,21 +26,10 @@
         int count = 0;
         
 
-        CFMutableArrayRef favorites = (CFMutableArrayRef)CFArrayCreateMutable(kCFAllocatorDefault, 0, nil);
-        
-        enumerator = [sensorsList  objectEnumerator];
-        
-        while (sensor = (HWMonitorSensor *)[enumerator nextObject]) {
-//            if (isMenuVisible || [sensor favorite]) {
-                CFTypeRef name = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, [[sensor key] cStringUsingEncoding:NSUTF8StringEncoding], kCFStringEncodingUTF8);
-                
-                CFArrayAppendValue(favorites, name);
-//            }
-        }
-        
+
         NSMutableString * statusString = [[NSMutableString alloc] init];
-        
-        if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateList), favorites)) 
+        CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, "magic", kCFStringEncodingASCII);
+        if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateValues), message)) 
         {           
           NSMutableDictionary * values = (__bridge_transfer NSMutableDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
             
@@ -81,10 +70,7 @@
                 }
             }
         }
-        
-        CFArrayRemoveAllValues(favorites);
-        CFRelease(favorites);
-        
+
         IOObjectRelease(service);
         
         if (count > 0) {
