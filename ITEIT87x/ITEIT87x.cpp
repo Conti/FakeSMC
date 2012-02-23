@@ -271,7 +271,7 @@ bool IT87x::probePort()
 			model = id; 
 			break; 
 		default:
-			WarningLog("found unsupported chip ID=0x%x", id);
+			DebugLog("found unsupported chip ID=0x%x", id);
 			return false;
 	}
     

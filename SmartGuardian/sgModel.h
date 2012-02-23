@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #include "FakeSMCDefinitions.h"
 
-@interface sgModel : NSObject
+@interface sgModel : NSObject {
+
+NSMutableArray *   fans; 
+    
+}
 
 +(UInt32) numberOfFans;
 
@@ -19,4 +23,9 @@
 + (UInt16) swap_value:(UInt16) value;
 + (UInt16)  decode_fpe2:(UInt16) value;
 + (UInt16) encode_fp4c:(UInt16) value;
+
+-(sgModel *) init;
+-(NSDictionary *) testPrepareFan;
+-(BOOL) addFan: (NSDictionary *) desc;
+-(BOOL) calibrateFan:(NSUInteger) fanId;
 @end

@@ -118,4 +118,55 @@
 }
 
 
+-(sgModel *) init
+{
+    fans = [NSMutableArray arrayWithCapacity:1];
+    return self;
+}
+
+-(NSDictionary *) testPrepareFan 
+{
+    NSMutableDictionary * fan = [NSMutableDictionary dictionaryWithCapacity:20];    
+    [fan setObject:@"F0Ac" forKey:@"RPM Read Key"];
+    [fan setObject:@"F2Tg" forKey:@"Fan Control Key"];
+
+    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data"];
+    return fan; 
+}
+
+-(BOOL) addFan: (NSDictionary *) desc
+{
+    [fans addObject:desc];
+    return YES;
+}
+
+-(BOOL) calibrateFan:(NSUInteger) fanId
+{
+    NSDictionary * fan;
+    if ((fan = [fans objectAtIndex:fanId])) {
+        NSMutableArray * calibrationData = [fan valueForKey:@"Calibration Data"];
+//        if (calibrationData) {
+//            NSNumber * stub[128];
+//            calibrationData = [NSMutableArray arrayWithObjects:stub count:128];
+//        }
+        NSString * FanRPMReadKey = [fan valueForKey:@"RPM Read Key"];
+        NSString * FanControlKey = [fan valueForKey:@"Fan Control Key"];
+        NSData * originalPWM = [sgModel readValueForKey:FanControlKey];
+        for(int i=0;i<128;i++)
+        {
+            [sgModel writeValueForKey:FanControlKey data:[NSData dataWithBytes:&i length:1]];  
+            [NSThread sleepForTimeInterval:1.0]; //  Give some time for fan to reach the stable rotation
+            NSData * dataptr = [sgModel readValueForKey:FanRPMReadKey];
+            UInt16 value = [sgModel decode_fpe2:*((UInt16 *)[dataptr bytes])];
+            NSNumber * num = [NSNumber numberWithInt:value];
+            [calibrationData addObject:num];
+            NSLog(@"RPMs at PWM = %d  is %d", i, value);
+        }
+            
+        
+        return YES;
+    }
+    return NO;
+}
+
 @end

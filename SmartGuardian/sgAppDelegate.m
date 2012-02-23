@@ -23,20 +23,10 @@
     // Insert code here to initialize your application
     NSLog(@"Number of Fans = %d",[sgModel numberOfFans]);
     
-    dataptr = [sgModel readValueForKey:@"F0Ac"];
-    UInt16 value = *((UInt16 *)[dataptr bytes]);
-    NSLog(@"RPMs for Fan 0 %d",[sgModel decode_fpe2:value]);
+    sgModel * model = [[sgModel alloc] init];
+    [model addFan:[model testPrepareFan]];
+    [model calibrateFan:0];
     
-    dataptr = [sgModel readValueForKey:@"F2Tg"];
-    
-    
-    
-    UInt32 newval = 127;
-    NSData * newsave = [NSData dataWithBytes:&newval length:1];
-    [sgModel writeValueForKey:@"F2Tg" data: newsave];
-    [sgModel writeValueForKey:@"F1Tg" data: newsave];
-
-
 }
 
 @end
