@@ -103,6 +103,9 @@
 
 
 //SmartGuardian keys
+#define KEY_FORMAT_FAN_MAIN_CONTROL             "FMCL"
+#define KEY_FORMAT_FAN_REG_CONTROL              "FMCR"
+
 #define KEY_FORMAT_FAN_TARGET_SPEED             "F%dTg"
 // Old bad legacy naming but i have to keep it actually means
 

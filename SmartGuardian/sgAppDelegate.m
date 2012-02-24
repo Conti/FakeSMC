@@ -14,28 +14,41 @@
 
 @synthesize window = _window;
 
-
+- (void) applicationWillTerminate:(NSNotification *)notification
+{
+        [model writeFanDictionatyToFile:@"/Users/ivan/Development/Fans.plist"]; 
+        
+}
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    int i;
     NSData * dataptr;
     // Insert code here to initialize your application
     NSLog(@"Number of Fans = %d",[sgModel numberOfFans]);
     
-    sgModel * model = [[sgModel alloc] init];
-    [model addFan:[model testPrepareFan] withName: @"FAN0" ];
-    [model addFan:[model testPrepareFan2] withName: @"FAN1" ];
+    model = [[sgModel alloc] init];
+    for(i=0;i<[sgModel numberOfFans];i++)
+        [model addFan:[model initialPrepareFan:i] withName:[NSString stringWithFormat:@"FAN%d",i]];
+    
+    [model findControllers];
+
     NSOperationQueue * newq = [[NSOperationQueue alloc] init];
     [newq setMaxConcurrentOperationCount:4];
     
     NSLog(@"Number of concurrent operations = %d",[newq maxConcurrentOperationCount]);
-    for(int i=0; i<2;i++)
+    NSDictionary * fans = [model fans];
+    NSEnumerator * enumerator = [fans keyEnumerator];
+    NSString * nextFan;
+    while (nextFan = [enumerator nextObject]) 
     [newq addOperationWithBlock:^{
-        NSString * str = [NSString stringWithFormat:@"FAN%d",i ];
-        NSLog(@"Starting thread for %@",str);
-        [model calibrateFan: str];
+        
+        NSLog(@"Starting thread for %@",nextFan);
+        [model calibrateFan: nextFan];
     }];
+    
+
     
 }
 

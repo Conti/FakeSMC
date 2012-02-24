@@ -12,11 +12,9 @@
 
 #define SpinTransactionTime 3.0
 #define SpinTime  10.0
-@interface sgModel : NSObject {
+@interface sgModel : NSObject 
 
-NSMutableDictionary *   fans; 
-    
-}
+@property (readwrite,retain) NSMutableDictionary *   fans; 
 
 +(UInt32) numberOfFans;
 
@@ -26,11 +24,13 @@ NSMutableDictionary *   fans;
 + (UInt16) swap_value:(UInt16) value;
 + (UInt16)  decode_fpe2:(UInt16) value;
 + (UInt16) encode_fp4c:(UInt16) value;
++(NSUInteger) whoDiffersFor:(NSArray *) current andPrevious:(NSArray *) previous andMaxDev:(NSUInteger) maxDev;;
 
 -(sgModel *) init;
--(NSDictionary *) testPrepareFan;
--(NSDictionary *) testPrepareFan2;
-
+-(NSDictionary *) initialPrepareFan: (NSUInteger) fanId;
+-(NSUInteger) rpmForFan: (NSString *) name;
+-(BOOL) writeFanDictionatyToFile: (NSString *) filename;
 -(BOOL) addFan: (NSDictionary *) desc withName: (NSString *) name;
 -(BOOL) calibrateFan:(NSString *) fanId;
+-(void) findControllers;
 @end

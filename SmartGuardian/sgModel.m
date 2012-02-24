@@ -15,7 +15,11 @@
 #define DebugLog
 #endif
 
+#define MAXRPM_TO_DIFFER 100
+
 @implementation sgModel
+
+@synthesize fans;
 
 + (UInt16) swap_value:(UInt16) value
 {
@@ -123,32 +127,32 @@
 }
 
 
+
+
+-(NSDictionary *) initialPrepareFan:(NSUInteger) fanId 
+{
+    if (fanId < [sgModel numberOfFans]) {
+        NSMutableDictionary * fan = [NSMutableDictionary dictionaryWithCapacity:20] ; 
+        NSString * fanReadKey = [NSString stringWithFormat:@"F%dAc",fanId];
+        NSString * description = [[NSString alloc] initWithData:[sgModel readValueForKey:[[NSString alloc] initWithFormat:@"F%XID",fanId] ]encoding: NSUTF8StringEncoding];
+        [fan setObject:@"" forKey:@"Name"];
+        [fan setObject:description forKey:@"Description"];
+        [fan setObject:fanReadKey forKey:@"RPM Read Key"];
+        [fan setObject:@"" forKey:@"Fan Control Key"];
+        [fan setObject:[NSNumber numberWithBool:NO] forKey:@"Calibrated"];
+        [fan setObject:[NSNumber numberWithBool:NO]  forKey:@"Controlable"];
+        
+        [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Upward"];
+        [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Downward"];
+        return fan; 
+    }
+    return nil;
+}
+
 -(sgModel *) init
 {
     fans = [NSMutableDictionary dictionaryWithCapacity:0];
     return self;
-}
-
--(NSDictionary *) testPrepareFan 
-{
-    NSMutableDictionary * fan = [NSMutableDictionary dictionaryWithCapacity:20];    
-    [fan setObject:@"F1Ac" forKey:@"RPM Read Key"];
-    [fan setObject:@"F1Tg" forKey:@"Fan Control Key"];
-
-    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Upward"];
-    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Downward"];
-    return fan; 
-}
-
--(NSDictionary *) testPrepareFan2
-{
-    NSMutableDictionary * fan = [NSMutableDictionary dictionaryWithCapacity:20];    
-    [fan setObject:@"F0Ac" forKey:@"RPM Read Key"];
-    [fan setObject:@"F2Tg" forKey:@"Fan Control Key"];
-    
-    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Upward"];
-    [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Downward"];
-    return fan; 
 }
 
 -(BOOL) addFan: (NSDictionary *) desc withName:(NSString *) name
@@ -157,12 +161,18 @@
     return YES;
 }
 
+-(BOOL) writeFanDictionatyToFile: (NSString *) filename
+{
+    return [fans writeToFile:filename atomically:YES];
+}
+
 -(BOOL) calibrateFan:(NSString *) fanId
 {
-    NSDictionary * fan;
+    NSMutableDictionary * fan;
     DebugLog(@"Starting calibration for %@",fanId);
     if ((fan = [fans valueForKey:fanId])) {
-    
+        if ([[fan valueForKey:@"Controlable"] boolValue] == NO) return NO;
+        
         NSMutableArray * calibrationDataUp = [fan valueForKey:@"Calibration Data Upward"];
         NSMutableArray * calibrationDataDown = [fan valueForKey:@"Calibration Data Downward"];
 
@@ -201,9 +211,85 @@
         }
             
         [sgModel writeValueForKey:FanControlKey data:originalPWM];
+        [fan setObject:[NSNumber numberWithBool:YES] forKey:@"Calibrated"];
         return YES;
     }
     return NO;
+}
+
++(NSUInteger) whoDiffersFor:(NSArray *) current andPrevious:(NSArray *) previous andMaxDev:(NSUInteger) maxDev;
+{
+    if([current count]!=[previous count]) return NSNotFound; // Arrays must be equal in size
+    __block NSUInteger maxDeviation = maxDev;
+    [current enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        DebugLog(@"%ld - %ld",[obj integerValue],[[previous objectAtIndex:idx] integerValue]);
+        if(labs([obj integerValue] - [[previous objectAtIndex:idx] integerValue])> maxDeviation)
+            maxDeviation=abs([obj intValue] - [[previous objectAtIndex:idx] intValue]);
+    }];
+    if(maxDev>=maxDeviation) return NSNotFound;
+    return [current indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL *stop)
+             {
+                 DebugLog(@"Difference %ld, max deviation %ld",labs([obj integerValue] - [[previous objectAtIndex:idx] integerValue]),maxDeviation );
+                 if(labs([obj integerValue] - [[previous objectAtIndex:idx] integerValue]) >= maxDeviation)
+                    {
+                        *stop=YES;
+                        return YES;
+                    }
+                 return NO;
+            }
+    ];
+    
+}
+
+-(NSUInteger) rpmForFan: (NSString *) name
+{
+    NSDictionary * fan;
+    if ((fan = [fans valueForKey:name])) 
+    {
+        NSData * dataptr = [sgModel readValueForKey:[fan valueForKey:@"RPM Read Key"]];
+        UInt16 value = [sgModel decode_fpe2:*((UInt16 *)[dataptr bytes])];
+        return value;
+    }
+        
+    return NSNotFound;
+}
+
+-(void) findControllers
+{
+    NSMutableArray * cur, * prev, * names;
+    
+    cur = [NSMutableArray arrayWithCapacity:0];
+    prev = [NSMutableArray arrayWithCapacity:0];
+    names = [NSMutableArray arrayWithCapacity:0];
+    
+    int i=0,temp=0;
+    
+    for (i=0; i<[sgModel numberOfFans]; i++) {
+        NSData * originalPWM = [sgModel readValueForKey:[NSString stringWithFormat:@"F%dTg",i]];
+        temp=0;
+        [sgModel writeValueForKey:[NSString stringWithFormat:@"F%dTg",i]  data:[NSData dataWithBytes:&temp length:1]];
+        [NSThread sleepForTimeInterval:SpinTime];
+        [fans enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [prev addObject:[NSNumber numberWithInteger:[self rpmForFan:key]]];
+            [names addObject:key];
+        }];
+        temp=127;
+        [sgModel writeValueForKey:[NSString stringWithFormat:@"F%dTg",i]  data:[NSData dataWithBytes:&temp length:1]];
+        [NSThread sleepForTimeInterval:SpinTime];
+        [fans enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [cur addObject:[NSNumber numberWithInteger:[self rpmForFan:key]]];
+        }];
+        [sgModel writeValueForKey:[NSString stringWithFormat:@"F%dTg",i]  data:originalPWM];
+        NSInteger index = [sgModel whoDiffersFor:cur andPrevious:prev andMaxDev:MAXRPM_TO_DIFFER];
+        if ( index != NSNotFound) {
+            [[fans objectForKey:[names objectAtIndex:index]] setObject:[NSString stringWithFormat:@"F%dTg",i] forKey:@"Fan Control Key"];
+            [[fans objectForKey:[names objectAtIndex:index]] setObject: [NSNumber numberWithBool:YES] forKey:@"Controlable"];
+        }
+        [cur removeAllObjects];
+        [prev removeAllObjects];
+        [names removeAllObjects];
+    }
+    
 }
 
 @end

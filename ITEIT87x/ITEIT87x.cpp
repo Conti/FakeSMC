@@ -82,6 +82,12 @@ long IT87xSensor::getValue()
         case kSuperIOSmartGuardTempFanControl:
             value = OSDynamicCast(IT87x, owner)->readSmartGuardFanControl(index);
             break;
+        case kSuperIOSmartGuardMainControl:
+            value = OSDynamicCast(IT87x, owner)->readSmartGuardMainControl(index);
+            break;
+        case kSuperIOSmartGuardRegControl:
+            value = OSDynamicCast(IT87x, owner)->readSmartGuardRegControl(index);
+            break;
             
 		default:
 			break;
@@ -128,7 +134,12 @@ void IT87xSensor::setValue(UInt16 value)
         case kSuperIOSmartGuardTempFanControl:
             OSDynamicCast(IT87x, owner)->writeSmartGuardFanControl(index,value);
             break;
-            
+        case kSuperIOSmartGuardMainControl:
+            OSDynamicCast(IT87x, owner)->writeSmartGuardMainControl(index,value);
+            break;
+        case kSuperIOSmartGuardRegControl:
+            OSDynamicCast(IT87x, owner)->writeSmartGuardRegControl(index,value);
+            break;
 		default:
 			break;
 	}
@@ -221,6 +232,29 @@ void IT87x::writeSmartGuardFanControl(unsigned long index,UInt16 value)
 {
     writeByte(address,ITE_SMARTGUARDIAN_CONTROL[index], value);
 }
+
+long IT87x::readSmartGuardMainControl(unsigned long index)
+{
+	
+	return readByte(address, ITE_SMARTGUARDIAN_MAIN_CONTROL);
+}
+
+void IT87x::writeSmartGuardMainControl(unsigned long index,UInt16 value)
+{
+    writeByte(address,ITE_SMARTGUARDIAN_MAIN_CONTROL, value);
+}
+
+long IT87x::readSmartGuardRegControl(unsigned long index)
+{
+	
+	return readByte(address, ITE_SMARTGUARDIAN_REG_CONTROL);
+}
+
+void IT87x::writeSmartGuardRegControl(unsigned long index,UInt16 value)
+{
+    writeByte(address,ITE_SMARTGUARDIAN_REG_CONTROL, value);
+}
+
 
 long IT87x::readTemperature(unsigned long index)
 {
@@ -534,6 +568,14 @@ bool IT87x::startPlugin()
                 WarningLog("error adding register fan control");
         }
 	}
+     if(hasSmartGuardian)
+     {
+         
+         if (!addSensor(KEY_FORMAT_FAN_MAIN_CONTROL, TYPE_UI8, 1, (SuperIOSensorGroup)kSuperIOSmartGuardMainControl, 0))
+             WarningLog("error adding Main fan control"); 
+         if (!addSensor(KEY_FORMAT_FAN_REG_CONTROL, TYPE_UI8, 1, (SuperIOSensorGroup)kSuperIOSmartGuardRegControl, 0))
+             WarningLog("error adding Main fan control"); 
+     }
 	
 	return true;	
 }

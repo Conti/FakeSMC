@@ -7,9 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "sgModel.h"
+@interface sgAppDelegate : NSObject <NSApplicationDelegate>{
 
-@interface sgAppDelegate : NSObject <NSApplicationDelegate>
+sgModel *  model;
 
+}
 @property (assign) IBOutlet NSWindow *window;
 
 @end

@@ -36,6 +36,7 @@ const UInt8 ITE_VOLTAGE_REG[9]						    = { 0x20, 0x21, 0x22, 0x23, 0x24,0x25,0x
 const float ITE_VOLTAGE_GAIN[]							= { 1, 1, 1, (6.8f / 10 + 1), 1, 1, 1, 1, 1 };
 
 const UInt8 ITE_SMARTGUARDIAN_MAIN_CONTROL				= 0x13;
+const UInt8 ITE_SMARTGUARDIAN_REG_CONTROL				= 0x14;
 const UInt8 ITE_SMARTGUARDIAN_PWM_CONTROL[5]			= { 0x15, 0x16, 0x17, 0x88, 0x89 };
 const UInt8 ITE_SMARTGUARDIAN_TEMPERATURE_STOP[5]		= { 0x60, 0x68, 0x70, 0x90, 0x98 };
 const UInt8 ITE_SMARTGUARDIAN_TEMPERATURE_START[5]		= { 0x61, 0x69, 0x71, 0x91, 0x99 };
@@ -68,7 +69,9 @@ enum SuperIOSensorGroupEx {
     kSuperIOSmartGuardTempFanFullOn,
     kSuperIOSmartGuardPWMStart,
     kSuperIOSmartGuardTempFanFullOff,
-    kSuperIOSmartGuardTempFanControl
+    kSuperIOSmartGuardTempFanControl,
+    kSuperIOSmartGuardMainControl,
+    kSuperIOSmartGuardRegControl
 };
 
 
@@ -128,6 +131,8 @@ public:
     virtual long			readSmartGuardPWMStart(unsigned long index);
     virtual long			readSmartGuardTempFanFullOff(unsigned long index);
     virtual long			readSmartGuardFanControl(unsigned long index); 
+    virtual long			readSmartGuardMainControl(unsigned long index); 
+    virtual long			readSmartGuardRegControl(unsigned long index); 
     //  New write SMC key value to SmartGuardian registers methods    
     virtual void			writeSmartGuardPWMControl(unsigned long index, UInt16 value);
     virtual void			writeSmartGuardTempFanStop(unsigned long index, UInt16 value);
@@ -136,6 +141,8 @@ public:
     virtual void			writeSmartGuardPWMStart(unsigned long index, UInt16 value);
     virtual void			writeSmartGuardTempFanFullOff(unsigned long index, UInt16 value);
     virtual void			writeSmartGuardFanControl(unsigned long index, UInt16 value); 
+    virtual void			writeSmartGuardMainControl(unsigned long index, UInt16 value); 
+    virtual void			writeSmartGuardRegControl(unsigned long index, UInt16 value); 
     
     SuperIOSensor *			addSensor(const char* key, const char* type, unsigned char size, SuperIOSensorGroup group, unsigned long index);
 
