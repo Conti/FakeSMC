@@ -12,6 +12,17 @@
 
 #define SpinTransactionTime 3.0
 #define SpinTime  10.0
+
+#define KEY_NAME            @"Name"
+#define KEY_READ_RPM        @"RPMReadKey"
+#define KEY_CURRENT_RPM     @"CurrentRPM"
+#define KEY_FAN_CONTROL     @"FanControlKey"
+#define KEY_DATA_UPWARD     @"CalibrationDataUpward"
+#define KEY_DATA_DOWNWARD   @"CalibrationDataDownward"
+#define KEY_DESCRIPTION     @"Description"
+#define KEY_CONTROLABLE     @"Controlable"
+#define KEY_CALIBRATED      @"Calibrated"
+
 @interface sgModel : NSObject 
 
 @property (readwrite,retain) NSMutableDictionary *   fans; 

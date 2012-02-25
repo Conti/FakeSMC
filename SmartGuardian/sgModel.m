@@ -135,15 +135,18 @@
         NSMutableDictionary * fan = [NSMutableDictionary dictionaryWithCapacity:20] ; 
         NSString * fanReadKey = [NSString stringWithFormat:@"F%dAc",fanId];
         NSString * description = [[NSString alloc] initWithData:[sgModel readValueForKey:[[NSString alloc] initWithFormat:@"F%XID",fanId] ]encoding: NSUTF8StringEncoding];
-        [fan setObject:@"" forKey:@"Name"];
-        [fan setObject:description forKey:@"Description"];
-        [fan setObject:fanReadKey forKey:@"RPM Read Key"];
-        [fan setObject:@"" forKey:@"Fan Control Key"];
-        [fan setObject:[NSNumber numberWithBool:NO] forKey:@"Calibrated"];
-        [fan setObject:[NSNumber numberWithBool:NO]  forKey:@"Controlable"];
+        [fan setObject:@"" forKey:KEY_NAME];
+        [fan setObject:description forKey:KEY_DESCRIPTION];
+        [fan setObject:fanReadKey forKey:KEY_READ_RPM];
+        [fan setObject:@"" forKey:KEY_FAN_CONTROL];
+        [fan setObject:[NSNumber numberWithBool:NO] forKey:KEY_CONTROLABLE];
+        [fan setObject:[NSNumber numberWithBool:NO]  forKey:KEY_CALIBRATED];
         
-        [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Upward"];
-        [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:@"Calibration Data Downward"];
+        NSData * dataptr = [sgModel readValueForKey: fanReadKey];
+        UInt16 value = [sgModel decode_fpe2:*((UInt16 *)[dataptr bytes])];
+        [fan setObject:[NSString stringWithFormat:@"%d RPM", value ] forKey:KEY_CURRENT_RPM];
+        [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:KEY_DATA_UPWARD];
+        [fan setObject: [NSMutableArray arrayWithCapacity:0] forKey:KEY_DATA_DOWNWARD];
         return fan; 
     }
     return nil;
@@ -171,17 +174,14 @@
     NSMutableDictionary * fan;
     DebugLog(@"Starting calibration for %@",fanId);
     if ((fan = [fans valueForKey:fanId])) {
-        if ([[fan valueForKey:@"Controlable"] boolValue] == NO) return NO;
+        if ([[fan valueForKey:KEY_CONTROLABLE] boolValue] == NO) return NO;
         
-        NSMutableArray * calibrationDataUp = [fan valueForKey:@"Calibration Data Upward"];
-        NSMutableArray * calibrationDataDown = [fan valueForKey:@"Calibration Data Downward"];
+        NSMutableArray * calibrationDataUp = [fan valueForKey:KEY_DATA_UPWARD];
+        NSMutableArray * calibrationDataDown = [fan valueForKey:KEY_DATA_DOWNWARD];
 
-//        if (calibrationData) {
-//            NSNumber * stub[128];
-//            calibrationData = [NSMutableArray arrayWithObjects:stub count:128];
-//        }
-        NSString * FanRPMReadKey = [fan valueForKey:@"RPM Read Key"];
-        NSString * FanControlKey = [fan valueForKey:@"Fan Control Key"];
+
+        NSString * FanRPMReadKey = [fan valueForKey:KEY_READ_RPM];
+        NSString * FanControlKey = [fan valueForKey:KEY_FAN_CONTROL];
         NSData * originalPWM = [sgModel readValueForKey:FanControlKey];
         int i = 0;
         [sgModel writeValueForKey:FanControlKey data:[NSData dataWithBytes:&i length:1]]; 
@@ -211,7 +211,7 @@
         }
             
         [sgModel writeValueForKey:FanControlKey data:originalPWM];
-        [fan setObject:[NSNumber numberWithBool:YES] forKey:@"Calibrated"];
+        [fan setObject:[NSNumber numberWithBool:YES] forKey:KEY_CALIBRATED];
         return YES;
     }
     return NO;
@@ -246,7 +246,7 @@
     NSDictionary * fan;
     if ((fan = [fans valueForKey:name])) 
     {
-        NSData * dataptr = [sgModel readValueForKey:[fan valueForKey:@"RPM Read Key"]];
+        NSData * dataptr = [sgModel readValueForKey:[fan valueForKey:KEY_READ_RPM]];
         UInt16 value = [sgModel decode_fpe2:*((UInt16 *)[dataptr bytes])];
         return value;
     }
@@ -282,8 +282,8 @@
         [sgModel writeValueForKey:[NSString stringWithFormat:@"F%dTg",i]  data:originalPWM];
         NSInteger index = [sgModel whoDiffersFor:cur andPrevious:prev andMaxDev:MAXRPM_TO_DIFFER];
         if ( index != NSNotFound) {
-            [[fans objectForKey:[names objectAtIndex:index]] setObject:[NSString stringWithFormat:@"F%dTg",i] forKey:@"Fan Control Key"];
-            [[fans objectForKey:[names objectAtIndex:index]] setObject: [NSNumber numberWithBool:YES] forKey:@"Controlable"];
+            [[fans objectForKey:[names objectAtIndex:index]] setObject:[NSString stringWithFormat:@"F%dTg",i] forKey:KEY_FAN_CONTROL];
+            [[fans objectForKey:[names objectAtIndex:index]] setObject: [NSNumber numberWithBool:YES] forKey:KEY_CONTROLABLE];
         }
         [cur removeAllObjects];
         [prev removeAllObjects];

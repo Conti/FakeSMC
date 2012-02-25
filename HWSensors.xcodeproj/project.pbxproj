@@ -82,9 +82,15 @@
 		1DA962C513ED37D90096F8A5 /* RadeonChipsets.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */; };
 		1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C613ED389E0096F8A5 /* AtomBIOS.h */; };
 		1DBB87F11458B90A00C4B56E /* thermotemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB87F01458B90A00C4B56E /* thermotemplate.png */; };
+		2C11943614F908B6009319BD /* f9810.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943414F908B6009319BD /* f9810.gif */; };
+		2C11943714F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943514F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg */; };
+		2C11943A14F910F1009319BD /* fan8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943914F910F1009319BD /* fan8.png */; };
+		2C1194D214F91AEF009319BD /* nameToActualValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1194D114F91AEF009319BD /* nameToActualValueTransformer.m */; };
+		2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
+		2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */; };
 		2C4518CD14F41D4100D44435 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4518CE14F41D4100D44435 /* AppDelegate.m */; };
 		2C4518D114F41D6700D44435 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C4518D314F41D6700D44435 /* Localizable.strings */; };
-		2C63394314F7BC9200F0BD78 /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C63394214F7BC9200F0BD78 /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
+		2C63397014F7F89900F0BD78 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C63396F14F7F89900F0BD78 /* QuartzCore.framework */; };
 		2C7C8EC814F5227400D3095F /* sgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C8EC714F5227400D3095F /* sgModel.m */; };
 		2C7C8ECC14F5259C00D3095F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D757E5414502CED0003045C /* IOKit.framework */; };
 		2C7C8ECD14F525BA00D3095F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D757E5614502CF90003045C /* CoreFoundation.framework */; };
@@ -97,8 +103,8 @@
 		2CB6913D14F40F2900152814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6913B14F40F2900152814 /* InfoPlist.strings */; };
 		2CB6913F14F40F2900152814 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB6913E14F40F2900152814 /* main.m */; };
 		2CB6914314F40F2900152814 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6914114F40F2900152814 /* Credits.rtf */; };
-		2CB6914614F40F2900152814 /* sgAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB6914514F40F2900152814 /* sgAppDelegate.m */; };
-		2CB6914914F40F2A00152814 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6914714F40F2A00152814 /* MainMenu.xib */; };
+		2CBC6A1414F81B1C00DAC464 /* sgAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC6A1214F81B1C00DAC464 /* sgAppController.m */; };
+		2CBC6A1514F81B1C00DAC464 /* sgAppController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC6A1314F81B1C00DAC464 /* sgAppController.xib */; };
 		6A0F327D14DD6A6800AA5598 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0F327B14DD6A6800AA5598 /* InfoPlist.strings */; };
 		6A0F328014DD6A6800AA5598 /* NuvotonNCT677x.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F327F14DD6A6800AA5598 /* NuvotonNCT677x.cpp */; };
 		6A9A244A14E65E9C0088F3AA /* SuperIOMonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A9A244814E65E9C0088F3AA /* SuperIOMonitor.cpp */; };
@@ -109,6 +115,18 @@
 		6A9C468F14E657EE0083E5E6 /* FakeSMCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A9C468B14E657EE0083E5E6 /* FakeSMCUtils.h */; };
 		6AAF618914D40262006E8573 /* default.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AAF618814D40262006E8573 /* default.icns */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2C63396D14F7F85000F0BD78 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1D05ABE413ED0DAD00EADBF6 /* FakeSMC.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeSMC.kext; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,11 +238,18 @@
 		1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadeonChipsets.h; sourceTree = "<group>"; };
 		1DA962C613ED389E0096F8A5 /* AtomBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomBIOS.h; sourceTree = "<group>"; };
 		1DBB87F01458B90A00C4B56E /* thermotemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermotemplate.png; sourceTree = "<group>"; };
+		2C11943414F908B6009319BD /* f9810.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = f9810.gif; sourceTree = "<group>"; };
+		2C11943514F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Axial_Flow_Square_Industrial_Ventilating_Fan.jpg; sourceTree = "<group>"; };
+		2C11943914F910F1009319BD /* fan8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan8.png; sourceTree = "<group>"; };
+		2C1194D014F91AEF009319BD /* nameToActualValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nameToActualValueTransformer.h; sourceTree = "<group>"; };
+		2C1194D114F91AEF009319BD /* nameToActualValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nameToActualValueTransformer.m; sourceTree = "<group>"; };
+		2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Japanese-Sensu-Fan-USB-Drive_1.icns"; sourceTree = "<group>"; };
+		2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Koolance_FAN-12038HBK-184.png"; sourceTree = "<group>"; };
 		2C4518CE14F41D4100D44435 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2C4518D214F41D6700D44435 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C4518D414F41D6D00D44435 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C4518D614F4202A00D44435 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		2C63394214F7BC9200F0BD78 /* Japanese-Sensu-Fan-USB-Drive_1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "Japanese-Sensu-Fan-USB-Drive_1.icns"; path = "../Japanese-Sensu-Fan-USB-Drive_1.icns"; sourceTree = "<group>"; };
+		2C63396F14F7F89900F0BD78 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		2C7C8EC614F5227400D3095F /* sgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sgModel.h; sourceTree = "<group>"; };
 		2C7C8EC714F5227400D3095F /* sgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sgModel.m; sourceTree = "<group>"; };
 		2CAD312914EE522000B32B68 /* ISPSmartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISPSmartController.h; sourceTree = "<group>"; };
@@ -245,9 +270,9 @@
 		2CB6913E14F40F2900152814 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2CB6914014F40F2900152814 /* SmartGuardian-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartGuardian-Prefix.pch"; sourceTree = "<group>"; };
 		2CB6914214F40F2900152814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		2CB6914414F40F2900152814 /* sgAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sgAppDelegate.h; sourceTree = "<group>"; };
-		2CB6914514F40F2900152814 /* sgAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sgAppDelegate.m; sourceTree = "<group>"; };
-		2CB6914814F40F2A00152814 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2CBC6A1114F81B1C00DAC464 /* sgAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sgAppController.h; sourceTree = "<group>"; };
+		2CBC6A1214F81B1C00DAC464 /* sgAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sgAppController.m; sourceTree = "<group>"; };
+		2CBC6A1314F81B1C00DAC464 /* sgAppController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = sgAppController.xib; sourceTree = "<group>"; };
 		6A0F327514DD6A6800AA5598 /* NuvotonNCT677x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NuvotonNCT677x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0F327714DD6A6800AA5598 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
 		6A0F327A14DD6A6800AA5598 /* NuvotonNCT677x-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NuvotonNCT677x-Info.plist"; sourceTree = "<group>"; };
@@ -350,6 +375,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C63397014F7F89900F0BD78 /* QuartzCore.framework in Frameworks */,
 				2CB6913414F40F2900152814 /* Cocoa.framework in Frameworks */,
 				2C7C8ECD14F525BA00D3095F /* CoreFoundation.framework in Frameworks */,
 				2C7C8ECC14F5259C00D3095F /* IOKit.framework in Frameworks */,
@@ -369,6 +395,7 @@
 		1D05ABAD13ED0D7000EADBF6 = {
 			isa = PBXGroup;
 			children = (
+				2C63396F14F7F89900F0BD78 /* QuartzCore.framework */,
 				1D05AC1313ED0F7100EADBF6 /* Utils */,
 				1D05ABE913ED0DAD00EADBF6 /* FakeSMC */,
 				1D05AC3113ED101200EADBF6 /* Plug-Ins */,
@@ -725,11 +752,13 @@
 		2CB6913814F40F2900152814 /* SmartGuardian */ = {
 			isa = PBXGroup;
 			children = (
-				2CB6914414F40F2900152814 /* sgAppDelegate.h */,
-				2CB6914514F40F2900152814 /* sgAppDelegate.m */,
-				2CB6914714F40F2A00152814 /* MainMenu.xib */,
 				2C7C8EC614F5227400D3095F /* sgModel.h */,
 				2C7C8EC714F5227400D3095F /* sgModel.m */,
+				2CBC6A1114F81B1C00DAC464 /* sgAppController.h */,
+				2CBC6A1214F81B1C00DAC464 /* sgAppController.m */,
+				2CBC6A1314F81B1C00DAC464 /* sgAppController.xib */,
+				2C1194D014F91AEF009319BD /* nameToActualValueTransformer.h */,
+				2C1194D114F91AEF009319BD /* nameToActualValueTransformer.m */,
 				2CB6913914F40F2900152814 /* Supporting Files */,
 			);
 			path = SmartGuardian;
@@ -738,7 +767,11 @@
 		2CB6913914F40F2900152814 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2C63394214F7BC9200F0BD78 /* Japanese-Sensu-Fan-USB-Drive_1.icns */,
+				2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */,
+				2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */,
+				2C11943914F910F1009319BD /* fan8.png */,
+				2C11943414F908B6009319BD /* f9810.gif */,
+				2C11943514F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg */,
 				2CB6913A14F40F2900152814 /* SmartGuardian-Info.plist */,
 				2CB6913B14F40F2900152814 /* InfoPlist.strings */,
 				2CB6913E14F40F2900152814 /* main.m */,
@@ -1108,6 +1141,7 @@
 				2CB6912E14F40F2900152814 /* Sources */,
 				2CB6912F14F40F2900152814 /* Frameworks */,
 				2CB6913014F40F2900152814 /* Resources */,
+				2C63396D14F7F85000F0BD78 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1277,8 +1311,12 @@
 			files = (
 				2CB6913D14F40F2900152814 /* InfoPlist.strings in Resources */,
 				2CB6914314F40F2900152814 /* Credits.rtf in Resources */,
-				2CB6914914F40F2A00152814 /* MainMenu.xib in Resources */,
-				2C63394314F7BC9200F0BD78 /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */,
+				2CBC6A1514F81B1C00DAC464 /* sgAppController.xib in Resources */,
+				2C11943614F908B6009319BD /* f9810.gif in Resources */,
+				2C11943714F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg in Resources */,
+				2C11943A14F910F1009319BD /* fan8.png in Resources */,
+				2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */,
+				2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1492,8 +1530,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB6913F14F40F2900152814 /* main.m in Sources */,
-				2CB6914614F40F2900152814 /* sgAppDelegate.m in Sources */,
 				2C7C8EC814F5227400D3095F /* sgModel.m in Sources */,
+				2CBC6A1414F81B1C00DAC464 /* sgAppController.m in Sources */,
+				2C1194D214F91AEF009319BD /* nameToActualValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1628,14 +1667,6 @@
 				2CB6914214F40F2900152814 /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		2CB6914714F40F2A00152814 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CB6914814F40F2A00152814 /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		6A0F327B14DD6A6800AA5598 /* InfoPlist.strings */ = {
@@ -2297,7 +2328,10 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.7.sdk/System/Library/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_DIR)/SDKs/MacOSX10.7.sdk/System/Library/Frameworks\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2332,7 +2366,10 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				"DEBUG_INFORMATION_FORMAT[arch=*]" = dwarf;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.7.sdk/System/Library/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_DIR)/SDKs/MacOSX10.7.sdk/System/Library/Frameworks\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
