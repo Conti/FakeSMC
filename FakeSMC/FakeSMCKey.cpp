@@ -125,7 +125,7 @@ const void *FakeSMCKey::getValue()
         IOReturn result = handler->callPlatformFunction(kFakeSMCGetValueCallback, true, (void *)name, (void *)value, (void *)size, 0);
 
         if (kIOReturnSuccess != result)
-            WarningLog("Value update request callback error for key %s, return 0x%x", name, result);
+            DebugLog("Value update request callback error for key %s, return 0x%x", name, result);
     }
 
     return value; 

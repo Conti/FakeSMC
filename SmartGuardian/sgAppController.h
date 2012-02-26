@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "sgModel.h"
 
-@interface sgAppController : NSViewController <NSTableViewDataSource>{
+@interface sgAppController : NSViewController <NSTableViewDataSource,NSApplicationDelegate>{
     NSOperationQueue * FansOperationQueue;
 }
 
@@ -19,5 +19,4 @@
 @property (strong) IBOutlet NSPanel *mainWindow;
 @property (retain) IBOutlet sgModel * model; 
 @property (strong) IBOutlet NSTableView *sgTableView;
-
 @end

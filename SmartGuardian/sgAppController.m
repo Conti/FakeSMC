@@ -20,6 +20,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
         // Initialization code here.
         model = [[sgModel alloc]init];
         
@@ -38,6 +39,9 @@
         
         FansOperationQueue = [[NSOperationQueue alloc] init];
         [FansOperationQueue setMaxConcurrentOperationCount:4];
+        
+
+        
         [FansOperationQueue addOperationWithBlock:^{
             [self FanInitialization];
         }];
@@ -50,6 +54,7 @@
 
 -(void) FanInitialization
 {
+    
     [model findControllers];
     
     NSEnumerator * enumerator = [[model fans] keyEnumerator];
@@ -61,6 +66,7 @@
             [model calibrateFan: nextFan];
         }];
     
+
 
 }
 
@@ -85,6 +91,12 @@
 {
     return [[model fans] valueForKey:[NSString stringWithFormat:@"FAN%d",rowIndex]];
 }
+
+-(void) applicationWillTerminate:(NSNotification *)notification
+{
+    [model writeFanDictionatyToFile:@"/Users/ivan/Development/Fans.plist"];
+}
+
 
 
 @end

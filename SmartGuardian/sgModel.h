@@ -11,7 +11,7 @@
 
 
 #define SpinTransactionTime 3.0
-#define SpinTime  10.0
+#define SpinTime  7.0
 
 #define KEY_NAME            @"Name"
 #define KEY_READ_RPM        @"RPMReadKey"
