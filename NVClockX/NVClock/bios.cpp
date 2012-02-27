@@ -368,7 +368,7 @@ static int bit_init_script_table_get_next_entry(char *rom, int offset)
 			break;
 		default:
 #if Debug
-			printf("Unhandled init script entry with id '%c' at %04x", id, offset);
+//			printf("Unhandled init script entry with id '%c' at %04x", id, offset);
 #endif
 			return 0;
 	}

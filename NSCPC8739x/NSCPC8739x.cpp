@@ -12,7 +12,7 @@
 #include <architecture/i386/pio.h>
 #include "FakeSMC.h"
 
-#define Debug FALSE
+#define Debug TRUE
 
 #define LogPrefix "PC8739x: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -41,12 +41,12 @@ void PC8739x::writeByte(UInt8 bank, UInt8 reg, UInt8 value)
 
 long PC8739x::readTemperature(unsigned long index)
 {
-	return mmioBase[NSC_HARDWARE_MONITOR_REGS[model][index]];
+	return mmioBase[NSC_HARDWARE_MONITOR_REGS[model*2][index]];
 }
 
 long PC8739x::readTachometer(unsigned long index)
 {
-	return (0xff - (mmioBase[NSC_HARDWARE_MONITOR_REGS[model+1][index]] & 0xff)) * 20;  
+	return (0xff - (mmioBase[NSC_HARDWARE_MONITOR_REGS[model*2+1][index]] & 0xff)) * 20;  
 }
 
 bool PC8739x::probePort()
