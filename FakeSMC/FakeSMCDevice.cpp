@@ -390,10 +390,10 @@ bool FakeSMCDevice::init(IOService *platform, OSDictionary *properties)
     if (!tmpData)
         WarningLog("failed to create tmpdata");
 
-    OSSymbol *gIntelPICName = (OSSymbol *) OSSymbol::withCStringNoCopy("io-apic-0");
-    specifiers->setObject( tmpData );
-    controllers->setObject( gIntelPICName );
-    this->setProperty( gIOInterruptControllersKey, controllers ) && this->setProperty( gIOInterruptSpecifiersKey,  specifiers );
+//    OSSymbol *gIntelPICName = (OSSymbol *) OSSymbol::withCStringNoCopy("io-apic-0");
+//    specifiers->setObject( tmpData );
+//    controllers->setObject( gIntelPICName );
+//    this->setProperty( gIOInterruptControllersKey, controllers ) && this->setProperty( gIOInterruptSpecifiersKey,  specifiers );
 
     this->attachToParent(platform, gIOServicePlane);
 

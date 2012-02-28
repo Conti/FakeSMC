@@ -169,6 +169,12 @@
     return [fans writeToFile:filename atomically:YES];
 }
 
+-(BOOL) readFanDictionatyFromFile: (NSString *) filename
+{
+    if((fans = [NSDictionary dictionaryWithContentsOfFile:filename])) return true;
+    return false;
+}
+
 -(BOOL) calibrateFan:(NSString *) fanId
 {
     NSMutableDictionary * fan;
@@ -212,6 +218,7 @@
             
         [sgModel writeValueForKey:FanControlKey data:originalPWM];
         [fan setObject:[NSNumber numberWithBool:YES] forKey:KEY_CALIBRATED];
+//        [self writeFanDictionatyToFile:@"/Users/ivan/Development/Fans.plist"];
         return YES;
     }
     return NO;

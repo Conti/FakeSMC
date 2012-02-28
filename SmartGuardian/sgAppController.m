@@ -2,7 +2,7 @@
 //  sgAppController.m
 //  HWSensors
 //
-//  Created by Иван Синицин on 24.02.12.
+//  Created by Navi on 24.02.12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,11 +10,14 @@
 
 
 
+
 @implementation sgAppController
 
+@synthesize currentFan;
 @synthesize mainWindow;
 @synthesize model;
 @synthesize sgTableView;
+@synthesize CalibrationGraphView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +32,7 @@
             
         }
         
+        
         [sgTableView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:
                                     [self methodSignatureForSelector:@selector(updateTitles)]];
@@ -40,17 +44,59 @@
         FansOperationQueue = [[NSOperationQueue alloc] init];
         [FansOperationQueue setMaxConcurrentOperationCount:4];
         
-
+//        [model readFanDictionatyFromFile:@"/Users/ivan/Development/Fans.plist"];
         
         [FansOperationQueue addOperationWithBlock:^{
             [self FanInitialization];
-        }];
+       }];
         
+   
     }
     
     
     return self;
 }
+         
+- (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes {
+    NSUInteger i = [proposedSelectionIndexes lastIndex];;
+        NSDictionary * fan = [[model fans] valueForKey:[NSString stringWithFormat:@"FAN%d",i]];
+        currentFan = fan;
+        if ([[fan valueForKey:KEY_CONTROLABLE] boolValue] == YES){
+            
+            NSArray * dataup = [fan valueForKey: KEY_DATA_UPWARD];
+            NSArray * datadown = [fan valueForKey: KEY_DATA_DOWNWARD];
+            NSMutableDictionary * allPlots = [NSMutableDictionary dictionaryWithCapacity:2];    
+            NSMutableDictionary * plotdataUp = [NSMutableDictionary dictionaryWithCapacity:1];
+            NSMutableDictionary * plotdataDown = [NSMutableDictionary dictionaryWithCapacity:1];
+            NSMutableDictionary * middleLine = [NSMutableDictionary dictionaryWithCapacity:1];
+
+            [plotdataUp setObject:[NSColor redColor] forKey:@"Color"];
+            [plotdataUp setObject:dataup forKey:@"Data" ];
+            [allPlots setObject:plotdataUp forKey:@"Upward"];
+            
+            [plotdataDown setObject:[NSColor blueColor] forKey:@"Color"];
+            [plotdataDown setObject:datadown forKey:@"Data" ];
+            [allPlots setObject:plotdataDown forKey:@"Downward"];
+            
+//            [middleLine setObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:10],[NSNumber numberWithInt:10],nil ] forKey:@"Data"];
+//            [middleLine setObject:[NSColor yellowColor] forKey:@"Color"];
+//            [middleLine setObject:[NSNumber numberWithInt:20] forKey:@"Scale"];
+//            [allPlots setObject:middleLine forKey:@"Midlane"];
+             [CalibrationGraphView setHidden:NO];
+        [CalibrationGraphView setPlotData: allPlots ];
+        [CalibrationGraphView setNeedsDisplay:YES];
+        }
+        else
+        {
+            NSMutableArray * plotdata = [NSMutableArray arrayWithCapacity:0];
+            [CalibrationGraphView setHidden:YES];
+//            [CalibrationGraphView setPlotData: plotdata ];
+//            [CalibrationGraphView setNeedsDisplay:YES];   
+        }
+    
+    return proposedSelectionIndexes;
+}
+
 
 -(void) FanInitialization
 {
@@ -79,6 +125,8 @@
             [obj setObject:[NSString stringWithFormat:@"%d RPM", value ] forKey:KEY_CURRENT_RPM]; 
         
     } ];
+    
+
      
 }
 

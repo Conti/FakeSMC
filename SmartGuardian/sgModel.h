@@ -41,6 +41,7 @@
 -(NSDictionary *) initialPrepareFan: (NSUInteger) fanId;
 -(NSUInteger) rpmForFan: (NSString *) name;
 -(BOOL) writeFanDictionatyToFile: (NSString *) filename;
+-(BOOL) readFanDictionatyFromFile: (NSString *) filename;
 -(BOOL) addFan: (NSDictionary *) desc withName: (NSString *) name;
 -(BOOL) calibrateFan:(NSString *) fanId;
 -(void) findControllers;
