@@ -3,7 +3,7 @@
 //  HWSensors
 //
 //  Created by Navi on 25.02.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Navi. All rights reserved.
 //
 #import <Cocoa/Cocoa.h>
 #import "sgModel.h"
@@ -16,12 +16,8 @@
 + (BOOL)allowsReverseTransformation { return NO; }
 
 - (id)transformedValue:(id)value {
-    if (value != nil) {
-        NSData * dataptr = [sgModel readValueForKey:value];
-        UInt16 value_Ret = [sgModel decode_fpe2:*((UInt16 *)[dataptr bytes])];
-        return [NSString stringWithFormat:@"%d RPM",value_Ret];
-
-    }
-    return nil;
+    return [NSString stringWithFormat:@"%d rpm",[value intValue]];
 }
+
+
 @end

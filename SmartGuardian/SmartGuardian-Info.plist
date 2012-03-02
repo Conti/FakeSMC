@@ -27,7 +27,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2012 . All rights reserved.</string>
 	<key>NSMainNibFile</key>
-	<string>sgAppController</string>
+	<string>MainWindow</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
