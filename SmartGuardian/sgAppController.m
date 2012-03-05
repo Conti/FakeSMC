@@ -14,6 +14,7 @@
 @implementation sgAppController
 
 @synthesize model;
+@synthesize ControlTabView;
 
 @synthesize StopTempInput;
 @synthesize FullOnTempInput;
@@ -41,7 +42,7 @@
         [[model fans] setObject:@KEY_FORMAT_FAN_MAIN_CONTROL forKey:@"FanMainControl"];
         [[model fans] setObject:@KEY_FORMAT_FAN_REG_CONTROL forKey:@"FanRegControl"];
         
-//        [model readFanDictionatyFromFile:@"/Users/ivan/Development/Fans.plist"];
+        [model readSettings];
         [model selectCurrentFan:@"FAN0"];
 
    
@@ -63,15 +64,19 @@
                                 [self methodSignatureForSelector:@selector(updateTitles)]];
     [invocation setTarget:self];
     [invocation setSelector:@selector(updateTitles)];
-    [[NSRunLoop mainRunLoop] addTimer:[NSTimer timerWithTimeInterval:2 invocation:invocation repeats:YES] forMode:NSRunLoopCommonModes];
+    [[NSRunLoop mainRunLoop] addTimer:[NSTimer timerWithTimeInterval:1 invocation:invocation repeats:YES] forMode:NSRunLoopCommonModes];
     
     FansOperationQueue = [[NSOperationQueue alloc] init];
-    [FansOperationQueue setMaxConcurrentOperationCount:4];
-    
-            [model selectCurrentFan:@"FAN0"];
-                   [FansOperationQueue addOperationWithBlock:^{
-                [self FanInitialization];
-         }];
+    __block id me = self;
+//    [model readFanDictionatyFromFile:@"/Users/ivan/Development/Fans.plist"];
+//    [FansOperationQueue setMaxConcurrentOperationCount:4];
+//    
+//            [[me model] selectCurrentFan:@"FAN0"];
+//                   [FansOperationQueue addOperationWithBlock:^{
+//                [me FanInitialization];
+//              
+//
+//         }];
     
     
 }
@@ -81,8 +86,7 @@
     NSUInteger i = [proposedSelectionIndexes lastIndex];;
     sgFan * fan = [[model fans] valueForKey:[NSString stringWithFormat:@"FAN%d",i]];
     [model selectCurrentFan:[NSString stringWithFormat:@"FAN%d",i]];
-    
-    
+    [dictController bind:NSContentObjectBinding toObject:self withKeyPath:@"model.currentFan" options:nil];
     if (fan.Calibrated && fan.Controlable) {
         
         NSArray * dataup = fan.calibrationDataUpward;
@@ -127,12 +131,14 @@
     
     NSEnumerator * enumerator = [[model fans] keyEnumerator];
     NSString * nextFan;
+    __unsafe_unretained id me = self;
     while (nextFan = [enumerator nextObject]) 
         [FansOperationQueue addOperationWithBlock:^{
-            if([nextFan hasPrefix:@"FAN"] && [[[[model  fans ] objectForKey:nextFan ] valueForKey:KEY_CONTROLABLE] boolValue])
+            if([nextFan hasPrefix:@"FAN"] && [[[[[me model]  fans ] objectForKey:nextFan ] valueForKey:KEY_CONTROLABLE] boolValue])
             {
                 NSLog(@"Starting thread for %@",nextFan);
-                [model calibrateFan: nextFan];
+                [[me model] calibrateFan: nextFan];
+                [[me model] saveSettings];
             }
         }];
     
@@ -171,7 +177,7 @@
 
 -(void) applicationWillTerminate:(NSNotification *)notification
 {
-    [model writeFanDictionatyToFile:@"/Users/ivan/Development/Fans.plist"];
+    [model saveSettings];
 }
 
 

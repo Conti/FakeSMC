@@ -12,11 +12,12 @@
 
 @interface sgAppController : NSViewController <NSTableViewDataSource,NSTableViewDelegate,NSApplicationDelegate> 
 {
+    IBOutlet NSObjectController	*dictController;
     NSOperationQueue * FansOperationQueue;
 }
 
 -(void) FanInitialization;
--(void) FanSelected;
+
 
 
 @property (strong) IBOutlet NSTextFieldCell *StartTempInput;
@@ -24,6 +25,7 @@
 @property (strong) IBOutlet NSTextFieldCell *FullOnTempInput;
 
 @property (retain) IBOutlet sgModel * model; 
+@property (strong) IBOutlet NSTabView *ControlTabView;
 
 @property (strong) IBOutlet NSTableView *sgTableView;
 @property (strong) IBOutlet GraphView *CalibrationGraphView;

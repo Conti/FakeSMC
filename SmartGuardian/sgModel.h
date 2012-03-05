@@ -14,20 +14,27 @@
 #define SpinTime  7.0
 
 
-@interface sgModel : NSObject 
+@interface sgModel : NSObject {
+    
+    sgFan * _currentFan;
+    
+}
 
 @property (readwrite,retain) NSMutableDictionary *   fans; 
-@property (readwrite,retain) sgFan  * CurrentFan;
+@property (readwrite,assign) sgFan  * currentFan;
 
 
 +(NSUInteger) whoDiffersFor:(NSArray *) current andPrevious:(NSArray *) previous andMaxDev:(NSUInteger) maxDev;;
 
 -(sgModel *) init;
--(NSDictionary *) initialPrepareFan: (NSUInteger) fanId;
+-(sgFan *) initialPrepareFan: (NSUInteger) fanId;
 
--(BOOL) writeFanDictionatyToFile: (NSString *) filename;
--(BOOL) readFanDictionatyFromFile: (NSString *) filename;
--(BOOL) addFan: (NSDictionary *) desc withName: (NSString *) name;
+-(void) setCurrentFan:(sgFan *)CurrentFan;
+-(sgFan *)  currentFan;
+
+-(void) saveSettings;
+-(BOOL) readSettings;
+-(BOOL) addFan: (sgFan *) desc withName: (NSString *) name;
 -(BOOL) calibrateFan:(NSString *) fanId;
 -(void) findControllers;
 -(BOOL) selectCurrentFan: (NSString *) name; 

@@ -20,14 +20,19 @@
 @implementation sgModel
 
 @synthesize fans;
-@synthesize CurrentFan;
 
 
+-(void) setCurrentFan:(sgFan *)CurrentFan
+{
+    _currentFan = CurrentFan;
+}
 
+-(sgFan *) currentFan
+{
+    return _currentFan;
+}
 
-
-
--(NSDictionary *) initialPrepareFan:(NSUInteger) fanId 
+-(sgFan *) initialPrepareFan:(NSUInteger) fanId 
 {
     if (fanId < [sgFan numberOfFans]) {
         
@@ -49,14 +54,39 @@
     return YES;
 }
 
--(BOOL) writeFanDictionatyToFile: (NSString *) filename
+-(void) saveSettings
 {
-    return [fans writeToFile:filename atomically:YES];
+    NSMutableDictionary * toSave = [NSMutableDictionary dictionaryWithDictionary:fans];
+    [toSave enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if([key hasPrefix:@"FAN"])
+        {
+            NSDictionary * temp = [obj valuesForSaveOperation];
+            [toSave setObject:temp forKey:key];
+            
+        }    
+
+    }];
+    [[NSUserDefaults standardUserDefaults] setObject:toSave forKey:@"Configuration"];
 }
 
--(BOOL) readFanDictionatyFromFile: (NSString *) filename
+-(BOOL) readSettings
 {
-    if((fans = [NSDictionary dictionaryWithContentsOfFile:filename])) return true;
+    NSMutableDictionary * temp = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"Configuration"] ];
+    
+    if(temp)
+    {
+        [temp enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            
+            if([key hasPrefix:@"FAN"])
+            {
+                obj = [[sgFan alloc] initWithKeys:obj];
+            }
+            
+            [fans setObject:obj forKey:key];
+            
+        }];
+        return true;
+    }
     return false;
 }
 
@@ -84,7 +114,7 @@
         {
             fan.manualPWM = i;
             [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
-            NSNumber * num = [NSNumber numberWithInt: fan.currentRPM];
+            NSNumber * num = [NSNumber numberWithLong: fan.currentRPM];
             [calibrationDataUp addObject:num];
             DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d", [fan name] , i, [num intValue]) ;
         }
@@ -94,7 +124,7 @@
             
             fan.manualPWM = i;
             [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
-            NSNumber * num = [NSNumber numberWithInt:fan.currentRPM];
+            NSNumber * num = [NSNumber numberWithLong:fan.currentRPM];
             [calibrationDataDown insertObject:num atIndex: 0];
             DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d", [fan name] , i, [num intValue]) ;
         }
@@ -104,7 +134,6 @@
         fan.Calibrated = YES;
         fan.calibrationDataUpward = calibrationDataUp;
         fan.calibrationDataDownward = calibrationDataDown;
-        [self writeFanDictionatyToFile:@"/Users/ivan/Development/Fans.plist"];
         return YES;
     }
     return NO;
@@ -172,7 +201,10 @@
             [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_START_TEMP_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_START_TEMP,i] ];
             [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_STOP_TEMP_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_OFF_TEMP,i] ];
             [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_FULL_TEMP_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_FULL_TEMP,i] ];
-            
+            [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_START_PWM_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_START_PWM,i] ];
+            [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_DELTA_TEMP_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_TEMP_DELTA,i] ];
+            [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_DELTA_PWM_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_CONTROL,i] ];
+
             [[fans objectForKey:[names objectAtIndex:index]] setControlable:YES];
         }
         [cur removeAllObjects];
@@ -184,8 +216,9 @@
 
 -(BOOL) selectCurrentFan:(NSString *)name
 {
-    CurrentFan = [fans valueForKey:name];
-    if(CurrentFan) return YES;
+    self.currentFan = [fans valueForKey:name];
+    
+    if(self.currentFan) return YES;
     return NO;
 }
 

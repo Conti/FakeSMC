@@ -129,7 +129,76 @@
     _startPWMValue=0;
     _slopeSmooth=0;
     _deltaPWM = 0.0;
-    ControlFanKeys = keys;
+    NSMutableDictionary * me = [NSMutableDictionary dictionaryWithCapacity:0];
+    if(keys)
+    {
+        calibrationDataDownward = [keys valueForKey:KEY_DATA_DOWNWARD];
+        calibrationDataUpward = [keys valueForKey:KEY_DATA_UPWARD];
+        Calibrated = [[keys valueForKey:KEY_CALIBRATED] boolValue];
+        Controlable = [[keys valueForKey:KEY_CONTROLABLE] boolValue];
+
+        [keys enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            
+            // Ugly but there is no other way yet
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"ID"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_DESCRIPTION];
+            };
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"Ac"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_READ_RPM];
+            };
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"Tg"])
+                {
+                    [sgFan writeValueForKey:key data:obj];
+                    [me setObject:key forKey:KEY_FAN_CONTROL];
+                };
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"St"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_START_TEMP_CONTROL];
+            };
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"Ss"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_STOP_TEMP_CONTROL];
+            };
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"Ft"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_FULL_TEMP_CONTROL];
+            };
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"Pt"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_START_PWM_CONTROL];
+            };
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"Fo"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_DELTA_TEMP_CONTROL];
+            };
+            if([key hasPrefix:@"F"] && [key hasSuffix:@"Ct"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_DELTA_PWM_CONTROL];
+            };
+        }];
+        ControlFanKeys = me;
+        NSUInteger temp;
+        temp=self.fanStopTemp;
+        temp=self.fanStartTemp;
+        temp=self.fanFullOnTemp;
+        temp=self.automatic;
+        temp=self.startPWMValue;
+        temp=self.deltaPWM;
+        temp=self.manualPWM;
+        temp=self.slopeSmooth;
+        temp=self.deltaTemp;
+        temp=self.tempSensorSource;
+    }
     return self;
 }
 
@@ -280,7 +349,7 @@
 -(UInt8) startPWMValue
 {
     NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_START_PWM_CONTROL]];
-    _startPWMValue =  *((UInt8 *)[dataptr bytes]) & 0x1F;   
+    _startPWMValue =  *((UInt8 *)[dataptr bytes]) & 0x7F;   
     return _startPWMValue;
 }
 
@@ -327,5 +396,58 @@
     float dec =  (*((UInt8 *)[dataptr2 bytes]) & 0x80) >> 3 | (*((UInt8 *)[dataptr bytes]) & 0x38) >> 3; 
     _deltaPWM = dec +fract;
     return _deltaPWM;
+}
+
+-(NSDictionary *) valuesForSaveOperation
+{
+    NSMutableDictionary * saveData = [NSMutableDictionary dictionaryWithCapacity:0];
+    [ControlFanKeys enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [saveData setObject:[sgFan readValueForKey:obj] forKey:obj];
+         }];
+    if(Calibrated)
+    {
+    [saveData setObject:calibrationDataUpward forKey: KEY_DATA_UPWARD];
+    [saveData setObject:calibrationDataDownward forKey:KEY_DATA_DOWNWARD];
+    }
+    [saveData setObject:[NSNumber numberWithBool:Controlable] forKey:KEY_CONTROLABLE];
+    [saveData setObject:[NSNumber numberWithBool: Calibrated] forKey:KEY_CALIBRATED];
+        return saveData;
+}
+
+-(void) loadFromDictrionary:(NSDictionary *)dict
+{
+    __block bool canLoad = YES;
+    
+    [ControlFanKeys enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if([dict valueForKey:obj]==nil)
+        {
+            canLoad=NO;
+            *stop=YES;
+        }
+    }];
+    
+    if(canLoad)
+    {
+        calibrationDataDownward = [dict valueForKey:KEY_DATA_DOWNWARD];
+        calibrationDataUpward = [dict valueForKey:KEY_DATA_UPWARD];
+        Calibrated = [[dict valueForKey:KEY_CALIBRATED] boolValue];
+        Controlable = [[dict valueForKey:KEY_CONTROLABLE] boolValue];
+        
+        [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            if ([key hasPrefix:@"F"]) 
+                [sgFan writeValueForKey:key data:obj];
+        }];
+        NSUInteger temp;
+        temp=self.fanStopTemp;
+        temp=self.fanStartTemp;
+        temp=self.fanFullOnTemp;
+        temp=self.automatic;
+        temp=self.startPWMValue;
+        temp=self.deltaPWM;
+        temp=self.manualPWM;
+        temp=self.slopeSmooth;
+        temp=self.deltaTemp;
+        temp=self.tempSensorSource;
+    }
 }
 @end

@@ -48,8 +48,8 @@
 @property (assign,readwrite) BOOL           slopeSmooth;
 @property (assign,readwrite) UInt8          deltaTemp;
 @property (assign,readwrite) UInt8          tempSensorSource;
-@property (assign,readwrite) NSArray *      calibrationDataUpward;
-@property (assign,readwrite) NSArray *      calibrationDataDownward;
+@property (retain,readwrite) NSArray *      calibrationDataUpward;
+@property (retain,readwrite) NSArray *      calibrationDataDownward;
 @property (assign,readwrite) BOOL           Controlable;
 @property (assign,readwrite) BOOL           Calibrated;
 
@@ -67,5 +67,6 @@
 -(id) initWithKeys:(NSDictionary*) keys;
 -(id) initWithFanId:(NSUInteger) fanId;
 -(void) updateKey:(NSString *) key withValue:(id) value; 
+-(NSDictionary *) valuesForSaveOperation;
 
 @end
