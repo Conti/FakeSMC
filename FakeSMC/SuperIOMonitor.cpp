@@ -378,8 +378,10 @@ bool SuperIOMonitor::start(IOService *provider)
     }
 
     if (startPlugin())
+    {
         registerService(0);
-
+        this->setProperty(kFakeSuperIOMonitorModel, OSString::withCStringNoCopy( getModelName()));
+    }
     return true;
 }
 

@@ -14,12 +14,13 @@
 {
     IBOutlet NSObjectController	*dictController;
     NSOperationQueue * FansOperationQueue;
+
 }
 
 -(void) FanInitialization;
 
 
-
+@property (readwrite)     bool needCalibration;
 @property (strong) IBOutlet NSTextFieldCell *StartTempInput;
 @property (strong) IBOutlet NSTextFieldCell *StopTempInput;
 @property (strong) IBOutlet NSTextFieldCell *FullOnTempInput;

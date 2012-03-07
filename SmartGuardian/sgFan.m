@@ -185,6 +185,11 @@
                 [sgFan writeValueForKey:key data:obj];
                 [me setObject:key forKey:KEY_DELTA_PWM_CONTROL];
             };
+            if([key hasPrefix:@"T"])
+            {
+                [sgFan writeValueForKey:key data:obj];
+                [me setObject:key forKey:KEY_TEMP_VALUE];
+            };
         }];
         ControlFanKeys = me;
         NSUInteger temp;
@@ -221,6 +226,8 @@
     [me setObject:[NSString stringWithFormat:@KEY_FORMAT_FAN_FULL_TEMP,fanId] forKey:KEY_FULL_TEMP_CONTROL];
     [me setObject:[NSString stringWithFormat:@KEY_FORMAT_FAN_TEMP_DELTA,fanId] forKey:KEY_DELTA_TEMP_CONTROL];
     [me setObject:[NSString stringWithFormat:@KEY_FORMAT_FAN_CONTROL,fanId] forKey:KEY_DELTA_PWM_CONTROL];
+    [me setObject:@KEY_CPU_HEATSINK_TEMPERATURE forKey:KEY_TEMP_VALUE];
+
     
 
     
@@ -389,13 +396,30 @@
 
 -(float) deltaPWM
 {
-    NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_FAN_CONTROL]];
+    NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_DELTA_PWM_CONTROL]];
     
         NSData * dataptr2 = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_START_PWM_CONTROL]];
-    float fract = (*((UInt8 *)[dataptr bytes]) & 0x3) / 8.0;
-    float dec =  (*((UInt8 *)[dataptr2 bytes]) & 0x80) >> 3 | (*((UInt8 *)[dataptr bytes]) & 0x38) >> 3; 
+    float fract = (*((UInt8 *)[dataptr bytes]) & 0x7) / 8.0;
+    float dec =  (*((UInt8 *)[dataptr2 bytes]) & 0x80) >> 4 | (*((UInt8 *)[dataptr bytes]) & 0x38) >> 3; 
     _deltaPWM = dec +fract;
     return _deltaPWM;
+}
+
+-(void) setDeltaPWM:(float)deltaPWM
+{
+
+    _deltaPWM =deltaPWM;
+    UInt8 integerPart = (UInt8)deltaPWM;
+    UInt8 fract = (UInt8)((deltaPWM - integerPart)*8.0);
+    integerPart &= 0xF;
+    fract &= 0x7;
+    UInt8 highBit = (integerPart & 0x8) << 4;   
+    NSData * dataptr2 = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_START_PWM_CONTROL]];
+    *((UInt8 *)[dataptr2 bytes]) = (*((UInt8 *)[dataptr2 bytes]) & 0x7f) | highBit;
+    [sgFan writeValueForKey:[ControlFanKeys valueForKey:KEY_START_PWM_CONTROL] data:dataptr2];
+     NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_DELTA_PWM_CONTROL]];
+    *((UInt8 *)[dataptr bytes]) = ( (*((UInt8 *)[dataptr bytes]) & 0x80) | (( integerPart & 0x7) << 3) | fract);
+    [sgFan writeValueForKey:[ControlFanKeys valueForKey:KEY_DELTA_PWM_CONTROL] data:dataptr];
 }
 
 -(NSDictionary *) valuesForSaveOperation
@@ -411,7 +435,19 @@
     }
     [saveData setObject:[NSNumber numberWithBool:Controlable] forKey:KEY_CONTROLABLE];
     [saveData setObject:[NSNumber numberWithBool: Calibrated] forKey:KEY_CALIBRATED];
+    
         return saveData;
+}
+
+-(UInt16) tempSensorValue
+{
+  NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_TEMP_VALUE]];   
+  return  *((UInt16 *)[dataptr bytes]);
+}
+
+-(void) setTempSensorValue:(UInt16)tempSensorValue
+{
+    
 }
 
 -(void) loadFromDictrionary:(NSDictionary *)dict

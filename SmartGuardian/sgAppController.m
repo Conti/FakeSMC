@@ -23,7 +23,7 @@
 @synthesize sgTableView;
 @synthesize CalibrationGraphView;
 @synthesize FanSettingGraphView;
-
+@synthesize needCalibration;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,6 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
+        needCalibration=NO;
         // Initialization code here.
         model = [[sgModel alloc]init];
         
@@ -42,7 +43,7 @@
         [[model fans] setObject:@KEY_FORMAT_FAN_MAIN_CONTROL forKey:@"FanMainControl"];
         [[model fans] setObject:@KEY_FORMAT_FAN_REG_CONTROL forKey:@"FanRegControl"];
         
-        [model readSettings];
+        if([model readSettings]==NO) needCalibration=YES;
         [model selectCurrentFan:@"FAN0"];
 
    
@@ -55,8 +56,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    
-  
+ 
     [self tableView: sgTableView selectionIndexesForProposedSelection:   [NSIndexSet indexSetWithIndex:0]];
             
           
@@ -68,15 +68,17 @@
     
     FansOperationQueue = [[NSOperationQueue alloc] init];
     __block id me = self;
-//    [model readFanDictionatyFromFile:@"/Users/ivan/Development/Fans.plist"];
-//    [FansOperationQueue setMaxConcurrentOperationCount:4];
-//    
-//            [[me model] selectCurrentFan:@"FAN0"];
-//                   [FansOperationQueue addOperationWithBlock:^{
-//                [me FanInitialization];
-//              
-//
-//         }];
+    needCalibration=NO;
+    [FansOperationQueue setMaxConcurrentOperationCount:4];
+    if(needCalibration==YES)
+    {
+            [[me model] selectCurrentFan:@"FAN0"];
+                   [FansOperationQueue addOperationWithBlock:^{
+                [me FanInitialization];
+              
+
+         }];
+    }
     
     
 }
@@ -152,6 +154,7 @@
     [[model fans] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if([key hasPrefix:@"FAN"]){
             [obj setCurrentRPM:0];
+            [obj setTempSensorValue:0];
 
         }
         

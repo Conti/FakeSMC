@@ -97,8 +97,9 @@
     if ((fan = [fans valueForKey:fanId])) {
         if ([fan Controlable] == NO) return NO;
         
-        NSMutableArray * calibrationDataUp = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray * calibrationDataUp =   [NSMutableArray arrayWithCapacity:0];
         NSMutableArray * calibrationDataDown = [NSMutableArray arrayWithCapacity:0];
+        
         
         BOOL wasAutomatic=fan.automatic;
         uint8 tempSensorSave = fan.tempSensorSource;

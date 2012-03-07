@@ -23,6 +23,7 @@
 #define KEY_DELTA_TEMP_CONTROL  @"DeltaTempControl"
 #define KEY_DELTA_PWM_CONTROL   @"DeltaPWMControl"
 #define KEY_START_PWM_CONTROL   @"StartPWMControl"
+#define KEY_TEMP_VALUE          @"TempSensorKey"
 
 @interface sgFan : NSObject {
     NSDictionary * ControlFanKeys;
@@ -43,11 +44,12 @@
 @property (assign,readwrite) UInt8          fanFullOnTemp;
 @property (assign,readwrite) BOOL           automatic;
 @property (assign,readwrite) UInt8          startPWMValue;
-@property (assign,readonly)  float          deltaPWM;
+@property (assign,readwrite) float          deltaPWM;
 @property (assign,readwrite) UInt8          manualPWM;
 @property (assign,readwrite) BOOL           slopeSmooth;
 @property (assign,readwrite) UInt8          deltaTemp;
 @property (assign,readwrite) UInt8          tempSensorSource;
+@property (assign,readwrite) UInt16         tempSensorValue;
 @property (retain,readwrite) NSArray *      calibrationDataUpward;
 @property (retain,readwrite) NSArray *      calibrationDataDownward;
 @property (assign,readwrite) BOOL           Controlable;

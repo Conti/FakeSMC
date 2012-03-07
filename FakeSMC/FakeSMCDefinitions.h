@@ -179,6 +179,7 @@
 #define kFakeSMCDeviceUpdateKeyValue            "updateKeyValue"
 #define kFakeSMCDevicePopulateValues            "populateValues"
 #define kFakeSMCDeviceKeysList                  "KeysList"
+#define kFakeSuperIOMonitorModel                "Model"
 
 #define kFakeSMCAddKeyValue                     "FakeSMC_AddKeyValue"
 #define kFakeSMCAddKeyHandler                   "FakeSMC_AddKeyHandler"

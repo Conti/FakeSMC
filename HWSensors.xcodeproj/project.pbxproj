@@ -85,7 +85,6 @@
 		2C11943614F908B6009319BD /* f9810.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943414F908B6009319BD /* f9810.gif */; };
 		2C11943714F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943514F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg */; };
 		2C11943A14F910F1009319BD /* fan8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943914F910F1009319BD /* fan8.png */; };
-		2C1194D214F91AEF009319BD /* nameToActualValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1194D114F91AEF009319BD /* nameToActualValueTransformer.m */; };
 		2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
 		2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */; };
 		2C4518CD14F41D4100D44435 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4518CE14F41D4100D44435 /* AppDelegate.m */; };
@@ -243,8 +242,6 @@
 		2C11943414F908B6009319BD /* f9810.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = f9810.gif; sourceTree = "<group>"; };
 		2C11943514F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Axial_Flow_Square_Industrial_Ventilating_Fan.jpg; sourceTree = "<group>"; };
 		2C11943914F910F1009319BD /* fan8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan8.png; sourceTree = "<group>"; };
-		2C1194D014F91AEF009319BD /* nameToActualValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nameToActualValueTransformer.h; sourceTree = "<group>"; };
-		2C1194D114F91AEF009319BD /* nameToActualValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nameToActualValueTransformer.m; sourceTree = "<group>"; };
 		2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Japanese-Sensu-Fan-USB-Drive_1.icns"; sourceTree = "<group>"; };
 		2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Koolance_FAN-12038HBK-184.png"; sourceTree = "<group>"; };
 		2C1DBBD51500E59000971A87 /* sgAppController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sgAppController.h; sourceTree = "<group>"; };
@@ -764,8 +761,6 @@
 				2C7C8EC614F5227400D3095F /* sgModel.h */,
 				2C7C8EC714F5227400D3095F /* sgModel.m */,
 				2CBC6A1314F81B1C00DAC464 /* MainWindow.xib */,
-				2C1194D014F91AEF009319BD /* nameToActualValueTransformer.h */,
-				2C1194D114F91AEF009319BD /* nameToActualValueTransformer.m */,
 				2CF872E014FCAC4400E8CBBC /* GraphView.h */,
 				2CF872E114FCAC4400E8CBBC /* GraphView.m */,
 				2CF872E314FCADD200E8CBBC /* NSColor+CGColorAdditions.h */,
@@ -1543,7 +1538,6 @@
 				2CEB5F9D1500E840002BD48D /* sgAppController.m in Sources */,
 				2CB6913F14F40F2900152814 /* main.m in Sources */,
 				2C7C8EC814F5227400D3095F /* sgModel.m in Sources */,
-				2C1194D214F91AEF009319BD /* nameToActualValueTransformer.m in Sources */,
 				2CF872E214FCAC4400E8CBBC /* GraphView.m in Sources */,
 				2CF872E514FCADD200E8CBBC /* NSColor+CGColorAdditions.m in Sources */,
 				2CEB5FA11501141B002BD48D /* sgFan.m in Sources */,
