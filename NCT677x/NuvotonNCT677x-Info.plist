@@ -39,7 +39,7 @@
 					<key>FANIN0</key>
 					<string>System</string>
 					<key>FANIN1</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>FANIN2</key>
 					<string></string>
 					<key>FANIN3</key>
@@ -49,9 +49,9 @@
 					<key>TEMPIN0</key>
 					<string>System</string>
 					<key>TEMPIN1</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>VIN0</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>VIN1</key>
 					<string>UNKN0</string>
 					<key>VIN2</key>

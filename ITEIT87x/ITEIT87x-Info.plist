@@ -65,11 +65,11 @@
 					<key>TEMPIN0</key>
 					<string>System</string>
 					<key>TEMPIN1</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>TEMPIN2</key>
-					<string>Auxiliary</string>
+					<string>Ambient</string>
 					<key>VIN0</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>VIN1</key>
 					<string>Memory</string>
 				</dict>
@@ -90,11 +90,11 @@
 					<key>TEMPIN0</key>
 					<string>System</string>
 					<key>TEMPIN1</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>TEMPIN2</key>
-					<string>Auxiliary</string>
+					<string>Ambient</string>
 					<key>VIN0</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>VIN1</key>
 					<string>Memory</string>
 					<key>VIN2</key>
@@ -129,9 +129,9 @@
 					<key>TEMPIN1</key>
 					<string></string>
 					<key>TEMPIN2</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>VIN0</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>VIN1</key>
 					<string>Memory</string>
 				</dict>
@@ -152,9 +152,9 @@
 					<key>TEMPIN1</key>
 					<string></string>
 					<key>TEMPIN2</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>VIN5</key>
-					<string>Processor</string>
+					<string>CPU</string>
 					<key>VIN6</key>
 					<string>Memory</string>
 				</dict>

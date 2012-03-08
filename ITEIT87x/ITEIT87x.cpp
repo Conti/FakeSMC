@@ -411,7 +411,7 @@ bool IT87x::startPlugin()
 			snprintf(key, 8, "TEMPIN%X", i);
             if(readTemperature(i)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
     			if (OSString* name = OSDynamicCast(OSString, configuration->getObject(key)))
-                    if (name->isEqualTo("Processor")) {
+                    if (name->isEqualTo("CPU")) {
                         if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, i))
                             WarningLog("error adding heatsink temperature sensor");
                     }
@@ -419,9 +419,9 @@ bool IT87x::startPlugin()
                         if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i))
                             WarningLog("error adding system temperature sensor");
                     }
-                    else if (name->isEqualTo("Auxiliary")) {				
+                    else if (name->isEqualTo("Ambient")) {				
                         if (!addSensor(KEY_AMBIENT_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i))
-                            WarningLog("error adding auxiliary temperature sensor");
+                            WarningLog("error adding Ambient temperature sensor");
 				}
 		}
 	}
@@ -431,7 +431,7 @@ bool IT87x::startPlugin()
                  WarningLog("error adding heatsink temperature sensor");
         if(readTemperature(1)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
             if (!addSensor(KEY_AMBIENT_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 1))
-                WarningLog("error adding auxiliary temperature sensor");
+                WarningLog("error adding Ambient temperature sensor");
         if(readTemperature(2)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
             if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 2))
                 WarningLog("error adding system temperature sensor");
@@ -447,7 +447,7 @@ bool IT87x::startPlugin()
 			snprintf(key, 5, "VIN%X", i);
 			
 			if (OSString* name = OSDynamicCast(OSString, configuration->getObject(key))) {
-				if (name->isEqualTo("Processor")) {
+				if (name->isEqualTo("CPU")) {
 					if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
 						WarningLog("error adding CPU voltage sensor");
 				}

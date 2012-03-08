@@ -72,7 +72,7 @@
 -(BOOL) readSettings
 {
     NSMutableDictionary * temp = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"Configuration"] ];
-    
+    __block BOOL result = NO;
     if(temp)
     {
         [temp enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -80,14 +80,15 @@
             if([key hasPrefix:@"FAN"])
             {
                 obj = [[sgFan alloc] initWithKeys:obj];
+                result = YES;
             }
             
             [fans setObject:obj forKey:key];
             
         }];
-        return true;
+        
     }
-    return false;
+    return result;
 }
 
 -(BOOL) calibrateFan:(NSString *) fanId

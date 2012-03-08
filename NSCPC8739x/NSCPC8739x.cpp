@@ -12,7 +12,7 @@
 #include <architecture/i386/pio.h>
 #include "FakeSMC.h"
 
-#define Debug TRUE
+#define Debug FALSE
 
 #define LogPrefix "PC8739x: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)

@@ -119,6 +119,80 @@
     return value;
 }
 
++(NSString *) smcKeyForSensor: (NSString *) name
+{
+    if ([name isEqual:@"CPU"]) 
+        return @KEY_CPU_HEATSINK_TEMPERATURE;
+    if ([name isEqual:@"System"]) 
+        return @KEY_NORTHBRIDGE_TEMPERATURE;
+    if ([name isEqual:@"Ambient"]) 
+        return @KEY_AMBIENT_TEMPERATURE;
+    return nil;   
+}
+
+
++(NSDictionary *) tempSensorNameAndKeys
+{
+    io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching("IT87x"));
+    if(!service)
+        return nil;
+    NSString *  model = (__bridge_transfer NSString *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSuperIOMonitorModel), kCFAllocatorDefault, 0);
+    NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:0];
+    if (model)
+    {
+        NSDictionary* list = (__bridge_transfer NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR("Sensors Configuration"), kCFAllocatorDefault, 0);
+        NSDictionary* configuration = list ? [list valueForKey:model]  : nil;
+        
+        if (list && !configuration) 
+            configuration = [list objectForKey:@"Default"];
+        // Temperature Sensors
+        if (configuration) {
+            for (int i = 0; i < 3; i++) 
+            {				
+                               
+                NSString * key = [NSString stringWithFormat:@"TEMPIN%X", i];
+                if ([[configuration objectForKey:key] isEqual:@"CPU"]) 
+                    if([sgFan readValueForKey:@KEY_CPU_HEATSINK_TEMPERATURE])
+                        [dict setObject:@"CPU" forKey:[NSNumber numberWithInt:i]];
+                if ([[configuration objectForKey:key] isEqual:@"System"]) 
+                    if([sgFan readValueForKey:@KEY_NORTHBRIDGE_TEMPERATURE])
+                        [dict setObject:@"System" forKey:[NSNumber numberWithInt:i]];
+                if ([[configuration objectForKey:key] isEqual:@"Ambient"]) 
+                    if([sgFan readValueForKey:@KEY_AMBIENT_TEMPERATURE])
+                        [dict setObject:@"Ambient" forKey:[NSNumber numberWithInt:i]];
+
+            }
+            return dict;
+        }
+    }
+    return nil;
+}
+
++(NSString *) smcKeyForSensorId:(NSNumber *) num
+{
+    return [sgFan smcKeyForSensor: [[sgFan tempSensorNameAndKeys] objectForKey: num]];
+}
+
++(BOOL) smartGuardianAvailable
+{
+      io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching("IT87x"));
+    if(!service)
+        return NO;
+    NSString *  model = (__bridge_transfer NSString *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSuperIOMonitorModel), kCFAllocatorDefault, 0);
+    
+    if (model)
+    {
+        NSDictionary* list = (__bridge_transfer NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR("Sensors Configuration"), kCFAllocatorDefault, 0);
+        NSDictionary* configuration = list ? [list valueForKey:model]  : nil;
+        
+        if (list && !configuration) 
+            configuration = [list objectForKey:@"Default"];
+        BOOL hasSmartGuardian = [[configuration valueForKey:@"SmartGuardian"] boolValue];
+        return hasSmartGuardian;
+    }
+    return NO;
+}
+
 -(id) initWithKeys:(NSDictionary*) keys
 {
     
@@ -265,6 +339,8 @@
 
 -(void) setFanStartTemp:(UInt8)fanStartTemp
 {
+    if(fanStartTemp < self.fanStopTemp) self.fanStopTemp = fanStartTemp;
+    if(fanStartTemp > self.fanFullOnTemp ) self.fanFullOnTemp = fanStartTemp;
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_START_TEMP_CONTROL] data:[NSData dataWithBytes:&fanStartTemp length:1]];
 }
 
@@ -276,6 +352,10 @@
 
 -(void) setFanStopTemp:(UInt8)fanStopTemp
 {
+    if(fanStopTemp > self.fanStartTemp ) self.fanStartTemp = fanStopTemp;
+    if(fanStopTemp > self.fanFullOnTemp ) self.fanFullOnTemp = fanStopTemp;
+
+
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_STOP_TEMP_CONTROL] data:[NSData dataWithBytes:&fanStopTemp length:1]];
 }
 
@@ -288,6 +368,8 @@
 
 -(void) setFanFullOnTemp:(UInt8)fanFullOnTemp
 {
+    if(fanFullOnTemp < self.fanStartTemp ) self.fanStartTemp = fanFullOnTemp;
+    if(fanFullOnTemp < self.fanStopTemp ) self.fanStopTemp = fanFullOnTemp;
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_FULL_TEMP_CONTROL] data:[NSData dataWithBytes:&fanFullOnTemp length:1]];
 }
 
@@ -310,6 +392,7 @@
     if (_automatic) {
         NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_FAN_CONTROL]];
         _tempSensorSource =  *((UInt8 *)[dataptr bytes]) & 0x3;
+        [ControlFanKeys setValue:[sgFan smcKeyForSensorId:[NSNumber numberWithInt:_tempSensorSource]] forKey:KEY_TEMP_VALUE];
     } else
         _tempSensorSource = 0;
     return _tempSensorSource;
@@ -318,6 +401,7 @@
 -(void) setTempSensorSource:(UInt8)tempSensorSource
 {
     _tempSensorSource = tempSensorSource;
+    [ControlFanKeys setValue:[sgFan smcKeyForSensorId:[NSNumber numberWithInt:_tempSensorSource]] forKey:KEY_TEMP_VALUE];
     UInt8 temp = _automatic ?  0x80 | ( _tempSensorSource & 0x03 ) : _manualPWM & 0x7F;
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_FAN_CONTROL] data:[NSData dataWithBytes:&temp length:1]];
 

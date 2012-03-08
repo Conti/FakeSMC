@@ -170,7 +170,7 @@ bool NCT677x::probePort()
   }
 
   if (!model) {
-    WarningLog("Found unsupported chip ID = 0x%x REVISION = 0x%x", id, revision);
+    DebugLog("Found unsupported chip ID = 0x%x REVISION = 0x%x", id, revision);
     return false;
   }
 
@@ -179,14 +179,14 @@ bool NCT677x::probePort()
   IOSleep(50);
 
   if (!getLogicalDeviceAddress()) {
-    WarningLog("Can't get monitoring logical device address");
+    DebugLog("Can't get monitoring logical device address");
     return false;
   }
 
   UInt16 vendor = (UInt16)(readByte(NUVOTON_VENDOR_ID_HIGH_REGISTER) << 8) | readByte(NUVOTON_VENDOR_ID_LOW_REGISTER);
 
   if (vendor != NUVOTON_VENDOR_ID) {
-    WarningLog("Wrong vendor id: 0x%x, Unloading...", vendor);
+    DebugLog("Wrong vendor id: 0x%x, Unloading...", vendor);
     return false;
   }
 
@@ -242,9 +242,9 @@ bool NCT677x::startPlugin()
           WarningLog("ERROR adding System temperature sensor");
         }
       }
-      else if ((name && name->isEqualTo("Processor")) || (!configuration && i==1)) {
+      else if ((name && name->isEqualTo("CPU")) || (!configuration && i==1)) {
         if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i)) {
-          WarningLog("ERROR adding Processor temperature sensor");
+          WarningLog("ERROR adding CPU temperature sensor");
         }
       }
     }
@@ -259,9 +259,9 @@ bool NCT677x::startPlugin()
 
     OSString  *name = configuration ? OSDynamicCast(OSString, configuration->getObject(key)) : 0;
 
-    if ((name && name->isEqualTo("Processor")) || (!configuration && i==0)) {
+    if ((name && name->isEqualTo("CPU")) || (!configuration && i==0)) {
       if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
-        WarningLog("ERROR Adding Processor Voltage Sensor!");
+        WarningLog("ERROR Adding CPU Voltage Sensor!");
       }
     }
     else if ((name && name->isEqualTo("UNKN0")) || (!configuration && i==1)) {

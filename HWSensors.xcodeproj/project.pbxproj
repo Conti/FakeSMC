@@ -82,8 +82,6 @@
 		1DA962C513ED37D90096F8A5 /* RadeonChipsets.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */; };
 		1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C613ED389E0096F8A5 /* AtomBIOS.h */; };
 		1DBB87F11458B90A00C4B56E /* thermotemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB87F01458B90A00C4B56E /* thermotemplate.png */; };
-		2C11943614F908B6009319BD /* f9810.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943414F908B6009319BD /* f9810.gif */; };
-		2C11943714F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943514F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg */; };
 		2C11943A14F910F1009319BD /* fan8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943914F910F1009319BD /* fan8.png */; };
 		2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
 		2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */; };
@@ -141,14 +139,14 @@
 		1D05AC0513ED0E8D00EADBF6 /* FakeSMC-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FakeSMC-Prefix.pch"; sourceTree = "<group>"; };
 		1D05AC0813ED0E9600EADBF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1D05AC0A13ED0E9D00EADBF6 /* FakeSMC-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FakeSMC-Info.plist"; sourceTree = "<group>"; };
-		1D05AC1413ED0FA900EADBF6 /* cpuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpuid.h; path = Utils/cpuid.h; sourceTree = "<group>"; };
+		1D05AC1413ED0FA900EADBF6 /* cpuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 1; name = cpuid.h; path = Utils/cpuid.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1D05AC1513ED0FA900EADBF6 /* TigerAdditionals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TigerAdditionals.cpp; path = Utils/TigerAdditionals.cpp; sourceTree = "<group>"; };
 		1D05AC1613ED0FA900EADBF6 /* TigerAdditionals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TigerAdditionals.h; path = Utils/TigerAdditionals.h; sourceTree = "<group>"; };
 		1D05AC5B13ED123D00EADBF6 /* ITEIT87x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITEIT87x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D05AC6013ED123D00EADBF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1D05AC6613ED123D00EADBF6 /* ITEIT87x-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ITEIT87x-Prefix.pch"; sourceTree = "<group>"; };
 		1D05AC6A13ED126500EADBF6 /* ITEIT87x-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ITEIT87x-Info.plist"; sourceTree = "<group>"; };
-		1D05AC6C13ED126C00EADBF6 /* ITEIT87x.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ITEIT87x.cpp; sourceTree = "<group>"; };
+		1D05AC6C13ED126C00EADBF6 /* ITEIT87x.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ITEIT87x.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		1D05AC6D13ED126C00EADBF6 /* ITEIT87x.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITEIT87x.h; sourceTree = "<group>"; };
 		1D05AC7613ED131B00EADBF6 /* WinbondW836x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WinbondW836x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D05AC7B13ED131B00EADBF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -213,7 +211,7 @@
 		1DA9625C13ED347B0096F8A5 /* libc_wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = libc_wrapper.cpp; sourceTree = "<group>"; };
 		1DA9625D13ED347B0096F8A5 /* lm99.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lm99.cpp; sourceTree = "<group>"; };
 		1DA9625E13ED347B0096F8A5 /* nv40.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nv40.cpp; sourceTree = "<group>"; };
-		1DA9625F13ED347B0096F8A5 /* nv50.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nv50.cpp; sourceTree = "<group>"; };
+		1DA9625F13ED347B0096F8A5 /* nv50.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = nv50.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		1DA9626013ED347B0096F8A5 /* nvclock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nvclock.h; sourceTree = "<group>"; };
 		1DA9626113ED347B0096F8A5 /* nvreg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nvreg.h; sourceTree = "<group>"; };
 		1DA9626213ED347B0096F8A5 /* overclock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = overclock.cpp; sourceTree = "<group>"; };
@@ -239,8 +237,6 @@
 		1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadeonChipsets.h; sourceTree = "<group>"; };
 		1DA962C613ED389E0096F8A5 /* AtomBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomBIOS.h; sourceTree = "<group>"; };
 		1DBB87F01458B90A00C4B56E /* thermotemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermotemplate.png; sourceTree = "<group>"; };
-		2C11943414F908B6009319BD /* f9810.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = f9810.gif; sourceTree = "<group>"; };
-		2C11943514F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Axial_Flow_Square_Industrial_Ventilating_Fan.jpg; sourceTree = "<group>"; };
 		2C11943914F910F1009319BD /* fan8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan8.png; sourceTree = "<group>"; };
 		2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Japanese-Sensu-Fan-USB-Drive_1.icns"; sourceTree = "<group>"; };
 		2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Koolance_FAN-12038HBK-184.png"; sourceTree = "<group>"; };
@@ -257,7 +253,7 @@
 		2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelCPUMonitor.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB03FBA14EB9AB70070DC93 /* IntelCPUMonitor-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "IntelCPUMonitor-Info.plist"; path = "IntelCPUMonitor/IntelCPUMonitor-Info.plist"; sourceTree = "<group>"; };
 		2CB03FBB14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IntelCPUMonitor-Prefix.pch"; path = "IntelCPUMonitor/IntelCPUMonitor-Prefix.pch"; sourceTree = "<group>"; };
-		2CB03FBC14EB9AB70070DC93 /* IntelCPUMonitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IntelCPUMonitor.cpp; path = IntelCPUMonitor/IntelCPUMonitor.cpp; sourceTree = "<group>"; };
+		2CB03FBC14EB9AB70070DC93 /* IntelCPUMonitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = IntelCPUMonitor.cpp; path = IntelCPUMonitor/IntelCPUMonitor.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		2CB03FBD14EB9AB70070DC93 /* IntelCPUMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntelCPUMonitor.h; path = IntelCPUMonitor/IntelCPUMonitor.h; sourceTree = "<group>"; };
 		2CB2F1F914F122AA006C4251 /* NSString+TruncateToWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TruncateToWidth.h"; sourceTree = "<group>"; };
 		2CB2F1FA14F122AA006C4251 /* NSString+TruncateToWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TruncateToWidth.m"; sourceTree = "<group>"; };
@@ -282,7 +278,7 @@
 		6A0F327A14DD6A6800AA5598 /* NuvotonNCT677x-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NuvotonNCT677x-Info.plist"; sourceTree = "<group>"; };
 		6A0F327C14DD6A6800AA5598 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A0F327E14DD6A6800AA5598 /* NuvotonNCT677x.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NuvotonNCT677x.h; sourceTree = "<group>"; };
-		6A0F327F14DD6A6800AA5598 /* NuvotonNCT677x.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NuvotonNCT677x.cpp; sourceTree = "<group>"; };
+		6A0F327F14DD6A6800AA5598 /* NuvotonNCT677x.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = NuvotonNCT677x.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		6A0F328114DD6A6800AA5598 /* NCT677x-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NCT677x-Prefix.pch"; sourceTree = "<group>"; };
 		6A85F85814DBEF5000F863A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6A9A244814E65E9C0088F3AA /* SuperIOMonitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SuperIOMonitor.cpp; sourceTree = "<group>"; };
@@ -776,8 +772,6 @@
 				2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */,
 				2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */,
 				2C11943914F910F1009319BD /* fan8.png */,
-				2C11943414F908B6009319BD /* f9810.gif */,
-				2C11943514F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg */,
 				2CB6913A14F40F2900152814 /* SmartGuardian-Info.plist */,
 				2CB6913B14F40F2900152814 /* InfoPlist.strings */,
 				2CB6913E14F40F2900152814 /* main.m */,
@@ -1318,8 +1312,6 @@
 				2CB6913D14F40F2900152814 /* InfoPlist.strings in Resources */,
 				2CB6914314F40F2900152814 /* Credits.rtf in Resources */,
 				2CBC6A1514F81B1C00DAC464 /* MainWindow.xib in Resources */,
-				2C11943614F908B6009319BD /* f9810.gif in Resources */,
-				2C11943714F908B6009319BD /* Axial_Flow_Square_Industrial_Ventilating_Fan.jpg in Resources */,
 				2C11943A14F910F1009319BD /* fan8.png in Resources */,
 				2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */,
 				2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */,

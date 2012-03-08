@@ -15,16 +15,30 @@
 
 @synthesize model;
 @synthesize ControlTabView;
+@synthesize mainWindow;
 
 @synthesize StopTempInput;
 @synthesize FullOnTempInput;
 @synthesize StartTempInput;
 
+@synthesize tempSource;
 @synthesize sgTableView;
 @synthesize CalibrationGraphView;
 @synthesize FanSettingGraphView;
+@synthesize panelToShow;
 @synthesize needCalibration;
 
+
+-(id) init
+{
+    self = [super init];
+    if(self)
+    {
+        if([sgFan smartGuardianAvailable])
+        NSLog(@"Found SmartGuardian");
+    }
+    return  self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,7 +58,7 @@
         [[model fans] setObject:@KEY_FORMAT_FAN_REG_CONTROL forKey:@"FanRegControl"];
         
         if([model readSettings]==NO) needCalibration=YES;
-        [model selectCurrentFan:@"FAN0"];
+    
 
    
     }
@@ -58,7 +72,24 @@
 {
  
     [self tableView: sgTableView selectionIndexesForProposedSelection:   [NSIndexSet indexSetWithIndex:0]];
+    
+   NSDictionary * dict = [sgFan tempSensorNameAndKeys];
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        for (int i=0; i<[tempSource segmentCount]; i++) {
+            if([[tempSource labelForSegment:i] isEqual:obj])
+            {
+                [tempSource setEnabled:YES forSegment:i];
+                [tempSource setTag:[key intValue] forSegment:i];
+            }
+                
+        }
             
+    }];
+
+        [model selectCurrentFan:[NSString stringWithFormat:@"FAN0"]];
+           [dictController bind:NSContentObjectBinding toObject:self withKeyPath:@"model.currentFan" options:nil];
+    [self showPanelModalAgainstWindow: mainWindow];
+
           
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:
                                 [self methodSignatureForSelector:@selector(updateTitles)]];
@@ -68,10 +99,11 @@
     
     FansOperationQueue = [[NSOperationQueue alloc] init];
     __block id me = self;
-    needCalibration=NO;
+
     [FansOperationQueue setMaxConcurrentOperationCount:4];
     if(needCalibration==YES)
     {
+        
             [[me model] selectCurrentFan:@"FAN0"];
                    [FansOperationQueue addOperationWithBlock:^{
                 [me FanInitialization];
@@ -183,6 +215,31 @@
     [model saveSettings];
 }
 
+- (id)showPanelModalAgainstWindow: (NSWindow *)window
+{
+    [[NSApplication sharedApplication] beginSheet: panelToShow
+                                   modalForWindow: window
+                                    modalDelegate: self
+                                   didEndSelector: @selector(sheetDidEnd:returnCode:contextInfo:)
+                                      contextInfo: nil];
+    
+    [[NSApplication sharedApplication] runModalForWindow: panelToShow];
+    if (m_returnCode == NSCancelButton) return nil;
+}
 
 
+- (void)sheetDidEnd:(NSWindow *)sheet
+         returnCode:(int)returnCode
+        contextInfo:(void  *)contextInfo
+{
+
+    m_returnCode = returnCode;
+}
+
+- (IBAction)clickCalibrate:(id)sender {
+//    [self FanInitialization];
+//    [FansOperationQueue waitUntilAllOperationsAreFinished];
+    [panelToShow orderOut:nil];
+    [[NSApplication sharedApplication] stopModal];
+}
 @end

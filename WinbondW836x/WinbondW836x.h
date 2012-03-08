@@ -64,7 +64,7 @@ const UInt8 WINBOND_VENDOR_ID_REGISTER              = 0x4F;
 const UInt8 WINBOND_TEMPERATURE_SOURCE_SELECT_REG	= 0x49;
 
 //private string[] TEMPERATURE_NAME = 
-//new string[] {"CPU", "Auxiliary", "System"};
+//new string[] {"CPU", "Ambient", "System"};
 const UInt8 WINBOND_TEMPERATURE[]					= { 0x50, 0x50, 0x27 };
 const UInt8 WINBOND_TEMPERATURE_BANK[]				= { 1,    2,    0 };
 

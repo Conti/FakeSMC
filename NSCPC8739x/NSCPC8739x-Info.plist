@@ -37,9 +37,9 @@
 				<key>TEMPIN0</key>
 				<string>System</string>
 				<key>TEMPIN1</key>
-				<string>Auxiliary</string>
+				<string>Ambient</string>
 				<key>TEMPIN2</key>
-				<string>Processor</string>
+				<string>CPU</string>
 				<key>TEMPIN3</key>
 				<string>Memory</string>
 				<key>FANIN0</key>
