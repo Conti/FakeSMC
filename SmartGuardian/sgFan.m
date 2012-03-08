@@ -9,6 +9,8 @@
 #import "sgFan.h"
 #import "FakeSMCDefinitions.h"
 
+#define SCALE_FACTOR 1.25f
+
 @implementation sgFan
 
 @synthesize calibrationDataUpward;
@@ -530,6 +532,114 @@
 }
 
 -(void) setTempSensorValue:(UInt16)tempSensorValue
+{
+    
+}
+
+-(NSDictionary *) lawGraphData
+{
+    NSMutableArray * data = [NSMutableArray arrayWithCapacity:0];
+    NSMutableDictionary * fan_allPlots = [NSMutableDictionary dictionaryWithCapacity:1];    
+    NSMutableDictionary * fan_plotdataUp = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if(!self.Calibrated) return fan_allPlots;
+    
+    if(self.automatic)
+    {
+    int i=0;
+        int fStop = self.fanStopTemp;
+        int fStart = self.fanStartTemp;
+        int fFullOn = self.fanFullOnTemp;
+        int sPwm = self.startPWMValue;
+        float dPwm = self.deltaPWM;
+    for (i=0; i<fStop; i++) 
+    [data addObject: [self.calibrationDataUpward objectAtIndex:0]];
+
+    for (i=fStop; i<fStart; i++) 
+        [data addObject:[self.calibrationDataUpward objectAtIndex:sPwm]];
+    for (i=fStart; i<fFullOn; i++) 
+    {
+        int newindex =   (sPwm + dPwm*(i-fStart)); 
+        [data addObject:[self.calibrationDataUpward objectAtIndex: newindex> 127 ? 127 : newindex]];
+    }
+    for (i=fFullOn; i<128; i++) 
+        [data addObject:[self.calibrationDataUpward lastObject]];
+        
+    
+    [fan_plotdataUp setObject:[NSNumber numberWithFloat:SCALE_FACTOR*[[self.calibrationDataUpward lastObject] floatValue]] forKey:@"Scale"];
+    }
+    
+    else
+    {
+        [data addObject:[self.calibrationDataUpward objectAtIndex:self.manualPWM]];
+        [data addObject:[self.calibrationDataUpward objectAtIndex:self.manualPWM]];
+        [fan_plotdataUp setObject:[self.calibrationDataUpward lastObject] forKey:@"Scale"];
+
+    }
+
+           [fan_plotdataUp setObject:[NSColor redColor] forKey:@"Color"];
+            [fan_plotdataUp setObject:data forKey:@"Data" ];
+            [fan_allPlots setObject:fan_plotdataUp forKey:@"LawGraph"];
+         
+    return fan_allPlots;
+}
+
+-(void) setLawGraphData:(NSArray *)lawGraphData
+{
+    
+}
+
+-(NSDictionary *) tempMarks
+{
+    NSMutableDictionary * mark_plots = [NSMutableDictionary dictionaryWithCapacity:3];    
+    NSMutableDictionary * stop_mark = [NSMutableDictionary dictionaryWithCapacity:1];
+    NSMutableDictionary * start_mark = [NSMutableDictionary dictionaryWithCapacity:1];
+    NSMutableDictionary * full_on_mark = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    
+    
+    [stop_mark setObject:[NSColor blueColor] forKey:@"Color"];
+    [start_mark setObject:[NSColor greenColor] forKey:@"Color"];
+    [full_on_mark setObject:[NSColor whiteColor] forKey:@"Color"];
+    
+    [stop_mark setObject:[NSNumber numberWithInt:self.fanStopTemp] forKey:@"Data"];
+    [start_mark setObject:[NSNumber numberWithInt:self.fanStartTemp]  forKey:@"Data"];
+    [full_on_mark setObject:[NSNumber numberWithInt:self.fanFullOnTemp]  forKey:@"Data"];
+    
+    [mark_plots setObject:stop_mark forKey:@"Stop"];
+    [mark_plots setObject:start_mark forKey:@"Start"];
+    [mark_plots setObject:full_on_mark forKey:@"FullOn"];
+    
+    return mark_plots;
+    
+}
+
+-(void) setTempMarks:(NSDictionary *)tempMarks
+{
+    
+}
+
+-(NSDictionary *) CalibrationGraphData
+{
+    NSMutableDictionary * calibration_allPlots = [NSMutableDictionary dictionaryWithCapacity:2];    
+    NSMutableDictionary * calibration_plotdataUp = [NSMutableDictionary dictionaryWithCapacity:1];
+    NSMutableDictionary * calibration_plotdataDown = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    if(!self.Calibrated) return calibration_allPlots;
+    
+    [calibration_plotdataUp setObject:[NSColor redColor] forKey:@"Color"];
+    [calibration_plotdataUp setObject:calibrationDataUpward forKey:@"Data" ];
+    [calibration_plotdataUp setObject:[NSNumber numberWithFloat:SCALE_FACTOR*[[calibrationDataUpward lastObject] floatValue]] forKey:@"Scale" ];
+    [calibration_allPlots setObject:calibration_plotdataUp forKey:@"Upward"];
+    
+    [calibration_plotdataDown setObject:[NSColor blueColor] forKey:@"Color"];
+    [calibration_plotdataDown setObject:calibrationDataDownward forKey:@"Data" ];
+    [calibration_plotdataDown setObject:[NSNumber numberWithFloat:SCALE_FACTOR*[[calibrationDataDownward lastObject] floatValue]] forKey:@"Scale" ];
+    [calibration_allPlots setObject:calibration_plotdataDown forKey:@"Downward"];
+    return calibration_allPlots;
+}
+
+-(void) setCalibrationGraphData:(NSDictionary *)CalibrationGraphData
 {
     
 }

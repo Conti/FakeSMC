@@ -59,6 +59,8 @@
         
         if([model readSettings]==NO) needCalibration=YES;
     
+            
+  
 
    
     }
@@ -88,6 +90,11 @@
 
         [model selectCurrentFan:[NSString stringWithFormat:@"FAN0"]];
            [dictController bind:NSContentObjectBinding toObject:self withKeyPath:@"model.currentFan" options:nil];
+
+    [FanSettingGraphView bind:@"PlotData" toObject:dictController withKeyPath:@"selection.lawGraphData" options:nil];
+    [FanSettingGraphView bind:@"VerticalMarks" toObject:dictController withKeyPath:@"selection.tempMarks" options:nil];
+    [CalibrationGraphView bind:@"PlotData" toObject:dictController withKeyPath:@"selection.CalibrationGraphData" options:nil];
+    
     [self showPanelModalAgainstWindow: mainWindow];
 
           
@@ -120,39 +127,19 @@
     NSUInteger i = [proposedSelectionIndexes lastIndex];;
     sgFan * fan = [[model fans] valueForKey:[NSString stringWithFormat:@"FAN%d",i]];
     [model selectCurrentFan:[NSString stringWithFormat:@"FAN%d",i]];
-    [dictController bind:NSContentObjectBinding toObject:self withKeyPath:@"model.currentFan" options:nil];
+
+    
     if (fan.Calibrated && fan.Controlable) {
-        
-        NSArray * dataup = fan.calibrationDataUpward;
-        NSArray * datadown = fan.calibrationDataDownward;
-        NSMutableDictionary * allPlots = [NSMutableDictionary dictionaryWithCapacity:2];    
-        NSMutableDictionary * plotdataUp = [NSMutableDictionary dictionaryWithCapacity:1];
-        NSMutableDictionary * plotdataDown = [NSMutableDictionary dictionaryWithCapacity:1];
-        //            NSMutableDictionary * middleLine = [NSMutableDictionary dictionaryWithCapacity:1];
-        
-        [plotdataUp setObject:[NSColor redColor] forKey:@"Color"];
-        [plotdataUp setObject:dataup forKey:@"Data" ];
-        [allPlots setObject:plotdataUp forKey:@"Upward"];
-        
-        [plotdataDown setObject:[NSColor blueColor] forKey:@"Color"];
-        [plotdataDown setObject:datadown forKey:@"Data" ];
-        [allPlots setObject:plotdataDown forKey:@"Downward"];
-        
-        //            [middleLine setObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:10],[NSNumber numberWithInt:10],nil ] forKey:@"Data"];
-        //            [middleLine setObject:[NSColor yellowColor] forKey:@"Color"];
-        //            [middleLine setObject:[NSNumber numberWithInt:20] forKey:@"Scale"];
-        //            [allPlots setObject:middleLine forKey:@"Midlane"];
-        [CalibrationGraphView setHidden:NO];
-        [CalibrationGraphView setPlotData: allPlots ];
-        [CalibrationGraphView setNeedsDisplay:YES];
+        [dictController bind:NSContentObjectBinding toObject:self withKeyPath:@"model.currentFan" options:nil];
+        [fan setLawGraphData:nil];
+        [fan setTempMarks:nil];
+        [fan setCalibrationGraphData:nil];
     }
-    else
-    {
-        NSMutableArray * plotdata = [NSMutableArray arrayWithCapacity:0];
-        [CalibrationGraphView setHidden:YES];
-        //            [CalibrationGraphView setPlotData: plotdata ];
-        //            [CalibrationGraphView setNeedsDisplay:YES];   
-    }
+//    else
+//    {
+//        [CalibrationGraphView setHidden:YES];
+// 
+//    }
     
     return proposedSelectionIndexes;
 }

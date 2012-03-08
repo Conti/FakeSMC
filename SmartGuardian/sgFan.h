@@ -54,6 +54,9 @@
 @property (retain,readwrite) NSArray *      calibrationDataDownward;
 @property (assign,readwrite) BOOL           Controlable;
 @property (assign,readwrite) BOOL           Calibrated;
+@property (assign,readwrite) NSDictionary * lawGraphData;
+@property (assign,readwrite) NSDictionary * CalibrationGraphData;
+@property (assign,readwrite) NSDictionary * tempMarks;
 
 +(UInt32) numberOfFans;
 
@@ -73,5 +76,6 @@
 -(id) initWithFanId:(NSUInteger) fanId;
 -(void) updateKey:(NSString *) key withValue:(id) value; 
 -(NSDictionary *) valuesForSaveOperation;
+
 
 @end

@@ -19,7 +19,7 @@
 
 @implementation GraphView
 
-@synthesize PlotData;
+@synthesize VerticalMarks;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -31,14 +31,58 @@
     return self;
 }
 
+-(NSDictionary *) PlotData
+{
+    return _PlotData;
+}
+
+-(void) setPlotData:(NSDictionary *)PlotData
+{
+    _PlotData = PlotData;
+
+    [self setNeedsDisplay:YES];
+}
+
+
+-(void) drawVerticalMarksWithContext:(CGContextRef)ctx
+{
+    if([VerticalMarks count]>0)
+    {
+        [VerticalMarks enumerateKeysAndObjectsUsingBlock:^(id key,id obj, BOOL *stop) {
+            
+            NSColor * DrawColor = [obj objectForKey:@"Color"];
+            NSNumber * data = [obj objectForKey:@"Data"];
+            NSString * legend = [obj objectForKey:@"Legend"];
+
+            CGContextSetLineWidth(ctx, 2.0);
+            
+            CGContextSetStrokeColorWithColor(ctx, [DrawColor CGColor]);
+            int maxGraphHeight = self.bounds.size.height - kOffsetY;
+            CGContextBeginPath(ctx);
+            CGContextMoveToPoint(ctx, kOffsetX + var*[data intValue],  kOffsetY);
+            
+            CGContextAddLineToPoint(ctx, kOffsetX + var*[data intValue] , kOffsetY+ maxGraphHeight);
+            CGFloat dash[] = {3.0, 2.0};
+            CGContextSetLineDash(ctx, 0.0, dash, 2);
+            //        CGContextAddLineToPoint(ctx, self.bounds.size.width,  0);
+            //        CGContextClosePath(ctx);
+            CGContextDrawPath(ctx, kCGPathStroke);
+            CGContextSetLineDash(ctx, 0, NULL, 0); // Remove the dash
+            
+            
+        }];
+    }
+
+    
+}
 
 
 - (void)drawLineGraphWithContext:(CGContextRef)ctx
 {
-    if([PlotData count]>0)
+    if([_PlotData count]>0)
         
     {
-       [PlotData enumerateKeysAndObjectsUsingBlock:^(id key,id obj, BOOL *stop) {
+       [_PlotData enumerateKeysAndObjectsUsingBlock:^(id key,id obj, BOOL *stop) {
            
         __block float denominator=1.0;
            NSColor * DrawColor = [obj objectForKey:@"Color"];
@@ -60,7 +104,7 @@
          CGContextMoveToPoint(ctx, kOffsetX,  kOffsetY+maxGraphHeight * [[data objectAtIndex:0] floatValue]/denominator);
        
        
-        float var = self.bounds.size.width / ([data count] - 1); 
+//        float var = self.bounds.size.width / ([data count] - 1); 
         for (int i = 1; i < [data count]; i++)
         {
             CGContextAddLineToPoint(ctx, kOffsetX + i * var , kOffsetY+ maxGraphHeight * [[data objectAtIndex:i] floatValue]/denominator);
@@ -77,6 +121,12 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
+    var = 0;
+    [_PlotData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSArray * data = [obj objectForKey:@"Data"];
+        if([data count]>1)
+            var = self.bounds.size.width / ([data count] - 1);
+    }];
     
     CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
     
@@ -109,7 +159,8 @@
      CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
     
 
-    
+    [self drawVerticalMarksWithContext:context];
+
     [self  drawLineGraphWithContext: context];
     
     CGContextSetStrokeColorWithColor(context, [[NSColor blackColor] CGColor]);

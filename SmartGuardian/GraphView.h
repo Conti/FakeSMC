@@ -8,9 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface GraphView : NSView
+@interface GraphView : NSView {
+    
+    NSDictionary * _PlotData;
+    NSDictionary * _VerticalMarks;
+    float var;
+}
 
 @property (retain,readwrite)  NSDictionary * PlotData;
+@property (retain,readwrite)  NSDictionary * VerticalMarks;
 
 - (void)drawLineGraphWithContext:(CGContextRef)ctx;
 @end
