@@ -15,6 +15,7 @@
  */
 
 @interface NSColor (CGColorAdditions)
+
 /**
  Return CGColor representation of the NSColor in the RGB color space
  */

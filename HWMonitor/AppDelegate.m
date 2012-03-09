@@ -70,7 +70,7 @@
                 }
             }
         }
-
+        CFRelease(message);
         IOObjectRelease(service);
         
         if (count > 0) {
@@ -210,19 +210,19 @@
     
     [self addSensorWithKey:@"Th0H" andType: @TYPE_SP78 andCaption:NSLocalizedString( @"CPU Heatsink", nil) intoGroup:TemperatureSensorGroup ];
     [self addSensorWithKey:@"TN0P" andType: @TYPE_SP78 andCaption:NSLocalizedString(@"Motherboard",nil) intoGroup:TemperatureSensorGroup ];
-    [self addSensorWithKey:@"Tm0P" andType: @TYPE_SP78 andCaption:@"Memory" intoGroup:TemperatureSensorGroup ];
-    [self addSensorWithKey:@"TA0P" andType: @TYPE_SP78 andCaption:@"Ambient" intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"Tm0P" andType: @TYPE_SP78 andCaption:NSLocalizedString(@"Memory",nil) intoGroup:TemperatureSensorGroup ];
+    [self addSensorWithKey:@"TA0P" andType: @TYPE_SP78 andCaption:NSLocalizedString(@"Ambient",nil) intoGroup:TemperatureSensorGroup ];
     
     for (int i=0; i<0xA; i++) {
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XD",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"GPU %X Core",i] intoGroup:TemperatureSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XD",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Core",nil) ,i] intoGroup:TemperatureSensorGroup ];
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XH",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Board",nil),i] intoGroup:TemperatureSensorGroup ];
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XP",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"GPU %X Proximity",i] intoGroup:TemperatureSensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XP",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Proximity",nil),i] intoGroup:TemperatureSensorGroup ];
     }
     
     [self insertFooterAndTitle:NSLocalizedString( @"TEMPERATURES",nil)];  
     
     for (int i=0; i<16; i++)
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andType: @TYPE_FREQ andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:FrequencySensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andType: @TYPE_FREQ andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"CPU %X",nil),i] intoGroup:FrequencySensorGroup ];
     
     //
 //    [self addSensorWithKey:@"FGC0" andCaption:@"GPU" intoGroup:FrequencySensorGroup];

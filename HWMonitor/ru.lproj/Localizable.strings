@@ -12,8 +12,12 @@
 "FANS"="ВЕНТИЛЯТОРЫ";
 "HARD DRIVES TEMPERATURES"="ТЕМПЕРАТУРЫ ДИСКОВ";
 "CPU Heatsink"="Радиатор CPU";
-"GPU %X Board"="Радиатор GPU %X";
+"GPU %X Board" = "GPU %X, радиатор ";
+"GPU %X Core" = "GPU %X, ядро ";
+"GPU %X Proximity" = "GPU %X";
 "Motherboard"="Чипсет";
+"Memory"="Модули памяти";
+"Ambient"="Корпус";
 "CPU Package Multiplier"="Общий множитель CPU";
 "CPU %X Multiplier"="Множитель CPU %X";
 "CPU Voltage"="Шина CPU";

@@ -33,7 +33,7 @@ typedef NSUInteger SensorGroup;
 
 + (unsigned int)        swapBytes:(unsigned int) value;
 
-+ (NSDictionary *)      populateValues;
+//+ (NSDictionary *)      populateValues;
 //+ (NSData *)            populateValueForKey:(NSString *)key;
 + (NSData *)            readValueForKey:(NSString *)key;
 

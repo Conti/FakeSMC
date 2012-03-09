@@ -43,6 +43,7 @@
             value = [values valueForKey:key];
         }
         IOObjectRelease(service);
+        CFRelease(message);
     }
     
     return value;

@@ -55,8 +55,8 @@
             NSString * legend = [obj objectForKey:@"Legend"];
 
             CGContextSetLineWidth(ctx, 2.0);
-            
-            CGContextSetStrokeColorWithColor(ctx, [DrawColor CGColor]);
+            CGColorRef drawColor = [DrawColor CGColor];
+            CGContextSetStrokeColorWithColor(ctx, drawColor);
             int maxGraphHeight = self.bounds.size.height - kOffsetY;
             CGContextBeginPath(ctx);
             CGContextMoveToPoint(ctx, kOffsetX + var*[data intValue],  kOffsetY);
@@ -68,6 +68,7 @@
             //        CGContextClosePath(ctx);
             CGContextDrawPath(ctx, kCGPathStroke);
             CGContextSetLineDash(ctx, 0, NULL, 0); // Remove the dash
+            CFRelease(drawColor);
             
             
         }];
@@ -97,8 +98,8 @@
         }];
         CGContextSetLineWidth(ctx, 2.0);
 //        CGContextSetFillColorWithColor(ctx, [[NSColor redColor] CGColor]);
-
-        CGContextSetStrokeColorWithColor(ctx, [DrawColor CGColor]);
+           CGColorRef drawColor = [DrawColor CGColor];
+        CGContextSetStrokeColorWithColor(ctx, drawColor);
         int maxGraphHeight = self.bounds.size.height - kOffsetY;
         CGContextBeginPath(ctx);
          CGContextMoveToPoint(ctx, kOffsetX,  kOffsetY+maxGraphHeight * [[data objectAtIndex:0] floatValue]/denominator);
@@ -112,6 +113,7 @@
 //        CGContextAddLineToPoint(ctx, self.bounds.size.width,  0);
 //        CGContextClosePath(ctx);
         CGContextDrawPath(ctx, kCGPathStroke);
+           CFRelease(drawColor);   
         
          
        }];
@@ -133,7 +135,8 @@
 
     
     CGContextSetLineWidth(context, 0.6);
-    CGContextSetStrokeColorWithColor(context, [[NSColor lightGrayColor] CGColor]);
+    CGColorRef drawColor = [[NSColor lightGrayColor] CGColor];
+    CGContextSetStrokeColorWithColor(context, drawColor);
    
   
     
@@ -156,20 +159,22 @@
     CGContextSetLineDash(context, 0.0, dash, 2);
     CGContextStrokePath(context);
 
-     CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
-    
+    CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
 
     [self drawVerticalMarksWithContext:context];
 
     [self  drawLineGraphWithContext: context];
-    
-    CGContextSetStrokeColorWithColor(context, [[NSColor blackColor] CGColor]);
+    CGColorRef drawColor_axis = [[NSColor blackColor] CGColor];
+    CGContextSetStrokeColorWithColor(context,drawColor_axis);
     CGContextSetLineWidth(context, 2.0);
     CGContextMoveToPoint(context, kOffsetX, kOffsetY);
     CGContextAddLineToPoint(context, kOffsetX, self.bounds.size.height);
     CGContextMoveToPoint(context, kOffsetX, kOffsetY);
     CGContextAddLineToPoint(context, self.bounds.size.width, kOffsetY);
     CGContextStrokePath(context);
+    CFRelease(drawColor);
+    CFRelease(drawColor_axis);
+    
 }
 
 @end

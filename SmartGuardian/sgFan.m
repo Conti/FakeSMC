@@ -59,7 +59,9 @@
     if (service) {
         //        CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, [key cStringUsingEncoding:NSASCIIStringEncoding], kCFStringEncodingASCII);
         CFMutableDictionaryRef message =  CFDictionaryCreateMutable(kCFAllocatorDefault,1, NULL, NULL);
-        CFDictionaryAddValue(message, CFStringCreateWithCString(kCFAllocatorDefault,[key cStringUsingEncoding:NSASCIIStringEncoding], kCFStringEncodingASCII), CFDataCreate(kCFAllocatorDefault, [aData bytes], [aData length]));
+        CFStringRef local_key =  CFStringCreateWithCString(kCFAllocatorDefault,[key cStringUsingEncoding:NSASCIIStringEncoding], kCFStringEncodingASCII);
+        CFDataRef   local_data =  CFDataCreate(kCFAllocatorDefault, [aData bytes], [aData length]);
+        CFDictionaryAddValue(message,local_key,local_data);
         if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDeviceUpdateKeyValue), message)) 
         {
             NSDictionary * values = (__bridge_transfer /*__bridge_transfer*/ NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
@@ -67,7 +69,8 @@
             if (values)
                 value = [values objectForKey:key];
         }
-        
+        CFRelease(local_key);
+        CFRelease(local_data);
         CFRelease(message);
         IOObjectRelease(service);
     }
@@ -223,7 +226,7 @@
             };
             if([key hasPrefix:@"F"] && [key hasSuffix:@"Ac"])
             {
-                [sgFan writeValueForKey:key data:obj];
+//                [sgFan writeValueForKey:key data:obj];  //READ Only key!!!
                 [me setObject:key forKey:KEY_READ_RPM];
             };
             if([key hasPrefix:@"F"] && [key hasSuffix:@"Tg"])
