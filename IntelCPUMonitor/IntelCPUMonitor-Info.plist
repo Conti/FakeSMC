@@ -47,7 +47,7 @@
 		<key>com.apple.kpi.unsupported</key>
 		<string>10.0.0</string>
 		<key>org.netkas.FakeSMC</key>
-		<string>4.0.0</string>
+		<string>4.1.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>

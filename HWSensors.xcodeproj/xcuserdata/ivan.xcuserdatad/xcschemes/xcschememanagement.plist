@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>SmartGuradianHelper.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -73,6 +78,16 @@
 			<true/>
 		</dict>
 		<key>1DA962A413ED36030096F8A5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C2CB49D150B34A60017762E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C2CB4BD150B39DA0017762E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

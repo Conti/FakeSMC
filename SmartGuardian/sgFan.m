@@ -9,14 +9,25 @@
 #import "sgFan.h"
 #import "FakeSMCDefinitions.h"
 
+
+#define Debug true
+
+#ifdef Debug
+#define DebugLog(string, args...)	do { if (Debug) { NSLog (string , ## args); } } while(0)
+#else
+#define DebugLog
+#endif
+
+
 #define SCALE_FACTOR 1.25f
 
 @implementation sgFan
 
 @synthesize calibrationDataUpward;
-@synthesize calibrationDataDownward;
+//@synthesize calibrationDataDownward;
 @synthesize Calibrated;
 @synthesize Controlable;
+@synthesize progress;
 
 + (UInt16) swap_value:(UInt16) value
 {
@@ -211,7 +222,7 @@
     NSMutableDictionary * me = [NSMutableDictionary dictionaryWithCapacity:0];
     if(keys)
     {
-        calibrationDataDownward = [keys valueForKey:KEY_DATA_DOWNWARD];
+//        calibrationDataDownward = [keys valueForKey:KEY_DATA_DOWNWARD];
         calibrationDataUpward = [keys valueForKey:KEY_DATA_UPWARD];
         Calibrated = [[keys valueForKey:KEY_CALIBRATED] boolValue];
         Controlable = [[keys valueForKey:KEY_CONTROLABLE] boolValue];
@@ -295,6 +306,7 @@
     _startPWMValue=0;
     _slopeSmooth=0;
     _deltaPWM = 0.0;
+    calibrationDataUpward = [NSMutableArray arrayWithCapacity:0];
     NSMutableDictionary * me = [NSMutableDictionary dictionaryWithCapacity:0];
     [me setObject:[NSString stringWithFormat:@KEY_FORMAT_FAN_ID,fanId] forKey:KEY_DESCRIPTION];    
     [me setObject:[NSString stringWithFormat:@KEY_FORMAT_FAN_TARGET_SPEED,fanId] forKey:KEY_FAN_CONTROL];
@@ -325,6 +337,11 @@
     return [NSString stringWithCString: [[sgFan readValueForKey: [ControlFanKeys valueForKey:KEY_DESCRIPTION]] bytes] encoding: NSUTF8StringEncoding ];
 }
 
+-(void) setName:(NSString *)name
+{
+    
+}
+
 -(NSInteger) currentRPM
 {
     NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_READ_RPM]];
@@ -347,6 +364,8 @@
     if(fanStartTemp < self.fanStopTemp) self.fanStopTemp = fanStartTemp;
     if(fanStartTemp > self.fanFullOnTemp ) self.fanFullOnTemp = fanStartTemp;
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_START_TEMP_CONTROL] data:[NSData dataWithBytes:&fanStartTemp length:1]];
+    [self setLawGraphData:nil];
+    [self setTempMarks:nil];
 }
 
 -(UInt8) fanStopTemp
@@ -362,6 +381,8 @@
 
 
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_STOP_TEMP_CONTROL] data:[NSData dataWithBytes:&fanStopTemp length:1]];
+    [self setLawGraphData:nil];
+    [self setTempMarks:nil];
 }
 
 
@@ -376,6 +397,8 @@
     if(fanFullOnTemp < self.fanStartTemp ) self.fanStartTemp = fanFullOnTemp;
     if(fanFullOnTemp < self.fanStopTemp ) self.fanStopTemp = fanFullOnTemp;
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_FULL_TEMP_CONTROL] data:[NSData dataWithBytes:&fanFullOnTemp length:1]];
+    [self setLawGraphData:nil];
+    [self setTempMarks:nil];
 }
 
 -(BOOL) automatic
@@ -390,6 +413,8 @@
     _automatic = automatic;
     UInt8 temp = _automatic ?  0x80 | ( _tempSensorSource & 0x03 ) : _manualPWM & 0x7F;
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_FAN_CONTROL] data:[NSData dataWithBytes:&temp length:1]];
+    [self setLawGraphData:nil];
+    [self setTempMarks:nil];
 }
 
 -(UInt8) tempSensorSource
@@ -455,6 +480,8 @@
     NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_START_PWM_CONTROL]];
     UInt8 temp = (*((UInt8 *)[dataptr bytes]) & 0x80) | ( _startPWMValue & 0x7f);
     [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_START_PWM_CONTROL] data:[NSData dataWithBytes:&temp length:1]];
+    [self setLawGraphData:nil];
+    [self setTempMarks:nil];
 }
 
 -(UInt8) manualPWM
@@ -480,7 +507,10 @@
     {
         UInt8 temp = _manualPWM & 0x7F;
         [sgFan writeValueForKey: [ControlFanKeys valueForKey:KEY_FAN_CONTROL] data:[NSData dataWithBytes:&temp length:1]];
+        
     }
+    [self setLawGraphData:nil];
+    [self setTempMarks:nil];
 }
 
 -(float) deltaPWM
@@ -509,6 +539,8 @@
      NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_DELTA_PWM_CONTROL]];
     *((UInt8 *)[dataptr bytes]) = ( (*((UInt8 *)[dataptr bytes]) & 0x80) | (( integerPart & 0x7) << 3) | fract);
     [sgFan writeValueForKey:[ControlFanKeys valueForKey:KEY_DELTA_PWM_CONTROL] data:dataptr];
+    [self setLawGraphData:nil];
+    [self setTempMarks:nil];
 }
 
 -(NSDictionary *) valuesForSaveOperation
@@ -520,7 +552,7 @@
     if(Calibrated)
     {
     [saveData setObject:calibrationDataUpward forKey: KEY_DATA_UPWARD];
-    [saveData setObject:calibrationDataDownward forKey:KEY_DATA_DOWNWARD];
+//    [saveData setObject:calibrationDataDownward forKey:KEY_DATA_DOWNWARD];
     }
     [saveData setObject:[NSNumber numberWithBool:Controlable] forKey:KEY_CONTROLABLE];
     [saveData setObject:[NSNumber numberWithBool: Calibrated] forKey:KEY_CALIBRATED];
@@ -624,9 +656,9 @@
 
 -(NSDictionary *) CalibrationGraphData
 {
-    NSMutableDictionary * calibration_allPlots = [NSMutableDictionary dictionaryWithCapacity:2];    
+    NSMutableDictionary * calibration_allPlots = [NSMutableDictionary dictionaryWithCapacity:1];    
     NSMutableDictionary * calibration_plotdataUp = [NSMutableDictionary dictionaryWithCapacity:1];
-    NSMutableDictionary * calibration_plotdataDown = [NSMutableDictionary dictionaryWithCapacity:1];
+//    NSMutableDictionary * calibration_plotdataDown = [NSMutableDictionary dictionaryWithCapacity:1];
     
     if(!self.Calibrated) return calibration_allPlots;
     
@@ -635,10 +667,10 @@
     [calibration_plotdataUp setObject:[NSNumber numberWithFloat:SCALE_FACTOR*[[calibrationDataUpward lastObject] floatValue]] forKey:@"Scale" ];
     [calibration_allPlots setObject:calibration_plotdataUp forKey:@"Upward"];
     
-    [calibration_plotdataDown setObject:[NSColor blueColor] forKey:@"Color"];
-    [calibration_plotdataDown setObject:calibrationDataDownward forKey:@"Data" ];
-    [calibration_plotdataDown setObject:[NSNumber numberWithFloat:SCALE_FACTOR*[[calibrationDataDownward lastObject] floatValue]] forKey:@"Scale" ];
-    [calibration_allPlots setObject:calibration_plotdataDown forKey:@"Downward"];
+//    [calibration_plotdataDown setObject:[NSColor blueColor] forKey:@"Color"];
+//    [calibration_plotdataDown setObject:calibrationDataDownward forKey:@"Data" ];
+//    [calibration_plotdataDown setObject:[NSNumber numberWithFloat:SCALE_FACTOR*[[calibrationDataDownward lastObject] floatValue]] forKey:@"Scale" ];
+//    [calibration_allPlots setObject:calibration_plotdataDown forKey:@"Downward"];
     return calibration_allPlots;
 }
 
@@ -646,6 +678,54 @@
 {
     
 }
+
+-(BOOL) calibrateFan
+{
+    BOOL wasAutomatic=self.automatic;
+    uint8 tempSensorSave = self.tempSensorSource;
+    [calibrationDataUpward removeAllObjects];
+//    [calibrationDataDownward removeAllObjects];
+    
+    int i = 0;
+    self.automatic=NO;
+    self.manualPWM = 0;
+    self.progress = 0;
+    self.name = @"";
+    [NSThread sleepForTimeInterval:SpinTime];  // Give a time to stop rotation
+    
+    // Upward disrection
+    for( i=0;i<128;i++)
+    {
+        self.manualPWM = i;
+        [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
+        NSNumber * num = [NSNumber numberWithLong: self.currentRPM];
+        [calibrationDataUpward addObject:num];
+        DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d", [self name] , i, [num intValue]) ;
+        self.progress = self.progress + 0.78125;
+    }
+    //Downward direction
+//    for( i=127;i>=0;i--)
+//    {
+//        
+//        self.manualPWM = i;
+//        [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
+//        NSNumber * num = [NSNumber numberWithLong:self.currentRPM];
+//        [calibrationDataDownward insertObject:num atIndex: 0];
+//        DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d", [self name] , i, [num intValue]) ;
+//        self.progress = self.progress + 0.390625;
+//    }
+    
+    self.automatic = wasAutomatic;
+    self.tempSensorSource = tempSensorSave;
+    self.Calibrated = YES;
+    [self setCalibrationGraphData:nil];
+    [self setLawGraphData:nil];
+    [self setTempMarks:nil];
+    return YES;
+
+}
+
+
 
 -(void) loadFromDictrionary:(NSDictionary *)dict
 {
@@ -661,7 +741,7 @@
     
     if(canLoad)
     {
-        calibrationDataDownward = [dict valueForKey:KEY_DATA_DOWNWARD];
+//        calibrationDataDownward = [dict valueForKey:KEY_DATA_DOWNWARD];
         calibrationDataUpward = [dict valueForKey:KEY_DATA_UPWARD];
         Calibrated = [[dict valueForKey:KEY_CALIBRATED] boolValue];
         Controlable = [[dict valueForKey:KEY_CONTROLABLE] boolValue];

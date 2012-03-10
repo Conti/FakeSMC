@@ -25,6 +25,10 @@
 #define KEY_START_PWM_CONTROL   @"StartPWMControl"
 #define KEY_TEMP_VALUE          @"TempSensorKey"
 
+
+#define SpinTransactionTime 3.0
+#define SpinTime  6.0
+
 @interface sgFan : NSObject {
     NSDictionary * ControlFanKeys;
     BOOL _automatic;
@@ -37,7 +41,7 @@
 }
 
 
-@property (readonly)         NSString *     name;
+@property (assign,readwrite)         NSString *     name;
 @property (assign,readwrite) NSInteger      currentRPM;
 @property (assign,readwrite) UInt8          fanStartTemp;
 @property (assign,readwrite) UInt8          fanStopTemp;
@@ -50,13 +54,15 @@
 @property (assign,readwrite) UInt8          deltaTemp;
 @property (assign,readwrite) UInt8          tempSensorSource;
 @property (assign,readwrite) UInt16         tempSensorValue;
-@property (retain,readwrite) NSArray *      calibrationDataUpward;
-@property (retain,readwrite) NSArray *      calibrationDataDownward;
+@property (retain,readwrite) NSMutableArray *      calibrationDataUpward;
+//@property (retain,readwrite) NSMutableArray *      calibrationDataDownward;
 @property (assign,readwrite) BOOL           Controlable;
 @property (assign,readwrite) BOOL           Calibrated;
 @property (assign,readwrite) NSDictionary * lawGraphData;
 @property (assign,readwrite) NSDictionary * CalibrationGraphData;
 @property (assign,readwrite) NSDictionary * tempMarks;
+@property (assign,readwrite) float         progress;
+           
 
 +(UInt32) numberOfFans;
 
@@ -74,6 +80,7 @@
 
 -(id) initWithKeys:(NSDictionary*) keys;
 -(id) initWithFanId:(NSUInteger) fanId;
+-(BOOL) calibrateFan;
 -(void) updateKey:(NSString *) key withValue:(id) value; 
 -(NSDictionary *) valuesForSaveOperation;
 

@@ -19,6 +19,10 @@
 
 @synthesize StopTempInput;
 @synthesize FullOnTempInput;
+@synthesize calibrationYesButton;
+@synthesize calibrationNoButton;
+@synthesize calibrationWarning;
+@synthesize calibrationQuestion;
 @synthesize StartTempInput;
 
 @synthesize tempSource;
@@ -26,6 +30,7 @@
 @synthesize CalibrationGraphView;
 @synthesize FanSettingGraphView;
 @synthesize panelToShow;
+@synthesize FansCalibrationView;
 @synthesize needCalibration;
 
 
@@ -34,8 +39,11 @@
     self = [super init];
     if(self)
     {
+        okStatus = NO;
         if([sgFan smartGuardianAvailable])
         NSLog(@"Found SmartGuardian");
+        else
+        [[NSApplication sharedApplication] terminate:self];
     }
     return  self;
 }
@@ -58,7 +66,7 @@
         [[model fans] setObject:@KEY_FORMAT_FAN_REG_CONTROL forKey:@"FanRegControl"];
         
         if([model readSettings]==NO) needCalibration=YES;
-    
+        okStatus = YES;
             
   
 
@@ -95,7 +103,6 @@
     [FanSettingGraphView bind:@"VerticalMarks" toObject:dictController withKeyPath:@"selection.tempMarks" options:nil];
     [CalibrationGraphView bind:@"PlotData" toObject:dictController withKeyPath:@"selection.CalibrationGraphData" options:nil];
     
-    [self showPanelModalAgainstWindow: mainWindow];
 
           
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:
@@ -110,16 +117,12 @@
     [FansOperationQueue setMaxConcurrentOperationCount:4];
     if(needCalibration==YES)
     {
-        
-            [[me model] selectCurrentFan:@"FAN0"];
-                   [FansOperationQueue addOperationWithBlock:^{
-                [me FanInitialization];
-              
+        [[me model] selectCurrentFan:@"FAN0"];
+        [self showPanelModalAgainstWindow: mainWindow];
 
-         }];
     }
-    
-    
+    else
+    okStatus=YES;
 }
 
 
@@ -135,11 +138,7 @@
         [fan setTempMarks:nil];
         [fan setCalibrationGraphData:nil];
     }
-//    else
-//    {
-//        [CalibrationGraphView setHidden:YES];
-// 
-//    }
+
     
     return proposedSelectionIndexes;
 }
@@ -147,19 +146,19 @@
 
 -(void) FanInitialization
 {
-    
+    FansCalibrationView.Hidden=NO;
     [model findControllers];
+
     
     NSEnumerator * enumerator = [[model fans] keyEnumerator];
-    NSString * nextFan;
+    id  nextFan;
     __unsafe_unretained id me = self;
     while (nextFan = [enumerator nextObject]) 
         [FansOperationQueue addOperationWithBlock:^{
             if([nextFan hasPrefix:@"FAN"] && [[[[[me model]  fans ] objectForKey:nextFan ] valueForKey:KEY_CONTROLABLE] boolValue])
             {
                 NSLog(@"Starting thread for %@",nextFan);
-                [[me model] calibrateFan: nextFan];
-                [[me model] saveSettings];
+                [[[[me model]  fans ] objectForKey:nextFan ] calibrateFan]; 
             }
         }];
     
@@ -199,7 +198,8 @@
 
 -(void) applicationWillTerminate:(NSNotification *)notification
 {
-    [model saveSettings];
+    if(okStatus==YES)
+        [model saveSettings];
 }
 
 - (id)showPanelModalAgainstWindow: (NSWindow *)window
@@ -212,6 +212,7 @@
     
     [[NSApplication sharedApplication] runModalForWindow: panelToShow];
     if (m_returnCode == NSCancelButton) return nil;
+    return nil;
 }
 
 
@@ -224,9 +225,39 @@
 }
 
 - (IBAction)clickCalibrate:(id)sender {
-//    [self FanInitialization];
-//    [FansOperationQueue waitUntilAllOperationsAreFinished];
-    [panelToShow orderOut:nil];
-    [[NSApplication sharedApplication] stopModal];
+    
+    if([sender isEqual:calibrationNoButton])
+    {
+        okStatus=NO;
+        [panelToShow orderOut:nil];
+        [[NSApplication sharedApplication] stopModal];
+        [[NSApplication sharedApplication] terminate:self];
+        return;
+    }
+    
+    calibrationNoButton.Hidden = YES;
+    calibrationYesButton.Hidden = YES;
+    calibrationWarning.Hidden = YES;
+    calibrationQuestion.Hidden = YES;
+    
+    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+        [self FanInitialization];
+        [FansOperationQueue waitUntilAllOperationsAreFinished];
+        [panelToShow orderOut:nil];
+        [[NSApplication sharedApplication] stopModal];
+        [model saveSettings];
+
+
+    } ];
+    okStatus=YES;
+
+
 }
+
+- (BOOL)windowShouldClose:(id)sender
+{
+    [NSApp terminate:self];
+    return YES;
+}
+
 @end

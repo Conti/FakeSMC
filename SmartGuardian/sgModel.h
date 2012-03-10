@@ -10,8 +10,7 @@
 #include "FakeSMCDefinitions.h"
 #import "sgFan.h"
 
-#define SpinTransactionTime 3.0
-#define SpinTime  7.0
+
 
 
 @interface sgModel : NSObject {

@@ -72,6 +72,7 @@
 -(BOOL) readSettings
 {
     NSMutableDictionary * temp = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"Configuration"] ];
+    
     __block BOOL result = NO;
     if(temp)
     {
@@ -97,47 +98,8 @@
     DebugLog(@"Starting calibration for %@",fanId);
     if ((fan = [fans valueForKey:fanId])) {
         if ([fan Controlable] == NO) return NO;
-        
-        NSMutableArray * calibrationDataUp =   [NSMutableArray arrayWithCapacity:0];
-        NSMutableArray * calibrationDataDown = [NSMutableArray arrayWithCapacity:0];
-        
-        
-        BOOL wasAutomatic=fan.automatic;
-        uint8 tempSensorSave = fan.tempSensorSource;
-
-        int i = 0;
-        fan.automatic=NO;
-        fan.manualPWM = 0;
-         
-        [NSThread sleepForTimeInterval:SpinTime];  // Give a time to stop rotation
-        
-        // Upward disrection
-        for( i=0;i<128;i++)
-        {
-            fan.manualPWM = i;
-            [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
-            NSNumber * num = [NSNumber numberWithLong: fan.currentRPM];
-            [calibrationDataUp addObject:num];
-            DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d", [fan name] , i, [num intValue]) ;
-        }
-        //Downward direction
-        for( i=127;i>=0;i--)
-        {
-            
-            fan.manualPWM = i;
-            [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
-            NSNumber * num = [NSNumber numberWithLong:fan.currentRPM];
-            [calibrationDataDown insertObject:num atIndex: 0];
-            DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d", [fan name] , i, [num intValue]) ;
-        }
-        
-        fan.automatic = wasAutomatic;
-        fan.tempSensorSource = tempSensorSave;
-        fan.Calibrated = YES;
-        fan.calibrationDataUpward = calibrationDataUp;
-        fan.calibrationDataDownward = calibrationDataDown;
-        return YES;
-    }
+         return [fan calibrateFan];
+       }
     return NO;
 }
 
@@ -206,7 +168,6 @@
             [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_START_PWM_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_START_PWM,i] ];
             [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_DELTA_TEMP_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_TEMP_DELTA,i] ];
             [[fans objectForKey:[names objectAtIndex:index]] updateKey:KEY_DELTA_PWM_CONTROL withValue:[NSString stringWithFormat:@KEY_FORMAT_FAN_CONTROL,i] ];
-
             [[fans objectForKey:[names objectAtIndex:index]] setControlable:YES];
         }
         [cur removeAllObjects];

@@ -15,6 +15,7 @@
     IBOutlet NSObjectController	*dictController;
     NSOperationQueue * FansOperationQueue;
     NSUInteger m_returnCode;
+    BOOL okStatus;
 }
 
 -(void) FanInitialization;
@@ -25,6 +26,10 @@
 @property (strong) IBOutlet NSTextFieldCell *StartTempInput;
 @property (strong) IBOutlet NSTextFieldCell *StopTempInput;
 @property (strong) IBOutlet NSTextFieldCell *FullOnTempInput;
+@property (strong) IBOutlet NSButton *calibrationYesButton;
+@property (strong) IBOutlet NSButton *calibrationNoButton;
+@property (strong) IBOutlet NSTextField *calibrationWarning;
+@property (strong) IBOutlet NSTextField *calibrationQuestion;
 
 @property (retain) IBOutlet sgModel * model; 
 @property (strong) IBOutlet NSTabView *ControlTabView;
@@ -36,5 +41,6 @@
 @property (strong) IBOutlet GraphView *CalibrationGraphView;
 @property (strong) IBOutlet GraphView *FanSettingGraphView;
 @property (strong) IBOutlet NSWindow *panelToShow;
+@property (strong) IBOutlet NSTableView *FansCalibrationView;
 @end
 
