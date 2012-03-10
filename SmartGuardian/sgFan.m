@@ -419,7 +419,7 @@
 
 -(UInt8) tempSensorSource
 {
-    if (_automatic) {
+    if (_automatic && [ControlFanKeys valueForKey:KEY_FAN_CONTROL]) {
         NSData * dataptr = [sgFan readValueForKey:  [ControlFanKeys valueForKey:KEY_FAN_CONTROL]];
         _tempSensorSource =  *((UInt8 *)[dataptr bytes]) & 0x3;
         [ControlFanKeys setValue:[sgFan smcKeyForSensorId:[NSNumber numberWithInt:_tempSensorSource]] forKey:KEY_TEMP_VALUE];

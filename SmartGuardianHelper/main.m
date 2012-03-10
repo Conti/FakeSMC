@@ -2,8 +2,8 @@
 //  main.m
 //  SmartGuardianHelper
 //
-//  Created by Иван Синицин on 10.03.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Navi on 10.03.12.
+//  Copyright (c) 2012 Navi. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
