@@ -56,14 +56,16 @@
 
 -(void) saveSettings
 {
-    NSMutableDictionary * toSave = [NSMutableDictionary dictionaryWithDictionary:fans];
-    [toSave enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    NSMutableDictionary * toSave = [NSMutableDictionary dictionaryWithCapacity:0];
+    [fans enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if([key hasPrefix:@"FAN"])
         {
             NSDictionary * temp = [obj valuesForSaveOperation];
             [toSave setObject:temp forKey:key];
             
-        }    
+        }   
+        else
+            [toSave setObject:obj forKey:key];
 
     }];
     [[NSUserDefaults standardUserDefaults] setObject:toSave forKey:@"Configuration"];
