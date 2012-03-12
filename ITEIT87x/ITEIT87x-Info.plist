@@ -76,11 +76,11 @@
 				<key>IT8718F</key>
 				<dict>
 					<key>FANIN0</key>
-					<string>CPU Fan</string>
+					<string></string>
 					<key>FANIN1</key>
-					<string>GPU Fan</string>
+					<string></string>
 					<key>FANIN2</key>
-					<string>Intake Fan</string>
+					<string></string>
 					<key>FANIN3</key>
 					<string></string>
 					<key>FANIN4</key>
