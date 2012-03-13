@@ -2,7 +2,7 @@
 //  NSSensor.h
 //  HWSensors
 //
-//  Created by mozo on 22.10.11.
+//  Created by mozo,Navi on 22.10.11.
 //  Copyright (c) 2011 mozo. All rights reserved.
 //
 
