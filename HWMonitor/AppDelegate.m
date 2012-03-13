@@ -113,11 +113,12 @@
       return NULL;
 }
 
-- (void)insertFooterAndTitle:(NSString *)title
+- (void)insertFooterAndTitle:(NSString *)title andImage:(NSImage *)img
 {
     if (lastMenusCount < menusCount) {
         NSMenuItem * titleItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
-        
+        if(img)
+            [titleItem setImage:img];
         [titleItem setEnabled:FALSE];
         //[titleItem setIndentationLevel:1];
         
@@ -181,8 +182,8 @@
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:statusMenu];
     [statusItem setHighlightMode:YES];
-    [statusItem setImage:[NSImage imageNamed:@"thermo"]];
-    [statusItem setAlternateImage:[NSImage imageNamed:@"thermotemplate"]];
+    [statusItem setImage:[NSImage imageNamed:@"temperature_small"]];
+    [statusItem setAlternateImage:[NSImage imageNamed:@"temperature_small"]];
     
     statusItemFont = [NSFont fontWithName:@"Lucida Grande Bold" size:9.0];
     
@@ -219,14 +220,14 @@
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XP",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Proximity",nil),i] intoGroup:TemperatureSensorGroup ];
     }
     
-    [self insertFooterAndTitle:NSLocalizedString( @"TEMPERATURES",nil)];  
+    [self insertFooterAndTitle:NSLocalizedString( @"TEMPERATURES",nil) andImage:[NSImage imageNamed:@"temperature_small"]];  
     
     for (int i=0; i<16; i++)
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andType: @TYPE_FREQ andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"CPU %X",nil),i] intoGroup:FrequencySensorGroup ];
     
     //
 //    [self addSensorWithKey:@"FGC0" andCaption:@"GPU" intoGroup:FrequencySensorGroup];
-    [self insertFooterAndTitle:NSLocalizedString(@"FREQUENCIES",nil)];
+    [self insertFooterAndTitle:NSLocalizedString(@"FREQUENCIES",nil) andImage:[NSImage imageNamed:@"freq_small"]];
     
     //Multipliers
     
@@ -235,7 +236,7 @@
     
     [self addSensorWithKey:@"MPkC" andType: @TYPE_FP4C andCaption:NSLocalizedString(@"CPU Package Multiplier",nil) intoGroup:MultiplierSensorGroup ];
 
-    [self insertFooterAndTitle:NSLocalizedString(@"MULTIPLIERS",nil)];
+    [self insertFooterAndTitle:NSLocalizedString(@"MULTIPLIERS",nil)andImage:[NSImage imageNamed:@"multiply_small"]];
     
     // Voltages
 
@@ -251,7 +252,7 @@
     [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY2 andType: @TYPE_FP2E andCaption:NSLocalizedString(@"VRM Supply 2 Voltage",nil) intoGroup:VoltageSensorGroup ];
 
 
-    [self insertFooterAndTitle:NSLocalizedString(@"VOLTAGES",nil)];
+    [self insertFooterAndTitle:NSLocalizedString(@"VOLTAGES",nil) andImage:[NSImage imageNamed:@"voltage_small"]];
     
     // Fans
     
@@ -262,7 +263,7 @@
         
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andType: @TYPE_FPE2 andCaption:caption intoGroup:TachometerSensorGroup ];
     }
-    [self insertFooterAndTitle:NSLocalizedString(@"FANS",nil)];
+    [self insertFooterAndTitle:NSLocalizedString(@"FANS",nil) andImage:[NSImage imageNamed:@"fan_small"]];
     // Disks
     NSEnumerator * DisksEnumerator = [DisksList keyEnumerator]; 
     id nextDisk;
@@ -270,7 +271,7 @@
         [self addSensorWithKey:nextDisk andType: @TYPE_FPE2 andCaption:nextDisk intoGroup:HDSmartTempSensorGroup];
     
     
-     [self insertFooterAndTitle:NSLocalizedString(@"HARD DRIVES TEMPERATURES",nil)];
+     [self insertFooterAndTitle:NSLocalizedString(@"HARD DRIVES TEMPERATURES",nil) andImage:[NSImage imageNamed:@"hd_small"]];
     if (![sensorsList count]) {
         NSMenuItem * item = [[NSMenuItem alloc]initWithTitle:@"No sensors found or FakeSMCDevice unavailable" action:nil keyEquivalent:@""];
         

@@ -36,7 +36,6 @@
 		1D9F832C144FF24000EEEFEB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9F832B144FF24000EEEFEB /* main.m */; };
 		1D9F8330144FF24000EEEFEB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1D9F832E144FF24000EEEFEB /* Credits.rtf */; };
 		1D9F8336144FF24100EEEFEB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D9F8334144FF24000EEEFEB /* MainMenu.xib */; };
-		1DA6F9681458A82E00FBFAA7 /* thermo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA6F9671458A82E00FBFAA7 /* thermo.png */; };
 		1DA9620B13ED30E40096F8A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DA9620913ED30E40096F8A5 /* InfoPlist.strings */; };
 		1DA9621913ED31280096F8A5 /* FintekF718x.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9621713ED31280096F8A5 /* FintekF718x.cpp */; };
 		1DA9621A13ED31280096F8A5 /* FintekF718x.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA9621813ED31280096F8A5 /* FintekF718x.h */; };
@@ -79,7 +78,6 @@
 		1DA962C413ED37D90096F8A5 /* RadeonChipinfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C213ED37D90096F8A5 /* RadeonChipinfo.h */; };
 		1DA962C513ED37D90096F8A5 /* RadeonChipsets.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */; };
 		1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C613ED389E0096F8A5 /* AtomBIOS.h */; };
-		1DBB87F11458B90A00C4B56E /* thermotemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB87F01458B90A00C4B56E /* thermotemplate.png */; };
 		2C11943A14F910F1009319BD /* fan8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943914F910F1009319BD /* fan8.png */; };
 		2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
 		2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */; };
@@ -95,6 +93,13 @@
 		2C933D71150F326A005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
 		2C933D72150F32A0005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
 		2C933D73150F32B9005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
+		2C9B2A3E150F502800AA7AEC /* temperature_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A3D150F502800AA7AEC /* temperature_small.png */; };
+		2C9B2A42150F525A00AA7AEC /* monitor-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A41150F525A00AA7AEC /* monitor-icon.icns */; };
+		2C9B2A44150F532600AA7AEC /* hd_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A43150F532600AA7AEC /* hd_small.png */; };
+		2C9B2A4A150F55DA00AA7AEC /* fan_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A49150F55DA00AA7AEC /* fan_small.png */; };
+		2C9B2A4E150F56F800AA7AEC /* multiply_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A4D150F56F800AA7AEC /* multiply_small.png */; };
+		2C9B2A50150F578200AA7AEC /* voltage_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A4F150F578200AA7AEC /* voltage_small.png */; };
+		2C9B2A52150F5A8D00AA7AEC /* freq_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A51150F5A8D00AA7AEC /* freq_small.png */; };
 		2CAD312B14EE522000B32B68 /* ISPSmartController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD312A14EE522000B32B68 /* ISPSmartController.m */; };
 		2CB03FBF14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2CB03FBB14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch */; };
 		2CB03FC014EB9AB70070DC93 /* IntelCPUMonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB03FBC14EB9AB70070DC93 /* IntelCPUMonitor.cpp */; };
@@ -117,7 +122,6 @@
 		6A9C468D14E657EE0083E5E6 /* FakeSMCPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A9C468914E657EE0083E5E6 /* FakeSMCPlugin.cpp */; };
 		6A9C468E14E657EE0083E5E6 /* FakeSMCPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A9C468A14E657EE0083E5E6 /* FakeSMCPlugin.h */; };
 		6A9C468F14E657EE0083E5E6 /* FakeSMCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A9C468B14E657EE0083E5E6 /* FakeSMCUtils.h */; };
-		6AAF618914D40262006E8573 /* default.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AAF618814D40262006E8573 /* default.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -184,7 +188,6 @@
 		1D9F832F144FF24000EEEFEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		1D9F8331144FF24000EEEFEB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D9F8335144FF24000EEEFEB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		1DA6F9671458A82E00FBFAA7 /* thermo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermo.png; sourceTree = "<group>"; };
 		1DA9620513ED30E40096F8A5 /* FintekF718x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FintekF718x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DA9620A13ED30E40096F8A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1DA9621013ED30E40096F8A5 /* FintekF718x-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FintekF718x-Prefix.pch"; sourceTree = "<group>"; };
@@ -239,7 +242,6 @@
 		1DA962C213ED37D90096F8A5 /* RadeonChipinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadeonChipinfo.h; sourceTree = "<group>"; };
 		1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadeonChipsets.h; sourceTree = "<group>"; };
 		1DA962C613ED389E0096F8A5 /* AtomBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomBIOS.h; sourceTree = "<group>"; };
-		1DBB87F01458B90A00C4B56E /* thermotemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermotemplate.png; sourceTree = "<group>"; };
 		2C11943914F910F1009319BD /* fan8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan8.png; sourceTree = "<group>"; };
 		2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "Japanese-Sensu-Fan-USB-Drive_1.icns"; path = "../SmartGuardian/Japanese-Sensu-Fan-USB-Drive_1.icns"; sourceTree = "<group>"; };
 		2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Koolance_FAN-12038HBK-184.png"; sourceTree = "<group>"; };
@@ -258,6 +260,13 @@
 		2C7C8EC614F5227400D3095F /* sgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sgModel.h; sourceTree = "<group>"; };
 		2C7C8EC714F5227400D3095F /* sgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sgModel.m; sourceTree = "<group>"; };
 		2C933D70150F326A005C7E86 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
+		2C9B2A3D150F502800AA7AEC /* temperature_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = temperature_small.png; path = ../../../../../Downloads/temperature_small.png; sourceTree = "<group>"; };
+		2C9B2A41150F525A00AA7AEC /* monitor-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "monitor-icon.icns"; sourceTree = "<group>"; };
+		2C9B2A43150F532600AA7AEC /* hd_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hd_small.png; sourceTree = "<group>"; };
+		2C9B2A49150F55DA00AA7AEC /* fan_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan_small.png; sourceTree = "<group>"; };
+		2C9B2A4D150F56F800AA7AEC /* multiply_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiply_small.png; sourceTree = "<group>"; };
+		2C9B2A4F150F578200AA7AEC /* voltage_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voltage_small.png; sourceTree = "<group>"; };
+		2C9B2A51150F5A8D00AA7AEC /* freq_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freq_small.png; sourceTree = "<group>"; };
 		2CAD312914EE522000B32B68 /* ISPSmartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISPSmartController.h; sourceTree = "<group>"; };
 		2CAD312A14EE522000B32B68 /* ISPSmartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISPSmartController.m; sourceTree = "<group>"; };
 		2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelCPUMonitor.kext; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,7 +307,6 @@
 		6A9C468914E657EE0083E5E6 /* FakeSMCPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeSMCPlugin.cpp; sourceTree = "<group>"; };
 		6A9C468A14E657EE0083E5E6 /* FakeSMCPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeSMCPlugin.h; sourceTree = "<group>"; };
 		6A9C468B14E657EE0083E5E6 /* FakeSMCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeSMCUtils.h; sourceTree = "<group>"; };
-		6AAF618814D40262006E8573 /* default.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = default.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -617,14 +625,18 @@
 		1D9F8326144FF24000EEEFEB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C9B2A51150F5A8D00AA7AEC /* freq_small.png */,
+				2C9B2A4F150F578200AA7AEC /* voltage_small.png */,
+				2C9B2A4D150F56F800AA7AEC /* multiply_small.png */,
+				2C9B2A49150F55DA00AA7AEC /* fan_small.png */,
+				2C9B2A43150F532600AA7AEC /* hd_small.png */,
+				2C9B2A41150F525A00AA7AEC /* monitor-icon.icns */,
 				1D9F8327144FF24000EEEFEB /* HWMonitor-Info.plist */,
 				1D9F8328144FF24000EEEFEB /* InfoPlist.strings */,
 				1D9F832B144FF24000EEEFEB /* main.m */,
 				1D9F832D144FF24000EEEFEB /* HWMonitor-Prefix.pch */,
 				1D9F832E144FF24000EEEFEB /* Credits.rtf */,
-				1DA6F9671458A82E00FBFAA7 /* thermo.png */,
-				1DBB87F01458B90A00C4B56E /* thermotemplate.png */,
-				6AAF618814D40262006E8573 /* default.icns */,
+				2C9B2A3D150F502800AA7AEC /* temperature_small.png */,
 				2C4518D314F41D6700D44435 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
@@ -1315,10 +1327,14 @@
 				1D9F832A144FF24000EEEFEB /* InfoPlist.strings in Resources */,
 				1D9F8330144FF24000EEEFEB /* Credits.rtf in Resources */,
 				1D9F8336144FF24100EEEFEB /* MainMenu.xib in Resources */,
-				1DA6F9681458A82E00FBFAA7 /* thermo.png in Resources */,
-				1DBB87F11458B90A00C4B56E /* thermotemplate.png in Resources */,
-				6AAF618914D40262006E8573 /* default.icns in Resources */,
 				2C4518D114F41D6700D44435 /* Localizable.strings in Resources */,
+				2C9B2A3E150F502800AA7AEC /* temperature_small.png in Resources */,
+				2C9B2A42150F525A00AA7AEC /* monitor-icon.icns in Resources */,
+				2C9B2A44150F532600AA7AEC /* hd_small.png in Resources */,
+				2C9B2A4A150F55DA00AA7AEC /* fan_small.png in Resources */,
+				2C9B2A4E150F56F800AA7AEC /* multiply_small.png in Resources */,
+				2C9B2A50150F578200AA7AEC /* voltage_small.png in Resources */,
+				2C9B2A52150F5A8D00AA7AEC /* freq_small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
