@@ -91,9 +91,10 @@
 		2C2CB4D7150B39FA0017762E /* sgFan.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB5FA01501141B002BD48D /* sgFan.m */; };
 		2C4518CD14F41D4100D44435 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4518CE14F41D4100D44435 /* AppDelegate.m */; };
 		2C4518D114F41D6700D44435 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C4518D314F41D6700D44435 /* Localizable.strings */; };
-		2C5E169A150F25DB0039623E /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5E1699150F25DB0039623E /* IOKit.framework */; };
-		2C5E169C150F25E70039623E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5E169B150F25E70039623E /* CoreFoundation.framework */; };
 		2C7C8EC814F5227400D3095F /* sgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C8EC714F5227400D3095F /* sgModel.m */; };
+		2C933D71150F326A005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
+		2C933D72150F32A0005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
+		2C933D73150F32B9005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
 		2CAD312B14EE522000B32B68 /* ISPSmartController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD312A14EE522000B32B68 /* ISPSmartController.m */; };
 		2CB03FBF14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2CB03FBB14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch */; };
 		2CB03FC014EB9AB70070DC93 /* IntelCPUMonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB03FBC14EB9AB70070DC93 /* IntelCPUMonitor.cpp */; };
@@ -254,10 +255,9 @@
 		2C4518D214F41D6700D44435 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C4518D414F41D6D00D44435 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C4518D614F4202A00D44435 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		2C5E1699150F25DB0039623E /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
-		2C5E169B150F25E70039623E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		2C7C8EC614F5227400D3095F /* sgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sgModel.h; sourceTree = "<group>"; };
 		2C7C8EC714F5227400D3095F /* sgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sgModel.m; sourceTree = "<group>"; };
+		2C933D70150F326A005C7E86 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		2CAD312914EE522000B32B68 /* ISPSmartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISPSmartController.h; sourceTree = "<group>"; };
 		2CAD312A14EE522000B32B68 /* ISPSmartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISPSmartController.m; sourceTree = "<group>"; };
 		2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelCPUMonitor.kext; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,6 +341,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C933D71150F326A005C7E86 /* IOKit.framework in Frameworks */,
 				1D757E5814502D510003045C /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C2CB4C0150B39DA0017762E /* Cocoa.framework in Frameworks */,
+				2C933D73150F32B9005C7E86 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,9 +394,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5E169C150F25E70039623E /* CoreFoundation.framework in Frameworks */,
-				2C5E169A150F25DB0039623E /* IOKit.framework in Frameworks */,
 				2CB6913414F40F2900152814 /* Cocoa.framework in Frameworks */,
+				2C933D72150F32A0005C7E86 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,8 +447,7 @@
 		1D05ABE613ED0DAD00EADBF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C5E169B150F25E70039623E /* CoreFoundation.framework */,
-				2C5E1699150F25DB0039623E /* IOKit.framework */,
+				2C933D70150F326A005C7E86 /* IOKit.framework */,
 				1D9F8320144FF24000EEEFEB /* Cocoa.framework */,
 				1D05ABE813ED0DAD00EADBF6 /* Kernel.framework */,
 				1D9F8322144FF24000EEEFEB /* AppKit.framework */,
