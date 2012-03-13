@@ -16,6 +16,7 @@
 #endif
 
 #define MAXRPM_TO_DIFFER 100
+#define MAX_FAN_TO_SEARCH 5 
 
 @implementation sgModel
 
@@ -139,9 +140,15 @@
     prev = [NSMutableArray arrayWithCapacity:0];
     names = [NSMutableArray arrayWithCapacity:0];
     
+    [fans enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if([key hasPrefix:@"FAN"])
+        {
+            [names addObject:key];
+        }    
+    }];
     int i=0,temp=0;
     
-    for (i=0; i<[sgFan numberOfFans]; i++) {
+    for (i=0; i<MAX_FAN_TO_SEARCH; i++) {
         NSData * originalPWM = [sgFan readValueForKey:[NSString stringWithFormat:@KEY_FORMAT_FAN_TARGET_SPEED,i]];
         temp=0;
         [sgFan writeValueForKey:[NSString stringWithFormat:@KEY_FORMAT_FAN_TARGET_SPEED,i]  data:[NSData dataWithBytes:&temp length:1]];
@@ -160,6 +167,7 @@
             if([key hasPrefix:@"FAN"])
               [cur addObject:[NSNumber numberWithInteger:[obj currentRPM]]];
         }];
+        if(originalPWM)
         [sgFan writeValueForKey:[NSString stringWithFormat:@KEY_FORMAT_FAN_TARGET_SPEED,i]  data:originalPWM];
         NSInteger index = [sgModel whoDiffersFor:cur andPrevious:prev andMaxDev:MAXRPM_TO_DIFFER];
         if ( index != NSNotFound) {
@@ -174,7 +182,6 @@
         }
         [cur removeAllObjects];
         [prev removeAllObjects];
-        [names removeAllObjects];
     }
     
 }
