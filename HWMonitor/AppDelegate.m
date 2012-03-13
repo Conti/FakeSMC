@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  HWMonitor
 //
-//  Created by mozo on 20.10.11.
+//  Created by mozo,Navi on 20.10.11.
 //  Copyright (c) 2011 mozo. All rights reserved.
 //
 
