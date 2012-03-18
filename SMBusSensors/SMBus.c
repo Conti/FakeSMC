@@ -138,13 +138,13 @@ static void read_smb_intel(pci_dt_t *smbus_dev)
 	mmio = pci_config_read32(smbus_dev->dev.addr, 0x10);// & ~0x0f;
   base = pci_config_read16(smbus_dev->dev.addr, 0x20) & 0xFFFE;
 	hostc = pci_config_read8(smbus_dev->dev.addr, 0x40);
-  verbose("Scanning SMBus [%04x:%04x], mmio: 0x%x, ioport: 0x%x, hostc: 0x%x\n", 
+  IOLog("Scanning SMBus [%04x:%04x], mmio: 0x%x, ioport: 0x%x, hostc: 0x%x\n", 
           smbus_dev->vendor_id, smbus_dev->device_id, mmio, base, hostc);
   
   
   // Search MAX_RAM_SLOTS slots
-  for (i = 0; i <  MAX_RAM_SLOTS; i++){
-    spd_size = smb_read_byte_intel(base, 0x50 + i, 0);
+//  for (i = 0; i <  MAX_RAM_SLOTS; i++){
+//    spd_size = smb_read_byte_intel(base, 0x50 + i, 0);
     
   } // for
 }
