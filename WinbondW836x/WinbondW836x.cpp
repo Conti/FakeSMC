@@ -103,28 +103,21 @@ long W836x::readTemperature(unsigned long index)
 
 long W836x::readVoltage(unsigned long index)
 {
-	float voltage = 0;
-	float gain = 1;
-	
-	UInt16 V = readByte(0, WINBOND_VOLTAGE + index);
-	
-	if (index == 0 && (model == W83627HF || model == W83627THF || model == W83687THF)) 
-	{
-		UInt8 vrmConfiguration = readByte(0, 0x18);
-		
-		if ((vrmConfiguration & 0x01) == 0)
-			voltage = 16.0f * V; // VRM8 formula
-		else
-			voltage = 4.88f * V + 690.0f; // VRM9 formula
-	}
-	else 
-	{
-		if (index == 3) gain = 2;
-		
-		voltage = (V << 3) * gain;
-	}
-	
-	return voltage;
+    if (index < 9) {
+        
+        float value = readByte(0,WINBOND_VOLTAGE_REG[index]) * (WINBOND_VOLTAGE_SCALE[index]);
+        
+        bool valid = value > 0;
+        
+        // check if battery voltage monitor is enabled
+        if (valid && WINBOND_VOLTAGE_REG[index] == WINBOND_VOLTAGE_VBAT_REG) {
+            valid = (readByte(0,0x5D) & 0x01) > 0;
+        }
+        
+        return valid ? value : 0;
+    }
+    
+    return 0;
 }
 
 void W836x::updateTachometers()
@@ -586,9 +579,68 @@ bool W836x::startPlugin()
 		}
 	}
 	
-	// CPU Vcore
-	if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, 0))
-		WarningLog("error adding CPU voltage sensor");
+
+
+    // Voltage
+	if (configuration) {
+		for (int i = 0; i < 9; i++) 
+		{				
+			char key[5];
+			
+			snprintf(key, 5, "VIN%X", i);
+			
+			if (OSString* name = OSDynamicCast(OSString, configuration->getObject(key))) {
+				if (name->isEqualTo("CPU")) {
+					if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
+						WarningLog("error adding CPU voltage sensor");
+				}
+				else if (name->isEqualTo("Memory")) {
+					if (!addSensor(KEY_MEMORY_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
+						WarningLog("error adding memory voltage sensor");
+				}
+                else if (name->isEqualTo("AVCC")) {
+                    if (!addSensor(KEY_AVCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding AVCC Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("12VC")) {
+                    if (!addSensor(KEY_12V_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding 12V Voltage Sensor!");
+                    }
+                }         
+                else if (name->isEqualTo("3VCC")) {
+                    if (!addSensor(KEY_3VCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding 3VCC Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("VRM1")) {
+                    if (!addSensor(KEY_CPU_VRM_SUPPLY0, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding UNKN1 Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("VRM2")) {
+                    if (!addSensor(KEY_CPU_VRM_SUPPLY1, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding UNKN2 Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("VRM3")) {
+                    if (!addSensor(KEY_CPU_VRM_SUPPLY2, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding UNKN3 Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("3VSB")) {
+                    if (!addSensor(KEY_3VSB_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding 3VSB Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("VBAT")) {
+                    if (!addSensor(KEY_VBAT_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding VBAT Voltage Sensor!");
+                    }
+                }
+			}
+		}
+	}
 	
 	// FANs
 	for (int i = 0; i < fanLimit; i++) 
@@ -616,6 +668,8 @@ bool W836x::startPlugin()
 	
 	return true;
 }
+
+
 
 const char *W836x::getModelName()
 {

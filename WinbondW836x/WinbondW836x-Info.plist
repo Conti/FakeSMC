@@ -52,6 +52,24 @@
 					<false/>
 					<key>TEMPIN1FORCED</key>
 					<false/>
+                    <key>VIN0</key>
+					<string>CPU</string>
+					<key>VIN1</key>
+					<string>Memory</string>
+					<key>VIN2</key>
+					<string>3VCC</string>
+					<key>VIN3</key>
+					<string>12VC</string>
+					<key>VIN4</key>
+					<string></string>
+					<key>VIN5</key>
+					<string></string>
+					<key>VIN6</key>
+					<string></string>
+					<key>VIN7</key>
+					<string></string>
+					<key>VIN8</key>
+					<string>VBAT</string>
 				</dict>
 			</dict>
 		</dict>

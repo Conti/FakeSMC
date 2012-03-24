@@ -68,7 +68,10 @@ const UInt8 WINBOND_TEMPERATURE_SOURCE_SELECT_REG	= 0x49;
 const UInt8 WINBOND_TEMPERATURE[]					= { 0x50, 0x50, 0x27 };
 const UInt8 WINBOND_TEMPERATURE_BANK[]				= { 1,    2,    0 };
 
-const UInt8 WINBOND_VOLTAGE							= 0x20;
+// Voltages                                         VCORE VIN0  AVCC  3VCC  VIN1  VIN2  VIN3  3VSB   VBAT
+const UInt16 WINBOND_VOLTAGE_REG[]              = { 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x550, 0x551 };
+const float  WINBOND_VOLTAGE_SCALE[]            = { 8,    8,    16,   16,   8,    8,    8,    16,    16 };
+const UInt16 WINBOND_VOLTAGE_VBAT_REG           = 0x0551;
 
 const UInt8 WINBOND_TACHOMETER[]					= { 0x28, 0x29, 0x2A, 0x3F, 0x53 };
 const UInt8 WINBOND_TACHOMETER_BANK[]				= { 0, 0, 0, 0, 5 };
