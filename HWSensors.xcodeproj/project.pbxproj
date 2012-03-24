@@ -109,6 +109,8 @@
 		2CB6913D14F40F2900152814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6913B14F40F2900152814 /* InfoPlist.strings */; };
 		2CB6913F14F40F2900152814 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB6913E14F40F2900152814 /* main.m */; };
 		2CB6914314F40F2900152814 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6914114F40F2900152814 /* Credits.rtf */; };
+		2CBDEF16150F68A600E8E886 /* temp_alt_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBDEF15150F68A600E8E886 /* temp_alt_small.png */; };
+		2CBDEF18150F691F00E8E886 /* monitor_icon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */; };
 		2CDCE0C415094B7F00BA9B97 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCE0C615094B7F00BA9B97 /* MainWindow.xib */; };
 		2CEB5F9D1500E840002BD48D /* sgAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1DBBD61500E59000971A87 /* sgAppController.m */; };
 		2CEB5FA11501141B002BD48D /* sgFan.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB5FA01501141B002BD48D /* sgFan.m */; };
@@ -285,6 +287,8 @@
 		2CB6913E14F40F2900152814 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2CB6914014F40F2900152814 /* SmartGuardian-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartGuardian-Prefix.pch"; sourceTree = "<group>"; };
 		2CB6914214F40F2900152814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2CBDEF15150F68A600E8E886 /* temp_alt_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_alt_small.png; sourceTree = "<group>"; };
+		2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monitor_icon_small.png; sourceTree = "<group>"; };
 		2CDCE0C515094B7F00BA9B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		2CDCE0C815094B9400BA9B97 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		2CEB5F9F1501141B002BD48D /* sgFan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sgFan.h; sourceTree = "<group>"; };
@@ -625,6 +629,8 @@
 		1D9F8326144FF24000EEEFEB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */,
+				2CBDEF15150F68A600E8E886 /* temp_alt_small.png */,
 				2C9B2A51150F5A8D00AA7AEC /* freq_small.png */,
 				2C9B2A4F150F578200AA7AEC /* voltage_small.png */,
 				2C9B2A4D150F56F800AA7AEC /* multiply_small.png */,
@@ -1335,6 +1341,8 @@
 				2C9B2A50150F578200AA7AEC /* voltage_small.png in Resources */,
 				2C9B2A52150F5A8D00AA7AEC /* freq_small.png in Resources */,
 				2C9B2A54150F623400AA7AEC /* temperature_small.png in Resources */,
+				2CBDEF16150F68A600E8E886 /* temp_alt_small.png in Resources */,
+				2CBDEF18150F691F00E8E886 /* monitor_icon_small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2127,7 +2135,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "HWMonitor/HWMonitor-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2158,7 +2166,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "HWMonitor/HWMonitor-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2526,7 +2534,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "SmartGuardian/SmartGuardian-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2559,7 +2567,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "SmartGuardian/SmartGuardian-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

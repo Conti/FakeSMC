@@ -27,7 +27,7 @@
 			<key>IOClass</key>
 			<string>W836x</string>
 			<key>IOMatchCategory</key>
-			<string>SuperIOMonitor</string>
+			<string>W836x</string>
 			<key>IOProviderClass</key>
 			<string>FakeSMC</string>
 			<key>IOResourceMatch</key>

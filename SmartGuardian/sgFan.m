@@ -10,7 +10,7 @@
 #import "FakeSMCDefinitions.h"
 
 
-#define Debug true
+//#define Debug true
 
 #ifdef Debug
 #define DebugLog(string, args...)	do { if (Debug) { NSLog (string , ## args); } } while(0)

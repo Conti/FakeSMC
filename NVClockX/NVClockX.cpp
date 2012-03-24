@@ -61,7 +61,15 @@ int NVClockX::addTachometer(int index)
 {
 	UInt8 length = 0;
 	void * data = 0;
+    UInt16 value;
+    if (nv_card->caps & I2C_FANSPEED_MONITORING)
+        value = nv_card->get_i2c_fanspeed_rpm(nv_card->sensor);
+    else if(nv_card->caps & GPU_FANSPEED_MONITORING)
+        value = (UInt16)nv_card->get_fanspeed();
+    else value = 0;
 	
+    
+    if(value>10)
 	if (kIOReturnSuccess == fakeSMC->callPlatformFunction(kFakeSMCGetKeyValue, false, (void *)KEY_FAN_NUMBER, (void *)&length, (void *)&data, 0)) {
 		length = 0;
 		
@@ -207,7 +215,7 @@ bool NVClockX::start(IOService * provider)
             }
 		}
 		
-		if (nv_card->caps & (I2C_FANSPEED_MONITORING | GPU_FANSPEED_MONITORING)){
+		if (nv_card->caps & (I2C_FANSPEED_MONITORING || GPU_FANSPEED_MONITORING)){
             InfoLog("Adding tachometer sensor");
             
 			int fanIndex = addTachometer(index);

@@ -52,6 +52,8 @@
 			<dict>
 				<key>Default</key>
 				<dict>
+					<key>SmartGuardian</key>
+					<true/>
 					<key>FANIN0</key>
 					<string></string>
 					<key>FANIN1</key>
@@ -114,6 +116,8 @@
 				</dict>
 				<key>IT8720F</key>
 				<dict>
+					<key>SmartGuardian</key>
+					<true/>
 					<key>FANIN0</key>
 					<string></string>
 					<key>FANIN1</key>

@@ -52,7 +52,7 @@
 #include "cpuid.h"
 #include "FakeSMC.h"
 
-#define Debug false
+#define Debug true
 
 #define LogPrefix "W836x: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -209,6 +209,7 @@ void W836x::exit()
 bool W836x::probePort()
 {
     model = 0;
+    
 	UInt8 id =listenPortByte(SUPERIO_CHIP_ID_REGISTER);
     
     IOSleep(50);
@@ -444,22 +445,22 @@ bool W836x::probePort()
 	selectLogicalDevice(WINBOND_HARDWARE_MONITOR_LDN);
 	
      IOSleep(50);
-    UInt16 vendor = (UInt16)(readByte(0x80, WINBOND_VENDOR_ID_REGISTER) << 8) | readByte(0, WINBOND_VENDOR_ID_REGISTER);
-    
-    if (vendor != WINBOND_VENDOR_ID)
-    {
-        DebugLog("wrong vendor ID=0x%x", vendor);
-        return false;
-    }
-    
-    IOSleep(50);
+//    UInt16 vendor = (UInt16)(readByte(0x80, WINBOND_VENDOR_ID_REGISTER) << 8) | readByte(0, WINBOND_VENDOR_ID_REGISTER);
+//    
+//    if (vendor != WINBOND_VENDOR_ID)
+//    {
+//        DebugLog("wrong vendor ID=0x%x", vendor);
+//        return false;
+//    }
+//    
+//    IOSleep(50);
     
 	if (!getLogicalDeviceAddress()) {
         DebugLog("can't get monitoring logical device address");
 		return false;
     }
     
-   
+
 	return true;
 }
 
