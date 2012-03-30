@@ -77,6 +77,8 @@
 				</dict>
 				<key>IT8718F</key>
 				<dict>
+					<key>VBATNeedUpdates</key>
+					<true/>
 					<key>FANIN0</key>
 					<string></string>
 					<key>FANIN1</key>
@@ -102,15 +104,15 @@
 					<key>VIN2</key>
 					<string>3VCC</string>
 					<key>VIN3</key>
-					<string>12VC</string>
+					<string>+12VC</string>
 					<key>VIN4</key>
-					<string></string>
+					<string>-12VC</string>
 					<key>VIN5</key>
-					<string></string>
+					<string>+5VC</string>
 					<key>VIN6</key>
-					<string></string>
+					<string>-5VC</string>
 					<key>VIN7</key>
-					<string></string>
+					<string>3VSB</string>
 					<key>VIN8</key>
 					<string>VBAT</string>
 				</dict>

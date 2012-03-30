@@ -34,6 +34,7 @@ const UInt8 ITE_FAN_TACHOMETER_REG[5]					= { 0x0d, 0x0e, 0x0f, 0x80, 0x82 };
 const UInt8 ITE_FAN_TACHOMETER_EXT_REG[5]				= { 0x18, 0x19, 0x1a, 0x81, 0x83 };
 const UInt8 ITE_VOLTAGE_REG[9]						    = { 0x20, 0x21, 0x22, 0x23, 0x24,0x25,0x26,0x27,0x28};
 const float ITE_VOLTAGE_GAIN[]							= { 1, 1, 1, (6.8f / 10 + 1), 1, 1, 1, 1, 1 };
+const UInt8 ITE_ADC_CHANNEL_ENABLE                      = 0x50;
 
 const UInt8 ITE_SMARTGUARDIAN_MAIN_CONTROL				= 0x13;
 const UInt8 ITE_SMARTGUARDIAN_REG_CONTROL				= 0x14;
@@ -82,7 +83,7 @@ class IT87xSensor : public SuperIOSensor
     OSDeclareDefaultStructors(IT87xSensor)
     
 private:
-    UInt16    coeff;
+    int16_t    coeff;
      
 public:    
     static SuperIOSensor *withOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex);
@@ -101,6 +102,7 @@ private:
     long                    voltageGain;
     bool                    has16bitFanCounter;
     bool                    hasSmartGuardian;
+    bool                    vbat_updates;
     //	UInt8					readByte(UInt8 reg);
     //	UInt16					readWord(UInt8 reg1, UInt8 reg2);
     //  void					writeByte(UInt8 reg, UInt8 value);

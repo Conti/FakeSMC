@@ -67,10 +67,13 @@
 
 #define KEY_MEMORY_VOLTAGE                      "VM0R" 
 #define KEY_12V_VOLTAGE                         "VP0R" //"Vp0C"
-#define KEY_AVCC_VOLTAGE                        "Vp0C"
-#define KEY_3VCC_VOLTAGE                        "Vp1C"
-#define KEY_3VSB_VOLTAGE                        "Vp2C"
-#define KEY_VBAT_VOLTAGE                        "Vp3C"
+#define KEY_N12VC_VOLTAGE                       "Vp0C"
+#define KEY_5VC_VOLTAGE                         "Vp1C"
+#define KEY_N5VC_VOLTAGE                        "Vp2C"
+#define KEY_3VCC_VOLTAGE                        "Vp3C"
+#define KEY_3VSB_VOLTAGE                        "Vp4C"
+#define KEY_VBAT_VOLTAGE                        "VBAT"
+
 
 #define KEY_NORTHBRIDGE_VOLTAGE                 "VN0C"
 

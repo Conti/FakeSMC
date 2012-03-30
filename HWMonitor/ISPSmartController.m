@@ -19,6 +19,8 @@
 #include <mach/mach_error.h>
 #include <mach/mach_init.h>
 
+#import "NSString+TruncateToWidth.h"
+
 static inline int convertTemperature(int format, int value) {
 	if(format == 0)
 		return value;
@@ -339,7 +341,7 @@ void SwapASCIIString(UInt16 *buffer, UInt16 length) {
 		if([[latestData objectAtIndex:x] objectForKey:@"partitions"])
 			name = [NSString stringWithFormat:@"%@", [[[latestData objectAtIndex:x] objectForKey:@"partitions"] componentsJoinedByString:@", "]];
 		else 
-			name = [[latestData objectAtIndex:x] objectForKey:@"model"];
+			name = [NSString stringWithFormat:@"%@ s/n %@", [[[latestData objectAtIndex:x] objectForKey:@"model"] stringByTrimmingLeadingWhitespace],[[[latestData objectAtIndex:x] objectForKey:@"serial"] stringByTrimmingLeadingWhitespace] ];
 		
 		[formattedTemps setObject:[NSData dataWithBytes:&value length:sizeof( value)] forKey:name];
 	}

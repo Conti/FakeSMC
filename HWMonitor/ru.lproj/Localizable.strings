@@ -22,11 +22,10 @@
 "CPU %X Multiplier"="Множитель CPU %X";
 "CPU Voltage"="Шина CPU";
 "DIMM Voltage"="Шина модулей DIMM";
-"12V Bus Voltage"="Шина 12В";
-"VCC Bus Voltage"="Шина VCC";
+"+12V Bus Voltage"="Шина +12В";
+"+5V Bus Voltage"="Шина +5В";
+"-12V Bus Voltage"="Шина -12В";
+"-5V Bus Voltage"="Шина -5В";
 "3.3 VCC Voltage"="Шина 3.3В VCC";
 "3.3 VSB Voltage"="Шина 3.3В VSB";
 "Battery Voltage"="Шина батареи";
-"VRM Supply 0 Voltage"="Шина VRM 0";
-"VRM Supply 1 Voltage"="Шина VRM 1";
-"VRM Supply 2 Voltage"="Шина VRM 2";

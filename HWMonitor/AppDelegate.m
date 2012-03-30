@@ -242,14 +242,14 @@
 
     [self addSensorWithKey:@"VC0C" andType: @TYPE_FP2E andCaption:NSLocalizedString(@"CPU Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@"VM0R" andType: @TYPE_FP2E andCaption:NSLocalizedString(@"DIMM Voltage",nil) intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_12V_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_AVCC_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"VCC Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_12V_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"+12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_5VC_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"+5V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_N12VC_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"-12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_N5VC_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"-5V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_3VCC_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VCC Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_3VSB_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VSB Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_VBAT_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"Battery Voltage",nil) intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY0 andType: @TYPE_FP2E andCaption:NSLocalizedString(@"VRM Supply 0 Voltage",nil) intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY1 andType: @TYPE_FP2E andCaption:NSLocalizedString(@"VRM Supply 1 Voltage",nil) intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY2 andType: @TYPE_FP2E andCaption:NSLocalizedString(@"VRM Supply 2 Voltage",nil) intoGroup:VoltageSensorGroup ];
+    
 
 
     [self insertFooterAndTitle:NSLocalizedString(@"VOLTAGES",nil) andImage:[NSImage imageNamed:@"voltage_small"]];

@@ -13,7 +13,7 @@
 #include "FakeSMC.h"
 #include "FakeSMCUtils.h"
 
-#define Debug false
+#define Debug true
 
 #define LogPrefix "ITEIT87x: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -33,7 +33,12 @@ SuperIOSensor * IT87xSensor::withOwner(SuperIOMonitor *aOwner, const char* aKey,
     ((IT87xSensor *) me)->setCoeff(1);
     if(strncmp(aKey, KEY_12V_VOLTAGE, 4)==0)
         ((IT87xSensor *) me)->setCoeff(4);
-        
+    if(strncmp(aKey, KEY_N12VC_VOLTAGE, 4)==0)
+        ((IT87xSensor *) me)->setCoeff(4);    
+    if(strncmp(aKey, KEY_5VC_VOLTAGE, 4)==0)
+        ((IT87xSensor *) me)->setCoeff(4);
+    if(strncmp(aKey, KEY_N5VC_VOLTAGE, 4)==0)
+        ((IT87xSensor *) me)->setCoeff(4); 
     if (me && !me->initWithOwner(aOwner, aKey, aType, aSize, aGroup, aIndex)) {
         me->release();
         return 0;
@@ -264,7 +269,9 @@ long IT87x::readTemperature(unsigned long index)
 
 long IT87x::readVoltage(unsigned long index)
 {
-    
+    // Refresh VBAT reading on each access to the key
+    if(vbat_updates)
+        writeByte(address, ITE_CONFIGURATION_REGISTER, readByte(address, ITE_CONFIGURATION_REGISTER) | 0x40);
     return readByte(address, ITE_VOLTAGE_REG[index]) * voltageGain;
     
 }
@@ -439,8 +446,23 @@ bool IT87x::startPlugin()
 	
 	
 	// Voltage
+    UInt8 tmp = readByte(address, ITE_ADC_CHANNEL_ENABLE);
+    DebugLog("ADC Enable register = %X",tmp);
+    
+    vbat_updates=false;
+    if(configuration)
+    {
+        if(OSBoolean* smartGuard=OSDynamicCast(OSBoolean, configuration->getObject("VBATNeedUpdates")))
+            if(smartGuard->isTrue())
+                vbat_updates=true;
+        
+    }
+    // Refresh VBAT reading on each access to the key
+    if(vbat_updates)
+        writeByte(address, ITE_CONFIGURATION_REGISTER, readByte(address, ITE_CONFIGURATION_REGISTER) | 0x40);
+    
 	if (configuration) {
-		for (int i = 0; i < 9; i++) //Zorglub
+		for (int i = 0; i < 9; i++) 
 		{				
 			char key[5];
 			
@@ -455,36 +477,32 @@ bool IT87x::startPlugin()
 					if (!addSensor(KEY_MEMORY_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
 						WarningLog("error adding memory voltage sensor");
 				}
-                else if (name->isEqualTo("AVCC")) {
-                    if (!addSensor(KEY_AVCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
+                else if (name->isEqualTo("+5VC")) {  
+                    if (!addSensor(KEY_5VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding AVCC Voltage Sensor!");
                     }
                 }
-                else if (name->isEqualTo("12VC")) {
+                else if (name->isEqualTo("-5VC")) {  
+                    if (!addSensor(KEY_N5VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding AVCC Voltage Sensor!");
+                    }
+                }                
+                else if (name->isEqualTo("+12VC")) {
                     if (!addSensor(KEY_12V_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding 12V Voltage Sensor!");
                     }
-                }         
+                }
+                else if (name->isEqualTo("-12VC")) {
+                    if (!addSensor(KEY_N12VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
+                        WarningLog("ERROR Adding 12V Voltage Sensor!");
+                    }
+                }
                 else if (name->isEqualTo("3VCC")) {
                     if (!addSensor(KEY_3VCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding 3VCC Voltage Sensor!");
                     }
                 }
-                else if (name->isEqualTo("VRM1")) {
-                    if (!addSensor(KEY_CPU_VRM_SUPPLY0, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
-                        WarningLog("ERROR Adding UNKN1 Voltage Sensor!");
-                    }
-                }
-                else if (name->isEqualTo("VRM2")) {
-                    if (!addSensor(KEY_CPU_VRM_SUPPLY1, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
-                        WarningLog("ERROR Adding UNKN2 Voltage Sensor!");
-                    }
-                }
-                else if (name->isEqualTo("VRM3")) {
-                    if (!addSensor(KEY_CPU_VRM_SUPPLY2, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
-                        WarningLog("ERROR Adding UNKN3 Voltage Sensor!");
-                    }
-                }
+                
                 else if (name->isEqualTo("3VSB")) {
                     if (!addSensor(KEY_3VSB_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
                         WarningLog("ERROR Adding 3VSB Voltage Sensor!");
