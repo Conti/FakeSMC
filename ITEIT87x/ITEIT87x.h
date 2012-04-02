@@ -81,16 +81,13 @@ class IT87x;
 class IT87xSensor : public SuperIOSensor
 {
     OSDeclareDefaultStructors(IT87xSensor)
-    
-private:
-    int16_t    coeff;
+
      
 public:    
-    static SuperIOSensor *withOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex);
+    static SuperIOSensor *withOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex, long aRi=0, long aRf=1, long aVf=0);
     
     virtual long		getValue();
     virtual void        setValue(UInt16 value);
-    virtual void        setCoeff(UInt16 value);
 };
 
 class IT87x : public SuperIOMonitor
@@ -146,7 +143,7 @@ public:
     virtual void			writeSmartGuardMainControl(unsigned long index, UInt16 value); 
     virtual void			writeSmartGuardRegControl(unsigned long index, UInt16 value); 
     
-    SuperIOSensor *			addSensor(const char* key, const char* type, unsigned char size, SuperIOSensorGroup group, unsigned long index);
+    SuperIOSensor *			addSensor(const char* key, const char* type, unsigned char size, SuperIOSensorGroup group, unsigned long index, long aRi=0, long aRf=1, long aVf=0);
 
     
     

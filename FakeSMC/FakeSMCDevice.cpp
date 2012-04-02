@@ -396,6 +396,14 @@ bool FakeSMCDevice::init(IOService *platform, OSDictionary *properties)
 //    this->setProperty( gIOInterruptControllersKey, controllers ) && this->setProperty( gIOInterruptSpecifiersKey,  specifiers );
 
     this->attachToParent(platform, gIOServicePlane);
+    
+    // Adding OEM manufacturer and board id
+//    char * str = readSMBIOS(theManufacturer);
+//    if(!str) str = "Unknown";
+//    this->setProperty("Manufacturer", OSString::withCString(str));
+//    str = readSMBIOS(theProductBoard);
+//    if(!str) str = "Unknown";
+//    this->setProperty("Board", OSString::withCString(str));
 
     DebugLog("successfully initialized");
 

@@ -104,6 +104,10 @@
 		2CB03FBF14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2CB03FBB14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch */; };
 		2CB03FC014EB9AB70070DC93 /* IntelCPUMonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB03FBC14EB9AB70070DC93 /* IntelCPUMonitor.cpp */; };
 		2CB03FC114EB9AB70070DC93 /* IntelCPUMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CB03FBD14EB9AB70070DC93 /* IntelCPUMonitor.h */; };
+		2CB4FCC51529958300FEF90D /* OemSMBIOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4FCB1152990E100FEF90D /* OemSMBIOS.cpp */; };
+		2CB4FCC61529959600FEF90D /* OemSMBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CB4FCB2152990E100FEF90D /* OemSMBIOS.h */; };
+		2CB4FCC71529959600FEF90D /* SMBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CB4FCB3152990E100FEF90D /* SMBIOS.h */; };
+		2CB4FCC8152995A700FEF90D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4FCA615298F4500FEF90D /* InfoPlist.strings */; };
 		2CB5444014F123BC00D114E2 /* NSString+TruncateToWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2F1FA14F122AA006C4251 /* NSString+TruncateToWidth.m */; };
 		2CB6913414F40F2900152814 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D9F8320144FF24000EEEFEB /* Cocoa.framework */; };
 		2CB6913D14F40F2900152814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6913B14F40F2900152814 /* InfoPlist.strings */; };
@@ -278,6 +282,14 @@
 		2CB03FBD14EB9AB70070DC93 /* IntelCPUMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntelCPUMonitor.h; path = IntelCPUMonitor/IntelCPUMonitor.h; sourceTree = "<group>"; };
 		2CB2F1F914F122AA006C4251 /* NSString+TruncateToWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TruncateToWidth.h"; sourceTree = "<group>"; };
 		2CB2F1FA14F122AA006C4251 /* NSString+TruncateToWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TruncateToWidth.m"; sourceTree = "<group>"; };
+		2CB4FCA515298F4500FEF90D /* OemSMBIOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OemSMBIOS-Info.plist"; sourceTree = "<group>"; };
+		2CB4FCA715298F4500FEF90D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2CB4FCAB15298F4500FEF90D /* OemSMBIOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OemSMBIOS-Prefix.pch"; sourceTree = "<group>"; };
+		2CB4FCB1152990E100FEF90D /* OemSMBIOS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OemSMBIOS.cpp; sourceTree = "<group>"; };
+		2CB4FCB2152990E100FEF90D /* OemSMBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OemSMBIOS.h; sourceTree = "<group>"; };
+		2CB4FCB3152990E100FEF90D /* SMBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMBIOS.h; sourceTree = "<group>"; };
+		2CB4FCC31529946B00FEF90D /* OemSMBIOS.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OemSMBIOS.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CB4FCC41529946C00FEF90D /* FintekF718x copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FintekF718x copy-Info.plist"; path = "/Users/ivan/Development/Assembla/fakesmc/HWSensors4/FintekF718x copy-Info.plist"; sourceTree = "<absolute>"; };
 		2CB6913214F40F2900152814 /* SmartGuardian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartGuardian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB6913514F40F2900152814 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		2CB6913614F40F2900152814 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -402,6 +414,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2CB4FCBA1529946B00FEF90D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CB6912F14F40F2900152814 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,8 +449,10 @@
 				1D9F8325144FF24000EEEFEB /* HWMonitor */,
 				2CB6913814F40F2900152814 /* SmartGuardian */,
 				2C2CB4C1150B39DA0017762E /* SmartGuardianHelper */,
+				2CB4FCA315298F4500FEF90D /* OemSMBIOS */,
 				1D05ABE613ED0DAD00EADBF6 /* Frameworks */,
 				1D05ABE513ED0DAD00EADBF6 /* Products */,
+				2CB4FCC41529946C00FEF90D /* FintekF718x copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -452,6 +473,7 @@
 				2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */,
 				2CB6913214F40F2900152814 /* SmartGuardian.app */,
 				2C2CB4BE150B39DA0017762E /* SmartGuardianHelper.app */,
+				2CB4FCC31529946B00FEF90D /* OemSMBIOS.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -805,6 +827,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2CB4FCA315298F4500FEF90D /* OemSMBIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2CB4FCB1152990E100FEF90D /* OemSMBIOS.cpp */,
+				2CB4FCB2152990E100FEF90D /* OemSMBIOS.h */,
+				2CB4FCB3152990E100FEF90D /* SMBIOS.h */,
+				2CB4FCA415298F4500FEF90D /* Supporting Files */,
+			);
+			path = OemSMBIOS;
+			sourceTree = "<group>";
+		};
+		2CB4FCA415298F4500FEF90D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2CB4FCA515298F4500FEF90D /* OemSMBIOS-Info.plist */,
+				2CB4FCA615298F4500FEF90D /* InfoPlist.strings */,
+				2CB4FCAB15298F4500FEF90D /* OemSMBIOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		2CB6913814F40F2900152814 /* SmartGuardian */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,6 +1014,15 @@
 			files = (
 				2CB03FBF14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch in Headers */,
 				2CB03FC114EB9AB70070DC93 /* IntelCPUMonitor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CB4FCBB1529946B00FEF90D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CB4FCC61529959600FEF90D /* OemSMBIOS.h in Headers */,
+				2CB4FCC71529959600FEF90D /* SMBIOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1208,6 +1260,25 @@
 			productReference = 2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
+		2CB4FCB71529946B00FEF90D /* OemSMBIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CB4FCC01529946B00FEF90D /* Build configuration list for PBXNativeTarget "OemSMBIOS" */;
+			buildPhases = (
+				2CB4FCB81529946B00FEF90D /* Sources */,
+				2CB4FCBA1529946B00FEF90D /* Frameworks */,
+				2CB4FCBB1529946B00FEF90D /* Headers */,
+				2CB4FCBD1529946B00FEF90D /* Resources */,
+				2CB4FCBF1529946B00FEF90D /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OemSMBIOS;
+			productName = FintekF718x;
+			productReference = 2CB4FCC31529946B00FEF90D /* OemSMBIOS.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		2CB6913114F40F2900152814 /* SmartGuardian */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CB6916214F40F2A00152814 /* Build configuration list for PBXNativeTarget "SmartGuardian" */;
@@ -1280,6 +1351,7 @@
 				2CB03FAC14EB99F50070DC93 /* IntelCPUMonitor */,
 				2CB6913114F40F2900152814 /* SmartGuardian */,
 				2C2CB4BD150B39DA0017762E /* SmartGuardianHelper */,
+				2CB4FCB71529946B00FEF90D /* OemSMBIOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1396,6 +1468,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2CB4FCBD1529946B00FEF90D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CB4FCC8152995A700FEF90D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CB6913014F40F2900152814 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1484,6 +1564,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2CB03FB414EB99F50070DC93 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CB4FCBF1529946B00FEF90D /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1620,6 +1707,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB03FC014EB9AB70070DC93 /* IntelCPUMonitor.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CB4FCB81529946B00FEF90D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CB4FCC51529958300FEF90D /* OemSMBIOS.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1767,6 +1862,14 @@
 				2C4518D414F41D6D00D44435 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		2CB4FCA615298F4500FEF90D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CB4FCA715298F4500FEF90D /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		2CB6913B14F40F2900152814 /* InfoPlist.strings */ = {
@@ -2506,6 +2609,63 @@
 			};
 			name = Release;
 		};
+		2CB4FCC11529946B00FEF90D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OemSMBIOS/OemSMBIOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "OemSMBIOS/OemSMBIOS-Info.plist";
+				MODULE_NAME = org.navi.OemSMBIOS;
+				MODULE_VERSION = 1.0.0;
+				PRODUCT_NAME = OemSMBIOS;
+				VERSION_INFO_BUILDER = "$(PRODUCT_NAME)_vers.c";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		2CB4FCC21529946B00FEF90D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OemSMBIOS/OemSMBIOS-Prefix.pch";
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "OemSMBIOS/OemSMBIOS-Info.plist";
+				MODULE_NAME = org.navi.OemSMBIOS;
+				MODULE_VERSION = 1.0.0;
+				PRODUCT_NAME = OemSMBIOS;
+				VERSION_INFO_BUILDER = "$(PRODUCT_NAME)_vers.c";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
 		2CB6915E14F40F2A00152814 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2750,6 +2910,15 @@
 			buildConfigurations = (
 				2CB03FB614EB99F50070DC93 /* Debug */,
 				2CB03FB714EB99F50070DC93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CB4FCC01529946B00FEF90D /* Build configuration list for PBXNativeTarget "OemSMBIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CB4FCC11529946B00FEF90D /* Debug */,
+				2CB4FCC21529946B00FEF90D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

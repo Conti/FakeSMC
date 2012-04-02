@@ -25,11 +25,14 @@
 
 OSDefineMetaClassAndStructors(SuperIOSensor, OSObject)
 
-SuperIOSensor *SuperIOSensor::withOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex)
+
+
+
+SuperIOSensor *SuperIOSensor::withOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex, long aRi, long aRf, long aVf)
 {
     SuperIOSensor *me = new SuperIOSensor;
 
-    if (me && !me->initWithOwner(aOwner, aKey, aType, aSize, aGroup, aIndex)) {
+    if (me && !me->initWithOwner(aOwner, aKey, aType, aSize, aGroup, aIndex,aRi,aRf,aVf)) {
         me->release();
         return 0;
     }
@@ -79,18 +82,22 @@ long SuperIOSensor::getValue()
         default:
             break;
     }
-
+    value =  value + ((value - Vf) * Ri)/Rf;
+    
     if (*((uint32_t*)type) == *((uint32_t*)TYPE_FP2E)) {
         value = encode_fp2e(value);
     }
     else if (*((uint32_t*)type) == *((uint32_t*)TYPE_FPE2)) {
         value = encode_fpe2(value);
     }
+    else if (*((uint32_t*)type) == *((uint32_t*)TYPE_FP4C)) {
+            value = encode_fp4c(value);
+    }
 
     return value;
 }
 
-bool SuperIOSensor::initWithOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex)
+bool SuperIOSensor::initWithOwner(SuperIOMonitor *aOwner, const char* aKey, const char* aType, unsigned char aSize, SuperIOSensorGroup aGroup, unsigned long aIndex, long aRi=0, long aRf=0, long aVf=0)
 {
     if (!OSObject::init())
         return false;
@@ -113,6 +120,9 @@ bool SuperIOSensor::initWithOwner(SuperIOMonitor *aOwner, const char* aKey, cons
     size = aSize;
     group = aGroup;
     index = aIndex;
+    Ri = aRi;
+    Rf = aRf;
+    Vf = aVf;
 
     return true;
 }
@@ -208,51 +218,51 @@ void SuperIOMonitor::exit()
     //
 };
 
-bool SuperIOMonitor::updateSensor(const char *key, const char *type, unsigned char size, SuperIOSensorGroup group, unsigned long index)
-{
-    long value = 0;
-
-    switch (group) {
-        case kSuperIOTemperatureSensor:
-            value = readTemperature(index);
-            break;
-        case kSuperIOVoltageSensor:
-            value = readVoltage(index);
-            break;
-        case kSuperIOTachometerSensor:
-            value = readTachometer(index);
-            break;
-        default:
-            break;
-    }
-
-    if (strcmp(type, TYPE_FP2E) == 0) {
-        value = encode_fp2e(value);
-    }
-    else if (strcmp(type, TYPE_FP4C) == 0) {
-        value = encode_fp4c(value);
-    }
-    else if (strcmp(type, TYPE_FPE2) == 0) {
-        value = encode_fpe2(value);
-    }
-
-    if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCSetKeyValue, true, (void*)key, (void*)size, (void*)&value, 0))
-        return false;
-
-    return true;
-}
+//bool SuperIOMonitor::updateSensor(const char *key, const char *type, unsigned char size, SuperIOSensorGroup group, unsigned long index)
+//{
+//    long value = 0;
+//
+//    switch (group) {
+//        case kSuperIOTemperatureSensor:
+//            value = readTemperature(index);
+//            break;
+//        case kSuperIOVoltageSensor:
+//            value = readVoltage(index);
+//            break;
+//        case kSuperIOTachometerSensor:
+//            value = readTachometer(index);
+//            break;
+//        default:
+//            break;
+//    }
+//
+//    if (strcmp(type, TYPE_FP2E) == 0) {
+//        value = encode_fp2e(value);
+//    }
+//    else if (strcmp(type, TYPE_FP4C) == 0) {
+//        value = encode_fp4c(value);
+//    }
+//    else if (strcmp(type, TYPE_FPE2) == 0) {
+//        value = encode_fpe2(value);
+//    }
+//
+//    if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCSetKeyValue, true, (void*)key, (void*)size, (void*)&value, 0))
+//        return false;
+//
+//    return true;
+//}
 
 const char *SuperIOMonitor::getModelName()
 {
     return "Unknown";
 }
 
-SuperIOSensor *SuperIOMonitor::addSensor(const char* name, const char* type, unsigned char size, SuperIOSensorGroup group, unsigned long index)
+SuperIOSensor *SuperIOMonitor::addSensor(const char* name, const char* type, unsigned char size, SuperIOSensorGroup group, unsigned long index, long aRi, long aRf, long aVf)
 {
     if (NULL != getSensor(name))
         return 0;
 
-    if (SuperIOSensor *sensor = SuperIOSensor::withOwner(this, name, type, size, group, index))
+    if (SuperIOSensor *sensor = SuperIOSensor::withOwner(this, name, type, size, group, index,aRi,aRf,aVf))
         if (sensors->setObject(sensor))
             if(kIOReturnSuccess == fakeSMC->callPlatformFunction(kFakeSMCAddKeyHandler, false, (void *)name, (void *)type, (void *)size, (void *)this))
                 return sensor;

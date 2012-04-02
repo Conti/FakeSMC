@@ -104,15 +104,33 @@
 					<key>VIN2</key>
 					<string>3VCC</string>
 					<key>VIN3</key>
-					<string>+12VC</string>
+					<dict>
+						<key>Name</key>
+						<string>+5VC</string>
+						<key>Ri</key>
+						<integer>680</integer>
+						<key>Rf</key>
+						<integer>1000</integer>
+						<key>VRef</key>
+						<integer>0</integer>
+					</dict>
 					<key>VIN4</key>
-					<string>-12VC</string>
+					<string></string>
 					<key>VIN5</key>
-					<string>+5VC</string>
+					<string></string>
 					<key>VIN6</key>
-					<string>-5VC</string>
+					<string></string>
 					<key>VIN7</key>
-					<string>3VSB</string>
+					<dict>
+						<key>Name</key>
+						<string>+12VC</string>
+						<key>Ri</key>
+						<integer>2700</integer>
+						<key>Rf</key>
+						<integer>910</integer>
+						<key>VRef</key>
+						<integer>0</integer>
+					</dict>
 					<key>VIN8</key>
 					<string>VBAT</string>
 				</dict>
