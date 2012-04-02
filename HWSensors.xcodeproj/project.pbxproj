@@ -289,7 +289,6 @@
 		2CB4FCB2152990E100FEF90D /* OemSMBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OemSMBIOS.h; sourceTree = "<group>"; };
 		2CB4FCB3152990E100FEF90D /* SMBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMBIOS.h; sourceTree = "<group>"; };
 		2CB4FCC31529946B00FEF90D /* OemSMBIOS.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OemSMBIOS.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CB4FCC41529946C00FEF90D /* FintekF718x copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FintekF718x copy-Info.plist"; path = "/Users/ivan/Development/Assembla/fakesmc/HWSensors4/FintekF718x copy-Info.plist"; sourceTree = "<absolute>"; };
 		2CB6913214F40F2900152814 /* SmartGuardian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartGuardian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB6913514F40F2900152814 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		2CB6913614F40F2900152814 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -452,7 +451,6 @@
 				2CB4FCA315298F4500FEF90D /* OemSMBIOS */,
 				1D05ABE613ED0DAD00EADBF6 /* Frameworks */,
 				1D05ABE513ED0DAD00EADBF6 /* Products */,
-				2CB4FCC41529946C00FEF90D /* FintekF718x copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};

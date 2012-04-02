@@ -7,58 +7,47 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.mozodojo.${PRODUCT_NAME}</string>
+	<string>org.navi.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>System Management OEM BIOS Driver</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.2</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.2</string>
+	<string>1.0.0</string>
+	<key>OSBundleCompatibleVersion</key>
+	<string>1.0.0</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>Fintek F718x Monitor Plugin</key>
+		<key>Platform BIOS Match</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>org.mozodojo.${PRODUCT_NAME}</string>
+			<string>org.navi.OemSMBIOS</string>
 			<key>IOClass</key>
-			<string>F718x</string>
+			<string>OemSMBIOS</string>
 			<key>IOMatchCategory</key>
-			<string>SuperIOMonitor</string>
+			<string>OemSMBIOS</string>
+			<key>IONameMatch</key>
+			<string>bios</string>
 			<key>IOProviderClass</key>
-			<string>FakeSMC</string>
-			<key>IOResourceMatch</key>
-			<string>ACPI</string>
-			<key>Sensors Configuration</key>
-			<dict>
-				<key>FANIN0</key>
-				<string></string>
-				<key>FANIN1</key>
-				<string></string>
-				<key>FANIN2</key>
-				<string></string>
-				<key>FANIN3</key>
-				<string></string>
-				<key>FANIN4</key>
-				<string></string>
-			</dict>
+			<string>IOPlatformDevice</string>
 		</dict>
 	</dict>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2012 Navi. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
-		<key>com.apple.kpi.libkern</key>
-		<string>10.0.0</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>10.0.0</string>
-		<key>com.apple.kpi.mach</key>
-		<string>10.0.0</string>
+		<string>9.0</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>9.0</string>
 		<key>com.apple.kpi.unsupported</key>
-		<string>10.0.0</string>
-		<key>org.netkas.FakeSMC</key>
-		<string>4.1.0</string>
+		<string>9.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
