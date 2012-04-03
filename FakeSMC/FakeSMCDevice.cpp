@@ -17,6 +17,8 @@
 #define WarningLog(string, args...) do { IOLog (LogPrefix "[Warning] " string "\n", ## args); } while(0)
 #define InfoLog(string, args...)    do { IOLog (LogPrefix string "\n", ## args); } while(0)
 
+
+
 #define super IOACPIPlatformDevice
 OSDefineMetaClassAndStructors (FakeSMCDevice, IOACPIPlatformDevice)
 
@@ -390,21 +392,13 @@ bool FakeSMCDevice::init(IOService *platform, OSDictionary *properties)
     if (!tmpData)
         WarningLog("failed to create tmpdata");
 
-//    OSSymbol *gIntelPICName = (OSSymbol *) OSSymbol::withCStringNoCopy("io-apic-0");
-//    specifiers->setObject( tmpData );
-//    controllers->setObject( gIntelPICName );
-//    this->setProperty( gIOInterruptControllersKey, controllers ) && this->setProperty( gIOInterruptSpecifiersKey,  specifiers );
-
+    //    OSSymbol *gIntelPICName = (OSSymbol *) OSSymbol::withCStringNoCopy("io-apic-0");
+    //    specifiers->setObject( tmpData );
+    //    controllers->setObject( gIntelPICName );
+    //    this->setProperty( gIOInterruptControllersKey, controllers ) && this->setProperty( gIOInterruptSpecifiersKey,  specifiers );
+    
     this->attachToParent(platform, gIOServicePlane);
     
-    // Adding OEM manufacturer and board id
-//    char * str = readSMBIOS(theManufacturer);
-//    if(!str) str = "Unknown";
-//    this->setProperty("Manufacturer", OSString::withCString(str));
-//    str = readSMBIOS(theProductBoard);
-//    if(!str) str = "Unknown";
-//    this->setProperty("Board", OSString::withCString(str));
-
     DebugLog("successfully initialized");
 
     return true;
@@ -705,3 +699,4 @@ IOReturn FakeSMCDevice::callPlatformFunction(const OSSymbol *functionName, bool 
 
     return kIOReturnUnsupported;
 }
+

@@ -14,6 +14,7 @@
 #include <IOKit/IOService.h>
 #include "FakeSMCKey.h"
 
+
 #define APPLESMC_DATA_PORT              0x300
 
 #define APPLESMC_CMD_PORT               0x304
@@ -40,6 +41,8 @@ struct AppleSMCStatus {
     uint8_t key_info[6];
 };
 
+class SMBPackedStrings;
+
 class FakeSMCDevice : public IOACPIPlatformDevice
 {
     OSDeclareDefaultStructors( FakeSMCDevice )
@@ -55,6 +58,7 @@ private:
     OSArray             *keys;
     OSDictionary        *values;
     FakeSMCKey          *sharpKEY;
+
 
     bool                debug;
 
@@ -97,6 +101,9 @@ public:
     virtual void        setDebug(bool debug_val);
 
     virtual IOReturn    callPlatformFunction(const OSSymbol *functionName, bool waitForFunction, void *param1, void *param2, void *param3, void *param4 ); 
+    
+
+
 };
 
 #endif

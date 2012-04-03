@@ -187,7 +187,7 @@ bool OemSMBIOS::start( IOService * provider )
 
     // Get the IOPlatformExpertDevice
 
-    fRoot = getServiceRoot();
+    fRoot = this;
     if (!provider || !fRoot)
         return false;
 
@@ -637,10 +637,10 @@ void OemSMBIOS::processSMBIOSStructureType0(
         snprintf(location, sizeof(location), "%x", bios->startSegment << 4);
         fROMNode->setLocation(location);
 
-        strings->setDataProperty(fROMNode, "oem-vendor", bios->vendor);
-        strings->setDataProperty(fROMNode, "oem-version", bios->version);
-        strings->setDataProperty(fROMNode, "oem-release-date", bios->releaseDate);
-        strings->setDataProperty(fROMNode, "oem-characteristics",
+        strings->setStringProperty(fROMNode, "oem-vendor", bios->vendor);
+        strings->setStringProperty(fROMNode, "oem-version", bios->version);
+        strings->setStringProperty(fROMNode, "oem-release-date", bios->releaseDate);
+        strings->setStringProperty(fROMNode, "oem-characteristics",
                                            bios->characteristics);
 
         fROMNode->setProperty("oem-rom-size", (bios->romSize + 1) * 0x10000, 32 );
@@ -659,9 +659,9 @@ void OemSMBIOS::processSMBIOSStructureType1(
         return;
 
 
-    strings->setDataProperty(fRoot, "oem-manufacturer",  sys->manufacturer);
-    strings->setDataProperty(fRoot, "oem-product-name",  sys->productName);
-    strings->setDataProperty(fRoot, "oem-version",       sys->version);
+    strings->setStringProperty(fRoot, "oem-manufacturer",  sys->manufacturer);
+    strings->setStringProperty(fRoot, "oem-product-name",  sys->productName);
+    strings->setStringProperty(fRoot, "oem-version",       sys->version);
 
     // Platform driver took care of this.
     if (fRoot->getProperty(kIOPlatformSerialNumberKey))
@@ -701,8 +701,8 @@ void OemSMBIOS::processSMBIOSStructureType2(
     if (baseBoard->header.length <8)
         return;
     
-    strings->setDataProperty(fRoot, "oem-mb-manufacturer",  baseBoard->manufacturer);
-    strings->setDataProperty(fRoot, "oem-mb-product",  baseBoard->product);
+    strings->setStringProperty(fRoot, "oem-mb-manufacturer",  baseBoard->manufacturer);
+    strings->setStringProperty(fRoot, "oem-mb-product",  baseBoard->product);
   
 
 }

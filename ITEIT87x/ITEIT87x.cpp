@@ -391,7 +391,7 @@ bool IT87x::startPlugin()
 	
 	InfoLog("found ITE %s", getModelName());
     OSDictionary* list = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
-    OSDictionary* configuration = list ? OSDynamicCast(OSDictionary, list->getObject(getModelName())) : 0;
+    OSDictionary* configuration = list ? OSDynamicCast(OSDictionary, list->getObject(VendorAndModel)) : 0;
     
     if (list && !configuration) 
         configuration = OSDynamicCast(OSDictionary, list->getObject("Default"));
@@ -473,8 +473,8 @@ bool IT87x::startPlugin()
                         WarningLog("ERROR Adding AVCC Voltage Sensor!");
                     }
                 }
-                else if (name->isEqualTo("-5VC")) {  
-                    if (!addSensor(KEY_N5VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
+                else if (name->isEqualTo("+5VSB")) {  
+                    if (!addSensor(KEY_5VSB_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
                         WarningLog("ERROR Adding AVCC Voltage Sensor!");
                     }
                 }                

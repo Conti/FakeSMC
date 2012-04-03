@@ -14,7 +14,7 @@
 #include "FakeSMC.h"
 #include "FakeSMCUtils.h"
 
-#define Debug FALSE
+#define Debug true
 
 #define LogPrefix "SuperIOMonitor: "
 #define DebugLog(string, args...)   do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -374,6 +374,8 @@ IOService *SuperIOMonitor::probe(IOService *provider, SInt32 *score)
     return this;
 }
 
+#define RELEASE(x) do { if (x) { (x)->release(); (x) = 0; } } while(0)
+
 bool SuperIOMonitor::start(IOService *provider)
 {
     DebugLog("Starting...");
@@ -385,6 +387,34 @@ bool SuperIOMonitor::start(IOService *provider)
     if (!(fakeSMC = waitForService(serviceMatching(kFakeSMCDeviceService)))) {
         WarningLog("Can't locate fake SMC device, kext will not load!");
         return false;
+    }
+    
+    IOService * fRoot = waitForMatchingService(serviceMatching("OemSMBIOS"),10000000000ll);
+    if(fRoot)
+    {
+        OSString * vendor = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-manufacturer"));
+        OSString * product = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-product"));
+        
+        DebugLog("Vendor = %s",vendor ? vendor->getCStringNoCopy() : "Null");
+        DebugLog("Product = %s",product  ? product->getCStringNoCopy() : "Null");
+        VendorAndModel = ComposeVendorAndMbKey(vendorID(vendor), boardID(product));
+        if(!VendorAndModel)
+        {    
+
+            
+        vendor = OSDynamicCast(OSString, fRoot->getProperty("oem-manufacturer"));
+        product = OSDynamicCast(OSString, fRoot->getProperty("oem-product-name"));
+        DebugLog("Vendor = %s",vendor ? vendor->getCStringNoCopy() : "Null");
+        DebugLog("Product = %s",product ? product->getCStringNoCopy() : "Null");
+        VendorAndModel = ComposeVendorAndMbKey(vendorID(vendor), boardID(product));
+        }
+        
+        if(VendorAndModel)
+            this->setProperty("board-identifier", VendorAndModel);
+        else
+            this->setProperty("board-identifier", OSString::withCString("Default"));
+        
+
     }
 
     if (startPlugin())
@@ -417,6 +447,7 @@ void SuperIOMonitor::free()
 {
     DebugLog("Freeing...");
 
+    if(VendorAndModel) VendorAndModel->free();
     sensors->release();
 
     super::free();

@@ -75,7 +75,7 @@
 					<key>VIN1</key>
 					<string>Memory</string>
 				</dict>
-				<key>IT8718F</key>
+				<key>Gigabyte.EP43-UD3L</key>
 				<dict>
 					<key>VBATNeedUpdates</key>
 					<true/>
@@ -134,9 +134,9 @@
 					<key>VIN8</key>
 					<string>VBAT</string>
 				</dict>
-				<key>IT8720F</key>
+				<key>ASUS.M2N_SLI_DELUXE</key>
 				<dict>
-					<key>SmartGuardian</key>
+					<key>VBATNeedUpdates</key>
 					<true/>
 					<key>FANIN0</key>
 					<string></string>
@@ -148,39 +148,59 @@
 					<string></string>
 					<key>FANIN4</key>
 					<string></string>
+					<key>SmartGuardian</key>
+					<true/>
 					<key>TEMPIN0</key>
-					<string>System</string>
-					<key>TEMPIN1</key>
-					<string></string>
-					<key>TEMPIN2</key>
 					<string>CPU</string>
+					<key>TEMPIN1</key>
+					<string>System</string>
+					<key>TEMPIN2</key>
+					<string></string>
 					<key>VIN0</key>
 					<string>CPU</string>
 					<key>VIN1</key>
 					<string>Memory</string>
-				</dict>
-				<key>IT8728F</key>
-				<dict>
-					<key>FANIN0</key>
-					<string></string>
-					<key>FANIN1</key>
-					<string></string>
-					<key>FANIN2</key>
-					<string></string>
-					<key>FANIN3</key>
-					<string></string>
-					<key>FANIN4</key>
-					<string></string>
-					<key>TEMPIN0</key>
-					<string>System</string>
-					<key>TEMPIN1</key>
-					<string></string>
-					<key>TEMPIN2</key>
-					<string>CPU</string>
+					<key>VIN2</key>
+					<string>3VCC</string>
+					<key>VIN3</key>
+					<dict>
+						<key>Name</key>
+						<string>+5VC</string>
+						<key>Ri</key>
+						<integer>680</integer>
+						<key>Rf</key>
+						<integer>1000</integer>
+						<key>VRef</key>
+						<integer>0</integer>
+					</dict>
+					<key>VIN4</key>
+					<dict>
+						<key>Name</key>
+						<string>+12VC</string>
+						<key>Ri</key>
+						<integer>3000</integer>
+						<key>Rf</key>
+						<integer>1000</integer>
+						<key>VRef</key>
+						<integer>0</integer>
+					</dict>
 					<key>VIN5</key>
-					<string>CPU</string>
+					<string></string>
 					<key>VIN6</key>
-					<string>Memory</string>
+					<string></string>
+					<key>VIN7</key>
+					<dict>
+						<key>Name</key>
+						<string>+5VSB</string>
+						<key>Ri</key>
+						<integer>680</integer>
+						<key>Rf</key>
+						<integer>1000</integer>
+						<key>VRef</key>
+						<integer>0</integer>
+					</dict>
+					<key>VIN8</key>
+					<string>VBAT</string>
 				</dict>
 			</dict>
 		</dict>
@@ -196,7 +216,7 @@
 		<key>com.apple.kpi.unsupported</key>
 		<string>10.0.0</string>
 		<key>org.netkas.FakeSMC</key>
-		<string>4.1.0</string>
+		<string>4.2.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
