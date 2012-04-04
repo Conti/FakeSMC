@@ -374,7 +374,7 @@ IOService *SuperIOMonitor::probe(IOService *provider, SInt32 *score)
     return this;
 }
 
-#define RELEASE(x) do { if (x) { (x)->release(); (x) = 0; } } while(0)
+
 
 bool SuperIOMonitor::start(IOService *provider)
 {
@@ -389,33 +389,16 @@ bool SuperIOMonitor::start(IOService *provider)
         return false;
     }
     
-    IOService * fRoot = waitForMatchingService(serviceMatching("OemSMBIOS"),10000000000ll);
+    IOService * fRoot = getServiceRoot();
+    
+
     if(fRoot)
-    {
-        OSString * vendor = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-manufacturer"));
-        OSString * product = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-product"));
-        
-        DebugLog("Vendor = %s",vendor ? vendor->getCStringNoCopy() : "Null");
-        DebugLog("Product = %s",product  ? product->getCStringNoCopy() : "Null");
-        VendorAndModel = ComposeVendorAndMbKey(vendorID(vendor), boardID(product));
-        if(!VendorAndModel)
-        {    
-
-            
-        vendor = OSDynamicCast(OSString, fRoot->getProperty("oem-manufacturer"));
-        product = OSDynamicCast(OSString, fRoot->getProperty("oem-product-name"));
-        DebugLog("Vendor = %s",vendor ? vendor->getCStringNoCopy() : "Null");
-        DebugLog("Product = %s",product ? product->getCStringNoCopy() : "Null");
-        VendorAndModel = ComposeVendorAndMbKey(vendorID(vendor), boardID(product));
+        if(!fRoot->getProperty("oem-product-name") && !fRoot->getProperty("oem-manufacturer") && !fRoot->getProperty("oem-mb-product") && !fRoot->getProperty("oem-mb-manufacturer"))  // Nothing was set at the root - try to wait 10 seconds for OemSMBIOS to load
+        {
+            IOService * OemSMBIOS =    waitForMatchingService(serviceMatching("OemSMBIOS"),10000000000ll);
+            OemSMBIOS->release();   // We just really need  it to setup oem-* values so free it once it done
         }
-        
-        if(VendorAndModel)
-            this->setProperty("board-identifier", VendorAndModel);
-        else
-            this->setProperty("board-identifier", OSString::withCString("Default"));
-        
 
-    }
 
     if (startPlugin())
     {
@@ -447,7 +430,7 @@ void SuperIOMonitor::free()
 {
     DebugLog("Freeing...");
 
-    if(VendorAndModel) VendorAndModel->free();
+
     sensors->release();
 
     super::free();

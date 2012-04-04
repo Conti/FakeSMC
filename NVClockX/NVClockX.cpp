@@ -215,7 +215,7 @@ bool NVClockX::start(IOService * provider)
             }
 		}
 		
-		if (nv_card->caps & (I2C_FANSPEED_MONITORING || GPU_FANSPEED_MONITORING)){
+		if (nv_card->caps & (I2C_FANSPEED_MONITORING | GPU_FANSPEED_MONITORING)){
             InfoLog("Adding tachometer sensor");
             
 			int fanIndex = addTachometer(index);

@@ -91,8 +91,27 @@ bool PC8739x::startPlugin()
 {
     InfoLog("found NSC %s, revision 0x%x", getModelName(), revision);
 	
-	OSDictionary* configuration = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
-	
+    OSDictionary* list = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
+    IOService * fRoot = getServiceRoot();
+    OSString *vendor=NULL, *product=NULL;
+    OSDictionary *configuration=NULL; 
+    
+    
+    if(fRoot)
+    {
+        vendor = vendorID( OSDynamicCast(OSString, fRoot->getProperty("oem-mb-manufacturer") ? fRoot->getProperty("oem-mb-manufacturer") :  (fRoot->getProperty("oem-manufacturer") ? fRoot->getProperty("oem-manufacturer") : NULL)));
+        product = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-product") ? fRoot->getProperty("oem-mb-product") :  (fRoot->getProperty("oem-product-name") ? fRoot->getProperty("oem-product-name") : NULL));
+        
+    }
+    if (vendor)
+        if (OSDictionary *link = OSDynamicCast(OSDictionary, list->getObject(vendor)))
+            if(product)
+                configuration = OSDynamicCast(OSDictionary, link->getObject(product));
+    
+    
+    if (list && !configuration) 
+        configuration = OSDynamicCast(OSDictionary, list->getObject("Default"));
+    
 	UInt32 adr = 
     (listenPortByte(NSC_MEM) & 0xff) + 
     ((listenPortByte(NSC_MEM + 1) << 8) & 0xff00) +

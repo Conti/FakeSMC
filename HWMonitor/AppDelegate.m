@@ -245,7 +245,7 @@
     [self addSensorWithKey:@KEY_12V_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"+12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_5VC_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"+5V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_N12VC_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"-12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@KEY_N5VC_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"-5V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_5VSB_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"-5V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_3VCC_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VCC Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_3VSB_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VSB Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_VBAT_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"Battery Voltage",nil) intoGroup:VoltageSensorGroup ];

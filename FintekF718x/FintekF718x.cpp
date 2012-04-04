@@ -262,7 +262,26 @@ bool F718x::startPlugin()
 {
     InfoLog("found Fintek %s", getModelName());
 	
-	OSDictionary* configuration = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
+    OSDictionary* list = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
+    IOService * fRoot = getServiceRoot();
+    OSString *vendor=NULL, *product=NULL;
+    OSDictionary *configuration=NULL; 
+    
+    
+    if(fRoot)
+    {
+        vendor = vendorID( OSDynamicCast(OSString, fRoot->getProperty("oem-mb-manufacturer") ? fRoot->getProperty("oem-mb-manufacturer") :  (fRoot->getProperty("oem-manufacturer") ? fRoot->getProperty("oem-manufacturer") : NULL)));
+        product = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-product") ? fRoot->getProperty("oem-mb-product") :  (fRoot->getProperty("oem-product-name") ? fRoot->getProperty("oem-product-name") : NULL));
+        
+    }
+    if (vendor)
+        if (OSDictionary *link = OSDynamicCast(OSDictionary, list->getObject(vendor)))
+            if(product)
+                configuration = OSDynamicCast(OSDictionary, link->getObject(product));
+    
+    
+    if (list && !configuration) 
+        configuration = OSDynamicCast(OSDictionary, list->getObject("Default"));
 	
 	// Heatsink
 	if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 0))

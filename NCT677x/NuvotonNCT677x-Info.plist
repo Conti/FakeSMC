@@ -63,7 +63,7 @@
 					<key>VIN5</key>
 					<string>-12VC</string>
 					<key>VIN6</key>
-					<string>-5VC</string>
+					<string>+5VSB</string>
 					<key>VIN7</key>
 					<string>3VSB</string>
 					<key>VIN8</key>

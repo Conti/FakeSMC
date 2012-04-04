@@ -197,11 +197,26 @@ bool NCT677x::startPlugin()
 {
   InfoLog("Found Nuvoton %s", getModelName());
 
-  OSDictionary  *list          = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
-  OSDictionary  *configuration = list ? OSDynamicCast(OSDictionary, list->getObject(getModelName())) : 0;
-
-  if (list && !configuration) 
-    configuration = OSDynamicCast(OSDictionary, list->getObject("Default"));
+    OSDictionary* list = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration"));
+    IOService * fRoot = getServiceRoot();
+    OSString *vendor=NULL, *product=NULL;
+    OSDictionary *configuration=NULL; 
+    
+    
+    if(fRoot)
+    {
+        vendor = vendorID( OSDynamicCast(OSString, fRoot->getProperty("oem-mb-manufacturer") ? fRoot->getProperty("oem-mb-manufacturer") :  (fRoot->getProperty("oem-manufacturer") ? fRoot->getProperty("oem-manufacturer") : NULL)));
+        product = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-product") ? fRoot->getProperty("oem-mb-product") :  (fRoot->getProperty("oem-product-name") ? fRoot->getProperty("oem-product-name") : NULL));
+        
+    }
+    if (vendor)
+        if (OSDictionary *link = OSDynamicCast(OSDictionary, list->getObject(vendor)))
+            if(product)
+                configuration = OSDynamicCast(OSDictionary, link->getObject(product));
+    
+    
+    if (list && !configuration) 
+        configuration = OSDynamicCast(OSDictionary, list->getObject("Default"));
 
   // Fans
   for (int i = 0; i < 5; i++) {
@@ -273,8 +288,8 @@ bool NCT677x::startPlugin()
             WarningLog("ERROR Adding +5VC Voltage Sensor!");
         }
     }
-    else if (name->isEqualTo("-5VC")) {  
-        if (!addSensor(KEY_N5VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
+    else if (name->isEqualTo("+5VSB")) {  
+        if (!addSensor(KEY_5VSB_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
             WarningLog("ERROR Adding -5VC Voltage Sensor!");
         }
     }                

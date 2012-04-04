@@ -34,18 +34,21 @@
 			<string>ACPI</string>
 			<key>Sensors Configuration</key>
 			<dict>
-				<key>TEMPIN0</key>
-				<string>System</string>
-				<key>TEMPIN1</key>
-				<string>Ambient</string>
-				<key>TEMPIN2</key>
-				<string>CPU</string>
-				<key>TEMPIN3</key>
-				<string>Memory</string>
-				<key>FANIN0</key>
-				<string>System Fan</string>
-				<key>FANIN1</key>
-				<string></string>
+				<key>Default</key>
+				<dict>
+					<key>FANIN1</key>
+					<string></string>
+					<key>FANIN0</key>
+					<string>System Fan</string>
+					<key>TEMPIN3</key>
+					<string>Memory</string>
+					<key>TEMPIN2</key>
+					<string>CPU</string>
+					<key>TEMPIN1</key>
+					<string>Ambient</string>
+					<key>TEMPIN0</key>
+					<string>System</string>
+				</dict>
 			</dict>
 		</dict>
 	</dict>

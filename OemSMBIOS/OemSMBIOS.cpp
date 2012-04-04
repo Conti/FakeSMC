@@ -187,8 +187,10 @@ bool OemSMBIOS::start( IOService * provider )
 
     // Get the IOPlatformExpertDevice
 
-    fRoot = this;
+    fRoot = getServiceRoot();
     if (!provider || !fRoot)
+        return false;
+    if(fRoot->getProperty("oem-product-name") || fRoot->getProperty("oem-manufacturer") || fRoot->getProperty("oem-mb-product") ||fRoot->getProperty("oem-mb-manufacturer"))
         return false;
 
     // Serialize SMBIOS structures to user-space on demand
