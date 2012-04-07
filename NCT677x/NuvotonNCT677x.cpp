@@ -265,62 +265,68 @@ bool NCT677x::startPlugin()
     }
   }
 
+    
+    
   // Voltages
-  for (int i = 0; i < 9; i++) {
-
-    char key[5];
-
-    snprintf(key, 5, "VIN%X", i);
-
-    OSString  *name = configuration ? OSDynamicCast(OSString, configuration->getObject(key)) : 0;
-
-    if ((name && name->isEqualTo("CPU")) || (!configuration && i==0)) {
-      if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
-        WarningLog("ERROR Adding CPU Voltage Sensor!");
-      }
-    }
-    else if (name->isEqualTo("Memory")) {
-        if (!addSensor(KEY_MEMORY_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i))
-            WarningLog("error adding memory voltage sensor");
-    }
-    else if (name->isEqualTo("+5VC")) {  
-        if (!addSensor(KEY_5VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
-            WarningLog("ERROR Adding +5VC Voltage Sensor!");
-        }
-    }
-    else if (name->isEqualTo("+5VSB")) {  
-        if (!addSensor(KEY_5VSB_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
-            WarningLog("ERROR Adding -5VC Voltage Sensor!");
-        }
-    }                
-    else if (name->isEqualTo("+12VC")) {
-        if (!addSensor(KEY_12V_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
-            WarningLog("ERROR Adding +12V Voltage Sensor!");
-        }
-    }
-    else if (name->isEqualTo("-12VC")) {
-        if (!addSensor(KEY_N12VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i)) {
-            WarningLog("ERROR Adding -12V Voltage Sensor!");
-        }
-    }
-    else if (name->isEqualTo("3VCC")) {
-        if (!addSensor(KEY_3VCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
-            WarningLog("ERROR Adding 3VCC Voltage Sensor!");
-        }
-    }
-      
-    else if (name->isEqualTo("3VSB")) {
-        if (!addSensor(KEY_3VSB_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
-            WarningLog("ERROR Adding 3VSB Voltage Sensor!");
-        }
-    }
-    else if (name->isEqualTo("VBAT")) {
-        if (!addSensor(KEY_VBAT_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i)) {
-            WarningLog("ERROR Adding VBAT Voltage Sensor!");
-        }
-    }
-
-  }
+	if (configuration) {
+		for (int i = 0; i < 9; i++) 
+		{				
+			char key[5];
+            OSString * name;
+            long Ri=0;
+            long Rf=1;
+            long Vf=0;
+			
+			snprintf(key, 5, "VIN%X", i);
+			
+			if (process_sensor_entry(configuration->getObject(key), &name, &Ri, &Rf, &Vf)) {
+				if (name->isEqualTo("CPU")) {
+					if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf))
+						WarningLog("error adding CPU voltage sensor");
+				}
+				else if (name->isEqualTo("Memory")) {
+					if (!addSensor(KEY_MEMORY_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf))
+						WarningLog("error adding memory voltage sensor");
+				}
+                else if (name->isEqualTo("+5VC")) {  
+                    if (!addSensor(KEY_5VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
+                        WarningLog("ERROR Adding AVCC Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("+5VSB")) {  
+                    if (!addSensor(KEY_5VSB_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
+                        WarningLog("ERROR Adding AVCC Voltage Sensor!");
+                    }
+                }                
+                else if (name->isEqualTo("+12VC")) {
+                    if (!addSensor(KEY_12V_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
+                        WarningLog("ERROR Adding 12V Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("-12VC")) {
+                    if (!addSensor(KEY_N12VC_VOLTAGE, TYPE_FP4C, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
+                        WarningLog("ERROR Adding 12V Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("3VCC")) {
+                    if (!addSensor(KEY_3VCC_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
+                        WarningLog("ERROR Adding 3VCC Voltage Sensor!");
+                    }
+                }
+                
+                else if (name->isEqualTo("3VSB")) {
+                    if (!addSensor(KEY_3VSB_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
+                        WarningLog("ERROR Adding 3VSB Voltage Sensor!");
+                    }
+                }
+                else if (name->isEqualTo("VBAT")) {
+                    if (!addSensor(KEY_VBAT_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf)) {
+                        WarningLog("ERROR Adding VBAT Voltage Sensor!");
+                    }
+                }
+			}
+		}
+	}
 
   return true;
 }
