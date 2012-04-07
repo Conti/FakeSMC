@@ -52,7 +52,7 @@
 #include "cpuid.h"
 #include "FakeSMC.h"
 
-#define Debug true
+#define Debug false
 
 #define LogPrefix "W836x: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
