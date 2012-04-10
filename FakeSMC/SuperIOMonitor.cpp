@@ -396,7 +396,8 @@ bool SuperIOMonitor::start(IOService *provider)
         if(!fRoot->getProperty("oem-product-name") && !fRoot->getProperty("oem-manufacturer") && !fRoot->getProperty("oem-mb-product") && !fRoot->getProperty("oem-mb-manufacturer"))  // Nothing was set at the root - try to wait 10 seconds for OemSMBIOS to load
         {
             IOService * OemSMBIOS =    waitForMatchingService(serviceMatching("OemSMBIOS"),10000000000ll);
-            OemSMBIOS->release();   // We just really need  it to setup oem-* values so free it once it done
+            if(OemSMBIOS)
+                OemSMBIOS->release();   // We just really need  it to setup oem-* values so free it once it done
         }
 
 
