@@ -516,6 +516,92 @@
 				</dict>
 				<key>Gigabyte</key>
 				<dict>
+					<key>Z68A-D3H-B3</key>
+					<dict>
+						<key>FANIN0</key>
+						<string>CPU Fan</string>
+						<key>FANIN1</key>
+						<string>System Fan1</string>
+						<key>FANIN2</key>
+						<string>PWR Fan</string>
+						<key>FANIN3</key>
+						<string>System Fan2</string>
+						<key>FANIN4</key>
+						<string></string>
+						<key>SmartGuardian</key>
+						<true/>
+						<key>TEMPIN0</key>
+						<string>System</string>
+						<key>TEMPIN1</key>
+						<string></string>
+						<key>TEMPIN2</key>
+						<string>CPU</string>
+						<key>VBATNeedUpdates</key>
+						<true/>
+						<key>VIN0</key>
+						<string></string>
+						<key>VIN1</key>
+						<dict>
+							<key>Name</key>
+							<string>3VCC</string>
+							<key>Rf</key>
+							<integer>2050</integer>
+							<key>Ri</key>
+							<integer>1330</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN2</key>
+						<dict>
+							<key>Name</key>
+							<string>+12VC</string>
+							<key>Rf</key>
+							<integer>220</integer>
+							<key>Ri</key>
+							<integer>680</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN3</key>
+						<dict>
+							<key>Name</key>
+							<string>+5VC</string>
+							<key>Rf</key>
+							<integer>2000</integer>
+							<key>Ri</key>
+							<integer>1430</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN4</key>
+						<string></string>
+						<key>VIN5</key>
+						<string>CPU</string>
+						<key>VIN6</key>
+						<string>Memory</string>
+						<key>VIN7</key>
+						<dict>
+							<key>Name</key>
+							<string>3VSB</string>
+							<key>Rf</key>
+							<integer>100</integer>
+							<key>Ri</key>
+							<integer>100</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN8</key>
+						<dict>
+							<key>Name</key>
+							<string>VBAT</string>
+							<key>Rf</key>
+							<integer>100</integer>
+							<key>Ri</key>
+							<integer>100</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+					</dict>
 					<key>EP43-UD3L</key>
 					<dict>
 						<key>VBATNeedUpdates</key>
