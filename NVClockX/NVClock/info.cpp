@@ -659,6 +659,7 @@ static const struct pci_ids ids[] =
 	// 1080 - 109F
 	{ 0x1080, "GF100 [GeForce GTX 580]", DESKTOP },
 	{ 0x1081, "GF100 [GeForce GTX 570]", DESKTOP },
+    { 0x1201, "GF100 [GeForce GTX 560]", DESKTOP },
 	{ 0x1082, "GF100 [GeForce GTX 560 Ti]", DESKTOP },
 	{ 0x1083, "GF100 [GeForce GTX 590]", DESKTOP },
 	{ 0x1086, "GF100 [GeForce GTX 570]", DESKTOP },
@@ -770,6 +771,7 @@ int get_gpu_arch(int device_id)
 			arch = NV4B; /* 7600 */
 			break;
 		case 0x190:
+        case 0x606:    
 			arch = NV50; /* 8800 'NV50 / G80' */
 			break;
 		case 0x400: /* 8600 'G84' */
