@@ -152,15 +152,11 @@
     io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching("IT87x"));
     if(!service)
         return nil;
-    NSString *  model = (__bridge_transfer NSString *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSuperIOMonitorModel), kCFAllocatorDefault, 0);
+
     NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:0];
-    if (model)
-    {
-        NSDictionary* list = (__bridge_transfer NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR("Sensors Configuration"), kCFAllocatorDefault, 0);
-        NSDictionary* configuration = list ? [list valueForKey:model]  : nil;
-        
-        if (list && !configuration) 
-            configuration = [list objectForKey:@"Default"];
+
+        NSDictionary* configuration = (__bridge_transfer NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR("Current Configuration"), kCFAllocatorDefault, 0);
+
         // Temperature Sensors
         if (configuration) {
             for (int i = 0; i < 3; i++) 
@@ -180,7 +176,7 @@
             }
             return dict;
         }
-    }
+    
     return nil;
 }
 
@@ -194,18 +190,14 @@
       io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching("IT87x"));
     if(!service)
         return NO;
-    NSString *  model = (__bridge_transfer NSString *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSuperIOMonitorModel), kCFAllocatorDefault, 0);
     
-    if (model)
-    {
-        NSDictionary* list = (__bridge_transfer NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR("Sensors Configuration"), kCFAllocatorDefault, 0);
-        NSDictionary* configuration = list ? [list valueForKey:model]  : nil;
+
+        NSDictionary* configuration = (__bridge_transfer NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR("Current Configuration"), kCFAllocatorDefault, 0);
+
         
-        if (list && !configuration) 
-            configuration = [list objectForKey:@"Default"];
         BOOL hasSmartGuardian = [[configuration valueForKey:@"SmartGuardian"] boolValue];
         return hasSmartGuardian;
-    }
+    
     return NO;
 }
 

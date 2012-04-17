@@ -240,8 +240,9 @@
     
     // Voltages
 
-    [self addSensorWithKey:@"VC0C" andType: @TYPE_FP2E andCaption:NSLocalizedString(@"CPU Voltage",nil) intoGroup:VoltageSensorGroup ];
-    [self addSensorWithKey:@"VM0R" andType: @TYPE_FP2E andCaption:NSLocalizedString(@"DIMM Voltage",nil) intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_CPU_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"CPU Voltage",nil) intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY0 andType: @TYPE_FP2E andCaption:NSLocalizedString(@"CPU VRM Voltage",nil) intoGroup:VoltageSensorGroup ];
+    [self addSensorWithKey:@KEY_MEMORY_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"DIMM Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_12V_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"+12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_5VC_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"+5V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_N12VC_VOLTAGE andType: @TYPE_FP4C andCaption:NSLocalizedString(@"-12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];

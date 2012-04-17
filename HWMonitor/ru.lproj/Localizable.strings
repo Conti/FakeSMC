@@ -20,7 +20,8 @@
 "Ambient"="Корпус";
 "CPU Package Multiplier"="Общий множитель CPU";
 "CPU %X Multiplier"="Множитель CPU %X";
-"CPU Voltage"="Шина CPU";
+"CPU Voltage"="Ядро CPU";
+"CPU VRM Voltage"="Шина CPU";
 "DIMM Voltage"="Шина модулей DIMM";
 "+12V Bus Voltage"="Шина +12В";
 "+5V Bus Voltage"="Шина +5В";

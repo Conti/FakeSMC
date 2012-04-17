@@ -78,6 +78,7 @@
 		1DA962C413ED37D90096F8A5 /* RadeonChipinfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C213ED37D90096F8A5 /* RadeonChipinfo.h */; };
 		1DA962C513ED37D90096F8A5 /* RadeonChipsets.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */; };
 		1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C613ED389E0096F8A5 /* AtomBIOS.h */; };
+		2C107CB0153DC8E400151A6E /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB9815E1535C63600DAC5F8 /* IOKit.framework */; };
 		2C11943A14F910F1009319BD /* fan8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943914F910F1009319BD /* fan8.png */; };
 		2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
 		2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */; };
@@ -90,9 +91,6 @@
 		2C4518CD14F41D4100D44435 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4518CE14F41D4100D44435 /* AppDelegate.m */; };
 		2C4518D114F41D6700D44435 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C4518D314F41D6700D44435 /* Localizable.strings */; };
 		2C7C8EC814F5227400D3095F /* sgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C8EC714F5227400D3095F /* sgModel.m */; };
-		2C933D71150F326A005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
-		2C933D72150F32A0005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
-		2C933D73150F32B9005C7E86 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C933D70150F326A005C7E86 /* IOKit.framework */; };
 		2C9B2A42150F525A00AA7AEC /* monitor-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A41150F525A00AA7AEC /* monitor-icon.icns */; };
 		2C9B2A44150F532600AA7AEC /* hd_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A43150F532600AA7AEC /* hd_small.png */; };
 		2C9B2A4A150F55DA00AA7AEC /* fan_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B2A49150F55DA00AA7AEC /* fan_small.png */; };
@@ -113,9 +111,11 @@
 		2CB6913D14F40F2900152814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6913B14F40F2900152814 /* InfoPlist.strings */; };
 		2CB6913F14F40F2900152814 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB6913E14F40F2900152814 /* main.m */; };
 		2CB6914314F40F2900152814 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6914114F40F2900152814 /* Credits.rtf */; };
+		2CB9815F1535C63600DAC5F8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB9815E1535C63600DAC5F8 /* IOKit.framework */; };
 		2CBDEF16150F68A600E8E886 /* temp_alt_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBDEF15150F68A600E8E886 /* temp_alt_small.png */; };
 		2CBDEF18150F691F00E8E886 /* monitor_icon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */; };
 		2CDCE0C415094B7F00BA9B97 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCE0C615094B7F00BA9B97 /* MainWindow.xib */; };
+		2CE100A71537F07100F69F63 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB9815E1535C63600DAC5F8 /* IOKit.framework */; };
 		2CEB5F9D1500E840002BD48D /* sgAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1DBBD61500E59000971A87 /* sgAppController.m */; };
 		2CEB5FA11501141B002BD48D /* sgFan.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB5FA01501141B002BD48D /* sgFan.m */; };
 		2CF872E214FCAC4400E8CBBC /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF872E114FCAC4400E8CBBC /* GraphView.m */; };
@@ -265,7 +265,6 @@
 		2C4518D614F4202A00D44435 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2C7C8EC614F5227400D3095F /* sgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sgModel.h; sourceTree = "<group>"; };
 		2C7C8EC714F5227400D3095F /* sgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sgModel.m; sourceTree = "<group>"; };
-		2C933D70150F326A005C7E86 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		2C9B2A41150F525A00AA7AEC /* monitor-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "monitor-icon.icns"; sourceTree = "<group>"; };
 		2C9B2A43150F532600AA7AEC /* hd_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hd_small.png; sourceTree = "<group>"; };
 		2C9B2A49150F55DA00AA7AEC /* fan_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan_small.png; sourceTree = "<group>"; };
@@ -298,6 +297,7 @@
 		2CB6913E14F40F2900152814 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2CB6914014F40F2900152814 /* SmartGuardian-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartGuardian-Prefix.pch"; sourceTree = "<group>"; };
 		2CB6914214F40F2900152814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2CB9815E1535C63600DAC5F8 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		2CBDEF15150F68A600E8E886 /* temp_alt_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_alt_small.png; sourceTree = "<group>"; };
 		2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monitor_icon_small.png; sourceTree = "<group>"; };
 		2CDCE0C515094B7F00BA9B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
@@ -364,7 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C933D71150F326A005C7E86 /* IOKit.framework in Frameworks */,
+				2CE100A71537F07100F69F63 /* IOKit.framework in Frameworks */,
 				1D757E5814502D510003045C /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,8 +401,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C107CB0153DC8E400151A6E /* IOKit.framework in Frameworks */,
 				2C2CB4C0150B39DA0017762E /* Cocoa.framework in Frameworks */,
-				2C933D73150F32B9005C7E86 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,8 +424,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB9815F1535C63600DAC5F8 /* IOKit.framework in Frameworks */,
 				2CB6913414F40F2900152814 /* Cocoa.framework in Frameworks */,
-				2C933D72150F32A0005C7E86 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,7 +479,7 @@
 		1D05ABE613ED0DAD00EADBF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C933D70150F326A005C7E86 /* IOKit.framework */,
+				2CB9815E1535C63600DAC5F8 /* IOKit.framework */,
 				1D9F8320144FF24000EEEFEB /* Cocoa.framework */,
 				1D05ABE813ED0DAD00EADBF6 /* Kernel.framework */,
 				1D9F8322144FF24000EEEFEB /* AppKit.framework */,
@@ -2268,7 +2268,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "HWMonitor/HWMonitor-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -2523,6 +2523,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2546,8 +2547,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "SmartGuardianHelper/SmartGuardianHelper-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2676,7 +2679,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2696,6 +2699,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2714,6 +2718,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2729,6 +2734,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

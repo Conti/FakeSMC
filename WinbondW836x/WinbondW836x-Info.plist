@@ -36,7 +36,64 @@
 			<dict>
 				<key>ASUS</key>
 				<dict>
-					<key>Rampage II GENE</key>
+					<key>P7P55D LE</key>
+					<dict>
+						<key>FANIN0</key>
+						<string>Chassis Fan 1</string>
+						<key>FANIN1</key>
+						<string>CPU Fan</string>
+						<key>FANIN2</key>
+						<string>Chassis Fan 2</string>
+						<key>FANIN3</key>
+						<string>Chassis Fan 3</string>
+						<key>FANIN4</key>
+						<string>Power Fan</string>
+						<key>FANINLIMIT</key>
+						<integer>4</integer>
+						<key>TEMPIN0</key>
+						<string>CPU</string>
+						<key>TEMPIN1</key>
+						<string>Ambient</string>
+						<key>TEMPIN2</key>
+						<string>System</string>
+						<key>VIN0</key>
+						<string>CPU</string>
+						<key>VIN1</key>
+						<string>Memory</string>
+						<key>VIN2</key>
+						<string>3VCC</string>
+						<key>VIN3</key>
+						<dict>
+							<key>Name</key>
+							<string>+12VC</string>
+							<key>Ri</key>
+							<integer>7193</integer>
+							<key>Rf</key>
+							<integer>1000</integer>
+							<key>VRef</key>
+							<string></string>
+						</dict>
+						<key>VIN4</key>
+						<dict>
+							<key>Name</key>
+							<string>+5VC</string>
+							<key>Ri</key>
+							<integer>2000</integer>
+							<key>Rf</key>
+							<integer>1000</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN5</key>
+						<string></string>
+						<key>VIN6</key>
+						<string></string>
+						<key>VIN7</key>
+						<string></string>
+						<key>VIN8</key>
+						<string></string>
+					</dict>
+					<key>P6T DELUXE V2</key>
 					<dict>
 						<key>TEMPIN0</key>
 						<string>CPU</string>
@@ -122,7 +179,7 @@
 						<key>VIN9</key>
 						<string>Power Supply 8</string>
 					</dict>
-					<key>P6T</key>
+					<key>Rampage II GENE</key>
 					<dict>
 						<key>TEMPIN0</key>
 						<string>CPU</string>
@@ -206,7 +263,93 @@
 							<integer>0</integer>
 						</dict>
 						<key>VIN9</key>
-						<string>Power Supply 8</string>
+						<string></string>
+					</dict>
+					<key>P6T</key>
+					<dict>
+						<key>TEMPIN0</key>
+						<string>CPU</string>
+						<key>TEMPIN1</key>
+						<string></string>
+						<key>TEMPIN2</key>
+						<string>System</string>
+						<key>FANINLIMIT</key>
+						<integer>5</integer>
+						<key>FANIN0</key>
+						<string>System Fan</string>
+						<key>FANIN1</key>
+						<string>CPU Fan</string>
+						<key>FANIN2</key>
+						<string>Auxiliary</string>
+						<key>FANIN3</key>
+						<string>CPU Fan 2</string>
+						<key>FANIN4</key>
+						<string>Auxiliary Fan 2</string>
+						<key>VIN0</key>
+						<string>CPU</string>
+						<key>VIN1</key>
+						<dict>
+							<key>Name</key>
+							<string>+12VC</string>
+							<key>Ri</key>
+							<integer>1150</integer>
+							<key>Rf</key>
+							<integer>191</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN2</key>
+						<string></string>
+						<key>VIN3</key>
+						<dict>
+							<key>Name</key>
+							<string>3VCC</string>
+							<key>Ri</key>
+							<integer>100</integer>
+							<key>Rf</key>
+							<integer>100</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN4</key>
+						<dict>
+							<key>Name</key>
+							<string>+5VC</string>
+							<key>Ri</key>
+							<integer>150</integer>
+							<key>Rf</key>
+							<integer>75</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN5</key>
+						<string></string>
+						<key>VIN6</key>
+						<string></string>
+						<key>VIN7</key>
+						<dict>
+							<key>Name</key>
+							<string>3VSB</string>
+							<key>Ri</key>
+							<integer>100</integer>
+							<key>Rf</key>
+							<integer>100</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN8</key>
+						<dict>
+							<key>Name</key>
+							<string>VBAT</string>
+							<key>Ri</key>
+							<integer>100</integer>
+							<key>Rf</key>
+							<integer>100</integer>
+							<key>VRef</key>
+							<integer>0</integer>
+						</dict>
+						<key>VIN9</key>
+						<string></string>
 					</dict>
 					<key>P6X58D-E</key>
 					<dict>

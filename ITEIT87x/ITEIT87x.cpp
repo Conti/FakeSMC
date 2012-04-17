@@ -410,6 +410,9 @@ bool IT87x::startPlugin()
     
     if (list && !configuration) 
         configuration = OSDynamicCast(OSDictionary, list->getObject("Default"));
+    
+    if(configuration)
+        this->setProperty("Current Configuration", configuration);
 	
 	// Temperature Sensors
 	if (configuration) {
@@ -476,7 +479,7 @@ bool IT87x::startPlugin()
 			
 			if (process_sensor_entry(configuration->getObject(key), &name, &Ri, &Rf, &Vf)) {
 				if (name->isEqualTo("CPU")) {
-					if (!addSensor(KEY_CPU_VOLTAGE, TYPE_FP2E, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf))
+					if (!addSensor(KEY_CPU_VRM_SUPPLY0, TYPE_FP2E, 2, kSuperIOVoltageSensor, i,Ri,Rf,Vf))
 						WarningLog("error adding CPU voltage sensor");
 				}
 				else if (name->isEqualTo("Memory")) {
