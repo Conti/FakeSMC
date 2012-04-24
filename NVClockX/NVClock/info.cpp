@@ -772,7 +772,7 @@ int get_gpu_arch(int device_id)
 			arch = NV4B; /* 7600 */
 			break;
 		case 0x190:
-        case 0x606:    
+ //       case 0x606:    
 			arch = NV50; /* 8800 'NV50 / G80' */
 			break;
 		case 0x400: /* 8600 'G84' */
@@ -800,7 +800,11 @@ int get_gpu_arch(int device_id)
 			break;
 		case 0x600: /* G92 */
 		case 0x610: /* G92 */
-			arch = G84; //NV50;
+      if (device_id == 0x606) {
+        arch = NV50;
+      } else {
+        arch = G84;
+      }
 			break;
 		case 0x620: /* 9600GT 'G94' */
 			arch = G94;
