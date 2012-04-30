@@ -167,6 +167,13 @@ bool NCT677x::probePort()
           minFanRPM = (int)(1.35e6 / 0x1FFF);
           break;
       } break;
+    case 0xC5:
+      switch (revision & 0xF0) {
+        case 0x60:
+          model = NCT6779D;
+          minFanRPM = (int)(1.35e6 / 0x1FFF);
+          break;
+      } break;
   }
 
   if (!model) {
@@ -336,6 +343,7 @@ const char *NCT677x::getModelName()
   switch (model) {
     case NCT6771F:  return "NCT6771F";
     case NCT6776F:  return "NCT6776F";
+    case NCT6779D:  return "NCT6779D";
   }
 
   return "Unknown";

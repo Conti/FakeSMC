@@ -90,7 +90,8 @@ const UInt16 NUVOTON_FAN_CONTROL_MODE_REG[]     = { 0x102,  0x202,  0x302 };
 
 enum NCT677xModel {
   NCT6771F = 0xB470,
-  NCT6776F = 0xC330
+  NCT6776F = 0xC330,
+  NCT6779D = 0xC560
 };
 
 class NCT677x : public SuperIOMonitor
