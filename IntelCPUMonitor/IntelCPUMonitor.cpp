@@ -197,6 +197,9 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 	}
   
   SandyArch = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN);
+  if (SandyArch) {
+    snprintf(Platform, 4, "k62");
+  }
 	
 	if (userTjmax != 0) {
 		for (int i = 0; i < count; i++)
