@@ -173,6 +173,7 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 				case CPUID_MODEL_NEHALEM_EX:
 				case CPUID_MODEL_WESTMERE_EX:
 				case CPUID_MODEL_SANDYBRIDGE:
+        case CPUID_MODEL_IVYBRIDGE:
 				case CPUID_MODEL_JAKETOWN:
 				{
 					nehalemArch = true;
@@ -196,7 +197,7 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 			return 0;
 	}
   
-  SandyArch = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN);
+  SandyArch = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN) || (CpuModel == CPUID_MODEL_IVYBRIDGE);
   if (SandyArch) {
     snprintf(Platform, 4, "k62");
   }
