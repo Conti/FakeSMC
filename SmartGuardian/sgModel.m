@@ -134,7 +134,7 @@
 
 -(void) findControllers
 {
-    NSMutableArray * cur, * prev, * names;
+    __block NSMutableArray * cur, * prev, * names;
     
     cur = [NSMutableArray arrayWithCapacity:0];
     prev = [NSMutableArray arrayWithCapacity:0];

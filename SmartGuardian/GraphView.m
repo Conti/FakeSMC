@@ -68,7 +68,7 @@
             //        CGContextClosePath(ctx);
             CGContextDrawPath(ctx, kCGPathStroke);
             CGContextSetLineDash(ctx, 0, NULL, 0); // Remove the dash
-            CFRelease(drawColor);
+        //    CFRelease(drawColor);
             
             
         }];
@@ -113,7 +113,7 @@
 //        CGContextAddLineToPoint(ctx, self.bounds.size.width,  0);
 //        CGContextClosePath(ctx);
         CGContextDrawPath(ctx, kCGPathStroke);
-           CFRelease(drawColor);   
+     //      CFRelease(drawColor);
         
          
        }];
@@ -172,8 +172,8 @@
     CGContextMoveToPoint(context, kOffsetX, kOffsetY);
     CGContextAddLineToPoint(context, self.bounds.size.width, kOffsetY);
     CGContextStrokePath(context);
-    CFRelease(drawColor);
-    CFRelease(drawColor_axis);
+ //   CFRelease(drawColor);
+ //   CFRelease(drawColor_axis);
     
 }
 
