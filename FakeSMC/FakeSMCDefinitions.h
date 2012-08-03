@@ -162,6 +162,11 @@
 //The fractional part is bits 2-0 of a register.The whole number part is bits 5-3 of a register 
 //and bit 7 of another register.
 
+#define KEY_FORMAT_FAKESMC_GPU_FREQUENCY        "CG%XP"
+#define KEY_FORMAT_FAKESMC_GPU_MEMORY_FREQUENCY "CG%XM"
+#define KEY_FORMAT_FAKESMC_GPU_SHADER_FREQUENCY "CG%XS"
+#define KEY_FORMAT_FAKESMC_GPU_ROP_FREQUENCY    "CG%XR"
+
 
 // Types
 #define TYPE_FPE2                               "fpe2"

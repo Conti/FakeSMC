@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120EF11A15CC4116003CC34F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 120EF11915CC4116003CC34F /* MainWindow.xib */; };
 		1D05ABFF13ED0E2E00EADBF6 /* FakeSMC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */; };
 		1D05AC0013ED0E2E00EADBF6 /* FakeSMC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05ABFA13ED0E2E00EADBF6 /* FakeSMC.h */; };
 		1D05AC0113ED0E2E00EADBF6 /* FakeSMCDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABFB13ED0E2E00EADBF6 /* FakeSMCDevice.cpp */; };
@@ -82,11 +83,6 @@
 		2C11943A14F910F1009319BD /* fan8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943914F910F1009319BD /* fan8.png */; };
 		2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
 		2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */; };
-		2C182F5E1542CBA600FDBE5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C182F571542CBA600FDBE5A /* InfoPlist.strings */; };
-		2C182F601542CBA600FDBE5A /* GeForceX-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2C182F5A1542CBA600FDBE5A /* GeForceX-Prefix.pch */; };
-		2C182F611542CBA600FDBE5A /* GeForceX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C182F5B1542CBA600FDBE5A /* GeForceX.cpp */; };
-		2C182F621542CBA600FDBE5A /* GeForceX.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C182F5C1542CBA600FDBE5A /* GeForceX.h */; };
-		2C182F631542CBA600FDBE5A /* nouveau.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C182F5D1542CBA600FDBE5A /* nouveau.h */; };
 		2C210548150B477800ACBBB3 /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
 		2C2CB4C0150B39DA0017762E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D9F8320144FF24000EEEFEB /* Cocoa.framework */; };
 		2C2CB4C6150B39DA0017762E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C2CB4C4150B39DA0017762E /* InfoPlist.strings */; };
@@ -119,7 +115,6 @@
 		2CB9815F1535C63600DAC5F8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB9815E1535C63600DAC5F8 /* IOKit.framework */; };
 		2CBDEF16150F68A600E8E886 /* temp_alt_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBDEF15150F68A600E8E886 /* temp_alt_small.png */; };
 		2CBDEF18150F691F00E8E886 /* monitor_icon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */; };
-		2CDCE0C415094B7F00BA9B97 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCE0C615094B7F00BA9B97 /* MainWindow.xib */; };
 		2CE100A71537F07100F69F63 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB9815E1535C63600DAC5F8 /* IOKit.framework */; };
 		2CEB5F9D1500E840002BD48D /* sgAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1DBBD61500E59000971A87 /* sgAppController.m */; };
 		2CEB5FA11501141B002BD48D /* sgFan.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB5FA01501141B002BD48D /* sgFan.m */; };
@@ -148,6 +143,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		120EF11915CC4116003CC34F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		1D05ABE413ED0DAD00EADBF6 /* FakeSMC.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeSMC.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D05ABE813ED0DAD00EADBF6 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
 		1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeSMC.cpp; sourceTree = "<group>"; };
@@ -256,7 +252,6 @@
 		2C11943914F910F1009319BD /* fan8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan8.png; sourceTree = "<group>"; };
 		2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "Japanese-Sensu-Fan-USB-Drive_1.icns"; path = "../SmartGuardian/Japanese-Sensu-Fan-USB-Drive_1.icns"; sourceTree = "<group>"; };
 		2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Koolance_FAN-12038HBK-184.png"; sourceTree = "<group>"; };
-		2C182F541542CB0100FDBE5A /* GeForceX.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeForceX.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C182F581542CBA600FDBE5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C182F591542CBA600FDBE5A /* GeForceX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GeForceX-Info.plist"; sourceTree = "<group>"; };
 		2C182F5A1542CBA600FDBE5A /* GeForceX-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeForceX-Prefix.pch"; sourceTree = "<group>"; };
@@ -312,8 +307,6 @@
 		2CB9815E1535C63600DAC5F8 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		2CBDEF15150F68A600E8E886 /* temp_alt_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_alt_small.png; sourceTree = "<group>"; };
 		2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monitor_icon_small.png; sourceTree = "<group>"; };
-		2CDCE0C515094B7F00BA9B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		2CDCE0C815094B9400BA9B97 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		2CEB5F9F1501141B002BD48D /* sgFan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sgFan.h; sourceTree = "<group>"; };
 		2CEB5FA01501141B002BD48D /* sgFan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sgFan.m; sourceTree = "<group>"; };
 		2CF872E014FCAC4400E8CBBC /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
@@ -409,13 +402,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2C182F441542CB0100FDBE5A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2C2CB4BB150B39DA0017762E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -491,7 +477,6 @@
 				2CB6913214F40F2900152814 /* SmartGuardian.app */,
 				2C2CB4BE150B39DA0017762E /* SmartGuardianHelper.app */,
 				2CB4FCC31529946B00FEF90D /* OemSMBIOS.kext */,
-				2C182F541542CB0100FDBE5A /* GeForceX.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -897,7 +882,7 @@
 				2C1DBBD61500E59000971A87 /* sgAppController.m */,
 				2C7C8EC614F5227400D3095F /* sgModel.h */,
 				2C7C8EC714F5227400D3095F /* sgModel.m */,
-				2CDCE0C615094B7F00BA9B97 /* MainWindow.xib */,
+				120EF11915CC4116003CC34F /* MainWindow.xib */,
 				2CF872E014FCAC4400E8CBBC /* GraphView.h */,
 				2CF872E114FCAC4400E8CBBC /* GraphView.m */,
 				2CF872E314FCADD200E8CBBC /* NSColor+CGColorAdditions.h */,
@@ -1045,16 +1030,6 @@
 				1DA962BD13ED368C0096F8A5 /* ATICard.h in Headers */,
 				1DA962BF13ED368C0096F8A5 /* RadeonX.h in Headers */,
 				1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C182F451542CB0100FDBE5A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2C182F601542CBA600FDBE5A /* GeForceX-Prefix.pch in Headers */,
-				2C182F621542CBA600FDBE5A /* GeForceX.h in Headers */,
-				2C182F631542CBA600FDBE5A /* nouveau.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,25 +1249,6 @@
 			productReference = 1DA962A513ED36030096F8A5 /* RadeonX.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
-		2C182F311542CB0100FDBE5A /* GeForceX */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C182F511542CB0100FDBE5A /* Build configuration list for PBXNativeTarget "GeForceX" */;
-			buildPhases = (
-				2C182F321542CB0100FDBE5A /* Sources */,
-				2C182F441542CB0100FDBE5A /* Frameworks */,
-				2C182F451542CB0100FDBE5A /* Headers */,
-				2C182F4E1542CB0100FDBE5A /* Resources */,
-				2C182F501542CB0100FDBE5A /* Rez */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = GeForceX;
-			productName = NVClockX;
-			productReference = 2C182F541542CB0100FDBE5A /* GeForceX.kext */;
-			productType = "com.apple.product-type.kernel-extension";
-		};
 		2C2CB4BD150B39DA0017762E /* SmartGuardianHelper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C2CB4D3150B39DB0017762E /* Build configuration list for PBXNativeTarget "SmartGuardianHelper" */;
@@ -1421,7 +1377,6 @@
 				2CB6913114F40F2900152814 /* SmartGuardian */,
 				2C2CB4BD150B39DA0017762E /* SmartGuardianHelper */,
 				2CB4FCB71529946B00FEF90D /* OemSMBIOS */,
-				2C182F311542CB0100FDBE5A /* GeForceX */,
 			);
 		};
 /* End PBXProject section */
@@ -1521,14 +1476,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2C182F4E1542CB0100FDBE5A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2C182F5E1542CBA600FDBE5A /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2C2CB4BC150B39DA0017762E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1560,10 +1507,10 @@
 			files = (
 				2CB6913D14F40F2900152814 /* InfoPlist.strings in Resources */,
 				2CB6914314F40F2900152814 /* Credits.rtf in Resources */,
-				2CDCE0C415094B7F00BA9B97 /* MainWindow.xib in Resources */,
 				2C11943A14F910F1009319BD /* fan8.png in Resources */,
 				2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */,
 				2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */,
+				120EF11A15CC4116003CC34F /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1635,13 +1582,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1DA962A313ED36030096F8A5 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C182F501542CB0100FDBE5A /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1775,14 +1715,6 @@
 			files = (
 				1DA962BC13ED368C0096F8A5 /* ATICard.cpp in Sources */,
 				1DA962BE13ED368C0096F8A5 /* RadeonX.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C182F321542CB0100FDBE5A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2C182F611542CBA600FDBE5A /* GeForceX.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1987,15 +1919,6 @@
 				2CB6914214F40F2900152814 /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		2CDCE0C615094B7F00BA9B97 /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CDCE0C515094B7F00BA9B97 /* en */,
-				2CDCE0C815094B9400BA9B97 /* ru */,
-			);
-			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
 		6A0F327B14DD6A6800AA5598 /* InfoPlist.strings */ = {
@@ -2618,63 +2541,6 @@
 			};
 			name = Release;
 		};
-		2C182F521542CB0100FDBE5A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.1d1;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GeForceX/GeForceX-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "GeForceX/GeForceX-Info.plist";
-				MODULE_NAME = org.kozlek.GeForceX;
-				MODULE_VERSION = 1.0.1d1;
-				PRODUCT_NAME = GeForceX;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Debug;
-		};
-		2C182F531542CB0100FDBE5A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.0.1d1;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GeForceX/GeForceX-Prefix.pch";
-				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "GeForceX/GeForceX-Info.plist";
-				MODULE_NAME = org.kozlek.GeForceX;
-				MODULE_VERSION = 1.0.1d1;
-				PRODUCT_NAME = GeForceX;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Release;
-		};
 		2C2CB4D4150B39DB0017762E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3086,15 +2952,6 @@
 			buildConfigurations = (
 				1DA962B213ED36030096F8A5 /* Debug */,
 				1DA962B313ED36030096F8A5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2C182F511542CB0100FDBE5A /* Build configuration list for PBXNativeTarget "GeForceX" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2C182F521542CB0100FDBE5A /* Debug */,
-				2C182F531542CB0100FDBE5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
