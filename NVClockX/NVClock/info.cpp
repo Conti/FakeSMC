@@ -653,6 +653,7 @@ static const struct pci_ids ids[] =
 	{ 0x1050, "GF100 [GeForce GT 520M]", MOBILE },
   { 0x1051, "GF100 [GeForce GT 520MX]", MOBILE },
 	{ 0x1054, "GF100 [GeForce GT 410M]", MOBILE },
+	{ 0x1055, "GF100 [GeForce GT 410M]", MOBILE },
 	{ 0x1056, "GF100 [NVS 4200M]", MOBILE },
 	{ 0x1057, "GF100 [NVS 4200M]", MOBILE },
 	{ 0x107F, "GF100 [NVIDIA GF119-ES]", DESKTOP },
@@ -660,7 +661,6 @@ static const struct pci_ids ids[] =
 	// 1080 - 109F
 	{ 0x1080, "GF100 [GeForce GTX 580]", DESKTOP },
 	{ 0x1081, "GF100 [GeForce GTX 570]", DESKTOP },
-    { 0x1201, "GF100 [GeForce GTX 560]", DESKTOP },
 	{ 0x1082, "GF100 [GeForce GTX 560 Ti]", DESKTOP },
 	{ 0x1083, "GF100 [GeForce GTX 590]", DESKTOP },
 	{ 0x1086, "GF100 [GeForce GTX 570]", DESKTOP },
@@ -670,6 +670,7 @@ static const struct pci_ids ids[] =
 	
 	// 1200 - 127F
 	{ 0x1200, "GF100 [GeForce GTX 560 Ti]", DESKTOP },
+    { 0x1201, "GF100 [GeForce GTX 560]", DESKTOP },
 	{ 0x1244, "GF100 [GeForce GTX 550 Ti]", DESKTOP },
 	{ 0x1245, "GF100 [GeForce GTS 450]", DESKTOP },
 	{ 0x1251, "GF100 [N12E-GS-A1]", DESKTOP },
