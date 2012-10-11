@@ -85,6 +85,11 @@ __asm__ __volatile__("rdtsc" : "=a" (low), "=d" (high))
 #define SMBHSTDAT 5
 #define SBMBLKDAT 7
 
+#include <IOKit/IOLib.h>
+
+//typedef UInt32 uint32_t;
+//typedef UInt8 uint8_t;
+
 /** Read one byte from the intel i2c, used for reading SPD on intel chipsets only. */
 unsigned char smb_read_byte_intel(uint32_t base, uint8_t adr, uint8_t cmd)
 {
