@@ -2,6 +2,7 @@
 #include "FakeSMC.h"
 #include "FakeSMCPlugin.h"
 #include "FakeSMCUtils.h"
+#include "SuperIOMonitor.h" /* vendorID() */
 
 //#define ASC_DEBUG 1
 #define ASC7621_ADDRS {0x2c,0x2d,0x2e}

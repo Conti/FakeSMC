@@ -63,7 +63,8 @@ bool Andigilog::start(IOService *provider)
     };
 
     OSDictionary *conf = NULL, *sconf = OSDynamicCast(OSDictionary, getProperty("Sensors Configuration")), *dict;
-    OSString *str;
+    IOService *fRoot = getServiceRoot();
+    OSString *str, *vendor = NULL;
     char *key;
     char tempkey[] = "_temp ", /* Ugly hack to keep keys in order for auto-generated plist */
     fankey[] = "tach ";
@@ -97,7 +98,22 @@ bool Andigilog::start(IOService *provider)
     memcpy(&Measures, &list, sizeof(Measures));
     memcpy(&Pwm, &pwm, sizeof(Pwm));
     
-    if (sconf)
+    if (fRoot) {
+        vendor = vendorID(OSDynamicCast(OSString, fRoot->getProperty("oem-mb-manufacturer") ?
+                                        fRoot->getProperty("oem-mb-manufacturer") :
+                                        (fRoot->getProperty("oem-manufacturer") ?
+                                         fRoot->getProperty("oem-manufacturer") : NULL)));
+        str = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-product") ?
+                                fRoot->getProperty("oem-mb-product") :
+                                (fRoot->getProperty("oem-product-name") ?
+                                 fRoot->getProperty("oem-product-name") : NULL));
+    }
+    if (vendor)
+        if (OSDictionary *link = OSDynamicCast(OSDictionary, sconf->getObject(vendor)))
+            if(str)
+                conf = OSDynamicCast(OSDictionary, link->getObject(str));
+
+    if (sconf && !conf)
         conf = OSDynamicCast(OSDictionary, sconf->getObject("Active"));
     i = 0;
     for (int s = 0, j = 0, k = 0; i < NUM_SENSORS; i++) {
