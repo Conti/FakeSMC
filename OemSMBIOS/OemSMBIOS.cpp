@@ -364,12 +364,10 @@ bool OemSMBIOS::findSMBIOSTableOEM( void )
     IOMemoryDescriptor * biosMemory;
     IOMemoryMap * biosMap;
     
-    biosMemory = version_major >= 12 /* 10.8.x */ ?
-        /* For 10.8.2, fix waitForSystemMapper panic */
-        IOMemoryDescriptor::withAddressRange( 0xf0000,0xfffff-0xf0000+1,
-                                             kIODirectionOutIn | kIOMemoryMapperNone,TASK_NULL)
-    :
-        IOMemoryDescriptor::withPhysicalAddress( 0xf0000,0xfffff-0xf0000+1,kIODirectionOutIn);
+    /* For >= 10.8.2, prevent waitForSystemMapper panic */
+    //biosMemory = IOMemoryDescriptor::withPhysicalAddress( 0xf0000,0xfffff-0xf0000+1,kIODirectionOutIn);
+    biosMemory = IOMemoryDescriptor::withAddressRange( 0xf0000,0xfffff-0xf0000+1,
+                                                      kIODirectionOutIn | kIOMemoryMapperNone,TASK_NULL);
     
     if(biosMemory)
     {
@@ -410,13 +408,8 @@ bool OemSMBIOS::findSMBIOSTableOEM( void )
                 eps->dmi.structureCount)
             {
                 dmiStructureCount = eps->dmi.structureCount;
-                dmiMemory = version_major >= 12 ?
-                    IOMemoryDescriptor::withAddressRange(eps->dmi.tableAddress, eps->dmi.tableLength,
-                                     kIODirectionOutIn | kIOMemoryMapperNone, TASK_NULL)
-                :
-                    IOMemoryDescriptor::withPhysicalAddress(
-                                    eps->dmi.tableAddress, eps->dmi.tableLength,
-                                    kIODirectionOutIn );
+                dmiMemory = IOMemoryDescriptor::withAddressRange(eps->dmi.tableAddress, eps->dmi.tableLength,
+                                                                 kIODirectionOutIn | kIOMemoryMapperNone, TASK_NULL);
             }
             else
             {
