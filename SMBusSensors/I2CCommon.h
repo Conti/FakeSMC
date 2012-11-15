@@ -1,7 +1,7 @@
 #ifndef _I2CCommon_
 #define _I2CCommon_
 
-//#include <IOKit/pci/IOPCIDevice.h>
+#include <IOKit/pci/IOPCIDevice.h>
 #include <IOKit/IOFilterInterruptEventSource.h>
 
 namespace I2COperations {
