@@ -140,8 +140,8 @@ void SuperIOSensor::free()
 
 // Monitor
 
-#define super IOService
-OSDefineMetaClassAndAbstractStructors(SuperIOMonitor, IOService)
+#define super FakeSMCPlugin
+OSDefineMetaClassAndAbstractStructors(SuperIOMonitor, FakeSMCPlugin)
 
 UInt8 SuperIOMonitor::listenPortByte(UInt16 reg)
 {

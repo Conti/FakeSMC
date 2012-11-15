@@ -20,7 +20,7 @@
  */
 
 //#include <stdio.h>
-#include <string.h>
+//#include <string.h>
 #include "backend.h"
 
 static void nv50_i2c_get_bits(I2CBusPtr bus, int *clock, int *data)

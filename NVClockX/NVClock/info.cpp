@@ -21,7 +21,7 @@
 
 //#include <stdio.h>
 //#include <stdlib.h>
-#include <string.h>
+//#include <string.h>
 #include "backend.h"
 #include "nvclock.h"
 
@@ -647,6 +647,7 @@ static const struct pci_ids ids[] =
 	
 	// 0EE0 - 0EFF: none yet
 	// 0F00 - 0F3F: none yet
+    { 0x0F00, "GF100 [GeForce GT630]", DESKTOP },
 	
 	// 1040 - 107F
   { 0x1040, "GF100 [GeForce GT 520]", DESKTOP },

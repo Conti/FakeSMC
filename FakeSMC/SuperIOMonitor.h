@@ -12,6 +12,7 @@
 
 #include <IOKit/IOLib.h>
 #include <IOKit/IOService.h>
+#include "FakeSMCPlugin.h"
 
 // Ports
 const UInt8 SUPERIO_STANDART_PORT[]                 = { 0x2e, 0x4e };
@@ -59,7 +60,7 @@ public:
     virtual void        free();
 };
 
-class SuperIOMonitor : public IOService {
+class SuperIOMonitor : public FakeSMCPlugin {
     OSDeclareAbstractStructors(SuperIOMonitor)
 
 protected:
