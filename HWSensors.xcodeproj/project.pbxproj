@@ -8,16 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		120EF11A15CC4116003CC34F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 120EF11915CC4116003CC34F /* MainWindow.xib */; };
-		1251073F162697270004D9C9 /* Andigilog-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12510733162697270004D9C9 /* Andigilog-Info.plist */; };
-		12510740162697270004D9C9 /* Andigilog-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 12510734162697270004D9C9 /* Andigilog-Prefix.pch */; };
-		12510742162697270004D9C9 /* Andigilog.h in Headers */ = {isa = PBXBuildFile; fileRef = 12510736162697270004D9C9 /* Andigilog.h */; };
-		12510743162697270004D9C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12510737162697270004D9C9 /* InfoPlist.strings */; };
-		12510744162697270004D9C9 /* I2CCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 12510739162697270004D9C9 /* I2CCommon.h */; };
-		12510745162697270004D9C9 /* ICHSMBus-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1251073A162697270004D9C9 /* ICHSMBus-Info.plist */; };
-		12510746162697270004D9C9 /* ICHSMBus-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 1251073B162697270004D9C9 /* ICHSMBus-Prefix.pch */; };
-		12510748162697270004D9C9 /* ICHSMBus.h in Headers */ = {isa = PBXBuildFile; fileRef = 1251073D162697270004D9C9 /* ICHSMBus.h */; };
-		1251080E1626E0250004D9C9 /* Andigilog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12510735162697270004D9C9 /* Andigilog.cpp */; };
-		1251084A1626E1270004D9C9 /* ICHSMBus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1251073C162697270004D9C9 /* ICHSMBus.cpp */; };
 		1D05ABFF13ED0E2E00EADBF6 /* FakeSMC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */; };
 		1D05AC0013ED0E2E00EADBF6 /* FakeSMC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05ABFA13ED0E2E00EADBF6 /* FakeSMC.h */; };
 		1D05AC0113ED0E2E00EADBF6 /* FakeSMCDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABFB13ED0E2E00EADBF6 /* FakeSMCDevice.cpp */; };
@@ -154,16 +144,6 @@
 
 /* Begin PBXFileReference section */
 		120EF11915CC4116003CC34F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		12510733162697270004D9C9 /* Andigilog-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Andigilog-Info.plist"; sourceTree = "<group>"; };
-		12510734162697270004D9C9 /* Andigilog-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Andigilog-Prefix.pch"; sourceTree = "<group>"; };
-		12510735162697270004D9C9 /* Andigilog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Andigilog.cpp; sourceTree = "<group>"; };
-		12510736162697270004D9C9 /* Andigilog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Andigilog.h; sourceTree = "<group>"; };
-		12510738162697270004D9C9 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		12510739162697270004D9C9 /* I2CCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I2CCommon.h; sourceTree = "<group>"; };
-		1251073A162697270004D9C9 /* ICHSMBus-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ICHSMBus-Info.plist"; sourceTree = "<group>"; };
-		1251073B162697270004D9C9 /* ICHSMBus-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ICHSMBus-Prefix.pch"; sourceTree = "<group>"; };
-		1251073C162697270004D9C9 /* ICHSMBus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ICHSMBus.cpp; sourceTree = "<group>"; };
-		1251073D162697270004D9C9 /* ICHSMBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICHSMBus.h; sourceTree = "<group>"; };
 		1251073E162697270004D9C9 /* SMBus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SMBus.c; sourceTree = "<group>"; };
 		1D05ABE413ED0DAD00EADBF6 /* FakeSMC.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeSMC.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D05ABE813ED0DAD00EADBF6 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
@@ -275,6 +255,12 @@
 		2C11943914F910F1009319BD /* fan8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan8.png; sourceTree = "<group>"; };
 		2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "Japanese-Sensu-Fan-USB-Drive_1.icns"; path = "../SmartGuardian/Japanese-Sensu-Fan-USB-Drive_1.icns"; sourceTree = "<group>"; };
 		2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Koolance_FAN-12038HBK-184.png"; sourceTree = "<group>"; };
+		2C182F581542CBA600FDBE5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2C182F591542CBA600FDBE5A /* GeForceX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GeForceX-Info.plist"; sourceTree = "<group>"; };
+		2C182F5A1542CBA600FDBE5A /* GeForceX-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeForceX-Prefix.pch"; sourceTree = "<group>"; };
+		2C182F5B1542CBA600FDBE5A /* GeForceX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = GeForceX.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		2C182F5C1542CBA600FDBE5A /* GeForceX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeForceX.h; sourceTree = "<group>"; };
+		2C182F5D1542CBA600FDBE5A /* nouveau.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau.h; sourceTree = "<group>"; };
 		2C1DBBD51500E59000971A87 /* sgAppController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sgAppController.h; sourceTree = "<group>"; };
 		2C1DBBD61500E59000971A87 /* sgAppController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sgAppController.m; sourceTree = "<group>"; };
 		2C2CB4BE150B39DA0017762E /* SmartGuardianHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartGuardianHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -419,20 +405,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21038D2D161D9905008FA427 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		21EF15C1161D8DA40098B983 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2C2CB4BB150B39DA0017762E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -478,16 +450,6 @@
 		12510732162697270004D9C9 /* SMBusSensors */ = {
 			isa = PBXGroup;
 			children = (
-				12510733162697270004D9C9 /* Andigilog-Info.plist */,
-				12510734162697270004D9C9 /* Andigilog-Prefix.pch */,
-				12510735162697270004D9C9 /* Andigilog.cpp */,
-				12510736162697270004D9C9 /* Andigilog.h */,
-				12510737162697270004D9C9 /* InfoPlist.strings */,
-				12510739162697270004D9C9 /* I2CCommon.h */,
-				1251073A162697270004D9C9 /* ICHSMBus-Info.plist */,
-				1251073B162697270004D9C9 /* ICHSMBus-Prefix.pch */,
-				1251073C162697270004D9C9 /* ICHSMBus.cpp */,
-				1251073D162697270004D9C9 /* ICHSMBus.h */,
 				1251073E162697270004D9C9 /* SMBus.c */,
 			);
 			path = SMBusSensors;
@@ -590,6 +552,7 @@
 		1D05AC3113ED101200EADBF6 /* Plug-Ins */ = {
 			isa = PBXGroup;
 			children = (
+				2C182F561542CBA600FDBE5A /* GeForceX */,
 				2CB03FAA14EB99890070DC93 /* IntelCPUMonitor */,
 				1D6FE3EF13FEBFF200376E64 /* ACPISensors */,
 				1D05AC5C13ED123D00EADBF6 /* ITEIT87x */,
@@ -842,6 +805,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2C182F561542CBA600FDBE5A /* GeForceX */ = {
+			isa = PBXGroup;
+			children = (
+				2C182F641542CBC000FDBE5A /* Supporting Files */,
+				2C182F5B1542CBA600FDBE5A /* GeForceX.cpp */,
+				2C182F5C1542CBA600FDBE5A /* GeForceX.h */,
+				2C182F5D1542CBA600FDBE5A /* nouveau.h */,
+			);
+			path = GeForceX;
+			sourceTree = "<group>";
+		};
+		2C182F641542CBC000FDBE5A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C182F571542CBA600FDBE5A /* InfoPlist.strings */,
+				2C182F591542CBA600FDBE5A /* GeForceX-Info.plist */,
+				2C182F5A1542CBA600FDBE5A /* GeForceX-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		2C2CB4C1150B39DA0017762E /* SmartGuardianHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1063,31 +1047,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21038D2E161D9905008FA427 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		21EF15C2161D8DA40098B983 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2CB03FB014EB99F50070DC93 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2CB03FBF14EB9AB70070DC93 /* IntelCPUMonitor-Prefix.pch in Headers */,
 				2CB03FC114EB9AB70070DC93 /* IntelCPUMonitor.h in Headers */,
-				12510740162697270004D9C9 /* Andigilog-Prefix.pch in Headers */,
-				12510742162697270004D9C9 /* Andigilog.h in Headers */,
-				12510744162697270004D9C9 /* I2CCommon.h in Headers */,
-				12510746162697270004D9C9 /* ICHSMBus-Prefix.pch in Headers */,
-				12510748162697270004D9C9 /* ICHSMBus.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1298,44 +1263,6 @@
 			productReference = 1DA962A513ED36030096F8A5 /* RadeonX.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
-		21038D2A161D9905008FA427 /* Andigilog */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 21038D33161D9905008FA427 /* Build configuration list for PBXNativeTarget "Andigilog" */;
-			buildPhases = (
-				21038D2B161D9905008FA427 /* Sources */,
-				21038D2D161D9905008FA427 /* Frameworks */,
-				21038D2E161D9905008FA427 /* Headers */,
-				21038D30161D9905008FA427 /* Resources */,
-				21038D32161D9905008FA427 /* Rez */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Andigilog;
-			productName = Andigilog;
-			productReference = 21038D36161D9905008FA427 /* Andigilog.kext */;
-			productType = "com.apple.product-type.kernel-extension";
-		};
-		21EF15BE161D8DA40098B983 /* ICHSMBus */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 21EF15C7161D8DA40098B983 /* Build configuration list for PBXNativeTarget "ICHSMBus" */;
-			buildPhases = (
-				21EF15BF161D8DA40098B983 /* Sources */,
-				21EF15C1161D8DA40098B983 /* Frameworks */,
-				21EF15C2161D8DA40098B983 /* Headers */,
-				21EF15C4161D8DA40098B983 /* Resources */,
-				21EF15C6161D8DA40098B983 /* Rez */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ICHSMBus;
-			productName = ICHSMBus;
-			productReference = 21EF15CA161D8DA40098B983 /* ICHSMBus.kext */;
-			productType = "com.apple.product-type.kernel-extension";
-		};
 		2C2CB4BD150B39DA0017762E /* SmartGuardianHelper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C2CB4D3150B39DB0017762E /* Build configuration list for PBXNativeTarget "SmartGuardianHelper" */;
@@ -1451,8 +1378,6 @@
 			targets = (
 				1D05ABE313ED0DAD00EADBF6 /* FakeSMC */,
 				1D6FE3ED13FEBFF200376E64 /* ACPISensors */,
-				21EF15BE161D8DA40098B983 /* ICHSMBus */,
-				21038D2A161D9905008FA427 /* Andigilog */,
 				1DA9623F13ED34070096F8A5 /* NVClockX */,
 				1DA962A413ED36030096F8A5 /* RadeonX */,
 				1D6FE3BA13FEBDA700376E64 /* X3100 */,
@@ -1565,20 +1490,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21038D30161D9905008FA427 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		21EF15C4161D8DA40098B983 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2C2CB4BC150B39DA0017762E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1593,9 +1504,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1251073F162697270004D9C9 /* Andigilog-Info.plist in Resources */,
-				12510743162697270004D9C9 /* InfoPlist.strings in Resources */,
-				12510745162697270004D9C9 /* ICHSMBus-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1688,20 +1596,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1DA962A313ED36030096F8A5 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		21038D32161D9905008FA427 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		21EF15C6161D8DA40098B983 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1838,22 +1732,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21038D2B161D9905008FA427 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1251080E1626E0250004D9C9 /* Andigilog.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		21EF15BF161D8DA40098B983 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1251084A1626E1270004D9C9 /* ICHSMBus.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2C2CB4BA150B39DA0017762E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1903,14 +1781,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		12510737162697270004D9C9 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				12510738162697270004D9C9 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		1D05AC0713ED0E9600EADBF6 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2004,6 +1874,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				1DA962AA13ED36030096F8A5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2C182F571542CBA600FDBE5A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C182F581542CBA600FDBE5A /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2679,120 +2557,6 @@
 			};
 			name = Release;
 		};
-		21038D34161D9905008FA427 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SMBusSensors/Andigilog-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "SMBusSensors/Andigilog-Info.plist";
-				MODULE_NAME = org.dukzcry.Andigilog;
-				MODULE_VERSION = 1.0;
-				PRODUCT_NAME = Andigilog;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Debug;
-		};
-		21038D35161D9905008FA427 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.0;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SMBusSensors/Andigilog-Prefix.pch";
-				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "SMBusSensors/Andigilog-Info.plist";
-				MODULE_NAME = org.dukzcry.Andigilog;
-				MODULE_VERSION = 1.0;
-				PRODUCT_NAME = Andigilog;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Release;
-		};
-		21EF15C8161D8DA40098B983 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.1;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SMBusSensors/ICHSMBus-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "SMBusSensors/ICHSMBus-Info.plist";
-				MODULE_NAME = org.dukzcry.I2CFamily;
-				MODULE_VERSION = 1.1;
-				PRODUCT_NAME = ICHSMBus;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Debug;
-		};
-		21EF15C9161D8DA40098B983 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.1;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SMBusSensors/ICHSMBus-Prefix.pch";
-				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "SMBusSensors/ICHSMBus-Info.plist";
-				MODULE_NAME = org.dukzcry.I2CFamily;
-				MODULE_VERSION = 1.1;
-				PRODUCT_NAME = ICHSMBus;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Release;
-		};
 		2C2CB4D4150B39DB0017762E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3204,24 +2968,6 @@
 			buildConfigurations = (
 				1DA962B213ED36030096F8A5 /* Debug */,
 				1DA962B313ED36030096F8A5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		21038D33161D9905008FA427 /* Build configuration list for PBXNativeTarget "Andigilog" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				21038D34161D9905008FA427 /* Debug */,
-				21038D35161D9905008FA427 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		21EF15C7161D8DA40098B983 /* Build configuration list for PBXNativeTarget "ICHSMBus" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				21EF15C8161D8DA40098B983 /* Debug */,
-				21EF15C9161D8DA40098B983 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
