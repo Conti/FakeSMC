@@ -199,7 +199,17 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
   
   SandyArch = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN) || (CpuModel == CPUID_MODEL_IVYBRIDGE);
   if (SandyArch) {
-    snprintf(Platform, 4, "k62");
+    if (CpuModel == CPUID_MODEL_IVYBRIDGE) {
+      snprintf(Platform, 4, "j30");
+      /*
+       RBr   [ch8*]  (bytes 62 72 61 6e 63 68 00 00)
+       REV   [{rev]  (bytes 02 02 0f 00 00 38)
+       RMde  [char]  (bytes 41)
+       RPlt  [ch8*]  (bytes 6a 33 30 00 00 00 00 00)
+       */
+    } else {
+      snprintf(Platform, 4, "k62");
+    }    
   }
 	
 	if (userTjmax != 0) {

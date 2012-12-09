@@ -30,6 +30,11 @@
 			<dict>
 				<key>Keys</key>
 				<dict>
+					<key>$Num</key>
+					<array>
+						<string>ui8 </string>
+						<data>AQ==</data>
+					</array>
 					<key>ACID</key>
 					<array>
 						<string>ch8*</string>
@@ -49,6 +54,11 @@
 					<array>
 						<string>flag</string>
 						<data>AQ==</data>
+					</array>
+					<key>GCID</key>
+					<array>
+						<string>hex_</string>
+						<data>Z1gQAg==</data>
 					</array>
 					<key>FNum</key>
 					<array>
