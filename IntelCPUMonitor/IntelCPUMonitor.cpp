@@ -18,6 +18,48 @@
 #define WarningLog(string, args...) do { IOLog (LogPrefix "[Warning] " string "\n", ## args); } while(0)
 #define InfoLog(string, args...)	do { IOLog (LogPrefix string "\n", ## args); } while(0)
 
+void IntelState(__unused void * magic)
+{
+	UInt32 i = cpu_number();
+	if(i < MaxCpuCount) {
+		UInt64 msr = rdmsr64(MSR_IA32_PERF_STS);
+		GlobalState[i].Control = msr & 0xFFFF;
+	}
+}
+
+void IntelThermal(__unused void * magic)
+{
+	UInt32 i = cpu_number();
+	if(i < MaxCpuCount) {
+		UInt64 msr = rdmsr64(MSR_IA32_THERM_STATUS);
+		if (msr & 0x80000000) {
+			GlobalThermalValue[i] = (msr >> 16) & 0x7F;
+			GlobalThermalValueIsObsolete[i]=false;
+		}
+	}
+}
+
+void IntelState2(__unused void * magic)
+{
+	UInt32 i = cpu_number() >> 1;
+	if(i < MaxCpuCount) {
+		UInt64 msr = rdmsr64(MSR_IA32_PERF_STS);
+		GlobalState[i].Control = msr & 0xFFFF;
+	}
+}
+
+void IntelThermal2(__unused void * magic)
+{
+	UInt32 i = cpu_number() >> 1;
+	if(i < MaxCpuCount) {
+		UInt64 msr = rdmsr64(MSR_IA32_THERM_STATUS);
+		if (msr & 0x80000000) {
+			GlobalThermalValue[i] = (msr >> 16) & 0x7F;
+			GlobalThermalValueIsObsolete[i]=false;
+		}
+	}
+}
+
 #define super IOService
 OSDefineMetaClassAndStructors(IntelCPUMonitor, FakeSMCPlugin)
 
@@ -33,6 +75,7 @@ bool IntelCPUMonitor::init(OSDictionary *properties)
 
 IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 {
+  bool RPltSet = false;
 	DebugLog("Probing...");
 	
 	if (super::probe(provider, score) != this) return 0;
@@ -72,6 +115,10 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 		IOLog("User defined TjMax=%d\n", (int)userTjmax);
 		snprintf(Platform, 4, "n");
 	}
+  if (OSString* name = OSDynamicCast(OSString, getProperty("RPlt"))) {
+    snprintf(Platform, 4, "%s", name ? name->getCStringNoCopy() : "n");
+    RPltSet = true;
+  }
 	// Calculating Tjmax
 	switch (CpuFamily)
 	{
@@ -82,7 +129,11 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 				case CPUID_MODEL_PENTIUM_M:
 					tjmax[0] = 100; 
 					CpuMobile = true;
-					snprintf(Platform, 4, "M70");
+          if (!RPltSet) {
+            snprintf(Platform, 4, "M70");
+            RPltSet = true;
+          }
+					
 					break;
 					
 				case CPUID_MODEL_YONAH:
@@ -90,7 +141,10 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 					if (rdmsr64(0x17) & (1<<28)) {
 						CpuMobile = true;
 					}
-					snprintf(Platform, 4, "K22");
+          if (!RPltSet) {
+					  snprintf(Platform, 4, "K22");
+            RPltSet = true;
+          }
 					break;					
 					
 				case CPUID_MODEL_MEROM: // Intel Core (65nm)
@@ -128,7 +182,10 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
             default:
               tjmax[0] = 85; break;
           } 
-					snprintf(Platform, 4, "M75");
+          if (!RPltSet) {
+					  snprintf(Platform, 4, "M75");
+            RPltSet = true;
+          }
 					break;
 					
 				case CPUID_MODEL_PENRYN: // Intel Core (45nm)
@@ -136,7 +193,10 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 					if (rdmsr64(0x17) & (1<<28)) { //mobile
 						CpuMobile = true;
 						tjmax[0] = 105; 
-						snprintf(Platform, 4, "M82");
+            if (!RPltSet) {
+						  snprintf(Platform, 4, "M82");
+              RPltSet = true;
+            }
 					}
 					else {
 						switch (CpuStepping) {
@@ -146,8 +206,11 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 							default:
 								tjmax[0] = 100;
 								break;
-						}						
-						snprintf(Platform, 4, "K36");
+						}
+            if (!RPltSet) {
+						  snprintf(Platform, 4, "K36");
+              RPltSet = true;
+            }
 					}
           
 					break;
@@ -161,8 +224,11 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
               tjmax[0] = 100; break;
             default:
               tjmax[0] = 90; break;
-          } 
-					snprintf(Platform, 4, "T9");
+          }
+          if (!RPltSet) {
+					  snprintf(Platform, 4, "T9");
+            RPltSet = true;
+          }
 					break;
 					
 				case CPUID_MODEL_NEHALEM:
@@ -183,7 +249,10 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 					}
 					
 				} 
-					snprintf(Platform, 4, "T9");
+          if (!RPltSet) {
+					  snprintf(Platform, 4, "T9");
+            RPltSet = true;
+          }
 					break;
 					
 				default:
@@ -198,18 +267,13 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 	}
   
   SandyArch = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN) || (CpuModel == CPUID_MODEL_IVYBRIDGE);
-  if (SandyArch) {
-    if (CpuModel == CPUID_MODEL_IVYBRIDGE) {
-      snprintf(Platform, 4, "j30");
-      /*
-       RBr   [ch8*]  (bytes 62 72 61 6e 63 68 00 00)
-       REV   [{rev]  (bytes 02 02 0f 00 00 38)
-       RMde  [char]  (bytes 41)
-       RPlt  [ch8*]  (bytes 6a 33 30 00 00 00 00 00)
-       */
+  if (SandyArch && !RPltSet) {
+    if (CpuMobile) {
+      snprintf(Platform, 4, "k90i");
     } else {
       snprintf(Platform, 4, "k62");
-    }    
+    }
+    RPltSet = true;
   }
 	
 	if (userTjmax != 0) {
@@ -502,21 +566,18 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 UInt32 IntelCPUMonitor::IntelGetFrequency(UInt8 fid) {
 	UInt32 multiplier, frequency;
 	
-    
-    
-    
-    if (!nehalemArch) {
+  if (!nehalemArch) {
 		multiplier = fid & 0x1f;					// = 0x08
 		int half = (fid & 0x40)?1:0;							// = 0x01
 		int dfsb = (fid & 0x80)?1:0;							// = 0x00
-		UInt32 fsb = BusClock >> dfsb;
-		UInt32 halffsb = BusClock >> 1;						// = 200
+		UInt32 fsb = (UInt32)BusClock >> dfsb;
+		UInt32 halffsb = (UInt32)BusClock >> 1;						// = 200
 		frequency = (multiplier * fsb);			// = 3200
 		return (frequency + (half * halffsb));	// = 3200 + 200 = 3400
 	}
 	else {
 		multiplier = fid & 0x3f;
-		frequency = (multiplier * BusClock);
+		frequency = (multiplier * (UInt32)BusClock);
 //		int half = gPEClockFrequencyInfo.bus_to_CPUID_rate_num;
 //		half = half?half:1;
 //		frequency = (multiplier * BusClock) * gPEClockFrequencyInfo.bus_to_CPUID_rate_den / half;

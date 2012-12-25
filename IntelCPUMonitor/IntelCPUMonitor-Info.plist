@@ -32,6 +32,8 @@
 			<string>IOResources</string>
 			<key>TjMax</key>
 			<integer>0</integer>
+			<key>RPlt</key>
+			<string>not</string>
 			<key>IOResourceMatch</key>
 			<string>IOKit</string>
 		</dict>

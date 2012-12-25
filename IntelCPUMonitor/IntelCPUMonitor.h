@@ -60,48 +60,10 @@ inline void IntelWaitForSts(void) {
 	while (rdmsr64(MSR_IA32_PERF_STS) & (1 << 21)) { if (!inline_timeout--) break; }
 }
 
-
-void IntelState(__unused void * magic)
-{
-	UInt32 i = cpu_number();
-	if(i < MaxCpuCount) {
-		UInt64 msr = rdmsr64(MSR_IA32_PERF_STS);
-		GlobalState[i].Control = msr & 0xFFFF;
-	}
-}
-
-void IntelThermal(__unused void * magic)
-{
-	UInt32 i = cpu_number();
-	if(i < MaxCpuCount) {
-		UInt64 msr = rdmsr64(MSR_IA32_THERM_STATUS);
-		if (msr & 0x80000000) {
-			GlobalThermalValue[i] = (msr >> 16) & 0x7F;
-			GlobalThermalValueIsObsolete[i]=false;
-		}
-	}
-}
-
-void IntelState2(__unused void * magic)
-{
-	UInt32 i = cpu_number() >> 1;
-	if(i < MaxCpuCount) {
-		UInt64 msr = rdmsr64(MSR_IA32_PERF_STS);
-		GlobalState[i].Control = msr & 0xFFFF;
-	}
-}
-
-void IntelThermal2(__unused void * magic)
-{
-	UInt32 i = cpu_number() >> 1;
-	if(i < MaxCpuCount) {
-		UInt64 msr = rdmsr64(MSR_IA32_THERM_STATUS);
-		if (msr & 0x80000000) {
-			GlobalThermalValue[i] = (msr >> 16) & 0x7F;
-			GlobalThermalValueIsObsolete[i]=false;
-		}
-	}
-}
+void IntelState(__unused void * magic);
+void IntelThermal(__unused void * magic);
+void IntelState2(__unused void * magic);
+void IntelThermal2(__unused void * magic);
 
 class IntelCPUMonitor : public FakeSMCPlugin
 {
@@ -113,8 +75,8 @@ public:
 private:
 	bool					Active;	
 	bool					LoopLock;
-	UInt32					BusClock;
-	UInt32					FSBClock;
+	UInt64					BusClock;
+	UInt64					FSBClock;
 	UInt32					CpuFamily;
 	UInt32					CpuModel; 
 	UInt32					CpuStepping;
