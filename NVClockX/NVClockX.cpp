@@ -30,6 +30,8 @@
 NVClock nvclock;
 NVCard* nv_card;
 
+bool is_digit(char c);
+
 #define super FakeSMCPlugin
 OSDefineMetaClassAndStructors(NVClockX, FakeSMCPlugin)
 
@@ -61,36 +63,33 @@ int NVClockX::addTachometer(int index)
 {
 	UInt8 length = 0;
 	void * data = 0;
-    UInt16 value;
-    if (nv_card->caps & I2C_FANSPEED_MONITORING)
-        value = nv_card->get_i2c_fanspeed_rpm(nv_card->sensor);
-    else if(nv_card->caps & GPU_FANSPEED_MONITORING)
-        value = (UInt16)nv_card->get_fanspeed();
-    else value = 0;
+  UInt16 value;
+  if (nv_card->caps & I2C_FANSPEED_MONITORING) {
+    value = nv_card->get_i2c_fanspeed_rpm(nv_card->sensor);
+  } else if(nv_card->caps & GPU_FANSPEED_MONITORING){
+    value = (UInt16)nv_card->get_fanspeed();
+  } else {
+    value = 0;
+  }
 	
-    
-    if(value>10)
-	if (kIOReturnSuccess == fakeSMC->callPlatformFunction(kFakeSMCGetKeyValue, false, (void *)KEY_FAN_NUMBER, (void *)&length, (void *)&data, 0)) {
-		length = 0;
-		
-		bcopy(data, &length, 1);
-		
-		char name[5];
-		
-		snprintf(name, 5, KEY_FORMAT_FAN_SPEED, length); 
-		
-		if (addSensor(name, TYPE_FPE2, 2, index)) {
-		
-			length++;
-			
-			if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCSetKeyValue, false, (void *)KEY_FAN_NUMBER, (void *)1, (void *)&length, 0))
-				WarningLog("error updating FNum value");
-			
-			return length-1;
-		}
-	}
-	else WarningLog("error reading FNum value");
-		
+  if(value>10) {
+    if (kIOReturnSuccess == fakeSMC->callPlatformFunction(kFakeSMCGetKeyValue, false, (void *)KEY_FAN_NUMBER, (void *)&length, (void *)&data, 0)) {
+      char name[5];
+      length = 0;
+      bcopy(data, &length, 1);
+      snprintf(name, 5, KEY_FORMAT_FAN_SPEED, length);
+      if (addSensor(name, TYPE_FPE2, 2, index)) {
+        length++;
+        if (kIOReturnSuccess != fakeSMC->callPlatformFunction(kFakeSMCSetKeyValue, false, (void *)KEY_FAN_NUMBER, (void *)1, (void *)&length, 0)) {
+          WarningLog("error updating FNum value");
+        }
+        return length-1;
+      }
+    } else {
+      WarningLog("error reading FNum value");
+    }
+  }
+  
 	return -1;
 }
 
@@ -98,7 +97,7 @@ bool NVClockX::init(OSDictionary *properties)
 {
 	DebugLog("Initialising...");
 	
-    if (!super::init(properties))
+  if (!super::init(properties))
 		return false;
 	
 	if (!(sensors = OSDictionary::withCapacity(0)))

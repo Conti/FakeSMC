@@ -25,7 +25,7 @@
 
 static void nv50_i2c_get_bits(I2CBusPtr bus, int *clock, int *data)
 {
-	const int offset = bus->DriverPrivate.val;
+	long offset = bus->DriverPrivate.val;
 	unsigned char val;
 
 	val = nv_card->PMC[(0x0000E138 + offset)/4];
@@ -35,7 +35,7 @@ static void nv50_i2c_get_bits(I2CBusPtr bus, int *clock, int *data)
 
 static void nv50_i2c_put_bits(I2CBusPtr bus, int clock, int data)
 {
-	const int offset = bus->DriverPrivate.val;
+	long offset = bus->DriverPrivate.val;
 	nv_card->PMC[(0x0000E138 + offset)/4] = 4 | clock | data << 1;
 }
 

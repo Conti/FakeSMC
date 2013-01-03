@@ -49,6 +49,8 @@ TODO:
 struct nvbios *read_bios(const char *file);
 static struct nvbios *parse_bios(char *rom);
 int load_bios_prom(char *data);
+int verify_bios(char *rom);
+int load_bios_pramin(char *data);
 
 typedef struct
 {
@@ -879,8 +881,8 @@ static void parse_bit_structure(struct nvbios *bios, char *rom, unsigned int bit
 
 static unsigned int locate(char *rom, const char *str, int offset)
 {
-	int size = strlen(str);
-	int i;
+	unsigned int size = (unsigned int)strlen(str);
+	unsigned int i;
 	char* data;
 
 	/* We shouldn't assume this is allways 64kB */

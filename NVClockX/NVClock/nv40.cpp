@@ -109,8 +109,9 @@
 / - NV47/NV49 0xff3f 7800/7900 cards
 / - NV4B 0x1f0f 7600
 */
-
-unsigned int abs0 (int number) {
+unsigned int abs0 (int number);
+unsigned int abs0 (int number)
+{
 	if (number<0)
 		number=-number;
 	return number;

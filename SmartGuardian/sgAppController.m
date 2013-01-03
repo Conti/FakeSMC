@@ -128,8 +128,8 @@
 
 - (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes {
     NSUInteger i = [proposedSelectionIndexes lastIndex];;
-    sgFan * fan = [[model fans] valueForKey:[NSString stringWithFormat:@"FAN%d",i]];
-    [model selectCurrentFan:[NSString stringWithFormat:@"FAN%d",i]];
+    sgFan * fan = [[model fans] valueForKey:[NSString stringWithFormat:@"FAN%ld",i]];
+    [model selectCurrentFan:[NSString stringWithFormat:@"FAN%ld",i]];
 
     
     if (fan.Calibrated && fan.Controlable) {
@@ -193,7 +193,7 @@
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-    return [[model fans] objectForKey:[NSString stringWithFormat:@"FAN%d",rowIndex]];
+    return [[model fans] objectForKey:[NSString stringWithFormat:@"FAN%ld",rowIndex]];
 }
 
 -(void) applicationWillTerminate:(NSNotification *)notification

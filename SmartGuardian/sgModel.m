@@ -98,7 +98,7 @@
 -(BOOL) calibrateFan:(NSString *) fanId
 {
     sgFan * fan;
-    DebugLog(@"Starting calibration for %@",fanId);
+    DebugLog(@"Starting calibration for %s@", fanId);
     if ((fan = [fans valueForKey:fanId])) {
         if ([fan Controlable] == NO) return NO;
          return [fan calibrateFan];

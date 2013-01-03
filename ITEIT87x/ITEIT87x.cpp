@@ -53,6 +53,8 @@ long IT87xSensor::getValue()
 		case kSuperIOTachometerSensor:
 			value = owner->readTachometer(index);
 			break;
+    default:
+      switch ((SuperIOSensorGroupEx)group) {
         case kSuperIOSmartGuardPWMControl:
             value = OSDynamicCast(IT87x, owner)->readSmartGuardPWMControl(index);
             break;
@@ -81,8 +83,9 @@ long IT87xSensor::getValue()
             value = OSDynamicCast(IT87x, owner)->readSmartGuardRegControl(index);
             break;
             
-		default:
-			break;
+        default:
+          break;
+      }
 	}
     value =  value + ((value - Vf) * Ri)/Rf;
     
@@ -103,7 +106,7 @@ long IT87xSensor::getValue()
 void IT87xSensor::setValue(UInt16 value)
 {
     
-	switch (group) {
+	switch ((SuperIOSensorGroupEx)group) {
             
         case kSuperIOSmartGuardPWMControl:
             OSDynamicCast(IT87x, owner)->writeSmartGuardPWMControl(index,value);
@@ -416,37 +419,45 @@ bool IT87x::startPlugin()
 	
 	// Temperature Sensors
 	if (configuration) {
-		for (int i = 0; i < 3; i++) 
-		{				
+		for (int i = 0; i < 3; i++)
+		{
 			char key[8];
 			
 			snprintf(key, 8, "TEMPIN%X", i);
-            if(readTemperature(i)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
-    			if (OSString* name = OSDynamicCast(OSString, configuration->getObject(key)))
-                    if (name->isEqualTo("CPU")) {
-                        if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, i))
-                            WarningLog("error adding heatsink temperature sensor");
-                    }
-                    else if (name->isEqualTo("System")) {				
-                        if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i))
-                            WarningLog("error adding system temperature sensor");
-                    }
-                    else if (name->isEqualTo("Ambient")) {				
-                        if (!addSensor(KEY_AMBIENT_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i))
-                            WarningLog("error adding Ambient temperature sensor");
-				}
+      if(readTemperature(i)<MAX_TEMP_THRESHOLD) { // Need to check if temperature sensor valid
+        if (OSString* name = OSDynamicCast(OSString, configuration->getObject(key))) {
+          if (name->isEqualTo("CPU")) {
+            if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, i)) {
+              WarningLog("error adding heatsink temperature sensor");
+            }
+          }
+          else if (name->isEqualTo("System")) {
+            if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i)) {
+              WarningLog("error adding system temperature sensor");
+            }
+          }
+          else if (name->isEqualTo("Ambient")) {
+            if (!addSensor(KEY_AMBIENT_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor,i)) {
+              WarningLog("error adding Ambient temperature sensor");
+            }
+          }
+        }
+      }
 		}
 	}
 	else {
-        if(readTemperature(0)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
-             if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 0))
-                 WarningLog("error adding heatsink temperature sensor");
-        if(readTemperature(1)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
-            if (!addSensor(KEY_AMBIENT_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 1))
-                WarningLog("error adding Ambient temperature sensor");
-        if(readTemperature(2)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
-            if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 2))
-                WarningLog("error adding system temperature sensor");
+    if(readTemperature(0)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
+      if (!addSensor(KEY_CPU_HEATSINK_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 0)) {
+        WarningLog("error adding heatsink temperature sensor");
+      }
+    if(readTemperature(1)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
+      if (!addSensor(KEY_AMBIENT_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 1)) {
+        WarningLog("error adding Ambient temperature sensor");
+      }
+    if(readTemperature(2)<MAX_TEMP_THRESHOLD)  // Need to check if temperature sensor valid
+      if (!addSensor(KEY_NORTHBRIDGE_TEMPERATURE, TYPE_SP78, 2, kSuperIOTemperatureSensor, 2)) {
+        WarningLog("error adding system temperature sensor");
+      }
 	}
 	
 	
@@ -470,10 +481,10 @@ bool IT87x::startPlugin()
 		for (int i = 0; i < 9; i++) 
 		{				
 			char key[5];
-            OSString * name;
-            long Ri=0;
-            long Rf=1;
-            long Vf=0;
+      OSString * name;
+      long Ri=0;
+      long Rf=1;
+      long Vf=0;
 			
 			snprintf(key, 5, "VIN%X", i);
 			

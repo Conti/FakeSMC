@@ -23,7 +23,9 @@
 //#include <stdlib.h>
 #include "backend.h"
 
-unsigned int abs (int number) {
+unsigned int abs (int number);
+unsigned int abs (int number)
+{
 	if (number<0)
 		number=-number;
 	return number;

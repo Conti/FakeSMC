@@ -117,6 +117,8 @@ I2CUDelay(I2CBusPtr b, int usec)
  * does not support this clock synchronization.
  */
 
+Bool I2CAddress(I2CDevPtr d, I2CSlaveAddr addr);
+
 static Bool
 I2CRaiseSCL(I2CBusPtr b, int sda, int timeout)
 {
@@ -375,8 +377,7 @@ I2CGetByte(I2CDevPtr d, I2CByte *data, Bool last)
  *    for more.
  */
 
-Bool
-I2CAddress(I2CDevPtr d, I2CSlaveAddr addr)
+Bool I2CAddress(I2CDevPtr d, I2CSlaveAddr addr)
 {
     if (I2CStart(d->pI2CBus, d->StartTimeout)) {
 	if (I2CPutByte(d, addr & 0xFF)) {

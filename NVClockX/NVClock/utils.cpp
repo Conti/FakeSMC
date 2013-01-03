@@ -21,6 +21,9 @@
 
 #include <IOKit/IOLib.h>
 
+int convert_gpu_architecture(short arch, char *buf);
+void convert_unit_mask_to_binary(char mask, char hw_default, char *buf);
+
 /* Convert the gpu architecture to a string using NVxx/Gxx naming */
 int convert_gpu_architecture(short arch, char *buf)
 {

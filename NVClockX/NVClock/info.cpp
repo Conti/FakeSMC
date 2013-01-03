@@ -25,6 +25,12 @@
 #include "backend.h"
 #include "nvclock.h"
 
+char* get_bus_type(void);
+char* get_agp_fw_status(void);
+char* get_agp_sba_status(void);
+char* get_agp_status(void);
+char* get_memory_type(void);
+
 /* This list isn't used much for the speed ranges anymore */
 /* Mainly mobile gpu speeds are missing */
 static const struct pci_ids ids[] =
@@ -876,7 +882,7 @@ int get_gpu_arch(int device_id)
 			}
 			break;
 		default:
-            printf("Unknown GPU \n", nv_card->card_name);
+            printf("Unknown GPU %s\n", nv_card->card_name);
 			arch = UNKNOWN;
 	}
 	return arch;

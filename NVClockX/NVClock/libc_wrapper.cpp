@@ -44,13 +44,13 @@
        performed as busy waits with microsecond precision.
 */
 
-void
+/*void
 xf86usleep(unsigned long usec)
     //unsigned long usec;
 {
 	IOSleep(usec);
 }
-
+*/
 
 void xf86getsecs(long * secs, long * usecs)
 {

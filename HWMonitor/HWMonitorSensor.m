@@ -37,9 +37,10 @@
         
         if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateValues), message))
         {
-        NSDictionary * values = (__bridge_transfer  NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
-        
-        if (values) 
+/*        NSDictionary * values = (__bridge_transfer  NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+*/
+           NSDictionary * values = (__bridge NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+          if (values) 
             value = [values valueForKey:key];
         }
         IOObjectRelease(service);
@@ -141,7 +142,7 @@
             } break;
                 
             default:
-                return [[NSString alloc] initWithString:@"-"];
+                return @"-";
                 break;
         }
     }
