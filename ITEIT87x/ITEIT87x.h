@@ -143,7 +143,7 @@ public:
     virtual void			writeSmartGuardMainControl(unsigned long index, UInt16 value); 
     virtual void			writeSmartGuardRegControl(unsigned long index, UInt16 value); 
     
-    SuperIOSensor *			addSensor(const char* key, const char* type, unsigned char size,SuperIOSensorGroup group, unsigned long index, long aRi=0, long aRf=1, long aVf=0);
+    SuperIOSensor *			addSensor(const char* key, const char* type, unsigned char size, SuperIOSensorGroup group, unsigned long index, long aRi=0, long aRf=1, long aVf=0);
 
     
     

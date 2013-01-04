@@ -72,6 +72,17 @@ void FakeSMCPlugin::free()
     super::free();
 }
 
+bool FakeSMCPlugin::isKeyHandled(const char *key)
+{
+ 
+    UInt16 size = 1;
+    UInt16 * data;
+        return kIOReturnSuccess == fakeSMC->callPlatformFunction(kFakeSMCGetKeyValue, false, (void *)key, (void *)&size, (void *)&data, 0);
+
+    
+    return false;
+}
+
 IOReturn FakeSMCPlugin::callPlatformFunction(const OSSymbol *functionName, bool waitForFunction, void *param1, void *param2, void *param3, void *param4 )
 {
     return super::callPlatformFunction(functionName, waitForFunction, param1, param2, param3, param4);

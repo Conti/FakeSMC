@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "NSString+TruncateToWidth.h"
+#import "IOBatteryStatus.h"
 #include "FakeSMCDefinitions.h"
 
 @implementation AppDelegate
@@ -44,6 +45,9 @@
                 }
                 [values addEntriesFromDictionary:[smartController getDataSet:1]];
             }
+            NSDictionary * temp = [IOBatteryStatus getAllBatteriesLevel];
+            if ([temp count] >0) 
+                [values addEntriesFromDictionary:temp];
             if (values) {
                 
                 enumerator = [sensorsList  objectEnumerator];
@@ -51,9 +55,10 @@
                 while (sensor = (HWMonitorSensor *)[enumerator nextObject]) {
                     
                     if (isMenuVisible) {
-                        NSString * value =[[NSString alloc] initWithString:[sensor formateValue:[values objectForKey:[sensor key]]]];
                         
-                        NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%s\t%s",[[sensor caption] cStringUsingEncoding:NSUTF16StringEncoding],[value cStringUsingEncoding:NSUTF16StringEncoding]] attributes:statusMenuAttributes];
+                        NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]]];
+                        
+                        NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%S\t%S",[[sensor caption] cStringUsingEncoding:NSUTF16StringEncoding],[value cStringUsingEncoding:NSUTF16StringEncoding]] attributes:statusMenuAttributes];
                         
                         [title addAttribute:NSFontAttributeName value:statusMenuFont range:NSMakeRange(0, [title length])];
                         
@@ -62,7 +67,7 @@
                     }
                     
                     if ([sensor favorite]) {
-                        NSString * value =[[NSString alloc] initWithString:[sensor formateValue:[values objectForKey:[sensor key]]]];
+                        NSString * value =[[NSString alloc] initWithString:[sensor formatedValue:[values objectForKey:[sensor key]]]];
                         
                         [statusString appendString:@" "];
                         [statusString appendString:value];
@@ -89,7 +94,7 @@
 
 - (HWMonitorSensor *)addSensorWithKey:(NSString *)key andType:(NSString *) aType andCaption:(NSString *)caption intoGroup:(SensorGroup)group 
 {
-    if(group==HDSmartTempSensorGroup || [HWMonitorSensor readValueForKey:key])
+    if(group==HDSmartTempSensorGroup || [HWMonitorSensor readValueForKey:key] || group==BatterySensorsGroup)
     {
         caption = [caption stringByTruncatingToWidth:145.0f withFont:statusItemFont]; 
         HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andType: aType andGroup:group withCaption:caption];
@@ -181,6 +186,8 @@
         DisksList = [smartController getDataSet:1];
     }
 	
+    BatteriesList = [IOBatteryStatus getAllBatteriesLevel];
+    
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:statusMenu];
     [statusItem setHighlightMode:YES];
@@ -228,9 +235,16 @@
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andType: @TYPE_FREQ andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"CPU %X",nil),i] intoGroup:FrequencySensorGroup ];
     
     //
-    //    [self addSensorWithKey:@"FGC0" andType:@TYPE_FREQ andCaption:@"GPU" intoGroup:FrequencySensorGroup];
+    for (int i=0; i<0xA; i++) {
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FAKESMC_FORMAT_GPU_FREQUENCY,i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Core",nil) ,i] intoGroup:FrequencySensorGroup ];
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FAKESMC_FORMAT_GPU_SHADER_FREQUENCY,i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Shaders",nil) ,i] intoGroup:FrequencySensorGroup ];
+
+// Temporary disable GPU ROP and Memory reporting
+//        [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FAKESMC_FORMAT_GPU_MEMORY_FREQUENCY,i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Memory",nil) ,i] intoGroup:FrequencySensorGroup ];
+//        [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FAKESMC_FORMAT_GPU_ROP_FREQUENCY,i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X ROP",nil) ,i] intoGroup:FrequencySensorGroup ];
+//
     [self insertFooterAndTitle:NSLocalizedString(@"FREQUENCIES",nil) andImage:[NSImage imageNamed:@"freq_small"]];
-    
+    }
     //Multipliers
     
     for (int i=0; i<0xA; i++)
@@ -252,7 +266,8 @@
     [self addSensorWithKey:@KEY_3VCC_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VCC Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_3VSB_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VSB Voltage",nil) intoGroup:VoltageSensorGroup ];
     [self addSensorWithKey:@KEY_VBAT_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"Battery Voltage",nil) intoGroup:VoltageSensorGroup ];
-    
+    for (int i=0; i<0xA; i++) 
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FORMAT_GPU_VOLTAGE,i] andType: @TYPE_FP2E andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Voltage",nil) ,i] intoGroup:VoltageSensorGroup ];
 
 
     [self insertFooterAndTitle:NSLocalizedString(@"VOLTAGES",nil) andImage:[NSImage imageNamed:@"voltage_small"]];
@@ -275,6 +290,15 @@
     
     
      [self insertFooterAndTitle:NSLocalizedString(@"HARD DRIVES TEMPERATURES",nil) andImage:[NSImage imageNamed:@"hd_small"]];
+   
+    NSEnumerator * BatteryEnumerator = [BatteriesList keyEnumerator];
+    id nextBattery;
+    
+    while (nextBattery = [BatteryEnumerator nextObject]) {
+        [self addSensorWithKey:nextBattery andType:@TYPE_FPE2 andCaption:nextBattery intoGroup:BatterySensorsGroup];
+    }
+    [self insertFooterAndTitle:NSLocalizedString(@"BATTERIES",nil) andImage:[NSImage imageNamed:@"modern-battery-icon"]];
+
     if (![sensorsList count]) {
         NSMenuItem * item = [[NSMenuItem alloc]initWithTitle:@"No sensors found or FakeSMCDevice unavailable" action:nil keyEquivalent:@""];
         

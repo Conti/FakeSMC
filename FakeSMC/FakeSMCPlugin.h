@@ -25,7 +25,7 @@ public:
     virtual bool            start(IOService *provider);
     virtual void            stop(IOService *provider);
     virtual void            free(void);
-
+    bool                    isKeyHandled(const char *key);
     virtual IOReturn        callPlatformFunction(const OSSymbol *functionName, bool waitForFunction, void *param1, void *param2, void *param3, void *param4 ); 
 
 };

@@ -13,7 +13,7 @@
 #include "FakeSMC.h"
 #include "FakeSMCUtils.h"
 
-#define Debug false
+#define Debug true
 
 #define LogPrefix "ITEIT87x: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -298,7 +298,7 @@ bool IT87x::probePort()
 		case IT8726F:
 		case IT8728F:
 		case IT8752F:
-        case IT8772E:
+    case IT8772E:
 			model = id; 
 			break; 
 		default:
@@ -405,10 +405,20 @@ bool IT87x::startPlugin()
         product = OSDynamicCast(OSString, fRoot->getProperty("oem-mb-product") ? fRoot->getProperty("oem-mb-product") :  (fRoot->getProperty("oem-product-name") ? fRoot->getProperty("oem-product-name") : NULL));
         
     }
-    if (vendor)
+  if (product && vendor) {
+    InfoLog(" mother vendor=%s product=%s\n", vendor->getCStringNoCopy(), product->getCStringNoCopy());
+  }  else {
+    WarningLog("no vendor or product\n");
+  }
+
+  
+  if (vendor) {
         if (OSDictionary *link = OSDynamicCast(OSDictionary, list->getObject(vendor)))
             if(product)
                 configuration = OSDynamicCast(OSDictionary, link->getObject(product));
+  } else {
+    WarningLog("no vendor\n");
+  }
 
     
     if (list && !configuration) 
@@ -620,7 +630,7 @@ bool IT87x::startPlugin()
 
 int IT87x::getPortsCount()
 {
-    return 1;
+    return 2;
 }
 
 

@@ -20,7 +20,9 @@
 
 -(void) FanInitialization;
 - (id)showPanelModalAgainstWindow: (NSWindow *)window;
-- (void)sheetDidEnd:(NSWindow *)sheet;
+- (void)sheetDidEnd:(NSWindow *)sheet
+         returnCode:(int)returnCode
+        contextInfo:(void  *)contextInfo;
 
 @property (readwrite)     bool needCalibration;
 @property (strong) IBOutlet NSTextFieldCell *StartTempInput;

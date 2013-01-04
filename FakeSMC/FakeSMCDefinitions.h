@@ -20,6 +20,18 @@
 #define KEY_FORMAT_GPU_BOARD_TEMPERATURE        "TG%XH"
 #define KEY_FORMAT_GPU_PROXIMITY_TEMPERATURE    "TG%XP"
 #define KEY_GPU_MEMORY_TEMPERATURE              "TG0M"
+#define KEY_FORMAT_GPU_MEMORY_TEMPERATURE       "TG%XM"
+
+// GPU
+#define KEY_GPU_DIODE_TEMPERATURE               "TG0D"
+#define KEY_FORMAT_GPU_DIODE_TEMPERATURE        "TG%XD"
+#define	KEY_GPU_HEATSINK_TEMPERATURE            "TG0H"
+#define	KEY_FORMAT_GPU_HEATSINK_TEMPERATURE		"TG%XH"
+#define KEY_GPU_PROXIMITY_TEMPERATURE           "TG0P"
+#define KEY_FORMAT_GPU_PROXIMITY_TEMPERATURE    "TG%XP"
+#define KEY_GPU_MEMORY_TEMPERATURE              "TG0M"
+#define KEY_FORMAT_GPU_MEMORY_TEMPERATURE       "TG%XM"
+
 // PECI
 #define KEY_FORMAT_CPU_PECI_CORE_TEMPERATURE    "TC%Xc" // SNB
 #define KEY_PECI_GFX_TEMPERATURE                "TCGc"  // SNB HD2/3000
@@ -56,8 +68,8 @@
 #define KEY_CPU_VRM_SUPPLY2                     "VS2C"
 
 // GPU
-#define KEY_GPU0_VOLTAGE                        "VC0G" // GPU 0 Core
-#define KEY_GPU1_VOLTAGE                        "VC1G" // GPU 1 Core
+#define KEY_GPU_VOLTAGE                         "VC0G" // GPU 0 Core
+#define KEY_FORMAT_GPU_VOLTAGE                  "VC%XG" // GPU X Core
 
 #define KEY_PCH_VOLTAGE                         "VN1C" // PCH 1.05V S0, VS1C-PP1V05 S0 SB, VV1R-1.05 S0
 
@@ -96,8 +108,19 @@
 #define KEY_FAN_NUMBER                          "FNum"
 #define KEY_FORMAT_FAN_ID                       "F%XID"
 #define KEY_FORMAT_FAN_SPEED                    "F%XAc"
+#define KEY_FAKESMC_GPUPWM                      "FG0P"
+#define KEY_FAKESMC_FORMAT_GPUPWM               "FG%XP"
 
 // Other
+#define KEY_FAKESMC_GPU_FREQUENCY               "CG0C"
+#define KEY_FAKESMC_FORMAT_GPU_FREQUENCY        "CG%XC"
+#define KEY_FAKESMC_GPU_MEMORY_FREQUENCY        "CG0M"
+#define KEY_FAKESMC_FORMAT_GPU_MEMORY_FREQUENCY "CG%XM"
+#define KEY_FAKESMC_GPU_SHADER_FREQUENCY        "CG0S"
+#define KEY_FAKESMC_FORMAT_GPU_SHADER_FREQUENCY "CG%XS"
+#define KEY_FAKESMC_GPU_ROP_FREQUENCY           "CG0R"
+#define KEY_FAKESMC_FORMAT_GPU_ROP_FREQUENCY    "CG%XR"
+
 #define KEY_FORMAT_NON_APPLE_CPU_FREQUENCY      "FRC%X"
 #define KEY_FORMAT_NON_APPLE_CPU_MULTIPLIER     "MC%XC"
 #define KEY_FORMAT_NON_APPLE_GPU_FREQUENCY      "FGC%X"
@@ -174,12 +197,22 @@
 #define TYPE_FP4C                               "fp4c"
 #define TYPE_CH8                                "ch8*"
 #define TYPE_SP78                               "sp78"
+#define TYPE_FP88                               "fp88"
 #define TYPE_UI8                                "ui8"
 #define TYPE_UI16                               "ui16"
 #define TYPE_UI32                               "ui32"
 #define TYPE_SI16                               "si16"
 #define TYPE_FLAG                               "flag"
 #define TYPE_FREQ                               "freq"
+
+#define TYPE_FPXX_SIZE                          2
+#define TYPE_SPXX_SIZE                          2
+#define TYPE_UI8_SIZE                           1
+#define TYPE_UI16_SIZE                          2
+#define TYPE_UI32_SIZE                          4
+#define TYPE_SI8_SIZE                           1
+#define TYPE_SI16_SIZE                          2
+#define TYPE_SI32_SIZE                          4
 
 // Protocol
 #define kFakeSMCDeviceService                   "FakeSMCDevice"

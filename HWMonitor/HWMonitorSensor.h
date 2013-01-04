@@ -16,6 +16,7 @@ enum {
     FrequencySensorGroup =     4,
     MultiplierSensorGroup =    5,
     HDSmartTempSensorGroup = 6, 
+    BatterySensorsGroup = 7,
 
 };
 typedef NSUInteger SensorGroup;
@@ -38,6 +39,6 @@ typedef NSUInteger SensorGroup;
 + (NSData *)            readValueForKey:(NSString *)key;
 
 - (HWMonitorSensor *)   initWithKey:(NSString *)aKey andType: aType andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption;
-- (NSString *)          formateValue:(NSData *)value;
+- (NSString *)          formatedValue:(NSData *)value;
 
 @end

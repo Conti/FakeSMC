@@ -18,6 +18,7 @@
     
     NSMutableArray *        sensorsList;
     NSMutableDictionary *        DisksList;
+    NSMutableDictionary *   BatteriesList;
     
     ISPSmartController *    smartController;
     
@@ -33,10 +34,11 @@
     NSDictionary*           statusMenuAttributes;
 }
 
-- (void)updateTitles;
-- (HWMonitorSensor *)addSensorWithKey:(NSString *)key andType:(NSString *)aType andCaption:(NSString *)caption intoGroup:(SensorGroup)group;
-- (void)insertFooterAndTitle:(NSString *)title andImgage:(NSImage *) img;
+//- (void)updateTitles;
+//- (HWMonitorSensor *)addSensorWithKey:(NSString *)key andType:(NSString *)aType andCaption:(NSString *)caption intoGroup:(SensorGroup)group;
+//- (void)insertFooterAndTitle:(NSString *)title andImgage:(NSImage *) img;
 
-- (void)menuItemClicked:(id)sender;
+
+//- (void)menuItemClicked:(id)sender;
 
 @end

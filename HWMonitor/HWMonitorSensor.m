@@ -60,9 +60,9 @@
     return self;
 }
 
-- (NSString *) formateValue:(NSData *)value
+- (NSString *) formatedValue:(NSData *)value
 {
-    if (value != NULL) {
+    if (value != nil) {
         switch (group) {
             case TemperatureSensorGroup:
             {
@@ -88,6 +88,12 @@
                 
             } break;
                 
+            case BatterySensorsGroup:
+            {
+                NSInteger * t;
+                t = [value bytes];
+               return [[NSString alloc] initWithFormat:@"%d%%",*t];
+            } break;
                 
             case VoltageSensorGroup:
             {
@@ -141,13 +147,11 @@
                 
             } break;
                 
-            default:
-                return @"-";
-                break;
+         
         }
     }
     
-    return nil;
+    return @"-";
 }
 
 @end

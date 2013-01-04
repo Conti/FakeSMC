@@ -708,7 +708,7 @@
         [NSThread sleepForTimeInterval:SpinTransactionTime]; //  Give some time for fan to reach the stable rotation
         NSNumber * num = [NSNumber numberWithLong: self.currentRPM];
         [calibrationDataUpward addObject:num];
-        DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d", [self name] , i, [num intValue]) ;
+ //       DebugLog(@"RPMs for FAN %@ at PWM = %d  is %d", [self name] , i, [num intValue]) ;
         self.progress = self.progress + 0.78125;
     }
     //Downward direction

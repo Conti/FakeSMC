@@ -7,27 +7,25 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.kozlek.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>org.kozlek.${PRODUCT_NAME}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0.2d1</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>GeForce Monitoring Plugin</key>
+		<key>Nouveau nVidia Cards Monitoring Plugin</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>org.kozlek.${PRODUCT_NAME:rfc1034identifier}</string>
+			<string>org.kozlek.${PRODUCT_NAME}</string>
 			<key>IOClass</key>
-			<string>GeForceX</string>
+			<string>GeforceSensors</string>
 			<key>IOMatchCategory</key>
 			<string>FakeSMCPlugin</string>
 			<key>IOPCIClassMatch</key>
@@ -35,15 +33,15 @@
 			<key>IOPCIMatch</key>
 			<string>0x000010de&amp;0x0000ffff</string>
 			<key>IOProbeScore</key>
-			<integer>10000</integer>
+			<integer>1000</integer>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 		</dict>
 	</dict>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2012 kozlek. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
+		<key>com.apple.iokit.IOPCIFamily</key>
+		<string>2.6</string>
 		<key>com.apple.kpi.iokit</key>
 		<string>10.0.0</string>
 		<key>com.apple.kpi.libkern</key>
@@ -52,8 +50,6 @@
 		<string>10.0.0</string>
 		<key>com.apple.kpi.unsupported</key>
 		<string>10.0.0</string>
-		<key>com.apple.iokit.IOPCIFamily</key>
-		<string>1.0.0b1</string>
 		<key>org.netkas.FakeSMC</key>
 		<string>4.2.0</string>
 	</dict>
