@@ -52,7 +52,7 @@
             
             NSColor * DrawColor = [obj objectForKey:@"Color"];
             NSNumber * data = [obj objectForKey:@"Data"];
-            NSString * legend = [obj objectForKey:@"Legend"];
+  //          NSString * legend = [obj objectForKey:@"Legend"];
 
             CGContextSetLineWidth(ctx, 2.0);
             CGColorRef drawColor = [DrawColor CGColor];
@@ -89,7 +89,7 @@
            NSColor * DrawColor = [obj objectForKey:@"Color"];
            NSArray * data = [obj objectForKey:@"Data"];
            NSNumber * scale = [obj objectForKey:@"Scale"];
-           NSString * legend = [obj objectForKey:@"Legend"];
+//           NSString * legend = [obj objectForKey:@"Legend"];
            if (scale) {
                denominator = [scale floatValue];
            } else

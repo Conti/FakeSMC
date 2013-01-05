@@ -100,7 +100,7 @@
    
     
     if (!service ) {
-		return nil;
+      return 0; //nil;
     }
     NSNumber * percent = (__bridge_transfer  NSNumber *)IORegistryEntryCreateCFProperty(service, CFSTR("BatteryPercent"), kCFAllocatorDefault, 0);
     
@@ -115,7 +115,7 @@
 
     
     if (!service ) {
-		return nil;
+      return 0; //nil;
     }
     NSNumber * percent = (__bridge_transfer  NSNumber *)IORegistryEntryCreateCFProperty(service, CFSTR("BatteryPercent"), kCFAllocatorDefault, 0);
     
@@ -130,7 +130,7 @@
 
     
     if (!service ) {
-		return nil;
+      return 0; //nil;
     }
     NSNumber * percent = (__bridge_transfer  NSNumber *)IORegistryEntryCreateCFProperty(service, CFSTR("BatteryPercent"), kCFAllocatorDefault, 0);
     

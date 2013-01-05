@@ -36,7 +36,7 @@ static inline int convertTemperature(int format, int value) {
 	return value;
 }
 
-
+void SwapASCIIString(UInt16 *buffer, UInt16 length);
 
 @implementation ISPSmartController
 

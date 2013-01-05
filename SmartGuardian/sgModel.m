@@ -12,7 +12,7 @@
 #ifdef Debug
 #define DebugLog(string, args...)	do { if (Debug) { NSLog (string , ## args); } } while(0)
 #else
-#define DebugLog
+#define DebugLog(string, args...)
 #endif
 
 #define MAXRPM_TO_DIFFER 100

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		120EF11A15CC4116003CC34F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 120EF11915CC4116003CC34F /* MainWindow.xib */; };
+		129F5C411697415900AB1F89 /* IOBatteryStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F5C401697415900AB1F89 /* IOBatteryStatus.m */; };
 		1D05ABFF13ED0E2E00EADBF6 /* FakeSMC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */; };
 		1D05AC0013ED0E2E00EADBF6 /* FakeSMC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05ABFA13ED0E2E00EADBF6 /* FakeSMC.h */; };
 		1D05AC0113ED0E2E00EADBF6 /* FakeSMCDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABFB13ED0E2E00EADBF6 /* FakeSMCDevice.cpp */; };
@@ -145,6 +146,8 @@
 /* Begin PBXFileReference section */
 		120EF11915CC4116003CC34F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		1251073E162697270004D9C9 /* SMBus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SMBus.c; sourceTree = "<group>"; };
+		129F5C3F1697415900AB1F89 /* IOBatteryStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOBatteryStatus.h; sourceTree = "<group>"; };
+		129F5C401697415900AB1F89 /* IOBatteryStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOBatteryStatus.m; sourceTree = "<group>"; };
 		1D05ABE413ED0DAD00EADBF6 /* FakeSMC.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeSMC.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D05ABE813ED0DAD00EADBF6 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
 		1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeSMC.cpp; sourceTree = "<group>"; };
@@ -654,6 +657,8 @@
 			children = (
 				2CB2F1F914F122AA006C4251 /* NSString+TruncateToWidth.h */,
 				2CB2F1FA14F122AA006C4251 /* NSString+TruncateToWidth.m */,
+				129F5C3F1697415900AB1F89 /* IOBatteryStatus.h */,
+				129F5C401697415900AB1F89 /* IOBatteryStatus.m */,
 				2CAD312914EE522000B32B68 /* ISPSmartController.h */,
 				2CAD312A14EE522000B32B68 /* ISPSmartController.m */,
 				1D978C931452CFDE00F83827 /* HWMonitorSensor.h */,
@@ -1680,6 +1685,7 @@
 				2C4518CD14F41D4100D44435 /* AppDelegate.m in Sources */,
 				1D978C951452CFDE00F83827 /* HWMonitorSensor.m in Sources */,
 				2CAD312B14EE522000B32B68 /* ISPSmartController.m in Sources */,
+				129F5C411697415900AB1F89 /* IOBatteryStatus.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2272,8 +2278,8 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
+					/Users/Slice/Developer/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk,
 					"$(inherited)",
-					"\"$(DEVELOPER_DIR)/SDKs/MacOSX10.7.sdk/System/Library/Frameworks\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2311,8 +2317,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				"DEBUG_INFORMATION_FORMAT[arch=*]" = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
+					/Users/Slice/Developer/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk,
 					"$(inherited)",
-					"\"$(DEVELOPER_DIR)/SDKs/MacOSX10.7.sdk/System/Library/Frameworks\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;

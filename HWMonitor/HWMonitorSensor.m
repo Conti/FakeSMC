@@ -92,7 +92,7 @@
             {
                 NSInteger * t;
                 t = [value bytes];
-               return [[NSString alloc] initWithFormat:@"%d%%",*t];
+               return [[NSString alloc] initWithFormat:@"%ld%%",*t];
             } break;
                 
             case VoltageSensorGroup:
