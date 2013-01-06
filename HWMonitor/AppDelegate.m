@@ -32,10 +32,10 @@
         CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, "magic", kCFStringEncodingASCII);
         if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateValues), message)) 
         {           
-/*          NSMutableDictionary * values = (__bridge_transfer NSMutableDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
-*/
-          NSMutableDictionary * values = (__bridge NSMutableDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+         NSMutableDictionary * values = (__bridge_transfer NSMutableDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
 
+/*          NSMutableDictionary * values = (__bridge NSMutableDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+*/
             if(smart)
             {
                 if (fabs([lastcall timeIntervalSinceNow]) > SMART_UPDATE_INTERVAL) 
@@ -48,7 +48,7 @@
             NSDictionary * temp = [IOBatteryStatus getAllBatteriesLevel];
             if ([temp count] >0) 
                 [values addEntriesFromDictionary:temp];
-            if (values) {
+  /*          if (values) {
                 
                 enumerator = [sensorsList  objectEnumerator];
                 
@@ -75,7 +75,47 @@
                         count++;
                     }
                 }
+            } */
+          if (values) {
+            int doubleLineCount = 0;
+            enumerator = [sensorsList objectEnumerator];
+            
+            while (sensor = (HWMonitorSensor *)[enumerator nextObject])
+              if ([sensor favorite])
+                doubleLineCount++;
+            
+            enumerator = [sensorsList objectEnumerator];
+            
+            int doubleLineIndex = 0;
+            
+            while (sensor = (HWMonitorSensor *)[enumerator nextObject]) {
+              
+              if (isMenuVisible) {
+                
+                NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]]];
+                
+                NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%S\t%S",[[sensor caption] cStringUsingEncoding:NSUTF16StringEncoding],[value cStringUsingEncoding:NSUTF16StringEncoding]] attributes:statusMenuAttributes];
+                
+                [title addAttribute:NSFontAttributeName value:statusMenuFont range:NSMakeRange(0, [title length])];
+                
+                // Update menu item title
+                [(NSMenuItem *)[sensor object] setAttributedTitle:title];
+              }
+              
+              if ([sensor favorite]) {
+                NSString * value =[[NSString alloc] initWithString:[sensor formatedValue:[values objectForKey:[sensor key]]]];
+                if ((doubleLineIndex == doubleLineCount>>1) && !(doubleLineCount&1))
+                  [statusString appendString:@"\n"];
+                [statusString appendString:@" "];
+                [statusString appendString:value];
+                if ((doubleLineIndex == doubleLineCount>>1) && (doubleLineCount&1))
+                  [statusString appendString:@"\n"];
+                
+                doubleLineIndex++;
+                count++;
+              }
             }
+          }
         }
         CFRelease(message);
         IOObjectRelease(service);

@@ -496,7 +496,7 @@ static bool probe_monitoring_device(struct nouveau_i2c_port *i2c, struct i2c_boa
 }
 
 #define I2C_BOARD_INFO(dev_type, dev_addr) \
-dev_type, dev_addr
+dev_type, 0, dev_addr, 0, 0
 
 void nouveau_i2c_probe(struct nouveau_device *device)
 {
