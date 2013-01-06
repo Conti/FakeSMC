@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		120EF11A15CC4116003CC34F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 120EF11915CC4116003CC34F /* MainWindow.xib */; };
-		129F5C411697415900AB1F89 /* IOBatteryStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F5C401697415900AB1F89 /* IOBatteryStatus.m */; };
+		129F816216994B55009AE95E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 129F816116994B55009AE95E /* timer.h */; };
 		1D05ABFF13ED0E2E00EADBF6 /* FakeSMC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */; };
 		1D05AC0013ED0E2E00EADBF6 /* FakeSMC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05ABFA13ED0E2E00EADBF6 /* FakeSMC.h */; };
 		1D05AC0113ED0E2E00EADBF6 /* FakeSMCDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABFB13ED0E2E00EADBF6 /* FakeSMCDevice.cpp */; };
@@ -80,6 +79,62 @@
 		1DA962C413ED37D90096F8A5 /* RadeonChipinfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C213ED37D90096F8A5 /* RadeonChipinfo.h */; };
 		1DA962C513ED37D90096F8A5 /* RadeonChipsets.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C313ED37D90096F8A5 /* RadeonChipsets.h */; };
 		1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA962C613ED389E0096F8A5 /* AtomBIOS.h */; };
+		2C06775C1679C878005B7DA1 /* GeForceSensors-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C0677381679C878005B7DA1 /* GeForceSensors-Info.plist */; };
+		2C06775D1679C878005B7DA1 /* GeforceSensors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677391679C878005B7DA1 /* GeforceSensors.cpp */; };
+		2C06775E1679C878005B7DA1 /* GeforceSensors.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06773A1679C878005B7DA1 /* GeforceSensors.h */; };
+		2C06775F1679C878005B7DA1 /* nouveau.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06773B1679C878005B7DA1 /* nouveau.cpp */; };
+		2C0677601679C878005B7DA1 /* nouveau.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06773C1679C878005B7DA1 /* nouveau.h */; };
+		2C0677611679C878005B7DA1 /* nouveau_bios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06773D1679C878005B7DA1 /* nouveau_bios.cpp */; };
+		2C0677621679C878005B7DA1 /* nouveau_bios.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06773E1679C878005B7DA1 /* nouveau_bios.h */; };
+		2C0677631679C878005B7DA1 /* nouveau_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06773F1679C878005B7DA1 /* nouveau_definitions.h */; };
+		2C0677641679C878005B7DA1 /* nouveau_gpio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677401679C878005B7DA1 /* nouveau_gpio.cpp */; };
+		2C0677651679C878005B7DA1 /* nouveau_gpio.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677411679C878005B7DA1 /* nouveau_gpio.h */; };
+		2C0677661679C878005B7DA1 /* nouveau_i2c._base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677421679C878005B7DA1 /* nouveau_i2c._base.cpp */; };
+		2C0677671679C878005B7DA1 /* nouveau_i2c.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677431679C878005B7DA1 /* nouveau_i2c.h */; };
+		2C0677681679C878005B7DA1 /* nouveau_i2c_aux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677441679C878005B7DA1 /* nouveau_i2c_aux.cpp */; };
+		2C0677691679C878005B7DA1 /* nouveau_i2c_bit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677451679C878005B7DA1 /* nouveau_i2c_bit.cpp */; };
+		2C06776A1679C878005B7DA1 /* nouveau_therm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677461679C878005B7DA1 /* nouveau_therm.cpp */; };
+		2C06776B1679C878005B7DA1 /* nouveau_therm.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677471679C878005B7DA1 /* nouveau_therm.h */; };
+		2C06776C1679C878005B7DA1 /* nouveau_volt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677481679C878005B7DA1 /* nouveau_volt.cpp */; };
+		2C06776D1679C878005B7DA1 /* nouveau_volt.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677491679C878005B7DA1 /* nouveau_volt.h */; };
+		2C06776E1679C878005B7DA1 /* nouveau_xpio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06774A1679C878005B7DA1 /* nouveau_xpio.cpp */; };
+		2C06776F1679C878005B7DA1 /* nouveau_xpio.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06774B1679C878005B7DA1 /* nouveau_xpio.h */; };
+		2C0677701679C878005B7DA1 /* nv10.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06774C1679C878005B7DA1 /* nv10.cpp */; };
+		2C0677711679C878005B7DA1 /* nv10.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06774D1679C878005B7DA1 /* nv10.h */; };
+		2C0677721679C878005B7DA1 /* nv40.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06774E1679C878005B7DA1 /* nv40.cpp */; };
+		2C0677731679C878005B7DA1 /* nv40.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06774F1679C878005B7DA1 /* nv40.h */; };
+		2C0677741679C878005B7DA1 /* nv50.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677501679C878005B7DA1 /* nv50.cpp */; };
+		2C0677751679C878005B7DA1 /* nv50.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677511679C878005B7DA1 /* nv50.h */; };
+		2C0677761679C878005B7DA1 /* nva3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677521679C878005B7DA1 /* nva3.cpp */; };
+		2C0677771679C878005B7DA1 /* nva3.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677531679C878005B7DA1 /* nva3.h */; };
+		2C0677781679C878005B7DA1 /* nvc0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677541679C878005B7DA1 /* nvc0.cpp */; };
+		2C0677791679C878005B7DA1 /* nvc0.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677551679C878005B7DA1 /* nvc0.h */; };
+		2C06777A1679C878005B7DA1 /* nvd0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677561679C878005B7DA1 /* nvd0.cpp */; };
+		2C06777B1679C878005B7DA1 /* nvd0.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677571679C878005B7DA1 /* nvd0.h */; };
+		2C06777C1679C878005B7DA1 /* nve0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677581679C878005B7DA1 /* nve0.cpp */; };
+		2C06777D1679C878005B7DA1 /* nve0.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677591679C878005B7DA1 /* nve0.h */; };
+		2C06777E1679C878005B7DA1 /* vga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06775A1679C878005B7DA1 /* vga.cpp */; };
+		2C06777F1679C878005B7DA1 /* vga.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06775B1679C878005B7DA1 /* vga.h */; };
+		2C0677831679C97F005B7DA1 /* GeForceSensors-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677821679C97F005B7DA1 /* GeForceSensors-Prefix.pch */; };
+		2C06778B1679C9BB005B7DA1 /* linux_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677851679C9BA005B7DA1 /* linux_definitions.h */; };
+		2C06778C1679C9BB005B7DA1 /* list.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677861679C9BA005B7DA1 /* list.h */; };
+		2C06778D1679C9BB005B7DA1 /* i2c_base.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677871679C9BA005B7DA1 /* i2c_base.h */; };
+		2C06778E1679C9BB005B7DA1 /* i2c_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677881679C9BA005B7DA1 /* i2c_base.cpp */; };
+		2C06778F1679C9BB005B7DA1 /* i2c_algo_bit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677891679C9BA005B7DA1 /* i2c_algo_bit.h */; };
+		2C0677901679C9BB005B7DA1 /* i2c_algo_bit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06778A1679C9BA005B7DA1 /* i2c_algo_bit.cpp */; };
+		2C06779F1679D23E005B7DA1 /* xfree.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677941679D23C005B7DA1 /* xfree.h */; };
+		2C0677A01679D23E005B7DA1 /* xf86i2c.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677951679D23C005B7DA1 /* xf86i2c.h */; };
+		2C0677A11679D23E005B7DA1 /* xf86i2c.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677961679D23C005B7DA1 /* xf86i2c.cpp */; };
+		2C0677A21679D23E005B7DA1 /* nvclock_i2c.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0677971679D23D005B7DA1 /* nvclock_i2c.h */; };
+		2C0677A31679D23E005B7DA1 /* nvclock_i2c.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677981679D23D005B7DA1 /* nvclock_i2c.cpp */; };
+		2C0677A41679D23E005B7DA1 /* adt7473.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0677991679D23D005B7DA1 /* adt7473.cpp */; };
+		2C0677A51679D23E005B7DA1 /* f75375.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C06779A1679D23D005B7DA1 /* f75375.h */; };
+		2C0677A61679D23E005B7DA1 /* f75375.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06779B1679D23D005B7DA1 /* f75375.cpp */; };
+		2C0677A71679D23E005B7DA1 /* lm99.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06779C1679D23D005B7DA1 /* lm99.cpp */; };
+		2C0677A81679D23E005B7DA1 /* w83l785r.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06779D1679D23E005B7DA1 /* w83l785r.cpp */; };
+		2C0677A91679D23E005B7DA1 /* w83781d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C06779E1679D23E005B7DA1 /* w83781d.cpp */; };
+		2C0DAB7C1696ECC500FA3652 /* IOBatteryStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0DAB7B1696ECC500FA3652 /* IOBatteryStatus.m */; };
+		2C0DAB8116971C7B00FA3652 /* modern-battery-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0DAB8016971C7B00FA3652 /* modern-battery-icon.png */; };
 		2C107CB0153DC8E400151A6E /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB9815E1535C63600DAC5F8 /* IOKit.framework */; };
 		2C11943A14F910F1009319BD /* fan8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C11943914F910F1009319BD /* fan8.png */; };
 		2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */; };
@@ -144,10 +199,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		120EF11915CC4116003CC34F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		1251073E162697270004D9C9 /* SMBus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SMBus.c; sourceTree = "<group>"; };
 		129F5C3F1697415900AB1F89 /* IOBatteryStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOBatteryStatus.h; sourceTree = "<group>"; };
 		129F5C401697415900AB1F89 /* IOBatteryStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOBatteryStatus.m; sourceTree = "<group>"; };
+		129F816116994B55009AE95E /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timer.h; path = Utils/timer.h; sourceTree = "<group>"; };
 		1D05ABE413ED0DAD00EADBF6 /* FakeSMC.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeSMC.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D05ABE813ED0DAD00EADBF6 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
 		1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeSMC.cpp; sourceTree = "<group>"; };
@@ -255,15 +310,67 @@
 		1DA962C613ED389E0096F8A5 /* AtomBIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomBIOS.h; sourceTree = "<group>"; };
 		21038D36161D9905008FA427 /* Andigilog.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Andigilog.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		21EF15CA161D8DA40098B983 /* ICHSMBus.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ICHSMBus.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C0677121679C6B5005B7DA1 /* GeForceSensors.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeForceSensors.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C0677131679C6B6005B7DA1 /* NVClockX copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "NVClockX copy-Info.plist"; path = "/Users/ivan/Development/Assembla/fakesmc/HWSensors4/NVClockX copy-Info.plist"; sourceTree = "<absolute>"; };
+		2C0677381679C878005B7DA1 /* GeForceSensors-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GeForceSensors-Info.plist"; sourceTree = "<group>"; };
+		2C0677391679C878005B7DA1 /* GeforceSensors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeforceSensors.cpp; sourceTree = "<group>"; };
+		2C06773A1679C878005B7DA1 /* GeforceSensors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeforceSensors.h; sourceTree = "<group>"; };
+		2C06773B1679C878005B7DA1 /* nouveau.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau.cpp; sourceTree = "<group>"; };
+		2C06773C1679C878005B7DA1 /* nouveau.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau.h; sourceTree = "<group>"; };
+		2C06773D1679C878005B7DA1 /* nouveau_bios.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau_bios.cpp; sourceTree = "<group>"; };
+		2C06773E1679C878005B7DA1 /* nouveau_bios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau_bios.h; sourceTree = "<group>"; };
+		2C06773F1679C878005B7DA1 /* nouveau_definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau_definitions.h; sourceTree = "<group>"; };
+		2C0677401679C878005B7DA1 /* nouveau_gpio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau_gpio.cpp; sourceTree = "<group>"; };
+		2C0677411679C878005B7DA1 /* nouveau_gpio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau_gpio.h; sourceTree = "<group>"; };
+		2C0677421679C878005B7DA1 /* nouveau_i2c._base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau_i2c._base.cpp; sourceTree = "<group>"; };
+		2C0677431679C878005B7DA1 /* nouveau_i2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau_i2c.h; sourceTree = "<group>"; };
+		2C0677441679C878005B7DA1 /* nouveau_i2c_aux.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau_i2c_aux.cpp; sourceTree = "<group>"; };
+		2C0677451679C878005B7DA1 /* nouveau_i2c_bit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau_i2c_bit.cpp; sourceTree = "<group>"; };
+		2C0677461679C878005B7DA1 /* nouveau_therm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau_therm.cpp; sourceTree = "<group>"; };
+		2C0677471679C878005B7DA1 /* nouveau_therm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau_therm.h; sourceTree = "<group>"; };
+		2C0677481679C878005B7DA1 /* nouveau_volt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau_volt.cpp; sourceTree = "<group>"; };
+		2C0677491679C878005B7DA1 /* nouveau_volt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau_volt.h; sourceTree = "<group>"; };
+		2C06774A1679C878005B7DA1 /* nouveau_xpio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nouveau_xpio.cpp; sourceTree = "<group>"; };
+		2C06774B1679C878005B7DA1 /* nouveau_xpio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau_xpio.h; sourceTree = "<group>"; };
+		2C06774C1679C878005B7DA1 /* nv10.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nv10.cpp; sourceTree = "<group>"; };
+		2C06774D1679C878005B7DA1 /* nv10.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nv10.h; sourceTree = "<group>"; };
+		2C06774E1679C878005B7DA1 /* nv40.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nv40.cpp; sourceTree = "<group>"; };
+		2C06774F1679C878005B7DA1 /* nv40.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nv40.h; sourceTree = "<group>"; };
+		2C0677501679C878005B7DA1 /* nv50.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nv50.cpp; sourceTree = "<group>"; };
+		2C0677511679C878005B7DA1 /* nv50.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nv50.h; sourceTree = "<group>"; };
+		2C0677521679C878005B7DA1 /* nva3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nva3.cpp; sourceTree = "<group>"; };
+		2C0677531679C878005B7DA1 /* nva3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nva3.h; sourceTree = "<group>"; };
+		2C0677541679C878005B7DA1 /* nvc0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nvc0.cpp; sourceTree = "<group>"; };
+		2C0677551679C878005B7DA1 /* nvc0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nvc0.h; sourceTree = "<group>"; };
+		2C0677561679C878005B7DA1 /* nvd0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nvd0.cpp; sourceTree = "<group>"; };
+		2C0677571679C878005B7DA1 /* nvd0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nvd0.h; sourceTree = "<group>"; };
+		2C0677581679C878005B7DA1 /* nve0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nve0.cpp; sourceTree = "<group>"; };
+		2C0677591679C878005B7DA1 /* nve0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nve0.h; sourceTree = "<group>"; };
+		2C06775A1679C878005B7DA1 /* vga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vga.cpp; sourceTree = "<group>"; };
+		2C06775B1679C878005B7DA1 /* vga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vga.h; sourceTree = "<group>"; };
+		2C0677821679C97F005B7DA1 /* GeForceSensors-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeForceSensors-Prefix.pch"; sourceTree = "<group>"; };
+		2C0677851679C9BA005B7DA1 /* linux_definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linux_definitions.h; sourceTree = "<group>"; };
+		2C0677861679C9BA005B7DA1 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		2C0677871679C9BA005B7DA1 /* i2c_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = i2c_base.h; sourceTree = "<group>"; };
+		2C0677881679C9BA005B7DA1 /* i2c_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = i2c_base.cpp; sourceTree = "<group>"; };
+		2C0677891679C9BA005B7DA1 /* i2c_algo_bit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = i2c_algo_bit.h; sourceTree = "<group>"; };
+		2C06778A1679C9BA005B7DA1 /* i2c_algo_bit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = i2c_algo_bit.cpp; sourceTree = "<group>"; };
+		2C0677941679D23C005B7DA1 /* xfree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xfree.h; sourceTree = "<group>"; };
+		2C0677951679D23C005B7DA1 /* xf86i2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xf86i2c.h; sourceTree = "<group>"; };
+		2C0677961679D23C005B7DA1 /* xf86i2c.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xf86i2c.cpp; sourceTree = "<group>"; };
+		2C0677971679D23D005B7DA1 /* nvclock_i2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nvclock_i2c.h; sourceTree = "<group>"; };
+		2C0677981679D23D005B7DA1 /* nvclock_i2c.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nvclock_i2c.cpp; sourceTree = "<group>"; };
+		2C0677991679D23D005B7DA1 /* adt7473.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adt7473.cpp; sourceTree = "<group>"; };
+		2C06779A1679D23D005B7DA1 /* f75375.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = f75375.h; sourceTree = "<group>"; };
+		2C06779B1679D23D005B7DA1 /* f75375.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = f75375.cpp; sourceTree = "<group>"; };
+		2C06779C1679D23D005B7DA1 /* lm99.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lm99.cpp; sourceTree = "<group>"; };
+		2C06779D1679D23E005B7DA1 /* w83l785r.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = w83l785r.cpp; sourceTree = "<group>"; };
+		2C06779E1679D23E005B7DA1 /* w83781d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = w83781d.cpp; sourceTree = "<group>"; };
+		2C0DAB7B1696ECC500FA3652 /* IOBatteryStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOBatteryStatus.m; sourceTree = "<group>"; };
+		2C0DAB8016971C7B00FA3652 /* modern-battery-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modern-battery-icon.png"; sourceTree = "<group>"; };
 		2C11943914F910F1009319BD /* fan8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fan8.png; sourceTree = "<group>"; };
 		2C1194D314F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "Japanese-Sensu-Fan-USB-Drive_1.icns"; path = "../SmartGuardian/Japanese-Sensu-Fan-USB-Drive_1.icns"; sourceTree = "<group>"; };
 		2C1194D514F92BDF009319BD /* Koolance_FAN-12038HBK-184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Koolance_FAN-12038HBK-184.png"; sourceTree = "<group>"; };
-		2C182F581542CBA600FDBE5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C182F591542CBA600FDBE5A /* GeForceX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GeForceX-Info.plist"; sourceTree = "<group>"; };
-		2C182F5A1542CBA600FDBE5A /* GeForceX-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeForceX-Prefix.pch"; sourceTree = "<group>"; };
-		2C182F5B1542CBA600FDBE5A /* GeForceX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = GeForceX.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		2C182F5C1542CBA600FDBE5A /* GeForceX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeForceX.h; sourceTree = "<group>"; };
-		2C182F5D1542CBA600FDBE5A /* nouveau.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nouveau.h; sourceTree = "<group>"; };
 		2C1DBBD51500E59000971A87 /* sgAppController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sgAppController.h; sourceTree = "<group>"; };
 		2C1DBBD61500E59000971A87 /* sgAppController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sgAppController.m; sourceTree = "<group>"; };
 		2C2CB4BE150B39DA0017762E /* SmartGuardianHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartGuardianHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,6 +392,8 @@
 		2C9B2A4F150F578200AA7AEC /* voltage_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voltage_small.png; sourceTree = "<group>"; };
 		2C9B2A51150F5A8D00AA7AEC /* freq_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freq_small.png; sourceTree = "<group>"; };
 		2C9B2A53150F623400AA7AEC /* temperature_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temperature_small.png; sourceTree = "<group>"; };
+		2CA7A48616648D4500966779 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		2CA7A48916648D7C00966779 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		2CAD312914EE522000B32B68 /* ISPSmartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISPSmartController.h; sourceTree = "<group>"; };
 		2CAD312A14EE522000B32B68 /* ISPSmartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISPSmartController.m; sourceTree = "<group>"; };
 		2CB03FB814EB99F50070DC93 /* IntelCPUMonitor.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelCPUMonitor.kext; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +517,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C0677021679C6B5005B7DA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C2CB4BB150B39DA0017762E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -470,6 +586,7 @@
 				2CB4FCA315298F4500FEF90D /* OemSMBIOS */,
 				1D05ABE613ED0DAD00EADBF6 /* Frameworks */,
 				1D05ABE513ED0DAD00EADBF6 /* Products */,
+				2C0677131679C6B6005B7DA1 /* NVClockX copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -493,6 +610,7 @@
 				2CB6913214F40F2900152814 /* SmartGuardian.app */,
 				2C2CB4BE150B39DA0017762E /* SmartGuardianHelper.app */,
 				2CB4FCC31529946B00FEF90D /* OemSMBIOS.kext */,
+				2C0677121679C6B5005B7DA1 /* GeForceSensors.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -545,6 +663,7 @@
 		1D05AC1313ED0F7100EADBF6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				129F816116994B55009AE95E /* timer.h */,
 				1D05AC1413ED0FA900EADBF6 /* cpuid.h */,
 				1D05AC1613ED0FA900EADBF6 /* TigerAdditionals.h */,
 				1D05AC1513ED0FA900EADBF6 /* TigerAdditionals.cpp */,
@@ -555,7 +674,7 @@
 		1D05AC3113ED101200EADBF6 /* Plug-Ins */ = {
 			isa = PBXGroup;
 			children = (
-				2C182F561542CBA600FDBE5A /* GeForceX */,
+				2C0677371679C878005B7DA1 /* GeForceSensors */,
 				2CB03FAA14EB99890070DC93 /* IntelCPUMonitor */,
 				1D6FE3EF13FEBFF200376E64 /* ACPISensors */,
 				1D05AC5C13ED123D00EADBF6 /* ITEIT87x */,
@@ -674,6 +793,7 @@
 		1D9F8326144FF24000EEEFEB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C0DAB8016971C7B00FA3652 /* modern-battery-icon.png */,
 				2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */,
 				2CBDEF15150F68A600E8E886 /* temp_alt_small.png */,
 				2C9B2A51150F5A8D00AA7AEC /* freq_small.png */,
@@ -810,25 +930,81 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2C182F561542CBA600FDBE5A /* GeForceX */ = {
+		2C0677371679C878005B7DA1 /* GeForceSensors */ = {
 			isa = PBXGroup;
 			children = (
-				2C182F641542CBC000FDBE5A /* Supporting Files */,
-				2C182F5B1542CBA600FDBE5A /* GeForceX.cpp */,
-				2C182F5C1542CBA600FDBE5A /* GeForceX.h */,
-				2C182F5D1542CBA600FDBE5A /* nouveau.h */,
+				2C0677841679C9A8005B7DA1 /* Linux */,
+				2C0677821679C97F005B7DA1 /* GeForceSensors-Prefix.pch */,
+				2C0677381679C878005B7DA1 /* GeForceSensors-Info.plist */,
+				2C0677391679C878005B7DA1 /* GeforceSensors.cpp */,
+				2C06773A1679C878005B7DA1 /* GeforceSensors.h */,
+				2C0677911679C9E9005B7DA1 /* Nouveau */,
 			);
-			path = GeForceX;
+			path = GeForceSensors;
 			sourceTree = "<group>";
 		};
-		2C182F641542CBC000FDBE5A /* Supporting Files */ = {
+		2C0677841679C9A8005B7DA1 /* Linux */ = {
 			isa = PBXGroup;
 			children = (
-				2C182F571542CBA600FDBE5A /* InfoPlist.strings */,
-				2C182F591542CBA600FDBE5A /* GeForceX-Info.plist */,
-				2C182F5A1542CBA600FDBE5A /* GeForceX-Prefix.pch */,
+				2C0677851679C9BA005B7DA1 /* linux_definitions.h */,
+				2C0677861679C9BA005B7DA1 /* list.h */,
+				2C0677871679C9BA005B7DA1 /* i2c_base.h */,
+				2C0677881679C9BA005B7DA1 /* i2c_base.cpp */,
+				2C0677891679C9BA005B7DA1 /* i2c_algo_bit.h */,
+				2C06778A1679C9BA005B7DA1 /* i2c_algo_bit.cpp */,
 			);
-			name = "Supporting Files";
+			name = Linux;
+			sourceTree = "<group>";
+		};
+		2C0677911679C9E9005B7DA1 /* Nouveau */ = {
+			isa = PBXGroup;
+			children = (
+				2C0677941679D23C005B7DA1 /* xfree.h */,
+				2C0677951679D23C005B7DA1 /* xf86i2c.h */,
+				2C0677961679D23C005B7DA1 /* xf86i2c.cpp */,
+				2C0677971679D23D005B7DA1 /* nvclock_i2c.h */,
+				2C0677981679D23D005B7DA1 /* nvclock_i2c.cpp */,
+				2C0677991679D23D005B7DA1 /* adt7473.cpp */,
+				2C06779A1679D23D005B7DA1 /* f75375.h */,
+				2C06779B1679D23D005B7DA1 /* f75375.cpp */,
+				2C06779C1679D23D005B7DA1 /* lm99.cpp */,
+				2C06779D1679D23E005B7DA1 /* w83l785r.cpp */,
+				2C06779E1679D23E005B7DA1 /* w83781d.cpp */,
+				2C06773B1679C878005B7DA1 /* nouveau.cpp */,
+				2C06773C1679C878005B7DA1 /* nouveau.h */,
+				2C06773D1679C878005B7DA1 /* nouveau_bios.cpp */,
+				2C06773E1679C878005B7DA1 /* nouveau_bios.h */,
+				2C06773F1679C878005B7DA1 /* nouveau_definitions.h */,
+				2C0677401679C878005B7DA1 /* nouveau_gpio.cpp */,
+				2C0677411679C878005B7DA1 /* nouveau_gpio.h */,
+				2C0677421679C878005B7DA1 /* nouveau_i2c._base.cpp */,
+				2C0677431679C878005B7DA1 /* nouveau_i2c.h */,
+				2C0677441679C878005B7DA1 /* nouveau_i2c_aux.cpp */,
+				2C0677451679C878005B7DA1 /* nouveau_i2c_bit.cpp */,
+				2C0677461679C878005B7DA1 /* nouveau_therm.cpp */,
+				2C0677471679C878005B7DA1 /* nouveau_therm.h */,
+				2C0677481679C878005B7DA1 /* nouveau_volt.cpp */,
+				2C0677491679C878005B7DA1 /* nouveau_volt.h */,
+				2C06774A1679C878005B7DA1 /* nouveau_xpio.cpp */,
+				2C06774B1679C878005B7DA1 /* nouveau_xpio.h */,
+				2C06774C1679C878005B7DA1 /* nv10.cpp */,
+				2C06774D1679C878005B7DA1 /* nv10.h */,
+				2C06774E1679C878005B7DA1 /* nv40.cpp */,
+				2C06774F1679C878005B7DA1 /* nv40.h */,
+				2C0677501679C878005B7DA1 /* nv50.cpp */,
+				2C0677511679C878005B7DA1 /* nv50.h */,
+				2C0677521679C878005B7DA1 /* nva3.cpp */,
+				2C0677531679C878005B7DA1 /* nva3.h */,
+				2C0677541679C878005B7DA1 /* nvc0.cpp */,
+				2C0677551679C878005B7DA1 /* nvc0.h */,
+				2C0677561679C878005B7DA1 /* nvd0.cpp */,
+				2C0677571679C878005B7DA1 /* nvd0.h */,
+				2C0677581679C878005B7DA1 /* nve0.cpp */,
+				2C0677591679C878005B7DA1 /* nve0.h */,
+				2C06775A1679C878005B7DA1 /* vga.cpp */,
+				2C06775B1679C878005B7DA1 /* vga.h */,
+			);
+			name = Nouveau;
 			sourceTree = "<group>";
 		};
 		2C2CB4C1150B39DA0017762E /* SmartGuardianHelper */ = {
@@ -901,7 +1077,7 @@
 				2C1DBBD61500E59000971A87 /* sgAppController.m */,
 				2C7C8EC614F5227400D3095F /* sgModel.h */,
 				2C7C8EC714F5227400D3095F /* sgModel.m */,
-				120EF11915CC4116003CC34F /* MainWindow.xib */,
+				2CA7A48716648D4500966779 /* MainWindow.xib */,
 				2CF872E014FCAC4400E8CBBC /* GraphView.h */,
 				2CF872E114FCAC4400E8CBBC /* GraphView.m */,
 				2CF872E314FCADD200E8CBBC /* NSColor+CGColorAdditions.h */,
@@ -1049,6 +1225,40 @@
 				1DA962BD13ED368C0096F8A5 /* ATICard.h in Headers */,
 				1DA962BF13ED368C0096F8A5 /* RadeonX.h in Headers */,
 				1DA962C713ED389E0096F8A5 /* AtomBIOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C0677031679C6B5005B7DA1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C06775E1679C878005B7DA1 /* GeforceSensors.h in Headers */,
+				2C0677601679C878005B7DA1 /* nouveau.h in Headers */,
+				2C0677621679C878005B7DA1 /* nouveau_bios.h in Headers */,
+				2C0677631679C878005B7DA1 /* nouveau_definitions.h in Headers */,
+				2C0677651679C878005B7DA1 /* nouveau_gpio.h in Headers */,
+				2C0677671679C878005B7DA1 /* nouveau_i2c.h in Headers */,
+				2C06776B1679C878005B7DA1 /* nouveau_therm.h in Headers */,
+				2C06776D1679C878005B7DA1 /* nouveau_volt.h in Headers */,
+				2C06776F1679C878005B7DA1 /* nouveau_xpio.h in Headers */,
+				2C0677711679C878005B7DA1 /* nv10.h in Headers */,
+				2C0677731679C878005B7DA1 /* nv40.h in Headers */,
+				2C0677751679C878005B7DA1 /* nv50.h in Headers */,
+				2C0677771679C878005B7DA1 /* nva3.h in Headers */,
+				2C0677791679C878005B7DA1 /* nvc0.h in Headers */,
+				2C06777B1679C878005B7DA1 /* nvd0.h in Headers */,
+				2C06777D1679C878005B7DA1 /* nve0.h in Headers */,
+				2C06777F1679C878005B7DA1 /* vga.h in Headers */,
+				2C0677831679C97F005B7DA1 /* GeForceSensors-Prefix.pch in Headers */,
+				2C06778B1679C9BB005B7DA1 /* linux_definitions.h in Headers */,
+				2C06778C1679C9BB005B7DA1 /* list.h in Headers */,
+				2C06778D1679C9BB005B7DA1 /* i2c_base.h in Headers */,
+				2C06778F1679C9BB005B7DA1 /* i2c_algo_bit.h in Headers */,
+				2C06779F1679D23E005B7DA1 /* xfree.h in Headers */,
+				2C0677A01679D23E005B7DA1 /* xf86i2c.h in Headers */,
+				2C0677A21679D23E005B7DA1 /* nvclock_i2c.h in Headers */,
+				2C0677A51679D23E005B7DA1 /* f75375.h in Headers */,
+				129F816216994B55009AE95E /* timer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1268,6 +1478,25 @@
 			productReference = 1DA962A513ED36030096F8A5 /* RadeonX.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
+		2C0676EF1679C6B5005B7DA1 /* GeforceSensors */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C06770F1679C6B5005B7DA1 /* Build configuration list for PBXNativeTarget "GeforceSensors" */;
+			buildPhases = (
+				2C0676F01679C6B5005B7DA1 /* Sources */,
+				2C0677021679C6B5005B7DA1 /* Frameworks */,
+				2C0677031679C6B5005B7DA1 /* Headers */,
+				2C06770C1679C6B5005B7DA1 /* Resources */,
+				2C06770E1679C6B5005B7DA1 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeforceSensors;
+			productName = NVClockX;
+			productReference = 2C0677121679C6B5005B7DA1 /* GeForceSensors.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		2C2CB4BD150B39DA0017762E /* SmartGuardianHelper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C2CB4D3150B39DB0017762E /* Build configuration list for PBXNativeTarget "SmartGuardianHelper" */;
@@ -1396,6 +1625,7 @@
 				2CB6913114F40F2900152814 /* SmartGuardian */,
 				2C2CB4BD150B39DA0017762E /* SmartGuardianHelper */,
 				2CB4FCB71529946B00FEF90D /* OemSMBIOS */,
+				2C0676EF1679C6B5005B7DA1 /* GeforceSensors */,
 			);
 		};
 /* End PBXProject section */
@@ -1459,6 +1689,7 @@
 				2C9B2A54150F623400AA7AEC /* temperature_small.png in Resources */,
 				2CBDEF16150F68A600E8E886 /* temp_alt_small.png in Resources */,
 				2CBDEF18150F691F00E8E886 /* monitor_icon_small.png in Resources */,
+				2C0DAB8116971C7B00FA3652 /* modern-battery-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1492,6 +1723,14 @@
 			files = (
 				1DA962B513ED36440096F8A5 /* ATI Device-ID list.txt in Resources */,
 				1DA962AB13ED36030096F8A5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C06770C1679C6B5005B7DA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C06775C1679C878005B7DA1 /* GeForceSensors-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1529,7 +1768,6 @@
 				2C11943A14F910F1009319BD /* fan8.png in Resources */,
 				2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */,
 				2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */,
-				120EF11A15CC4116003CC34F /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1601,6 +1839,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1DA962A313ED36030096F8A5 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C06770E1679C6B5005B7DA1 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1685,7 +1930,7 @@
 				2C4518CD14F41D4100D44435 /* AppDelegate.m in Sources */,
 				1D978C951452CFDE00F83827 /* HWMonitorSensor.m in Sources */,
 				2CAD312B14EE522000B32B68 /* ISPSmartController.m in Sources */,
-				129F5C411697415900AB1F89 /* IOBatteryStatus.m in Sources */,
+				2C0DAB7C1696ECC500FA3652 /* IOBatteryStatus.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1735,6 +1980,40 @@
 			files = (
 				1DA962BC13ED368C0096F8A5 /* ATICard.cpp in Sources */,
 				1DA962BE13ED368C0096F8A5 /* RadeonX.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C0676F01679C6B5005B7DA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C06775D1679C878005B7DA1 /* GeforceSensors.cpp in Sources */,
+				2C06775F1679C878005B7DA1 /* nouveau.cpp in Sources */,
+				2C0677611679C878005B7DA1 /* nouveau_bios.cpp in Sources */,
+				2C0677641679C878005B7DA1 /* nouveau_gpio.cpp in Sources */,
+				2C0677661679C878005B7DA1 /* nouveau_i2c._base.cpp in Sources */,
+				2C0677681679C878005B7DA1 /* nouveau_i2c_aux.cpp in Sources */,
+				2C0677691679C878005B7DA1 /* nouveau_i2c_bit.cpp in Sources */,
+				2C06776A1679C878005B7DA1 /* nouveau_therm.cpp in Sources */,
+				2C06776C1679C878005B7DA1 /* nouveau_volt.cpp in Sources */,
+				2C06776E1679C878005B7DA1 /* nouveau_xpio.cpp in Sources */,
+				2C0677701679C878005B7DA1 /* nv10.cpp in Sources */,
+				2C0677721679C878005B7DA1 /* nv40.cpp in Sources */,
+				2C0677741679C878005B7DA1 /* nv50.cpp in Sources */,
+				2C0677761679C878005B7DA1 /* nva3.cpp in Sources */,
+				2C0677781679C878005B7DA1 /* nvc0.cpp in Sources */,
+				2C06777A1679C878005B7DA1 /* nvd0.cpp in Sources */,
+				2C06777C1679C878005B7DA1 /* nve0.cpp in Sources */,
+				2C06777E1679C878005B7DA1 /* vga.cpp in Sources */,
+				2C06778E1679C9BB005B7DA1 /* i2c_base.cpp in Sources */,
+				2C0677901679C9BB005B7DA1 /* i2c_algo_bit.cpp in Sources */,
+				2C0677A11679D23E005B7DA1 /* xf86i2c.cpp in Sources */,
+				2C0677A31679D23E005B7DA1 /* nvclock_i2c.cpp in Sources */,
+				2C0677A41679D23E005B7DA1 /* adt7473.cpp in Sources */,
+				2C0677A61679D23E005B7DA1 /* f75375.cpp in Sources */,
+				2C0677A71679D23E005B7DA1 /* lm99.cpp in Sources */,
+				2C0677A81679D23E005B7DA1 /* w83l785r.cpp in Sources */,
+				2C0677A91679D23E005B7DA1 /* w83781d.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1884,14 +2163,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		2C182F571542CBA600FDBE5A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C182F581542CBA600FDBE5A /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		2C2CB4C4150B39DA0017762E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1915,6 +2186,15 @@
 				2C4518D414F41D6D00D44435 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		2CA7A48716648D4500966779 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CA7A48616648D4500966779 /* ru */,
+				2CA7A48916648D7C00966779 /* en */,
+			);
+			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
 		2CB4FCA615298F4500FEF90D /* InfoPlist.strings */ = {
@@ -1956,6 +2236,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CONFIGURATION_BUILD_DIR = Binaries;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -1984,6 +2265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 3.1.0d1;
@@ -2007,7 +2289,7 @@
 				INFOPLIST_FILE = "FakeSMC/FakeSMC-Info.plist";
 				MODULE_NAME = org.mozodojo.FakeSMC;
 				MODULE_VERSION = 3.1.0d1;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -2017,7 +2299,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 3.1.0d1;
@@ -2034,7 +2316,7 @@
 				INFOPLIST_FILE = "FakeSMC/FakeSMC-Info.plist";
 				MODULE_NAME = org.mozodojo.FakeSMC;
 				MODULE_VERSION = 3.1.0d1;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -2272,14 +2554,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
-					/Users/Slice/Developer/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk,
 					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2310,15 +2592,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				"DEBUG_INFORMATION_FORMAT[arch=*]" = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
-					/Users/Slice/Developer/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk,
 					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2566,6 +2848,68 @@
 			};
 			name = Release;
 		};
+		2C0677101679C6B5005B7DA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0.1d1;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GeForceSensors/GeForceSensors-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "GeForceSensors/GeForceSensors-Info.plist";
+				MODULE_NAME = org.kozlek.GeforceSensors;
+				MODULE_VERSION = 1.0.1d1;
+				PRODUCT_NAME = GeForceSensors;
+				SDKROOT = macosx;
+				VALID_ARCHS = "x86_64 i386";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		2C0677111679C6B5005B7DA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.0.1d1;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GeForceSensors/GeForceSensors-Prefix.pch";
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "GeForceSensors/GeForceSensors-Info.plist";
+				MODULE_NAME = org.kozlek.GeforceSensors;
+				MODULE_VERSION = 1.0.1d1;
+				PRODUCT_NAME = GeForceSensors;
+				SDKROOT = macosx;
+				VALID_ARCHS = "x86_64 i386";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
 		2C2CB4D4150B39DB0017762E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2758,7 +3102,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartGuardian/SmartGuardian-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2973,6 +3317,15 @@
 			buildConfigurations = (
 				1DA962B213ED36030096F8A5 /* Debug */,
 				1DA962B313ED36030096F8A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C06770F1679C6B5005B7DA1 /* Build configuration list for PBXNativeTarget "GeforceSensors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C0677101679C6B5005B7DA1 /* Debug */,
+				2C0677111679C6B5005B7DA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

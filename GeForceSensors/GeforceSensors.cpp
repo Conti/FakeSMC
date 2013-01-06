@@ -37,6 +37,7 @@
 
 #include "nouveau.h"
 //#include "nvclock_i2c.h"
+bool is_digit(char c);
 
 #define Debug FALSE
  
@@ -380,7 +381,7 @@ IOReturn GeforceSensors::callPlatformFunction(const OSSymbol *functionName, bool
 	if (functionName->isEqualTo(kFakeSMCGetValueCallback)) {
 		const char* key = (const char*)param1;
 		char * data = (char*)param2;
-		UInt32 size = (UInt64)param3;
+//		UInt32 size = (UInt64)param3;
 		
 		if (key && data) {
 			if (OSNumber *number = OSDynamicCast(OSNumber, sensors->getObject(key))) {
