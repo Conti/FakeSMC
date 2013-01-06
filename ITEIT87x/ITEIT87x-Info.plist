@@ -800,7 +800,7 @@
 					<key>H61M-S1</key>
 					<dict>
 						<key>FANIN0</key>
-						<string>System</string>
+						<string>CPUFan</string>
 						<key>FANIN1</key>
 						<string></string>
 						<key>FANIN2</key>

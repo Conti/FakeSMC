@@ -406,9 +406,9 @@ bool IT87x::startPlugin()
         
     }
   if (product && vendor) {
-    InfoLog(" mother vendor=%s product=%s\n", vendor->getCStringNoCopy(), product->getCStringNoCopy());
+    InfoLog(" mother vendor=%s product=%s", vendor->getCStringNoCopy(), product->getCStringNoCopy());
   }  else {
-    WarningLog("no vendor or product\n");
+    WarningLog("no vendor or product");
   }
 
   
@@ -417,7 +417,7 @@ bool IT87x::startPlugin()
             if(product)
                 configuration = OSDynamicCast(OSDictionary, link->getObject(product));
   } else {
-    WarningLog("no vendor\n");
+    WarningLog("no vendor");
   }
 
     
