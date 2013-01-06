@@ -251,10 +251,10 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 					}
 					
 				} 
-          if (!RPltSet) {
+/*          if (!RPltSet) {
 					  snprintf(Platform, 4, "T9");
             RPltSet = true;
-          }
+          } */
 					break;
 					
 				default:
@@ -269,11 +269,15 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 	}
   
   SandyArch = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN) || (CpuModel == CPUID_MODEL_IVYBRIDGE);
-  if (SandyArch && !RPltSet) {
-    if (CpuMobile) {
-      snprintf(Platform, 4, "k90i");
+  if (!RPltSet) {
+    if (SandyArch) {
+      if (CpuMobile) {
+        snprintf(Platform, 4, "k90i");
+      } else {
+        snprintf(Platform, 4, "k62");
+      }
     } else {
-      snprintf(Platform, 4, "k62");
+      snprintf(Platform, 4, "T9");
     }
     RPltSet = true;
   }
