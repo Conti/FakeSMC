@@ -117,7 +117,9 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 	}
   if (OSString* name = OSDynamicCast(OSString, getProperty("RPlt"))) {
     snprintf(Platform, 4, "%s", name ? name->getCStringNoCopy() : "n");
-    RPltSet = true;
+    if ((Platform[0] != 'n') &&  (Platform[0] != 'N')) {
+      RPltSet = true;
+    }    
   }
 	// Calculating Tjmax
 	switch (CpuFamily)

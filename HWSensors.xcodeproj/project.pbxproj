@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		129F816216994B55009AE95E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 129F816116994B55009AE95E /* timer.h */; };
+		129F817516995A7C009AE95E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA7A48716648D4500966779 /* MainWindow.xib */; };
 		1D05ABFF13ED0E2E00EADBF6 /* FakeSMC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */; };
 		1D05AC0013ED0E2E00EADBF6 /* FakeSMC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05ABFA13ED0E2E00EADBF6 /* FakeSMC.h */; };
 		1D05AC0113ED0E2E00EADBF6 /* FakeSMCDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABFB13ED0E2E00EADBF6 /* FakeSMCDevice.cpp */; };
@@ -1071,6 +1072,7 @@
 		2CB6913814F40F2900152814 /* SmartGuardian */ = {
 			isa = PBXGroup;
 			children = (
+				2CB6913E14F40F2900152814 /* main.m */,
 				2CEB5F9F1501141B002BD48D /* sgFan.h */,
 				2CEB5FA01501141B002BD48D /* sgFan.m */,
 				2C1DBBD51500E59000971A87 /* sgAppController.h */,
@@ -1094,7 +1096,6 @@
 				2C11943914F910F1009319BD /* fan8.png */,
 				2CB6913A14F40F2900152814 /* SmartGuardian-Info.plist */,
 				2CB6913B14F40F2900152814 /* InfoPlist.strings */,
-				2CB6913E14F40F2900152814 /* main.m */,
 				2CB6914014F40F2900152814 /* SmartGuardian-Prefix.pch */,
 				2CB6914114F40F2900152814 /* Credits.rtf */,
 			);
@@ -1763,6 +1764,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				129F817516995A7C009AE95E /* MainWindow.xib in Resources */,
 				2CB6913D14F40F2900152814 /* InfoPlist.strings in Resources */,
 				2CB6914314F40F2900152814 /* Credits.rtf in Resources */,
 				2C11943A14F910F1009319BD /* fan8.png in Resources */,
