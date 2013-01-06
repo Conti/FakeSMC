@@ -10,10 +10,6 @@
 		129F816216994B55009AE95E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 129F816116994B55009AE95E /* timer.h */; };
 		129F817516995A7C009AE95E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA7A48716648D4500966779 /* MainWindow.xib */; };
 		12F6F7E71699713600E6977E /* IOBatteryStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F5C401697415900AB1F89 /* IOBatteryStatus.m */; };
-		12F6F7F11699721400E6977E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 12F6F7E91699721400E6977E /* Credits.rtf */; };
-		12F6F7F21699721400E6977E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12F6F7EB1699721400E6977E /* InfoPlist.strings */; };
-		12F6F7F31699721400E6977E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12F6F7ED1699721400E6977E /* MainMenu.xib */; };
-		12F6F7F41699721400E6977E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12F6F7EF1699721400E6977E /* MainWindow.xib */; };
 		1D05ABFF13ED0E2E00EADBF6 /* FakeSMC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */; };
 		1D05AC0013ED0E2E00EADBF6 /* FakeSMC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D05ABFA13ED0E2E00EADBF6 /* FakeSMC.h */; };
 		1D05AC0113ED0E2E00EADBF6 /* FakeSMCDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D05ABFB13ED0E2E00EADBF6 /* FakeSMCDevice.cpp */; };
@@ -207,11 +203,6 @@
 		129F5C3F1697415900AB1F89 /* IOBatteryStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOBatteryStatus.h; sourceTree = "<group>"; };
 		129F5C401697415900AB1F89 /* IOBatteryStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOBatteryStatus.m; sourceTree = "<group>"; };
 		129F816116994B55009AE95E /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timer.h; path = Utils/timer.h; sourceTree = "<group>"; };
-		12F6F7EA1699721400E6977E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = Credits.rtf; sourceTree = "<group>"; };
-		12F6F7EC1699721400E6977E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
-		12F6F7EE1699721400E6977E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = MainMenu.xib; sourceTree = "<group>"; };
-		12F6F7F01699721400E6977E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = MainWindow.xib; sourceTree = "<group>"; };
-		12F6F7F71699722200E6977E /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = MainWindow.xib; sourceTree = "<group>"; };
 		1D05ABE413ED0DAD00EADBF6 /* FakeSMC.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeSMC.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D05ABE813ED0DAD00EADBF6 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
 		1D05ABF913ED0E2E00EADBF6 /* FakeSMC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeSMC.cpp; sourceTree = "<group>"; };
@@ -579,26 +570,6 @@
 				1251073E162697270004D9C9 /* SMBus.c */,
 			);
 			path = SMBusSensors;
-			sourceTree = "<group>";
-		};
-		12F6F7E81699721400E6977E /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				12F6F7E91699721400E6977E /* Credits.rtf */,
-				12F6F7EB1699721400E6977E /* InfoPlist.strings */,
-				12F6F7ED1699721400E6977E /* MainMenu.xib */,
-				12F6F7EF1699721400E6977E /* MainWindow.xib */,
-			);
-			path = en.lproj;
-			sourceTree = "<group>";
-		};
-		12F6F7F51699722200E6977E /* ru.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				12F6F7F61699722200E6977E /* MainWindow.xib */,
-			);
-			name = ru.lproj;
-			path = ../../../../Downloads/HWSensors4/SmartGuardian/ru.lproj;
 			sourceTree = "<group>";
 		};
 		1D05ABAD13ED0D7000EADBF6 = {
@@ -1097,8 +1068,6 @@
 		2CB6913814F40F2900152814 /* SmartGuardian */ = {
 			isa = PBXGroup;
 			children = (
-				12F6F7F51699722200E6977E /* ru.lproj */,
-				12F6F7E81699721400E6977E /* en.lproj */,
 				2CB6913E14F40F2900152814 /* main.m */,
 				2CEB5F9F1501141B002BD48D /* sgFan.h */,
 				2CEB5FA01501141B002BD48D /* sgFan.m */,
@@ -1796,10 +1765,6 @@
 				2C11943A14F910F1009319BD /* fan8.png in Resources */,
 				2C1194D414F91F29009319BD /* Japanese-Sensu-Fan-USB-Drive_1.icns in Resources */,
 				2C1194D614F92BDF009319BD /* Koolance_FAN-12038HBK-184.png in Resources */,
-				12F6F7F11699721400E6977E /* Credits.rtf in Resources */,
-				12F6F7F21699721400E6977E /* InfoPlist.strings in Resources */,
-				12F6F7F31699721400E6977E /* MainMenu.xib in Resources */,
-				12F6F7F41699721400E6977E /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2098,46 +2063,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		12F6F7E91699721400E6977E /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				12F6F7EA1699721400E6977E /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		12F6F7EB1699721400E6977E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				12F6F7EC1699721400E6977E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		12F6F7ED1699721400E6977E /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				12F6F7EE1699721400E6977E /* en */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		12F6F7EF1699721400E6977E /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				12F6F7F01699721400E6977E /* en */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		12F6F7F61699722200E6977E /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				12F6F7F71699722200E6977E /* ru */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
 		1D05AC0713ED0E9600EADBF6 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2363,7 +2288,7 @@
 				MODULE_VERSION = 3.1.0d1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -2391,7 +2316,7 @@
 				MODULE_VERSION = 3.1.0d1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -2657,7 +2582,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2689,7 +2614,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2951,7 +2876,7 @@
 				MODULE_NAME = org.kozlek.GeforceSensors;
 				MODULE_VERSION = 1.0.1d1;
 				PRODUCT_NAME = GeForceSensors;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -2979,7 +2904,7 @@
 				MODULE_NAME = org.kozlek.GeforceSensors;
 				MODULE_VERSION = 1.0.1d1;
 				PRODUCT_NAME = GeForceSensors;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				VALID_ARCHS = "x86_64 i386";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -3132,7 +3057,7 @@
 				MODULE_NAME = org.navi.OemSMBIOS;
 				MODULE_VERSION = 1.0.0;
 				PRODUCT_NAME = OemSMBIOS;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				VERSION_INFO_BUILDER = "$(PRODUCT_NAME)_vers.c";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -3159,7 +3084,7 @@
 				MODULE_NAME = org.navi.OemSMBIOS;
 				MODULE_VERSION = 1.0.0;
 				PRODUCT_NAME = OemSMBIOS;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				VERSION_INFO_BUILDER = "$(PRODUCT_NAME)_vers.c";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -3195,7 +3120,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
+				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
 			};
@@ -3229,7 +3154,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
+				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
 			};
