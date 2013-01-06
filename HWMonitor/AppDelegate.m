@@ -46,8 +46,29 @@
                 [values addEntriesFromDictionary:[smartController getDataSet:1]];
             }
             NSDictionary * temp = [IOBatteryStatus getAllBatteriesLevel];
-            if ([temp count] >0) 
+            if ([temp count] >0)
+            {
                 [values addEntriesFromDictionary:temp];
+                BOOL __block needFooter = YES;
+                [temp enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                    BOOL found = NO;
+                    NSEnumerator * sensorsEnumerator = [sensorsList objectEnumerator];
+                    HWMonitorSensor * localSensor;
+                    while (localSensor = (HWMonitorSensor *)[sensorsEnumerator nextObject]) {
+                        if ([key isEqualToString:[localSensor key]]) {
+                            found = YES;
+                            needFooter = NO;
+                        }
+                    }
+                    if(!found){
+                        [self addSensorWithKey:key andType:@TYPE_FPE2 andCaption:key intoGroup:BatterySensorsGroup];
+                    }
+                    
+                    
+                }];
+                if(needFooter)
+                      [self insertFooterAndTitle:NSLocalizedString(@"BATTERIES",nil) andImage:[NSImage imageNamed:@"modern-battery-icon"]];
+            }
   /*          if (values) {
                 
                 enumerator = [sensorsList  objectEnumerator];
@@ -103,7 +124,7 @@
               }
               
               if ([sensor favorite]) {
-                NSString * value =[[NSString alloc] initWithString:[sensor formatedValue:[values objectForKey:[sensor key]]]];
+                NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]]];
                 if ((doubleLineIndex == doubleLineCount>>1) && !(doubleLineCount&1))
                   [statusString appendString:@"\n"];
                 [statusString appendString:@" "];
