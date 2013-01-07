@@ -458,8 +458,9 @@ IOReturn GeforceSensors::callPlatformFunction(const OSSymbol *functionName, bool
                         case 'V':
 							switch (key[3]) {
 								case 'G':
-									value = encode_fp2e( (float)card.voltage_get(&card) / 1000000.0f);
-									
+//									value = encode_fp2e( (float)card.voltage_get(&card) / 1000000.0f);
+                                    value = encode_fp2e( (float)card.voltage_get(&card) / 1000.0f);  // Fix for fp2e encoding
+
 									//bcopy(&value, data, 2);
 									memcpy(data, &value, 2);
 									
