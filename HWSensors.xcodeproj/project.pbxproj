@@ -3017,7 +3017,7 @@
 				MODULE_NAME = org.dukzcry.Andigilog;
 				MODULE_VERSION = 1.0;
 				PRODUCT_NAME = Andigilog;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -3043,7 +3043,7 @@
 				MODULE_NAME = org.dukzcry.Andigilog;
 				MODULE_VERSION = 1.0;
 				PRODUCT_NAME = Andigilog;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
