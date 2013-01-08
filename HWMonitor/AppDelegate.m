@@ -115,12 +115,15 @@
                 
                 NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]]];
                 
-                NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%S\t%S",[[sensor caption] cStringUsingEncoding:NSUTF16StringEncoding],[value cStringUsingEncoding:NSUTF16StringEncoding]] attributes:statusMenuAttributes];
+//                NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%S\t%S",[[sensor caption] cStringUsingEncoding:NSUTF16StringEncoding],[value cStringUsingEncoding:NSUTF16StringEncoding]] attributes:statusMenuAttributes];
                 
-                [title addAttribute:NSFontAttributeName value:statusMenuFont range:NSMakeRange(0, [title length])];
+//                [title addAttribute:NSFontAttributeName value:statusMenuFont range:NSMakeRange(0, [title length])];
                 
                 // Update menu item title
-                [(NSMenuItem *)[sensor object] setAttributedTitle:title];
+//                [(NSMenuItem *)[sensor object] setAttributedTitle:title];
+                  NSMutableString * str = [[sensor caption] stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
+                
+                 [(NSMenuItem *)[sensor object] setTitle:[NSString stringWithFormat:@"%@%@",str,value ]] ;
               }
               
               if ([sensor favorite]) {
@@ -146,6 +149,7 @@
             NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:statusString attributes:statusItemAttributes];
             [title addAttribute:NSFontAttributeName value:statusItemFont range:NSMakeRange(0, [title length])];
             [statusItem setAttributedTitle:title];
+         
         }
         else [statusItem setTitle:@""];
     
@@ -157,7 +161,7 @@
 {
     if(group==HDSmartTempSensorGroup || [HWMonitorSensor readValueForKey:key] || group==BatterySensorsGroup)
     {
-        caption = [caption stringByTruncatingToWidth:145.0f withFont:statusItemFont]; 
+        caption = [caption stringByTruncatingToWidth:180.0f withFont:statusMenuFont];
         HWMonitorSensor * sensor = [[HWMonitorSensor alloc] initWithKey:key andType: aType andGroup:group withCaption:caption];
         
         [sensor setFavorite:[[NSUserDefaults standardUserDefaults] boolForKey:key]];
@@ -256,13 +260,13 @@
     [statusItem setAlternateImage:[NSImage imageNamed:@"temperature_small"]];
     
     statusItemFont = [NSFont fontWithName:@"Lucida Grande Bold" size:9.0];
-    
+
     NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:0];
 
     statusItemAttributes = [NSDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
     
-    statusMenuFont = [NSFont fontWithName:@"Lucida Grande Bold" size:10];
+    statusMenuFont = [NSFont fontWithName:@"Menlo" size:11];
     [statusMenu setFont:statusMenuFont];
     
     style = [[NSMutableParagraphStyle alloc] init];
