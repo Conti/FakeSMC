@@ -98,16 +98,16 @@
                 }
             } */
           if (values) {
-            int doubleLineCount = 0;
+//            int doubleLineCount = 0;
+//            enumerator = [sensorsList objectEnumerator];
+//            
+//            while (sensor = (HWMonitorSensor *)[enumerator nextObject])
+//              if ([sensor favorite])
+//                doubleLineCount++;
+            
             enumerator = [sensorsList objectEnumerator];
             
-            while (sensor = (HWMonitorSensor *)[enumerator nextObject])
-              if ([sensor favorite])
-                doubleLineCount++;
-            
-            enumerator = [sensorsList objectEnumerator];
-            
-            int doubleLineIndex = 0;
+//            int doubleLineIndex = 0;
             
             while (sensor = (HWMonitorSensor *)[enumerator nextObject]) {
               
@@ -121,21 +121,21 @@
                 
                 // Update menu item title
 //                [(NSMenuItem *)[sensor object] setAttributedTitle:title];
-                  NSMutableString * str = [[sensor caption] stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
+                  NSString * str = [[sensor caption] stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
                 
                  [(NSMenuItem *)[sensor object] setTitle:[NSString stringWithFormat:@"%@%@",str,value ]] ;
               }
               
               if ([sensor favorite]) {
                 NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]]];
-                if ((doubleLineIndex == doubleLineCount>>1) && !(doubleLineCount&1))
-                  [statusString appendString:@"\n"];
+//                if ((doubleLineIndex == doubleLineCount>>1) && !(doubleLineCount&1))
+//                  [statusString appendString:@"\n"];
                 [statusString appendString:@" "];
                 [statusString appendString:value];
-                if ((doubleLineIndex == doubleLineCount>>1) && (doubleLineCount&1))
-                  [statusString appendString:@"\n"];
-                
-                doubleLineIndex++;
+//                if ((doubleLineIndex == doubleLineCount>>1) && (doubleLineCount&1))
+//                  [statusString appendString:@"\n"];
+//                
+//                doubleLineIndex++;
                 count++;
               }
             }
