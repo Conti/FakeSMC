@@ -155,6 +155,7 @@
 		2C2CB4C8150B39DA0017762E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CB4C7150B39DA0017762E /* main.m */; };
 		2C2CB4CC150B39DA0017762E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2C2CB4CA150B39DA0017762E /* Credits.rtf */; };
 		2C2CB4D7150B39FA0017762E /* sgFan.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB5FA01501141B002BD48D /* sgFan.m */; };
+		2C2E49A616C2ACE90085BAB3 /* smc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E49A416C2ACE90085BAB3 /* smc.c */; };
 		2C4518CD14F41D4100D44435 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4518CE14F41D4100D44435 /* AppDelegate.m */; };
 		2C4518D114F41D6700D44435 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C4518D314F41D6700D44435 /* Localizable.strings */; };
 		2C7C8EC814F5227400D3095F /* sgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C8EC714F5227400D3095F /* sgModel.m */; };
@@ -397,6 +398,8 @@
 		2C2CB4C7150B39DA0017762E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C2CB4C9150B39DA0017762E /* SmartGuardianHelper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartGuardianHelper-Prefix.pch"; sourceTree = "<group>"; };
 		2C2CB4CB150B39DA0017762E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2C2E49A416C2ACE90085BAB3 /* smc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smc.c; sourceTree = "<group>"; };
+		2C2E49A516C2ACE90085BAB3 /* smc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smc.h; sourceTree = "<group>"; };
 		2C4518CE14F41D4100D44435 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2C4518D214F41D6700D44435 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C4518D414F41D6D00D44435 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -827,6 +830,8 @@
 		1D9F8326144FF24000EEEFEB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C2E49A416C2ACE90085BAB3 /* smc.c */,
+				2C2E49A516C2ACE90085BAB3 /* smc.h */,
 				2C0DAB8016971C7B00FA3652 /* modern-battery-icon.png */,
 				2CBDEF17150F691F00E8E886 /* monitor_icon_small.png */,
 				2CBDEF15150F68A600E8E886 /* temp_alt_small.png */,
@@ -2047,6 +2052,7 @@
 				2C4518CD14F41D4100D44435 /* AppDelegate.m in Sources */,
 				1D978C951452CFDE00F83827 /* HWMonitorSensor.m in Sources */,
 				2CAD312B14EE522000B32B68 /* ISPSmartController.m in Sources */,
+				2C2E49A616C2ACE90085BAB3 /* smc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "HWMonitorSensor.h"
 
 #include "FakeSMCDefinitions.h"
+#include "smc.h"
 
 @implementation HWMonitorSensor
 
@@ -28,26 +29,40 @@
 
 + (NSData *) readValueForKey:(NSString *)key
 {
-    NSData * value = NULL;
     
-    io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching(kFakeSMCDeviceService));
     
-    if (service) {
-        CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, "magic", kCFStringEncodingASCII);
-        
-        if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateValues), message))
-        {
-        NSDictionary * values = (__bridge_transfer  NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+//    io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching(kFakeSMCDeviceService));
+//    
+//    if (service) {
+//        CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, "magic", kCFStringEncodingASCII);
+//        
+//        if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateValues), message))
+//        {
+//        NSDictionary * values = (__bridge_transfer  NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+//
+////           NSDictionary * values = (__bridge NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
+//          if (values) 
+//            value = [values valueForKey:key];
+//        }
+//        IOObjectRelease(service);
+//        CFRelease(message);
+//    }
 
-//           NSDictionary * values = (__bridge NSDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
-          if (values) 
-            value = [values valueForKey:key];
-        }
-        IOObjectRelease(service);
-        CFRelease(message);
-    }
     
-    return value;
+    SMCOpen(&conn);
+    
+    UInt32Char_t  readkey = "\0";
+    strncpy(readkey,[key cStringUsingEncoding:NSASCIIStringEncoding],4);
+    readkey[4]=0;
+    SMCVal_t      val;
+    
+    kern_return_t result = SMCReadKey(readkey, &val);
+                if (result != kIOReturnSuccess)
+                    return NULL;
+    SMCClose(&conn);
+    if (val.dataSize > 0)
+        return [NSData dataWithBytes:val.bytes length:val.dataSize];
+    return NULL;
 }
 
 - (HWMonitorSensor *)initWithKey:(NSString *)aKey andType: aType andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption
