@@ -11,7 +11,7 @@
 #include "FakeSMCDefinitions.h"
 #include "smc.h"
 
-//#define SMC_ACCESS
+#define SMC_ACCESS
 
 @implementation HWMonitorSensor
 
@@ -57,7 +57,7 @@
     SMCOpen(&conn);
     
     UInt32Char_t  readkey = "\0";
-    strncpy(readkey,[key cStringUsingEncoding:NSASCIIStringEncoding],4);
+    strncpy(readkey,[key cStringUsingEncoding:NSASCIIStringEncoding]==NULL ? "" : [key cStringUsingEncoding:NSASCIIStringEncoding],4);
     readkey[4]=0;
     SMCVal_t      val;
     
@@ -66,7 +66,10 @@
                     return NULL;
     SMCClose(&conn);
     if (val.dataSize > 0)
+    {
+
         return [NSData dataWithBytes:val.bytes length:val.dataSize];
+    }
     return NULL;
 #endif
 }

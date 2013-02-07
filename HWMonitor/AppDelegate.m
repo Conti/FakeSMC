@@ -13,7 +13,7 @@
 
 @implementation AppDelegate
 
-
+#define SMC_ACCESS
 #define SMART_UPDATE_INTERVAL 5*60
 
 - (void)updateTitles
@@ -26,16 +26,19 @@
         HWMonitorSensor * sensor = nil;
         int count = 0;
         
-
+   
 
         NSMutableString * statusString = [[NSMutableString alloc] init];
+#ifndef SMC_ACCESS
         CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, "magic", kCFStringEncodingASCII);
         if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateValues), message)) 
-        {           
+        {
          NSMutableDictionary * values = (__bridge_transfer NSMutableDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
 
-/*          NSMutableDictionary * values = (__bridge NSMutableDictionary *)IORegistryEntryCreateCFProperty(service, CFSTR(kFakeSMCDeviceValues), kCFAllocatorDefault, 0);
-*/
+#else
+     NSMutableDictionary * values = [[NSMutableDictionary alloc] initWithCapacity:0];
+#endif
+            
             if(smart)
             {
                 if (fabs([lastcall timeIntervalSinceNow]) > SMART_UPDATE_INTERVAL) 
@@ -69,81 +72,43 @@
                 if(needFooter)
                       [self insertFooterAndTitle:NSLocalizedString(@"BATTERIES",nil) andImage:[NSImage imageNamed:@"modern-battery-icon"]];
             }
-  /*          if (values) {
-                
-                enumerator = [sensorsList  objectEnumerator];
-                
-                while (sensor = (HWMonitorSensor *)[enumerator nextObject]) {
-                    
-                    if (isMenuVisible) {
-                        
-                        NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]]];
-                        
-                        NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%S\t%S",[[sensor caption] cStringUsingEncoding:NSUTF16StringEncoding],[value cStringUsingEncoding:NSUTF16StringEncoding]] attributes:statusMenuAttributes];
-                        
-                        [title addAttribute:NSFontAttributeName value:statusMenuFont range:NSMakeRange(0, [title length])];
-                        
-                        // Update menu item title
-                        [(NSMenuItem *)[sensor object] setAttributedTitle:title];
-                    }
-                    
-                    if ([sensor favorite]) {
-                        NSString * value =[[NSString alloc] initWithString:[sensor formatedValue:[values objectForKey:[sensor key]]]];
-                        
-                        [statusString appendString:@" "];
-                        [statusString appendString:value];
-                        
-                        count++;
-                    }
-                }
-            } */
+
           if (values) {
-//            int doubleLineCount = 0;
-//            enumerator = [sensorsList objectEnumerator];
-//            
-//            while (sensor = (HWMonitorSensor *)[enumerator nextObject])
-//              if ([sensor favorite])
-//                doubleLineCount++;
-            
+
             enumerator = [sensorsList objectEnumerator];
             
-//            int doubleLineIndex = 0;
             
             while (sensor = (HWMonitorSensor *)[enumerator nextObject]) {
               
               if (isMenuVisible) {
                 
-                NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]]];
-                
-//                NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%S\t%S",[[sensor caption] cStringUsingEncoding:NSUTF16StringEncoding],[value cStringUsingEncoding:NSUTF16StringEncoding]] attributes:statusMenuAttributes];
-                
-//                [title addAttribute:NSFontAttributeName value:statusMenuFont range:NSMakeRange(0, [title length])];
+
+                  NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]] ? [values objectForKey:[sensor key]] : [HWMonitorSensor readValueForKey:[sensor key]]];
+
                 
                 // Update menu item title
-//                [(NSMenuItem *)[sensor object] setAttributedTitle:title];
+
                   NSString * str = [[sensor caption] stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
                 
                  [(NSMenuItem *)[sensor object] setTitle:[NSString stringWithFormat:@"%@%@",str,value ]] ;
               }
               
               if ([sensor favorite]) {
-                NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]]];
-//                if ((doubleLineIndex == doubleLineCount>>1) && !(doubleLineCount&1))
-//                  [statusString appendString:@"\n"];
+                 NSString * value =[sensor formatedValue:[values objectForKey:[sensor key]] ? [values objectForKey:[sensor key]] : [HWMonitorSensor readValueForKey:[sensor key]]];
+
+
                 [statusString appendString:@" "];
                 [statusString appendString:value];
-//                if ((doubleLineIndex == doubleLineCount>>1) && (doubleLineCount&1))
-//                  [statusString appendString:@"\n"];
-//                
-//                doubleLineIndex++;
+
                 count++;
               }
             }
           }
+#ifndef SMC_ACCESS
         }
         CFRelease(message);
         IOObjectRelease(service);
-        
+#endif
         if (count > 0) {
             // Update status bar title
             NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:statusString attributes:statusItemAttributes];
