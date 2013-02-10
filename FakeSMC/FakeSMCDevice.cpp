@@ -10,7 +10,7 @@
 #include "FakeSMCDevice.h"
 #include "FakeSMCDefinitions.h"
 
-#define Debug FALSE
+#define Debug false
 
 #define LogPrefix "FakeSMCDevice: "
 #define DebugLog(string, args...)   do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
@@ -555,7 +555,7 @@ FakeSMCKey *FakeSMCDevice::getKey(const char * name)
         iterator->release();
     }
 
-    DebugLog("key %s not found", name);
+//    DebugLog("key %s not found", name);
 
     return 0;
 }
@@ -565,7 +565,7 @@ FakeSMCKey *FakeSMCDevice::getKey(unsigned int index)
     if (FakeSMCKey *key = OSDynamicCast(FakeSMCKey, keys->getObject(index)))
         return key;
 
-    DebugLog("key with index %d not found", index);
+//    DebugLog("key with index %d not found", index);
 
     return 0;
 }

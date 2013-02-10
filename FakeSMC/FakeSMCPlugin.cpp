@@ -11,7 +11,7 @@
 #include <IOKit/IOLib.h>
 #include "FakeSMCDefinitions.h"
 
-#define Debug FALSE
+#define Debug false
 
 #define LogPrefix "FakeSMCPlugin: "
 #define DebugLog(string, args...)   do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)

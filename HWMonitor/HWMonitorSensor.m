@@ -90,13 +90,18 @@
         switch (group) {
             case TemperatureSensorGroup:
             {
-                unsigned int t = 0;
                 
-                bcopy([value bytes], &t, 2);
+                unsigned int encoded = 0;
                 
-                //t = [NSSensor swapBytes:t] >> 8;
+                bcopy([value bytes], &encoded, 2);
                 
-                return [[NSString alloc] initWithFormat:@"%d°",t];
+                encoded = [HWMonitorSensor swapBytes:encoded];
+                
+                if ([type isEqualToString:@TYPE_SP78]){
+                    float v = ((float) encoded )/ 256.0f; //2^12
+                    return [[NSString alloc] initWithFormat:@"%2.1f°",v];
+                }
+                
                 
             } break;
             

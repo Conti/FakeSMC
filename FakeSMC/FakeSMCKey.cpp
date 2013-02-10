@@ -12,7 +12,7 @@
 #include <IOKit/IOLib.h>
 #include <libkern/c++/OSSerialize.h>
 
-#define Debug FALSE
+#define Debug false
 
 #define LogPrefix "FakeSMCKey: "
 #define DebugLog(string, args...)   do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)

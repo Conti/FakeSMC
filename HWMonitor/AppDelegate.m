@@ -18,18 +18,22 @@
 
 - (void)updateTitles
 {
+    
+    NSEnumerator * enumerator = nil;
+    HWMonitorSensor * sensor = nil;
+    
+    NSMutableString * statusString = [[NSMutableString alloc] init];
+    int count = 0;
+#ifndef SMC_ACCESS
     io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching(kFakeSMCDeviceService));
     
     if (service) {
         
-        NSEnumerator * enumerator = nil;
-        HWMonitorSensor * sensor = nil;
-        int count = 0;
+
         
    
 
-        NSMutableString * statusString = [[NSMutableString alloc] init];
-#ifndef SMC_ACCESS
+
         CFTypeRef message = (CFTypeRef) CFStringCreateWithCString(kCFAllocatorDefault, "magic", kCFStringEncodingASCII);
         if (kIOReturnSuccess == IORegistryEntrySetCFProperty(service, CFSTR(kFakeSMCDevicePopulateValues), message)) 
         {
@@ -88,9 +92,10 @@
                 
                 // Update menu item title
 
-                  NSString * str = [[sensor caption] stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
+                  NSString * str = [[sensor caption] stringByPaddingToLength:20 withString:@" " startingAtIndex:0];
                 
-                 [(NSMenuItem *)[sensor object] setTitle:[NSString stringWithFormat:@"%@%@",str,value ]] ;
+                  if(![[(NSMenuItem *)[sensor object] title] isEqualToString:str])
+                      [(NSMenuItem *)[sensor object] setTitle:[NSString stringWithFormat:@"%@%@",str,value ]] ;
               }
               
               if ([sensor favorite]) {
@@ -117,8 +122,9 @@
          
         }
         else [statusItem setTitle:@""];
-    
+#ifndef SMC_ACCESS    
     }
+#endif
 
 }
 
@@ -199,7 +205,7 @@
                                 [self methodSignatureForSelector:@selector(updateTitles)]];
     [invocation setTarget:self];
     [invocation setSelector:@selector(updateTitles)];
-    [[NSRunLoop mainRunLoop] addTimer:[NSTimer timerWithTimeInterval:2 invocation:invocation repeats:YES] forMode:NSRunLoopCommonModes];
+    [[NSRunLoop mainRunLoop] addTimer:[NSTimer timerWithTimeInterval:3 invocation:invocation repeats:YES] forMode:NSRunLoopCommonModes];
     
     [self updateTitles];
 }
@@ -246,8 +252,10 @@
     //Temperatures
     
     for (int i=0; i<0xA; i++)
+    {
         [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TC%XD",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:TemperatureSensorGroup ];
-    
+        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TC%XH",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"CPU %X",i] intoGroup:TemperatureSensorGroup ];
+    }
     [self addSensorWithKey:@"Th0H" andType: @TYPE_SP78 andCaption:NSLocalizedString( @"CPU Heatsink", nil) intoGroup:TemperatureSensorGroup ];
     [self addSensorWithKey:@"TN0P" andType: @TYPE_SP78 andCaption:NSLocalizedString(@"Motherboard",nil) intoGroup:TemperatureSensorGroup ];
     [self addSensorWithKey:@"Tm0P" andType: @TYPE_SP78 andCaption:NSLocalizedString(@"Memory",nil) intoGroup:TemperatureSensorGroup ];
@@ -305,12 +313,21 @@
     // Fans
     
     for (int i=0; i<10; i++)
-    {
-        NSString * caption = [[NSString alloc] initWithData:[HWMonitorSensor readValueForKey:[[NSString alloc] initWithFormat:@"F%XID",i] ]encoding: NSUTF8StringEncoding];
-        if([caption length]<=0) caption = [[NSString alloc] initWithFormat:@"Fan %d",i];
-        
-        [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andType: @TYPE_FPE2 andCaption:caption intoGroup:TachometerSensorGroup ];
-    }
+        {
+            FanTypeDescStruct * fds;
+            NSData * keydata = [HWMonitorSensor readValueForKey:[[NSString alloc] initWithFormat:@"F%XID",i]];
+            NSString * caption;
+            if(keydata)
+            {
+            fds = [keydata bytes];
+            caption = [[NSString alloc] initWithBytes:  fds->strFunction length: DIAG_FUNCTION_STR_LEN encoding: NSUTF8StringEncoding];
+            }
+            else
+                caption = @"";
+                if([caption length]<=0) caption = [[NSString alloc] initWithFormat:@"Fan %d",i];
+            [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andType: @TYPE_FPE2 andCaption:caption intoGroup:TachometerSensorGroup ];
+            
+        }
     [self insertFooterAndTitle:NSLocalizedString(@"FANS",nil) andImage:[NSImage imageNamed:@"fan_small"]];
     // Disks
     NSEnumerator * DisksEnumerator = [DisksList keyEnumerator]; 
