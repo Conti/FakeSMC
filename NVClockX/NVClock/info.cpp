@@ -657,6 +657,7 @@ static const struct pci_ids ids[] =
 	
 	// 1040 - 107F
   { 0x1040, "GF100 [GeForce GT 520]", DESKTOP },
+  { 0x104A, "GF100 [GeForce GT 610]", DESKTOP },
 	{ 0x1050, "GF100 [GeForce GT 520M]", MOBILE },
   { 0x1051, "GF100 [GeForce GT 520MX]", MOBILE },
 	{ 0x1054, "GF100 [GeForce GT 410M]", MOBILE },
@@ -831,7 +832,7 @@ int get_gpu_arch(int device_id)
 		case 0x0EE0 ... 0x0EFF:
 		case 0x0F00 ... 0x0F3F:
 		case 0x1040 ... 0x107F:
-        case 0x1080 ... 0x109F:
+    case 0x1080 ... 0x109F:
 		case 0x1200 ... 0x127F:
 			arch = GF100;
 			break;

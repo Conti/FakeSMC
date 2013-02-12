@@ -35,7 +35,7 @@ cc ./smc.c  -o smcutil -framework IOKit -framework CoreFoundation -Wno-four-char
 
 #include "smc.h"
 
-
+io_connect_t conn;
 
 UInt32 _strtoul(char *str, int size, int base)
 {
