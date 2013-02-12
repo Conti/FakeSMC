@@ -616,7 +616,7 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 UInt32 IntelCPUMonitor::IntelGetFrequency(UInt8 cpu_id) {
 	UInt32 multiplier, frequency=0;
 	UInt8 fid = GlobalState[cpu_id].FID;
-    if(SandyArch && (fid & 0x3f)>BaseFreqRatio)
+    if(SandyArch)
     {
         UInt64 deltaUCC = lastUCC[cpu_id] > UCC[cpu_id] ? 0xFFFFFFFFFFFFFFFFll - lastUCC[cpu_id] + UCC[cpu_id] : UCC[cpu_id] - lastUCC[cpu_id];
         UInt64 deltaUCR = lastUCR[cpu_id] > UCR[cpu_id] ? 0xFFFFFFFFFFFFFFFFll - lastUCR[cpu_id] + UCR[cpu_id] : UCR[cpu_id] - lastUCR[cpu_id];
@@ -624,7 +624,6 @@ UInt32 IntelCPUMonitor::IntelGetFrequency(UInt8 cpu_id) {
         {
             float num = (float)deltaUCC*BaseFreqRatio/(float)deltaUCR;
             int n = (int)(num < 0 ? (num - 0.5) : (num + 0.5));
-            if(num>1)
             return BusClock*n;
         }
         
