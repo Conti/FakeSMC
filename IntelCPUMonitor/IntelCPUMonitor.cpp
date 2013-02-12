@@ -73,6 +73,16 @@ void IntelThermal2(__unused void * magic)
 	}
 }
 
+// Power states!
+enum {
+    kMyOnPowerState = 1
+};
+
+static IOPMPowerState myTwoStates[2] = {
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, kIOPMPowerOn, kIOPMPowerOn, kIOPMPowerOn, 0, 0, 0, 0, 0, 0, 0, 0}
+};
+
 #define super IOService
 OSDefineMetaClassAndStructors(IntelCPUMonitor, FakeSMCPlugin)
 
@@ -329,6 +339,13 @@ bool IntelCPUMonitor::start(IOService * provider)
 	
 	if (!super::start(provider)) return false;
 	
+    // Join power management so that we can get a notification early during
+    // wakeup to re-sample our battery data. We don't actually power manage
+    // any devices.
+    PMinit();
+    registerPowerDriver(this, myTwoStates, 2);
+    provider->joinPMtree(this);
+    
     if (!(fakeSMC = waitForService(serviceMatching(kFakeSMCDeviceService)))) {
 		WarningLog("Can't locate fake SMC device, kext will not load");
 		return false;
@@ -666,4 +683,22 @@ UInt32 IntelCPUMonitor::IntelGetVoltage(UInt8 vid) {  //no nehalem
 			break;
 	}	
 	return 0;
+}
+
+
+
+IOReturn IntelCPUMonitor::setPowerState(unsigned long which,IOService *whom)
+{
+    if (kMyOnPowerState == which)
+ 
+    {
+        // Init PMC Fixed Counters once more
+        DebugLog( "awaken, resetting counters");
+        bzero(UCC, sizeof(UCC));
+        bzero(lastUCC, sizeof(lastUCC));
+        bzero(UCR, sizeof(UCR));
+        bzero(lastUCR, sizeof(lastUCR));
+        bzero(InitFlags, sizeof(InitFlags));
+    }
+    return IOPMAckImplied;
 }
