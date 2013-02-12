@@ -28,7 +28,6 @@
 }
 
 
-
 + (NSData *) readValueForKey:(NSString *)key
 {
     
@@ -64,10 +63,14 @@
     kern_return_t result = SMCReadKey(readkey, &val);
                 if (result != kIOReturnSuccess)
                     return NULL;
-    SMCClose(&conn);
+    SMCClose(conn);
     if (val.dataSize > 0)
     {
 
+        if (strncmp(val.dataType, TYPE_SP78, 4))
+        {
+            
+        } 
         return [NSData dataWithBytes:val.bytes length:val.dataSize];
     }
     return NULL;
@@ -182,5 +185,7 @@
     
     return @"-";
 }
+
+
 
 @end

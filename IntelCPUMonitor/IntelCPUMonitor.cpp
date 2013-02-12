@@ -11,12 +11,25 @@
 #include "FakeSMC.h"
 #include "FakeSMCUtils.h"
 
-#define Debug false
+#define Debug true
 
 #define LogPrefix "IntelCPUMonitor: "
 #define DebugLog(string, args...)	do { if (Debug) { IOLog (LogPrefix "[Debug] " string "\n", ## args); } } while(0)
 #define WarningLog(string, args...) do { IOLog (LogPrefix "[Warning] " string "\n", ## args); } while(0)
 #define InfoLog(string, args...)	do { IOLog (LogPrefix string "\n", ## args); } while(0)
+
+
+void UCState(__unused void * magic)
+{
+	UInt32 i = cpu_number();
+	if(i < MaxCpuCount) {
+        initPMCCounters(i);
+        lastUCC[i]=UCC[i];
+        lastUCR[i]=UCR[i];
+        UCC[i]=ReadUCC();
+        UCR[i]=ReadUCR();
+	}
+}
 
 void IntelState(__unused void * magic)
 {
@@ -80,7 +93,7 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 	
 	if (super::probe(provider, score) != this) return 0;
 	
-	InfoLog("Based on code by mercurysquad, superhai (C)2008");
+	InfoLog("Based on code by mercurysquad, superhai (C)2008. Turbostates measurement added by Navi");
 	
 	cpuid_update_generic_info();
 	
@@ -241,7 +254,7 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 				case CPUID_MODEL_NEHALEM_EX:
 				case CPUID_MODEL_WESTMERE_EX:
 				case CPUID_MODEL_SANDYBRIDGE:
-        case CPUID_MODEL_IVYBRIDGE:
+                case CPUID_MODEL_IVYBRIDGE:
 				case CPUID_MODEL_JAKETOWN:
 				{
 					nehalemArch = true;
@@ -269,6 +282,12 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 	}
   
   SandyArch = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN) || (CpuModel == CPUID_MODEL_IVYBRIDGE);
+    if(SandyArch)
+    {
+        BaseFreqRatio = BaseOperatingFreq();
+ 
+        DebugLog("Base Ratio = %d", BaseFreqRatio);
+    }
   if (!RPltSet) {
     if (SandyArch) {
       if (CpuMobile) {
@@ -334,7 +353,12 @@ bool IntelCPUMonitor::start(IOService * provider)
     BusClock = FSBClock >> 2;
     InfoLog("Using bus_frequency_max_hz");
   }
-  BusClock = BusClock / Mega;
+    if(!SandyArch)
+        BusClock = BusClock / Mega;   // I Don't like this crap - i'll write mine
+    else {
+    float v = (float)BusClock / (float)Mega;
+    BusClock = (int)(v  < 0 ? (v - 0.5) : (v + 0.5));
+    }
   FSBClock = FSBClock / Mega;
 	InfoLog("BusClock=%dMHz FSB=%dMHz", (int)(BusClock), (int)(FSBClock));
 	InfoLog("Platform string %s", Platform);
@@ -545,7 +569,10 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 	if(LoopLock)
 		return kIOReturnTimeout;	
 	LoopLock = true;
-	
+	if(SandyArch){
+        mp_rendezvous_no_intrs(UCState, &magic);
+    }
+
 	// State Readout
 	if (threads > count) {
 		mp_rendezvous_no_intrs(IntelState2, &magic);
@@ -556,10 +583,10 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 	for (UInt32 i = 0; i < count; i++) 
 	{
 		if (!nehalemArch  || SandyArch) {
-			Frequency[i] = IntelGetFrequency(GlobalState[i].FID);
+			Frequency[i] = IntelGetFrequency(i);
 			Voltage = IntelGetVoltage(GlobalState[i].VID);
 		} else {
-			Frequency[i] = IntelGetFrequency(GlobalState[i].VID);
+			Frequency[i] = IntelGetFrequency(i);
 			Voltage = 1000;
 		}
 	}
@@ -569,10 +596,24 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 	return kIOReturnSuccess;
 }
 
-UInt32 IntelCPUMonitor::IntelGetFrequency(UInt8 fid) {
-	UInt32 multiplier, frequency;
-	
-  if (!nehalemArch) {
+UInt32 IntelCPUMonitor::IntelGetFrequency(UInt8 cpu_id) {
+	UInt32 multiplier, frequency=0;
+	UInt8 fid = GlobalState[cpu_id].FID;
+    if(SandyArch && (fid & 0x3f)>BaseFreqRatio)
+    {
+        UInt64 deltaUCC = lastUCC[cpu_id] > UCC[cpu_id] ? 0xFFFFFFFFFFFFFFFFll - lastUCC[cpu_id] + UCC[cpu_id] : UCC[cpu_id] - lastUCC[cpu_id];
+        UInt64 deltaUCR = lastUCR[cpu_id] > UCR[cpu_id] ? 0xFFFFFFFFFFFFFFFFll - lastUCR[cpu_id] + UCR[cpu_id] : UCR[cpu_id] - lastUCR[cpu_id];
+        if(deltaUCR>0)
+        {
+            float num = (float)deltaUCC*BaseFreqRatio/(float)deltaUCR;
+            int n = (int)(num < 0 ? (num - 0.5) : (num + 0.5));
+            if(num>1)
+            return BusClock*n;
+        }
+        
+    }
+  if (!nehalemArch)
+  {
 		multiplier = fid & 0x1f;					// = 0x08
 		int half = (fid & 0x40)?1:0;							// = 0x01
 		int dfsb = (fid & 0x80)?1:0;							// = 0x00
@@ -580,7 +621,8 @@ UInt32 IntelCPUMonitor::IntelGetFrequency(UInt8 fid) {
 		UInt32 halffsb = (UInt32)BusClock >> 1;						// = 200
 		frequency = (multiplier * fsb);			// = 3200
 		return (frequency + (half * halffsb));	// = 3200 + 200 = 3400
-	}
+        }
+
 	else {
 		multiplier = fid & 0x3f;
 		frequency = (multiplier * (UInt32)BusClock);

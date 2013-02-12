@@ -92,7 +92,7 @@
                 
                 // Update menu item title
 
-                  NSString * str = [[sensor caption] stringByPaddingToLength:20 withString:@" " startingAtIndex:0];
+                  NSString * str = [[sensor caption] stringByPaddingToLength:28 withString:@" " startingAtIndex:0];
                 
                   if(![[(NSMenuItem *)[sensor object] title] isEqualToString:str])
                       [(NSMenuItem *)[sensor object] setTitle:[NSString stringWithFormat:@"%@%@",str,value ]] ;
