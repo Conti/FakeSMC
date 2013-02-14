@@ -66,7 +66,7 @@ inline void IntelWaitForSts(void) {
 	while (rdmsr64(MSR_IA32_PERF_STS) & (1 << 21)) { if (!inline_timeout--) break; }
 }
 
-inline UInt32 BaseOperatingFreq(void){
+inline UInt64 BaseOperatingFreq(void){
     UInt64 msr = rdmsr64(MSR_PLATFORM_INFO);
     return (msr & 0xFF00) >> 8;
 }
@@ -109,7 +109,7 @@ class IntelCPUMonitor : public FakeSMCPlugin
 public:
 	UInt32			 		Frequency[MaxCpuCount];
 	UInt32					Voltage;
-    UInt32                  BaseFreqRatio;
+    UInt64                  BaseFreqRatio;
 private:
 	bool					Active;	
 	bool					LoopLock;
@@ -127,7 +127,8 @@ private:
 	char*					key[MaxCpuCount];
 	char					Platform[4];
 	bool					nehalemArch;
-  bool          SandyArch;
+    bool                    SandyArch;
+    bool                    hasTurbo;
 	IOService*				fakeSMC;
 	IOWorkLoop *			WorkLoop;
 	IOTimerEventSource *	TimerEventSource;

@@ -292,11 +292,13 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 	}
   
   SandyArch = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN) || (CpuModel == CPUID_MODEL_IVYBRIDGE);
-    if(SandyArch)
+  hasTurbo = (CpuModel == CPUID_MODEL_SANDYBRIDGE) || (CpuModel == CPUID_MODEL_JAKETOWN) || (CpuModel == CPUID_MODEL_IVYBRIDGE) || (CpuModel == CPUID_MODEL_FIELDS) || (CpuModel == CPUID_MODEL_DALES)  || (CpuModel == CPUID_MODEL_DALES_32NM) || (CpuModel == CPUID_MODEL_NEHALEM) || (CpuModel == CPUID_MODEL_NEHALEM_EX) || (CpuModel == CPUID_MODEL_WESTMERE) || (CpuModel == CPUID_MODEL_WESTMERE_EX);
+  
+  if(hasTurbo)
     {
         BaseFreqRatio = BaseOperatingFreq();
  
-        DebugLog("Base Ratio = %d", BaseFreqRatio);
+        DebugLog("Base Ratio = %lld", BaseFreqRatio);
     }
   if (!RPltSet) {
     if (SandyArch) {
@@ -374,7 +376,7 @@ bool IntelCPUMonitor::start(IOService * provider)
         BusClock = BusClock / Mega;   // I Don't like this crap - i'll write mine
     else {
     float v = (float)BusClock / (float)Mega;
-    BusClock = (int)(v  < 0 ? (v - 0.5) : (v + 0.5));
+    BusClock = (int)(v + 0.5);
     }
   FSBClock = FSBClock / Mega;
 	InfoLog("BusClock=%dMHz FSB=%dMHz", (int)(BusClock), (int)(FSBClock));
@@ -586,7 +588,7 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 	if(LoopLock)
 		return kIOReturnTimeout;	
 	LoopLock = true;
-	if(SandyArch){
+	if(hasTurbo){
         mp_rendezvous_no_intrs(UCState, &magic);
         IOSleep(2);
         mp_rendezvous_no_intrs(UCState, &magic);
@@ -617,19 +619,25 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 
 UInt32 IntelCPUMonitor::IntelGetFrequency(UInt8 cpu_id) {
 	UInt32 multiplier, frequency=0;
-	UInt8 fid = GlobalState[cpu_id].FID;
-    if(SandyArch)
+    UInt8 fid;
+    if(nehalemArch)
+        fid=GlobalState[cpu_id].VID;
+    else
+        fid = GlobalState[cpu_id].FID;
+    
+    if(hasTurbo)
     {
         UInt64 deltaUCC = lastUCC[cpu_id] > UCC[cpu_id] ? 0xFFFFFFFFFFFFFFFFll - lastUCC[cpu_id] + UCC[cpu_id] : UCC[cpu_id] - lastUCC[cpu_id];
         UInt64 deltaUCR = lastUCR[cpu_id] > UCR[cpu_id] ? 0xFFFFFFFFFFFFFFFFll - lastUCR[cpu_id] + UCR[cpu_id] : UCR[cpu_id] - lastUCR[cpu_id];
         if(deltaUCR>0)
         {
-            float num = (float)deltaUCC*BaseFreqRatio/(float)deltaUCR;
-            int n = (int)(num < 0 ? (num - 0.5) : (num + 0.5));
-            return BusClock*n;
+            double num = (double)deltaUCC*BaseFreqRatio/(double)deltaUCR;
+            int n = (int)(num + 0.5);
+            return (UInt32)(BusClock*n);
         }
         
     }
+  // Don't have turbo or counerts invalid - proceed with MSR method
   if (!nehalemArch)
   {
 		multiplier = fid & 0x1f;					// = 0x08
