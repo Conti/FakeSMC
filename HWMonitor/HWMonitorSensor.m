@@ -102,8 +102,8 @@
                 encoded = [HWMonitorSensor swapBytes:encoded];
                 
                 if ([type isEqualToString:@TYPE_SP78]){
-                    float v = ((float) encoded )/ 256.0f; //2^12
-                    return [[NSString alloc] initWithFormat:@"%2.1f°",v];
+                    int v = ((float) encoded )/ 256.0f; //2^12
+                    return [[NSString alloc] initWithFormat:@"%2d°",v];
                 }
                 
                 
