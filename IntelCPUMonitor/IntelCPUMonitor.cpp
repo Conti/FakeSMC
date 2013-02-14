@@ -103,7 +103,7 @@ IOService* IntelCPUMonitor::probe(IOService *provider, SInt32 *score)
 	
 	if (super::probe(provider, score) != this) return 0;
 	
-	InfoLog("Based on code by mercurysquad, superhai (C)2008. Turbostates measurement added by Navi");
+	InfoLog("Based on code by mercurysquad, superhai (C)2008. TurboStates measurement added by Navi (c)2013");
 	
 	cpuid_update_generic_info();
 	
