@@ -620,10 +620,10 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 UInt32 IntelCPUMonitor::IntelGetFrequency(UInt8 cpu_id) {
 	UInt32 multiplier, frequency=0;
     UInt8 fid;
-    if(nehalemArch)
-        fid=GlobalState[cpu_id].VID;
+    if(!nehalemArch || SandyArch)
+        fid=GlobalState[cpu_id].FID;
     else
-        fid = GlobalState[cpu_id].FID;
+        fid = GlobalState[cpu_id].VID;
     
     if(hasTurbo)
     {
