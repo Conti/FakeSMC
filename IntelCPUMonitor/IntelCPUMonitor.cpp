@@ -588,6 +588,8 @@ IOReturn IntelCPUMonitor::loopTimerEvent(void)
 	LoopLock = true;
 	if(SandyArch){
         mp_rendezvous_no_intrs(UCState, &magic);
+        IOSleep(2);
+        mp_rendezvous_no_intrs(UCState, &magic);
     }
 
 	// State Readout
