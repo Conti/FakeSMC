@@ -145,6 +145,12 @@
                 float v = ((float) encoded) / 16384.0f; //2^14
                 return [[NSString alloc] initWithFormat:@"%1.3fV",v]; 
                 }
+                else if ([type isEqualToString:@TYPE_SP4B])
+                { 
+                  float v = ((float) encoded) / 2048f; //2^11
+                  return [[NSString alloc] initWithFormat:@"%3.3fV",v]; 
+                }
+              
             } break;
                 
             case TachometerSensorGroup:

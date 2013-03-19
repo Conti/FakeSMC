@@ -12,7 +12,10 @@
 "FANS"="ВЕНТИЛЯТОРЫ";
 "HARD DRIVES TEMPERATURES"="ТЕМПЕРАТУРЫ ДИСКОВ";
 "BATTERIES"="ЗАРЯД БАТАРЕЙ";
-"CPU Heatsink"="Радиатор CPU";
+"CPU Heatsink"="Радиатор ЦПУ";
+"CPU Proximity"="Датчик ЦПУ";
+"CPU %X Diode"="ЦПУ %X";
+"CPU %X Core"="Ядро ЦПУ %X";
 "GPU %X Board" = "GPU %X, радиатор ";
 "GPU %X Core" = "GPU %X, ядро ";
 "GPU %X Proximity" = "GPU %X, радиатор";
@@ -22,10 +25,10 @@
 "Motherboard"="Чипсет";
 "Memory"="Модули памяти";
 "Ambient"="Корпус";
-"CPU Package Multiplier"="Общий множитель CPU";
-"CPU %X Multiplier"="Множитель CPU %X";
-"CPU Voltage"="Ядро CPU";
-"CPU VRM Voltage"="Шина CPU";
+"CPU Package Multiplier"="Общий множитель ЦПУ";
+"CPU %X Multiplier"="Множитель ЦПУ %X";
+"CPU Voltage"="Вольтаж ЦПУ";
+"CPU VRM Voltage"="Шина ЦПУ";
 "DIMM Voltage"="Шина модулей DIMM";
 "+12V Bus Voltage"="Шина +12В";
 "+5V Bus Voltage"="Шина +5В";
@@ -34,4 +37,4 @@
 "3.3 VCC Voltage"="Шина 3.3В VCC";
 "3.3 VSB Voltage"="Шина 3.3В VSB";
 "Battery Voltage"="Шина батареи";
-"GPU %X Voltage"="GPU %X";
+"GPU %X Voltage"="Вольтаж GPU %X";
