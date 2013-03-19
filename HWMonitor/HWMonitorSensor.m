@@ -147,7 +147,7 @@
                 }
                 else if ([type isEqualToString:@TYPE_SP4B])
                 { 
-                  float v = ((float) encoded) / 2048f; //2^11
+                  float v = ((float) encoded) / 2048.0f; //2^11
                   return [[NSString alloc] initWithFormat:@"%3.3fV",v]; 
                 }
               

@@ -247,7 +247,7 @@ int I2CDevice::I2CExec(I2COp op, UInt16 addr, void *cmdbuf, size_t cmdlen, void 
 
     clock_interval_to_deadline(ICHIIC_TIMEOUT, kSecondScale, (UInt64 *) &deadline);
   
-//  clock_interval_to_deadline(ICHIIC_TIMEOUT, kSecondScale, &deadline);
+ // clock_interval_to_deadline(ICHIIC_TIMEOUT, kSecondScale, &deadline);
     IOLockLock(Lock.holder);
     if (Lock.event) {
         Lock.event = false;

@@ -281,9 +281,9 @@
   }
   //Multipliers
   
-  for (int i=0; i<0xA; i++)
+  for (int i=0; i<0xA; i++) {
     [self addSensorWithKey:[[NSString alloc] initWithFormat:@"MC%XC",i] andType: @TYPE_FP4C andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"CPU %X Multiplier",nil),i] intoGroup:MultiplierSensorGroup ];
-  
+  }
   [self addSensorWithKey:@"MPkC" andType: @TYPE_FP4C andCaption:NSLocalizedString(@"CPU Package Multiplier",nil) intoGroup:MultiplierSensorGroup ];
   
   [self insertFooterAndTitle:NSLocalizedString(@"MULTIPLIERS",nil)andImage:[NSImage imageNamed:@"multiply_small"]];
@@ -300,37 +300,37 @@
   [self addSensorWithKey:@KEY_3VCC_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VCC Voltage",nil) intoGroup:VoltageSensorGroup ];
   [self addSensorWithKey:@KEY_3VSB_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VSB Voltage",nil) intoGroup:VoltageSensorGroup ];
   [self addSensorWithKey:@KEY_VBAT_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"Battery Voltage",nil) intoGroup:VoltageSensorGroup ];
-  for (int i=0; i<0xA; i++) 
+  for (int i=0; i<0xA; i++) {
     [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FORMAT_GPU_VOLTAGE,i] andType: @TYPE_FP2E andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Voltage",nil) ,i] intoGroup:VoltageSensorGroup ];
-  
+  }
   
   [self insertFooterAndTitle:NSLocalizedString(@"VOLTAGES",nil) andImage:[NSImage imageNamed:@"voltage_small"]];
   
   // Fans
   
-  for (int i=0; i<10; i++)
-  {
+  for (int i=0; i<10; i++)   {
     FanTypeDescStruct * fds;
     NSData * keydata = [HWMonitorSensor readValueForKey:[[NSString alloc] initWithFormat:@"F%XID",i]];
     NSString * caption;
-    if(keydata)
-    {
+    if(keydata) {
       fds = [keydata bytes];
       caption = [[[NSString alloc] initWithBytes:  fds->strFunction length: DIAG_FUNCTION_STR_LEN encoding: NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[[NSCharacterSet letterCharacterSet] invertedSet]];
-    }
-    else
+    } else {
       caption = @"";
-    if([caption length]<=0) caption = [[NSString alloc] initWithFormat:@"Fan %d",i];
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andType: @TYPE_FPE2 andCaption:caption intoGroup:TachometerSensorGroup ];
-    
+    }
+    if([caption length]<=0) {
+      caption = [[NSString alloc] initWithFormat:@"Fan %d",i];
+    }
+    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andType: @TYPE_FPE2 andCaption:caption intoGroup:TachometerSensorGroup ];    
   }
+  
   [self insertFooterAndTitle:NSLocalizedString(@"FANS",nil) andImage:[NSImage imageNamed:@"fan_small"]];
   // Disks
   NSEnumerator * DisksEnumerator = [DisksList keyEnumerator]; 
   id nextDisk;
-  while (nextDisk = [DisksEnumerator nextObject]) 
+  while (nextDisk = [DisksEnumerator nextObject]) {
     [self addSensorWithKey:nextDisk andType: @TYPE_FPE2 andCaption:nextDisk intoGroup:HDSmartTempSensorGroup];
-  
+  }
   
   [self insertFooterAndTitle:NSLocalizedString(@"HARD DRIVES TEMPERATURES",nil) andImage:[NSImage imageNamed:@"hd_small"]];
   
@@ -340,6 +340,7 @@
   while (nextBattery = [BatteryEnumerator nextObject]) {
     [self addSensorWithKey:nextBattery andType:@TYPE_FPE2 andCaption:nextBattery intoGroup:BatterySensorsGroup];
   }
+  
   [self insertFooterAndTitle:NSLocalizedString(@"BATTERIES",nil) andImage:[NSImage imageNamed:@"modern-battery-icon"]];
   
   if (![sensorsList count]) {

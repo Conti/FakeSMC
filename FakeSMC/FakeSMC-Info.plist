@@ -50,6 +50,16 @@
 						<string>ui32</string>
 						<data>AAByGw==</data>
 					</array>
+					<key>CLWK</key>
+					<array>
+						<string>ui16</string>
+						<data>AAA=</data>
+					</array>
+					<key>DPLM</key>
+					<array>
+						<string>{lim</string>
+						<data>AAAAAA==</data>
+					</array>
 					<key>EPCI</key>
 					<array>
 						<string>flag</string>
@@ -83,6 +93,11 @@
 					<key>MSPS</key>
 					<array>
 						<string>{msp</string>
+						<data>AA==</data>
+					</array>
+					<key>MSDS</key>
+					<array>
+						<string>ui8</string>
 						<data>AA==</data>
 					</array>
 					<key>MSSD</key>
@@ -128,7 +143,7 @@
 					<key>RPlt</key>
 					<array>
 						<string>ch8*</string>
-						<string>m82</string>
+						<string>k62</string>
 					</array>
 				</dict>
 				<key>debug</key>

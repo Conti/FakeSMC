@@ -88,6 +88,11 @@ kern_return_t SMCOpen(io_connect_t *conn)
     io_object_t   device;
 
     result = IOMasterPort(MACH_PORT_NULL, &masterPort);
+  if (result != kIOReturnSuccess)
+  {
+    printf("Error: IOMasterPort() = %08x\n", result);
+    return 1;
+  }
 
     CFMutableDictionaryRef matchingDictionary = IOServiceMatching("AppleSMC");
     result = IOServiceGetMatchingServices(masterPort, matchingDictionary, &iterator);
