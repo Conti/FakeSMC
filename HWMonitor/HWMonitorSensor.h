@@ -37,6 +37,7 @@ typedef NSUInteger SensorGroup;
 //+ (NSDictionary *)      populateValues;
 //+ (NSData *)            populateValueForKey:(NSString *)key;
 + (NSData *)            readValueForKey:(NSString *)key;
++ (NSString* )			getTypeOfKey:(NSString*)key;
 
 - (HWMonitorSensor *)   initWithKey:(NSString *)aKey andType: aType andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption;
 - (NSString *)          formatedValue:(NSData *)value;
