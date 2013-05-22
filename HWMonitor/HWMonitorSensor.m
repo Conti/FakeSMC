@@ -11,7 +11,7 @@
 #include "FakeSMCDefinitions.h"
 #include "smc.h"
 
-#define SMC_ACCESS
+//#define SMC_ACCESS
 #define BIT(x) (1 << (x))
 #define bit_get(x, y) ((x) & (y))
 #define bit_clear(x, y) ((x) &= (~y))
@@ -124,9 +124,20 @@ float decodeNumericValue(NSData* _data, NSString*_type)
 
 + (NSData *) readValueForKey:(NSString *)key
 {
+    SMCOpen(&conn);
     
-#ifndef SMC_ACCESS
-    NSData * value = NULL;
+    UInt32Char_t  readkey = "\0";
+    strncpy(readkey,[key cStringUsingEncoding:NSASCIIStringEncoding]==NULL ? "" : [key cStringUsingEncoding:NSASCIIStringEncoding],4);
+    readkey[4]=0;
+    SMCVal_t      val;
+    
+    kern_return_t result = SMCReadKey(readkey, &val);
+                if (result != kIOReturnSuccess)
+                    return NULL;
+    SMCClose(conn);
+    if (val.dataSize > 0)
+        return [NSData dataWithBytes:val.bytes length:val.dataSize];
+    NSData * value = nil;
     
     io_service_t service = IOServiceGetMatchingService(0, IOServiceMatching(kFakeSMCDeviceService));
     
@@ -146,142 +157,10 @@ float decodeNumericValue(NSData* _data, NSString*_type)
     }
     
     return value;
-#else
-    SMCOpen(&conn);
-    
-    UInt32Char_t  readkey = "\0";
-    strncpy(readkey,[key cStringUsingEncoding:NSASCIIStringEncoding]==NULL ? "" : [key cStringUsingEncoding:NSASCIIStringEncoding],4);
-    readkey[4]=0;
-    SMCVal_t      val;
-    
-    kern_return_t result = SMCReadKey(readkey, &val);
-                if (result != kIOReturnSuccess)
-                    return NULL;
-    SMCClose(conn);
-    if (val.dataSize > 0)
-    {
-
-        /*if (strncmp(val.dataType, TYPE_SP78, 4))
-        {
-            
-        } */
-        return [NSData dataWithBytes:val.bytes length:val.dataSize];
-    }
-    return nil;
-#endif
 }
 
 + (NSString *) getTypeOfKey:(NSString *)key
 {
-    
-#ifndef SMC_ACCESS
-	return @TYPE_SP78;
-/*	for (int i=0; i<0xA; i++)
-  {
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TC%XD",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"CPU %X Diode",i] intoGroup:TemperatureSensorGroup ];
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TC%XH",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:@"CPU %X Core",i] intoGroup:TemperatureSensorGroup ];
-  }
-  [self addSensorWithKey:@"TC0P" andType: @TYPE_SP78 andCaption:NSLocalizedString( @"CPU Proximity", nil) intoGroup:TemperatureSensorGroup ];
-  [self addSensorWithKey:@"Th0H" andType: @TYPE_SP78 andCaption:NSLocalizedString( @"CPU Heatsink", nil) intoGroup:TemperatureSensorGroup ];
-  [self addSensorWithKey:@"TN0P" andType: @TYPE_SP78 andCaption:NSLocalizedString(@"Motherboard",nil) intoGroup:TemperatureSensorGroup ];
-  [self addSensorWithKey:@"Tm0P" andType: @TYPE_SP78 andCaption:NSLocalizedString(@"Memory",nil) intoGroup:TemperatureSensorGroup ];
-  [self addSensorWithKey:@"TA0P" andType: @TYPE_SP78 andCaption:NSLocalizedString(@"Ambient",nil) intoGroup:TemperatureSensorGroup ];
-  
-  for (int i=0; i<0xA; i++) {
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XD",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Core",nil) ,i] intoGroup:TemperatureSensorGroup ];
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XH",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Board",nil),i] intoGroup:TemperatureSensorGroup ];
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"TG%XP",i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Proximity",nil),i] intoGroup:TemperatureSensorGroup ];
-  }
-  
-  [self insertFooterAndTitle:NSLocalizedString( @"TEMPERATURES",nil) andImage:[NSImage imageNamed:@"temp_alt_small"]];  
-  
-  for (int i=0; i<16; i++)
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"FRC%X",i] andType: @TYPE_FREQ andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"CPU %X",nil),i] intoGroup:FrequencySensorGroup ];
-  
-  //
-  for (int i=0; i<0xA; i++) {
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FAKESMC_FORMAT_GPU_FREQUENCY,i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Core",nil) ,i] intoGroup:FrequencySensorGroup ];
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FAKESMC_FORMAT_GPU_SHADER_FREQUENCY,i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Shaders",nil) ,i] intoGroup:FrequencySensorGroup ];
-    
-    // Temporary disable GPU ROP and Memory reporting
-    //        [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FAKESMC_FORMAT_GPU_MEMORY_FREQUENCY,i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Memory",nil) ,i] intoGroup:FrequencySensorGroup ];
-    //        [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FAKESMC_FORMAT_GPU_ROP_FREQUENCY,i] andType: @TYPE_SP78 andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X ROP",nil) ,i] intoGroup:FrequencySensorGroup ];
-    //
-    [self insertFooterAndTitle:NSLocalizedString(@"FREQUENCIES",nil) andImage:[NSImage imageNamed:@"freq_small"]];
-  }
-  //Multipliers
-  
-  for (int i=0; i<0xA; i++) {
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"MC%XC",i] andType: @TYPE_FP4C andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"CPU %X Multiplier",nil),i] intoGroup:MultiplierSensorGroup ];
-  }
-  [self addSensorWithKey:@"MPkC" andType: @TYPE_FP4C andCaption:NSLocalizedString(@"CPU Package Multiplier",nil) intoGroup:MultiplierSensorGroup ];
-  
-  [self insertFooterAndTitle:NSLocalizedString(@"MULTIPLIERS",nil)andImage:[NSImage imageNamed:@"multiply_small"]];
-  
-  // Voltages
-  
-  [self addSensorWithKey:@KEY_CPU_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"CPU Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_CPU_VRM_SUPPLY0 andType: @TYPE_FP2E andCaption:NSLocalizedString(@"CPU VRM Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_MEMORY_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"DIMM Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_12V_VOLTAGE andType: @TYPE_SP4B andCaption:NSLocalizedString(@"+12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_5VC_VOLTAGE andType: @TYPE_SP4B andCaption:NSLocalizedString(@"+5V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_N12VC_VOLTAGE andType: @TYPE_SP4B andCaption:NSLocalizedString(@"-12V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_5VSB_VOLTAGE andType: @TYPE_SP4B andCaption:NSLocalizedString(@"-5V Bus Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_3VCC_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VCC Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_3VSB_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"3.3 VSB Voltage",nil) intoGroup:VoltageSensorGroup ];
-  [self addSensorWithKey:@KEY_VBAT_VOLTAGE andType: @TYPE_FP2E andCaption:NSLocalizedString(@"Battery Voltage",nil) intoGroup:VoltageSensorGroup ];
-  for (int i=0; i<0xA; i++) {
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@KEY_FORMAT_GPU_VOLTAGE,i] andType: @TYPE_FP2E andCaption:[[NSString alloc] initWithFormat:NSLocalizedString(@"GPU %X Voltage",nil) ,i] intoGroup:VoltageSensorGroup ];
-  }
-  
-  [self insertFooterAndTitle:NSLocalizedString(@"VOLTAGES",nil) andImage:[NSImage imageNamed:@"voltage_small"]];
-  
-  // Fans
-  
-  for (int i=0; i<10; i++)   {
-    FanTypeDescStruct * fds;
-    NSData * keydata = [HWMonitorSensor readValueForKey:[[NSString alloc] initWithFormat:@"F%XID",i]];
-    NSString * caption;
-    if(keydata) {
-      fds = [keydata bytes];
-      caption = [[[NSString alloc] initWithBytes:  fds->strFunction length: DIAG_FUNCTION_STR_LEN encoding: NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[[NSCharacterSet letterCharacterSet] invertedSet]];
-    } else {
-      caption = @"";
-    }
-    if([caption length]<=0) {
-      caption = [[NSString alloc] initWithFormat:@"Fan %d",i];
-    }
-    [self addSensorWithKey:[[NSString alloc] initWithFormat:@"F%XAc",i] andType: @TYPE_FPE2 andCaption:caption intoGroup:TachometerSensorGroup ];    
-  }
-  
-  [self insertFooterAndTitle:NSLocalizedString(@"FANS",nil) andImage:[NSImage imageNamed:@"fan_small"]];
-  // Disks
-  NSEnumerator * DisksEnumerator = [DisksList keyEnumerator]; 
-  id nextDisk;
-  while (nextDisk = [DisksEnumerator nextObject]) {
-    [self addSensorWithKey:nextDisk andType: @TYPE_FPE2 andCaption:nextDisk intoGroup:HDSmartTempSensorGroup];
-  }
-  
-  [self insertFooterAndTitle:NSLocalizedString(@"HARD DRIVES TEMPERATURES",nil) andImage:[NSImage imageNamed:@"hd_small"]];
-  
-  NSEnumerator * BatteryEnumerator = [BatteriesList keyEnumerator];
-  id nextBattery;
-  
-  while (nextBattery = [BatteryEnumerator nextObject]) {
-    [self addSensorWithKey:nextBattery andType:@TYPE_FPE2 andCaption:nextBattery intoGroup:BatterySensorsGroup];
-  }
-  
-  [self insertFooterAndTitle:NSLocalizedString(@"BATTERIES",nil) andImage:[NSImage imageNamed:@"modern-battery-icon"]];
-  
-  if (![sensorsList count]) {
-    NSMenuItem * item = [[NSMenuItem alloc]initWithTitle:@"No sensors found or FakeSMCDevice unavailable" action:nil keyEquivalent:@""];
-    
-    [item setEnabled:FALSE];
-    
-    [statusMenu insertItem:item atIndex:0];
-  }
-*/
-#else
     SMCOpen(&conn);
     
     UInt32Char_t  readkey = "\0";
@@ -296,7 +175,6 @@ float decodeNumericValue(NSData* _data, NSString*_type)
     if (val.dataSize > 0)
         return [NSString stringWithFormat:@"%.4s", val.dataType];
     return nil;
-#endif
 }
 
 
@@ -336,7 +214,7 @@ float decodeNumericValue(NSData* _data, NSString*_type)
             }
                 
             case VoltageSensorGroup:
-            	return [[NSString alloc] initWithFormat:@"%2.3f", v];
+            	return [[NSString alloc] initWithFormat:@"%2.3fV", v];
                 
             case TachometerSensorGroup:
                 return [[NSString alloc] initWithFormat:@"%drpm",(int)v];

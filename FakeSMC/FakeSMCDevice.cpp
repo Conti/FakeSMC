@@ -345,9 +345,15 @@ bool FakeSMCDevice::init(IOService *platform, OSDictionary *properties)
 
     loadKeysFromDictionary(OSDynamicCast(OSDictionary, properties->getObject("Keys")));
 
-    this->setName("SMC");
+	char nodeName[] = "APP0001";
+	if (OSDynamicCast(OSBoolean, properties->getObject("noEmulation"))) {
+		this->setName("HWMonitor");
+		strncpy(nodeName, "FAKESMC", 8);
+	}
+	else
+		this->setName("SMC");
+		
 
-    const char * nodeName = "APP0001";
     this->setProperty("name",(void *)nodeName, (UInt32)strlen(nodeName)+1);
 
     if(OSString *smccomp = OSDynamicCast(OSString, properties->getObject("smc-compatible"))) {
