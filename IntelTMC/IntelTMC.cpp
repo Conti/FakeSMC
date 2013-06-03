@@ -187,7 +187,7 @@ IOReturn IntelTMC::callPlatformFunction(const OSSymbol *functionName, bool waitF
 					return kIOReturnBadArgument;
 				}
 			}
-			short value;
+			short value = 20;
 			if (mmio_base) {
 				OUTVID(TSE, 0xB8);
 				//		if ((INVID16(TSC1) & (1<<15)) && !(INVID16(TSC1) & (1<<8)))//enabled and ready

@@ -151,6 +151,6 @@ static void read_smb_intel(pci_dt_t *smbus_dev)
 //  for (i = 0; i <  MAX_RAM_SLOTS; i++){
 //    spd_size = smb_read_byte_intel(base, 0x50 + i, 0);
     
-  } // for
+//  }  for
 }
 

@@ -186,7 +186,7 @@ IOReturn X3100monitor::callPlatformFunction(const OSSymbol *functionName, bool w
 					return kIOReturnBadArgument;
 				}
 			}
-			short value;
+			short value = 130;
 			if (mmio_base) {
 				OUTVID(TIC1, 3);
 				//		if ((INVID16(TSC1) & (1<<15)) && !(INVID16(TSC1) & (1<<8)))//enabled and ready

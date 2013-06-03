@@ -353,71 +353,71 @@ getSlotNameWithSlotId( int slotId )
 
 bool OemSMBIOS::findSMBIOSTableOEM( void )
 {
-
-	SMBEntryPoint			* eps;
+  
+	SMBEntryPoint			* eps = NULL;
 	IOMemoryDescriptor *    dmiMemory = 0;
 	IOItemCount             dmiStructureCount = 0;
   
-    
-  	UInt8 *      biosAddress = NULL;	
-    
-    IOMemoryDescriptor * biosMemory;
-    IOMemoryMap * biosMap;
-    
-    /* For >= 10.8.2, prevent waitForSystemMapper panic */
-    //biosMemory = IOMemoryDescriptor::withPhysicalAddress( 0xf0000,0xfffff-0xf0000+1,kIODirectionOutIn);
-    biosMemory = IOMemoryDescriptor::withAddressRange( 0xf0000,0xfffff-0xf0000+1,
-                                                      kIODirectionOutIn | kIOMemoryMapperNone,TASK_NULL);
-    
-    if(biosMemory)
+  
+  UInt8 *      biosAddress = NULL;	
+  
+  IOMemoryDescriptor * biosMemory;
+  IOMemoryMap * biosMap;
+  
+  /* For >= 10.8.2, prevent waitForSystemMapper panic */
+  //biosMemory = IOMemoryDescriptor::withPhysicalAddress( 0xf0000,0xfffff-0xf0000+1,kIODirectionOutIn);
+  biosMemory = IOMemoryDescriptor::withAddressRange( 0xf0000,0xfffff-0xf0000+1,
+                                                    kIODirectionOutIn | kIOMemoryMapperNone,TASK_NULL);
+  
+  if(biosMemory)
+  {
+    biosMap = biosMemory->map();
+    if(biosMap)
     {
-        biosMap = biosMemory->map();
-        if(biosMap)
-        {
-            biosAddress = (UInt8 *) biosMap->getVirtualAddress();
-        }
+      biosAddress = (UInt8 *) biosMap->getVirtualAddress();
     }
-    
-    
+  }
+  
+  
 	// Search 0x0f0000 - 0x0fffff for SMBIOS Ptr
 	if(biosAddress)
-        for (UInt32 Address = 0; Address < biosMap->getLength(); Address += 0x10) {
-            if (*(UInt32 *)(biosAddress + Address) == SMBIOS_PTR) {
-                eps = (SMBEntryPoint *)(biosAddress + Address);
-                continue;
-            }
-        }
-    if(eps)
-        if (memcmp(eps->anchor, "_SM_", 4) == 0)
-        {
-            UInt8 csum;
-            
-            csum = checksum8(eps, sizeof(SMBEntryPoint));
-            
-            DEBUG_LOG("DMI checksum       = 0x%x\n", csum);
-            DEBUG_LOG("DMI tableLength    = %d\n",
-                      eps->dmi.tableLength);
-            DEBUG_LOG("DMI tableAddress   = 0x%x\n",
-                      (uint32_t) eps->dmi.tableAddress);
-            DEBUG_LOG("DMI structureCount = %d\n",
-                      eps->dmi.structureCount);
-            DEBUG_LOG("DMI bcdRevision    = %x\n",
-                      eps->dmi.bcdRevision);
-            
-            if (csum == 0 && eps->dmi.tableLength &&
-                eps->dmi.structureCount)
-            {
-                dmiStructureCount = eps->dmi.structureCount;
-                dmiMemory = IOMemoryDescriptor::withAddressRange(eps->dmi.tableAddress, eps->dmi.tableLength,
-                                                                 kIODirectionOutIn | kIOMemoryMapperNone, TASK_NULL);
-            }
-            else
-            {
-                DEBUG_LOG("No DMI structure found\n");
-            }
-        }
+    for (UInt32 Address = 0; Address < biosMap->getLength(); Address += 0x10) {
+      if (*(UInt32 *)(biosAddress + Address) == SMBIOS_PTR) {
+        eps = (SMBEntryPoint *)(biosAddress + Address);
+        continue;
+      }
+    }
+  if(eps)
+    if (memcmp(eps->anchor, "_SM_", 4) == 0)
+    {
+      UInt8 csum;
+      
+      csum = checksum8(eps, sizeof(SMBEntryPoint));
+      
+      DEBUG_LOG("DMI checksum       = 0x%x\n", csum);
+      DEBUG_LOG("DMI tableLength    = %d\n",
+                eps->dmi.tableLength);
+      DEBUG_LOG("DMI tableAddress   = 0x%x\n",
+                (uint32_t) eps->dmi.tableAddress);
+      DEBUG_LOG("DMI structureCount = %d\n",
+                eps->dmi.structureCount);
+      DEBUG_LOG("DMI bcdRevision    = %x\n",
+                eps->dmi.bcdRevision);
+      
+      if (csum == 0 && eps->dmi.tableLength &&
+          eps->dmi.structureCount)
+      {
+        dmiStructureCount = eps->dmi.structureCount;
+        dmiMemory = IOMemoryDescriptor::withAddressRange(eps->dmi.tableAddress, eps->dmi.tableLength,
+                                                         kIODirectionOutIn | kIOMemoryMapperNone, TASK_NULL);
+      }
+      else
+      {
+        DEBUG_LOG("No DMI structure found\n");
+      }
+    }
   if(biosMemory)
-      biosMemory->release();  
+    biosMemory->release();  
   
   if ( dmiMemory )
   {
@@ -435,8 +435,6 @@ bool OemSMBIOS::findSMBIOSTableOEM( void )
   }
   
   return (fDMIMemoryMap != 0);
-  
-  
 }  
 
 //---------------------------------------------------------------------------
