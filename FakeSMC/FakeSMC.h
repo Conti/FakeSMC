@@ -1,28 +1,24 @@
-#ifndef _FAKESMC_H
-#define _FAKESMC_H
+#ifndef _VIRTUALSMC_H
+#define _VIRTUALSMC_H
+
+#include "FakeSMCKeyStore.h"
 
 #include <IOKit/IOService.h>
-#include <IOKit/pci/IOPCIDevice.h>
-#include <IOKit/IOTimerEventSource.h>
-#include <IOKit/acpi/IOACPIPlatformDevice.h>
-#include "FakeSMCDevice.h"
-#include "FakeSMCKey.h"
-#include "FakeSMCDefinitions.h"
 
+class FakeSMCDevice;
 
 class FakeSMC : public IOService
 {
-    OSDeclareDefaultStructors(FakeSMC)
-
+	OSDeclareDefaultStructors(FakeSMC)
+	
 private:
+    FakeSMCKeyStore     *keyStore;
     FakeSMCDevice       *smcDevice;
 
 public:
-    virtual bool        init(OSDictionary *dictionary = 0);
-    virtual void        free(void);
-    virtual IOService   *probe(IOService *provider, SInt32 *score);
-    virtual bool        start(IOService *provider);
-    virtual void        stop(IOService *provider);
+    virtual bool		init(OSDictionary *dictionary = 0);
+    virtual bool		start(IOService *provider);
+    
 };
 
 #endif

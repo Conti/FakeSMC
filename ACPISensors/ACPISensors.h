@@ -1,34 +1,44 @@
 /*
- *  ACPIMonitor.h
+ *  ACPISensors.h
  *  HWSensors
  *
- *  Created by mozo on 12/11/10.
+ *  Created by kozlek on 12/11/10.
  *  Copyright 2010 Slice. All rights reserved.
  *
  */
 
-#include <IOKit/IOService.h>
-#include "IOKit/acpi/IOACPIPlatformDevice.h"
+#ifndef __HWSensors__ACPISensors__
+#define __HWSensors__ACPISensors__
 
 #include "FakeSMCPlugin.h"
 
-class ACPIMonitor : public FakeSMCPlugin
+#include "IOKit/acpi/IOACPIPlatformDevice.h"
+
+#define kACPISensorsDebug   0
+
+#define ACPISensorsDebugLog(string, args...)	do { if (kACPISensorsDebug) { IOLog ("%s (%s): [Debug] " string "\n",getName(), acpiDevice->getName() , ## args); } } while(0)
+#define ACPISensorsWarningLog(string, args...) do { IOLog ("%s (%s): [Warning] " string "\n",getName(), acpiDevice->getName(), ## args); } while(0)
+#define ACPISensorsErrorLog(string, args...) do { IOLog ("%s (%s): [Error] " string "\n",getName(), acpiDevice->getName() , ## args); } while(0)
+#define ACPISensorsFatalLog(string, args...) do { IOLog ("%s (%s): [Fatal] " string "\n",getName(), acpiDevice->getName() , ## args); } while(0)
+#define ACPISensorsInfoLog(string, args...)	do { IOLog ("%s (%s): " string "\n",getName(), acpiDevice->getName() , ## args); } while(0)
+
+class ACPISensors : public FakeSMCPlugin
 {
-    OSDeclareDefaultStructors(ACPIMonitor)
+    OSDeclareDefaultStructors(ACPISensors)
     
 private:
-	IOACPIPlatformDevice *	acpiDevice;
+	IOACPIPlatformDevice    *acpiDevice;
+    OSArray                 *methods;
+    bool                    useKelvins;
     
-	OSDictionary*			sensors;
-	
-	bool                    addSensor(const char* method, const char* key, const char* type, unsigned char size);
-	bool                    addTachometer(const char* method, const char* caption);
+    void                    addSensorsFromDictionary(OSDictionary *dictionary, kFakeSMCCategory category);
+    void                    addSensorsFromArray(OSArray *array, kFakeSMCCategory category);
+    
+protected:
+    virtual float           getSensorValue(FakeSMCSensor *sensor);
     
 public:
-    virtual bool			init(OSDictionary *properties=0);
     virtual bool			start(IOService *provider);
-	virtual void			stop(IOService *provider);
-	virtual void			free(void);
-
-	virtual IOReturn        callPlatformFunction(const OSSymbol *functionName, bool waitForFunction, void *param1, void *param2, void *param3, void *param4 ); 
 };
+
+#endif /* defined(__HWSensors__ACPISensors__) */

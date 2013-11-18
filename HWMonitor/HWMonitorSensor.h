@@ -1,45 +1,104 @@
 //
-//  NSSensor.h
+//  HWMonitorSensor.h
 //  HWSensors
 //
-//  Created by mozo,Navi on 22.10.11.
-//  Copyright (c) 2011 mozo. All rights reserved.
+//  Created by kozlek on 23/02/12.
 //
 
-#import <Foundation/Foundation.h>
-#import "ISPSmartController.h"
+/*
+ *  Copyright (c) 2013 Natan Zalkin <natan.zalkin@me.com>. All rights reserved.
+ *
+ *  This program is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License
+ *  as published by the Free Software Foundation; either version 2
+ *  of the License, or (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ *  02111-1307, USA.
+ *
+ */
 
-enum {
-    TemperatureSensorGroup =   1,
-    VoltageSensorGroup =       2,
-    TachometerSensorGroup =    3,
-    FrequencySensorGroup =     4,
-    MultiplierSensorGroup =    5,
-    HDSmartTempSensorGroup = 6, 
-    BatterySensorsGroup = 7,
+#include "ATAGenericDrive.h"
 
-};
-typedef NSUInteger SensorGroup;
+typedef enum {
+    kHWSensorGroupNone                  = 0,
+    
+    kHWSensorGroupTemperature           = 1 << 1,
+    kHWSensorGroupVoltage               = 1 << 2,
+    kHWSensorGroupPWM                   = 1 << 3,
+    kHWSensorGroupTachometer            = 1 << 4,
+    kHWSensorGroupMultiplier            = 1 << 5,
+    kHWSensorGroupFrequency             = 1 << 6,
+    kHWSensorGroupCurrent               = 1 << 7,
+    kHWSensorGroupPower                 = 1 << 8,
+    
+    kBluetoothGroupBattery              = 1 << 9,
+    
+    kSMARTGroupTemperature              = 1 << 10,
+    kSMARTGroupRemainingLife            = 1 << 11,
+    kSMARTGroupRemainingBlocks          = 1 << 12,
+} HWSensorGroup;
+
+typedef enum {
+    kHWSensorLevelUnused                = 0,
+    kHWSensorLevelDisabled              = 1,
+    kHWSensorLevelNormal                = 2,
+    kHWSensorLevelModerate              = 3,
+    kHWSensorLevelHigh                  = 4,
+    kHWSensorLevelExceeded              = 1000,
+} HWSensorLevel;
+
+@class HWMonitorEngine;
 
 @interface HWMonitorSensor : NSObject
+{
+    char _rawKey[5];
+    NSNumber *_rawValue;
+    NSMutableDictionary *_localizationCache;
+}
 
-@property (readwrite, retain) NSString *    key;
-@property (readwrite, retain) NSString *    type;
-@property (readwrite, assign) SensorGroup   group;
-@property (readwrite, retain) NSString *    caption;
-@property (readwrite, retain) id            object;
-@property (readwrite, assign) BOOL          favorite;
+@property (nonatomic, strong) HWMonitorEngine*  engine;
 
+@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* type;
+@property (nonatomic, assign) NSUInteger group;
+@property (nonatomic, strong) NSString* title;
+@property (nonatomic, strong) NSData* data;
+@property (nonatomic, assign) io_connect_t connection;
+@property (nonatomic, strong) id genericDevice;
 
+@property (nonatomic, assign) HWSensorLevel level;
+@property (readonly) const char *rawKey;
+@property (readonly) NSNumber* rawValue;
+@property (readonly) NSString* stringValue;
+@property (readonly) NSInteger intValue;
+@property (readonly) double doubleValue;
+@property (readonly) float floatValue;
 
-+ (unsigned int)        swapBytes:(unsigned int) value;
+@property (nonatomic, assign) BOOL valueHasBeenChanged;
 
-//+ (NSDictionary *)      populateValues;
-//+ (NSData *)            populateValueForKey:(NSString *)key;
-+ (NSData *)            readValueForKey:(NSString *)key;
-+ (NSString* )			getTypeOfKey:(NSString*)key;
+@property (nonatomic, strong) id representedObject;
 
-- (HWMonitorSensor *)   initWithKey:(NSString *)aKey andType: aType andGroup:(NSUInteger)aGroup withCaption:(NSString *)aCaption;
-- (NSString *)          formatedValue:(NSData *)value;
++ (int)getIndexOfHexChar:(char)c;
++ (BOOL)isValidIntegetType:(NSString*)type;
++ (BOOL)isValidFloatingType:(NSString*)type;
++ (float)decodeNumericData:(NSData*)data ofType:(NSString*)type;
+
++ (HWMonitorSensor*)sensor;
+
+- (void)setType:(NSString *)newType;
+- (NSString *)type;
+- (void)setData:(NSData *)newData;
+- (NSData *)data;
+
+- (float)decodeNumericValue;
+- (NSString*)stringValue;
 
 @end

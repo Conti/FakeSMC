@@ -1,0 +1,4 @@
+// Relaunch Tool only
+
+PRODUCT_NAME = Sparkle Updater
+SKIP_INSTALL = YES

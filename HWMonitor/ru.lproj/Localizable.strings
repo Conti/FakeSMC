@@ -1,40 +1,259 @@
-/* 
-  Localizable.strings
-  HWSensors
+/*
+ Localizable.strings
+ HWSensors
+ 
+ Created by kozlek on 24/02/12.
+ Copyright (c) 2012 Natan Zalkin <natan.zalkin@me.com>. All rights reserved.
+ */
 
-  Created by Navi on 21.02.12.
-  Copyright (c) 2012 . All rights reserved.
-*/
-"TEMPERATURES"="ТЕМПЕРАТУРЫ";
-"FREQUENCIES"="ЧАСТОТЫ";
-"MULTIPLIERS"="МНОЖИТЕЛИ";
-"VOLTAGES"="НАПРЯЖЕНИЯ";
-"FANS"="ВЕНТИЛЯТОРЫ";
-"HARD DRIVES TEMPERATURES"="ТЕМПЕРАТУРЫ ДИСКОВ";
-"BATTERIES"="ЗАРЯД БАТАРЕЙ";
-"CPU Heatsink"="Радиатор ЦПУ";
-"CPU Proximity"="Датчик ЦПУ";
-"CPU %X Diode"="ЦПУ %X";
-"CPU %X Core"="Ядро ЦПУ %X";
-"GPU %X Board" = "GPU %X, радиатор ";
-"GPU %X Core" = "GPU %X, ядро ";
-"GPU %X Proximity" = "GPU %X, радиатор";
-"GPU %X Shaders"="GPU %X, шейдеры";
-"GPU %X Memory"="GPU %X, память";
-"GPU %X ROP"="GPU %X, ROP";
-"Motherboard"="Чипсет";
-"Memory"="Модули памяти";
-"Ambient"="Корпус";
-"CPU Package Multiplier"="Общий множитель ЦПУ";
-"CPU %X Multiplier"="Множитель ЦПУ %X";
-"CPU Voltage"="Вольтаж ЦПУ";
-"CPU VRM Voltage"="Шина ЦПУ";
-"DIMM Voltage"="Шина модулей DIMM";
-"+12V Bus Voltage"="Шина +12В";
-"+5V Bus Voltage"="Шина +5В";
-"-12V Bus Voltage"="Шина -12В";
-"-5V Bus Voltage"="Шина -5В";
-"3.3 VCC Voltage"="Шина 3.3В VCC";
-"3.3 VSB Voltage"="Шина 3.3В VSB";
-"Battery Voltage"="Шина батареи";
-"GPU %X Voltage"="Вольтаж GPU %X";
+"TEMPERATURES" = "ТЕМПЕРАТУРНЫЕ ДАТЧИКИ";
+"DRIVE TEMPERATURES" = "ТЕМПЕРАТУРА ДИСКОВ";
+"SSD REMAINING LIFE" = "ВРЕМЯ ЖИЗНИ SSD";
+"SSD REMAINING BLOCKS" = "РЕЗЕРВНЫЕ ЯЧЕЙКИ SSD";
+"MULTIPLIERS" = "МНОЖИТЕЛИ";
+"FREQUENCIES" = "ЧАСТОТЫ";
+"VOLTAGES" = "ДАТЧИКИ НАПРЯЖЕНИЯ";
+"CURRENTS" = "ДАТЧИКИ СИЛЫ ТОКА";
+"POWER CONSUMPTION" = "ДАТЧИКИ МОЩНОСТИ";
+"FANS & PUMPS" = "ОБОРОТЫ ВЕНТИЛЯТОРОВ";
+"BATTERIES" = "ЗАРЯД АККУМУЛЯТОРОВ";
+"Quit HWMonitor" = "Закрыть HWMonitor";
+"No sensors found" = "Нет доступных сенсоров";
+"Preferences..." = "Настройки...";
+"Show hidden sensors" = "Показывать скрытые датчики";
+"Use BSD drives names" = "Имена дисков в формате BSD";
+"Celsius" = "Цельсий";
+"Fahrenheit" = "Фаренгейт";
+"Use larger font" = "Использовать большой шрифт";
+"Use shadow effect" = "Отображать с эффектом тени";
+"hwmonitor" = "Значок HWMonitor";
+"thermometer" = "Значок градусника";
+"temperatures" = "Значок температуры";
+"hddtemperatures" = "Значок жесткого диска";
+"ssdlife" = "Значок SSD";
+"multipliers" = "Значок микросхемы";
+"frequencies" = "Значок частоты";
+"tachometers" = "Значок вентилятора";
+"voltages" = "Значок напряжения";
+"pcicard" = "Значок устройства";
+"video" = "Значок видеокарты";
+"battery" = "Значок батарейки";
+"scale" = "Значок измерителя";
+"Menubar items" = "Элементы в строке меню";
+"Icons" = "Значки";
+"Sensors" = "Датчики";
+"HWMonitor Preferences" = "Настройки HWMonitor";
+"Install menu bar extension" = "Установить расширение меню";
+"Remove menu bar extension" = "Удалить расширение меню";
+"Temperature units:" = "Система температур:";
+"Menu sensors:" = "Датчики в меню:";
+"Miscellaneous:" = "Разное:";
+"About HWMonitor" = "О программе HWMonitor";
+"Preferences..." = "Настройки...";
+"Services" = "Службы";
+"Hide HWMonitor" = "Скрыть HWMonitor";
+"Hide Others" = "Скрыть остальные";
+"Show All" = "Показать все";
+"Quit HWMonitor" = "Закрыть HWMonitor";
+"Window" = "Окно";
+"Minimize" = "Свернуть";
+"Zoom" = "Изменить масштаб";
+"Bring All to Front" = "Все окна - на передний план";
+"Help" = "Справка";
+"HWMonitor Help" = "Справка HWMonitor";
+"Preferences" = "Настройки";
+"Graphs" = "Графики";
+"Show partitions names" = "Показывать имена разделов";
+"System menu bar:" = "Значки системного меню:";
+"Preferences" = "Настройки";
+"Menubar Items" = "Значки меню";
+"History Graphs" = "Графики";
+"Sensors update rate:" = "Интервал обновления датчиков:";
+"S.M.A.R.T. update rate:" = "Интервал обновления S.M.A.R.T:";
+"sec" = "сек.";
+"min" = "мин.";
+"Graphs:" = "Графики:";
+"Use data smoothing" = "Использовать сглаживание данных";
+"General" = "Основные";
+"Menubar" = "Меню";
+"Menubar icons:" = "Значки меню:";
+"Temperature Sensors" = "Температурные датчики";
+"Frequency Sensors" = "Датчики частоты";
+"Tachometer Sensors" = "Датчики оборотов";
+"Voltage Sensors" = "Датчики напряжения";
+"Close HWMonitor" = "Закрыть HWMonitor";
+"Start HWMonitor at login" = "Запускать HWMonitor при старте системы";
+"Menu color theme:" = "Цветовая схема меню:";
+"Default" = "Обычная";
+"Gray" = "Серая";
+"Dark" = "Темная";
+"Continue monitor sensors in background" = "Продолжать собирать данные в фоновом режиме";
+"Graphs window always topmost" = "Окно графиков всегда поверх остальных окон";
+"Graphs scale factor:" = "Масштаб отображения по времени:";
+"Check for updates" = "Проверять наличие обновлений в сети";
+"Attach to Menu Bar" = "Закрепить панель";
+"Detach from Menu Bar" = "Отсоеденить панель";
+"Hide Window" = "Скрыть окно";
+"Version %@" = "Версия %@";
+
+"Mouse" = "Мышь";
+"Keyboard" = "Клавиатура";
+"Trackpad" = "Трекпад";
+"Built-in Battery" = "Встроенный аккумулятор";
+"Internal Battery" = "Внутренний аккумулятор";
+
+"HWSensors Updater" = "Обновления HWSensors";
+"New HWSensors version %@ is available to download. You have %@. Download newer version?" = "Появилась новая версия HWSensors v%@. Вы используете v%@. Скачать новую версию?";
+"Update" = "Обновить";
+"Download" = "Скачать";
+"Next time" = "В другой раз";
+"Skip this version" = "Пропустить эту версию";
+
+"Check for Updates..." = "Проверить обновления...";
+"No new versions of HWSensors are available at this time!" = "Нет доступных новых версий HWSensors! Попробуйте проверить в другой раз.";
+"Close" = "Закрыть";
+"An error occured while trying to download HWSensors installer!" = "Возникла ошибка при попытке загрузить установщик HWSensors";
+
+"%1.0f MHz" = "%1.0f МГц";
+"%1.0f rpm" = "%1.0f об/мин";
+"%1.3f V" = "%1.3f В";
+"%1.3f A" = "%1.3f А";
+"%1.3f W" = "%1.3f Ватт";
+
+"%1.0fMHz" = "%1.0fМГц";
+"%1.2fGHz" = "%1.2fГГц";
+"%1.2fTHz" = "%1.2fТГц";
+"%1.0frpm" = "%1.0fоб/м";
+"%1.3fV" = "%1.3fВ";
+"%1.3fA" = "%1.3fА";
+"%1.2fW" = "%1.2fВт";
+
+"Downloading %@" = "Загрузка %@";
+"%1.2f Mbytes" = "%1.2f МБайт";
+
+"CPUFan" = "Вентилятор ЦП";
+"CPUFan2" = "Вентилятор ЦП 2";
+"PowerFan" = "Вентилятор БП";
+"SystemFan1" = "Вентилятор №1";
+"SystemFan2" = "Вентилятор №2";
+"AuxFan" = "Дополнительный вентилятор";
+"AuxFan2" = "Дополнительный вентилятор №2";
+"MB Fan 0" = "Вентилятор 0";
+"MB Fan 1" = "Вентилятор 1";
+"MB Fan 2" = "Вентилятор 2";
+"MB Fan 3" = "Вентилятор 3";
+"MB Fan 4" = "Вентилятор 4";
+"GPU Fan" = "Вентилятор видеокарты";
+"GPU 2 Fan" = "Вентилятор видеокарты 2";
+"GPU 3 Fan" = "Вентилятор видеокарты 3";
+"GPU 3 Fan" = "Вентилятор видеокарты 4";
+"CPU_MEM" = "Процессор/Память";
+"IO" = "Слоты раширения";
+"PCI" = "Слоты раширения";
+"INTAKE" = "Втягивющий";
+"EXHAUST" = "Вытяжка";
+"PS" = "Источник питания";
+"Main" = "Основной вентилятор";
+"ODD" = "Оптический привод";
+"HDD" = "Лоток жестких дисков";
+"BOOSTA" = "Усилитель А";
+"BOOSTB" = "Усилитель Б";
+
+"Ambient" = "Окружение";
+
+"CPU Die %X" = "Процессор, Ядро %X";
+
+"CPU %X" = "Процессор %X";
+"CPU Heatsink" = "Процессор, Радиатор";
+"CPU %X Heatsink" = "Процессор %X, Радиатор";
+"CPU Proximity" = "Процессор, Датчик";
+"CPU %X Proximity" = "Процессор %X, Датчик";
+
+"CPU Package" = "Процессор, Блок ядер";
+"CPU %X Package" = "Процессор %X, Подложка";
+"CPU %X Core" = "Процессор %X, Ядро";
+"CPU %X Graphics" = "Процессор %X, Видео";
+"CPU %X Heatsink" = "Процессор %X, Радиатор";
+"CPU Package Total" = "Процессор, Общий";
+"CPU Package Cores" = "Процессор, Ядра";
+"CPU Package Graphics" = "Процессор, Графика";
+"CPU Package DRAM" = "Контроллер памяти";
+
+"PECI CPU" = "PECI Процессор";
+"PECI SA" = "PECI SA";
+"PECI GPU" = "PECI Видео";
+
+"Northbridge Die" = "Северный мост";
+"Northbridge %X Die" = "Северный мост %X";
+"Northbridge Proximity" = "Северный мост, Датчик";
+"Northbridge %X Proximity" = "Северный мост %X, Датчик";
+"MCH Die" = "Контроллер памяти";
+"MCH Heatsink" = "Контроллер памяти, Радиатор";
+"MCP Internal Die" = "Контроллер памяти, Подложка";
+"PCH Die" = "Системный контроллер";
+"PCH Proximity" = "Системный контроллер, Датчик";
+"Mainboard Proximity" = "Материнская плата";
+"LCD Proximity" = "Датчик LCD";
+"Airport Proximity" = "Датчик Airport";
+"Battery Proximity" = "Датчик батареи";
+"Powerboard Proximity" = "Источник питания";
+
+"Memory Bank %X" = "Слот памяти %X";
+"Memory Module %X" = "Модуль памяти %X";
+
+"Optical Drive" = "Оптический привод";
+"HDD Bay %X" = "Лоток диска %X";
+
+"GPU Die" = "Видеокарта";
+"GPU %X Die" = "Видеокарта %X";
+"GPU Heatsink" = "Видеокарта, Радиатор";
+"GPU %X Heatsink" = "Видеокарта %X, Радиатор";
+"GPU Proximity" = "Видеокарта, Датчик";
+"GPU %X Proximity" = "Видеокарта %X, Датчик";
+"GPU Memory" = "Видеокарта, Память";
+"GPU %X Memory" = "Видеокарта %X, Память";
+"GPU ROPs" = "Видеокарта, РП";
+"GPU %X ROPs" = "Видеокарта %X, РП";
+"GPU PWM" = "Видеокарта ШИМ";
+"GPU %X PWM" = "Видеокарта %X";
+"GPU %X Fan" = "Видеокарта %X";
+
+"Thermal Zone %X" = "Термальная зона %X";
+
+"CPU Core" = "Процессор, Ядро";
+"CPU Core %X" = "Процессор, Ядро %X";
+"CPU Package Multiplier" = "Процессор, Множитель";
+//"CPU Package" = "Процессор, Частота";
+
+"GPU Core" = "Видеокарта, Ядро";
+"GPU %X Core" = "Видеокарта %X, Ядро";
+"GPU Shader" = "Видеокарта, Шейдеры";
+"GPU %X Shader" = "Видеокарта %X, Шейдеры";
+"GPU ROP" = "Видеокарта, РП";
+"GPU %X ROP" = "Видеокарта %X, РП";
+
+"Memory Modules" = "Модули памяти";
+"MCP Core" = "Контролер памяти, Ядро";
+"Main 3.3V" = "Основной 3.3V";
+"Main 5V" = "Основной 5V";
+"Main 12V" = "Основной 12V";
+"Auxiliary 3.3V" = "Дополнительный 3.3V";
+"Standby 5V" = "Резервный 5V";
+//"PCIe 12V" = "";
+"Power Supply 12V" = "Источник питания 12V";
+//"DC In S0 Rail" = "";
+//"DC In S5 Rail" = "";
+"GPU Rail" = "Видеокарта, Шина";
+"GPU %X Rail" = "Видеокарта, Шина %X";
+"CPU VRM" = "Процессор, Регулятор";
+"CPU VRM %X" = "Процессор, Регулятор %X";
+
+"Mainboard S0 Rail" = "Шина питания S0";
+"Mainboard S3 Rail" = "Шина питания S3";
+"Mainboard S5 Rail" = "Шина питания S5";
+"Main Power Supply" = "Основной источник питания";
+
+"CMOS Battery" = "Батарея CMOS";
+
+"VRM Supply %X" = "Регулятор напряжения %X";
+"Power Supply %X" = "Источник питания %X";

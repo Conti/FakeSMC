@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<installer-gui-script minSpecVersion="2">
+    <title>DISTRIBUTION_TITLE</title>
+    <options customize="allow" allow-external-scripts="false" hostArchitectures="x86_64"/>
+    <domains enable_anywhere="true"/>
+
+    <license file="license.txt"/>
+    <readme file="readme.txt"/>
+    <background file="background.tiff" alignment="bottomleft" scaling="proportional"/>
+
+    <script>
+        <![CDATA[
+        function hackintoshCheckScript()
+        {
+            var obj = system.ioregistry.matchingClass("FakeSMC");
+
+            if (obj) {
+                system.log('hackintoshCheckScript: Found FakeSMC');
+                return true;
+            }
+
+            system.log('hackintoshCheckScript: Running on Mac');
+
+            return false;
+        }
+
+        ]]>
+    </script>
+    <choices-outline>
+        <line choice="hwmonitor"/>
+        <line choice="fakesmc">
+            <line choice="acpisensors"/>
+            <line choice="cpusensors"/>
+            <line choice="gpusensors"/>
+            <line choice="lpcsensors"/>
+        </line>
+        <line choice="fakesmckeystore">
+            <line choice="cpusensors_mac"/>
+            <line choice="gpusensors_mac"/>
+        </line>
+
+    </choices-outline>
+
+    <choice
+        id="hwmonitor"
+        title="HWMonitor"
+        description="HWMONITOR_DESCRIPTION">
+        <pkg-ref id="org.hwsensors.HWMonitor"/>
+    </choice>
+
+    <choice
+        id="fakesmc"
+        title="FakeSMC"
+        description="FAKESMC_DESCRIPTION"
+        start_selected="hackintoshCheckScript()"
+        enabled="hackintoshCheckScript()">
+        <pkg-ref id="org.hwsensors.FakeSMC"/>
+    </choice>
+
+    <choice
+        id="acpisensors"
+        title="ACPISensors"
+        description="ACPISENSORS_DESCRIPTION"
+        enabled="choices['fakesmc'].enabled"
+        start_selected="choices['fakesmc'].selected">
+        <pkg-ref id="org.hwsensors.ACPISensors"/>
+    </choice>
+
+    <choice
+        id="cpusensors"
+        title="CPUSensors"
+        description="CPUSENSORS_DESCRIPTION"
+        enabled="choices['fakesmc'].enabled"
+        start_selected="choices['fakesmc'].selected">
+        <pkg-ref id="org.hwsensors.CPUSensors"/>
+    </choice>
+
+    <choice
+        id="gpusensors"
+        title="GPUSensors"
+        description="GPUSENSORS_DESCRIPTION"
+        enabled="choices['fakesmc'].enabled"
+        start_selected="choices['fakesmc'].selected">
+        <pkg-ref id="org.hwsensors.GPUSensors"/>
+    </choice>
+
+    <choice
+        id="lpcsensors"
+        title="LPCSensors"
+        description="LPCSENSORS_DESCRIPTION"
+        enabled="choices['fakesmc'].enabled"
+        start_selected="choices['fakesmc'].selected">
+        <pkg-ref id="org.hwsensors.LPCSensors"/>
+    </choice>
+
+    <choice
+        id="fakesmckeystore"
+        title="FakeSMCKeyStore"
+        description="FAKESMCKEYSTORE_DESCRIPTION"
+        start_selected="!hackintoshCheckScript()"
+        enabled="!hackintoshCheckScript()">
+        <pkg-ref id="org.hwsensors.FakeSMCKeyStore"/>
+    </choice>
+
+    <choice
+        id="cpusensors_mac"
+        title="CPUSensors"
+        description="CPUSENSORS_DESCRIPTION"
+        enabled="choices['fakesmckeystore'].enabled"
+        start_selected="choices['fakesmckeystore'].selected">
+        <pkg-ref id="org.hwsensors.CPUSensors.Mac"/>
+    </choice>
+
+    <choice
+        id="gpusensors_mac"
+        title="GPUSensors"
+        description="GPUSENSORS_DESCRIPTION"
+        enabled="choices['fakesmckeystore'].enabled"
+        start_selected="choices['fakesmckeystore'].selected">
+        <pkg-ref id="org.hwsensors.GPUSensors.Mac"/>
+    </choice>
+
+    <pkg-ref id="org.hwsensors.HWMonitor">
+        <relocate search-id="Search.Applications.Utilities.HWMonitor">
+            <bundle id="org.hwsensors.HWMonitor"/>
+        </relocate>
+    </pkg-ref>
+
+    <locator>
+        <search id="Search.Applications.HWMonitor" type="component">
+            <bundle CFBundleIdentifier="org.hwsensors.HWMonitor" path="/Applications/HWMonitor.app"/>
+        </search>
+        <search id="Search.Applications.Utilities.HWMonitor" type="component">
+            <bundle CFBundleIdentifier="org.hwsensors.HWMonitor" path="/Applications/Utilities/HWMonitor.app"/>
+        </search>
+        <search id="Search.HWMonitor" type="script" script="SearchHWMonitorLocations()">
+            <script>
+                <![CDATA[
+                function SearchHWMonitorLocations() {
+                    function PushResultsToArray(results, array) {
+                        for(i = 0; i < results.length; i++)
+                            array.push(results[i]);
+                    }
+                    var paths = new Array();
+                    var results;
+                    results = my.search.results['Search.Applications.HWMonitor'];
+                    if (results) PushResultsToArray(results, paths);
+                    results = my.search.results['Search.Applications.Utilities.HWMonitor'];
+                    if (results) PushResultsToArray(results, paths);
+                    return paths;
+                }
+                ]]>
+            </script>
+        </search>
+    </locator>
+
+    <!-- Package References to be added -->

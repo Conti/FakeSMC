@@ -1,4 +1,13 @@
-Binaries.zip
-Binaries
-UserInterfaceState.xcuserstate
-xcschememanagement.plist
+.DS_Store
+xcuserdata
+smcutil
+version.h
+revision.txt
+Appcast/*
+Binaries/*
+Sparkle/Binaries/*
+Package/Distribution.xml
+Package/*.pkg
+
+
+*.xccheckout

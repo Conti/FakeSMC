@@ -2,8 +2,8 @@
 //  main.m
 //  HWMonitor
 //
-//  Created by Natan Zalkin on 20.10.11.
-//  Copyright (c) 2011 . All rights reserved.
+//  Created by kozlek on 23.02.13.
+//  Copyright (c) 2013 kozlek. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

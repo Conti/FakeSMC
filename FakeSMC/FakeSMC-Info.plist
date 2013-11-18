@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.netkas.${PRODUCT_NAME}</string>
+	<string>FAKESMC_BUNDLE</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -15,24 +15,57 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.2</string>
+	<string>HWSENSORS_VERSION</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4.2.0</string>
+	<string>HWSENSORS_REVISION</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>SMC Device Emulator</key>
+		<key>FakeSMC</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>org.netkas.${PRODUCT_NAME}</string>
+			<string>FAKESMC_BUNDLE</string>
 			<key>Configuration</key>
 			<dict>
+				<key>Clover</key>
+				<dict>
+					<key>BEMB</key>
+					<array>
+						<string>BEMB</string>
+						<string>flag</string>
+					</array>
+					<key>EPCI</key>
+					<array>
+						<string>EPCI</string>
+						<string>ui32</string>
+					</array>
+					<key>RBr</key>
+					<array>
+						<string>RBr</string>
+						<string>ch8*</string>
+					</array>
+					<key>REV</key>
+					<array>
+						<string>REV</string>
+						<string>{rev</string>
+					</array>
+					<key>RPlt</key>
+					<array>
+						<string>RPlt</string>
+						<string>ch8*</string>
+					</array>
+				</dict>
 				<key>Keys</key>
 				<dict>
+					<key>$Adr</key>
+					<array>
+						<string>ui32</string>
+						<data>AAADAA==</data>
+					</array>
 					<key>$Num</key>
 					<array>
-						<string>ui8 </string>
+						<string>ui8</string>
 						<data>AQ==</data>
 					</array>
 					<key>ACID</key>
@@ -40,87 +73,12 @@
 						<string>ch8*</string>
 						<data>ur48RcADEEM=</data>
 					</array>
-					<key>CLKH</key>
-					<array>
-						<string>{clh</string>
-						<data>AABwgAABGUA=</data>
-					</array>
-					<key>CLKT</key>
-					<array>
-						<string>ui32</string>
-						<data>AAByGw==</data>
-					</array>
-					<key>CLWK</key>
-					<array>
-						<string>ui16</string>
-						<data>AAA=</data>
-					</array>
 					<key>DPLM</key>
 					<array>
 						<string>{lim</string>
-						<data>AAAAAA==</data>
-					</array>
-					<key>EPCI</key>
-					<array>
-						<string>flag</string>
-						<data>AQ==</data>
-					</array>
-					<key>GCID</key>
-					<array>
-						<string>hex_</string>
-						<data>Z1gQAg==</data>
+						<data>AAAA</data>
 					</array>
 					<key>FNum</key>
-					<array>
-						<string>ui8</string>
-						<data>AA==</data>
-					</array>
-					<key>LSOF</key>
-					<array>
-						<string>flag</string>
-						<data>AQ==</data>
-					</array>
-					<key>LSSB</key>
-					<array>
-						<string>{lso</string>
-						<data>AQE=</data>
-					</array>
-					<key>MOST</key>
-					<array>
-						<string>ui16</string>
-						<data>gAM=</data>
-					</array>
-					<key>MSPS</key>
-					<array>
-						<string>{msp</string>
-						<data>AA==</data>
-					</array>
-					<key>MSDS</key>
-					<array>
-						<string>ui8</string>
-						<data>AA==</data>
-					</array>
-					<key>MSSD</key>
-					<array>
-						<string>si8</string>
-						<data>Aw==</data>
-					</array>
-					<key>NATJ</key>
-					<array>
-						<string>ui8</string>
-						<data>AA==</data>
-					</array>
-					<key>NATi</key>
-					<array>
-						<string>ui16</string>
-						<string>0000</string>
-					</array>
-					<key>NTOK</key>
-					<array>
-						<string>ui8</string>
-						<data>AQ==</data>
-					</array>
-					<key>NVPR</key>
 					<array>
 						<string>ui8</string>
 						<data>AA==</data>
@@ -140,41 +98,87 @@
 						<string>{rev</string>
 						<data>ATAPAAAD</data>
 					</array>
-					<key>RPlt</key>
+					<key>RVBF</key>
 					<array>
-						<string>ch8*</string>
-						<string>k62</string>
+						<string>{rev</string>
+						<data>ATAPAAAD</data>
 					</array>
+					<key>RVUF</key>
+					<array>
+						<string>{rev</string>
+						<data>ATAPAAAD</data>
+					</array>
+					<key>MSSD</key>
+					<array>
+						<string>si8</string>
+						<data>BQ==</data>
+					</array>
+					<key>MSSP</key>
+					<array>
+						<string>si8</string>
+						<data>BQ==</data>
+					</array>
+				</dict>
+				<key>Types</key>
+				<dict>
+					<key>BEMB</key>
+					<string>flag</string>
+					<key>CLKC</key>
+					<string>{clc</string>
+					<key>CLKH</key>
+					<string>{clh</string>
+					<key>CLKT</key>
+					<string>ui32</string>
+					<key>CLWK</key>
+					<string>ui32</string>
+					<key>EPCI</key>
+					<string>flag</string>
+					<key>LSSS</key>
+					<string>{lso</string>
+					<key>MSDS</key>
+					<string>ui8</string>
+					<key>MSDW</key>
+					<string>flag</string>
+					<key>MSPS</key>
+					<string>{msp</string>
+					<key>RPlt</key>
+					<string>ch8*</string>
 				</dict>
 				<key>debug</key>
 				<false/>
 				<key>smc-compatible</key>
 				<string>smc-napa</string>
+				<key>trace</key>
+				<false/>
 			</dict>
 			<key>IOClass</key>
-			<string>${PRODUCT_NAME}</string>
+			<string>FakeSMC</string>
 			<key>IOMatchCategory</key>
-			<string>IOACPIPlatformDevice</string>
+			<string>FakeSMC</string>
 			<key>IOProviderClass</key>
-			<string>AppleACPIPlatformExpert</string>
+			<string>IOResources</string>
 			<key>IOResourceMatch</key>
-			<string>ACPI</string>
+			<string>FakeSMCKeyStore</string>
 		</dict>
 	</dict>
-	<key>OSBundleCompatibleVersion</key>
-	<string>4.2.0</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © HWSENSORS_LASTYEAR netkas. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
+		<key>FAKESMCKEYSTORE_BUNDLE</key>
+		<string>FAKESMCKEYSTORE_COMPATIBLE</string>
 		<key>com.apple.iokit.IOACPIFamily</key>
 		<string>1.0.0d1</string>
+		<key>com.apple.kpi.bsd</key>
+		<string>10.6</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>10.0.0</string>
+		<string>10.6</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>10.0.0</string>
+		<string>10.6</string>
 		<key>com.apple.kpi.mach</key>
-		<string>10.0.0</string>
+		<string>10.6</string>
 		<key>com.apple.kpi.unsupported</key>
-		<string>10.0.0</string>
+		<string>10.6</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
